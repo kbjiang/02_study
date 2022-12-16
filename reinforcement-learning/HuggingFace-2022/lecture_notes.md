@@ -18,3 +18,20 @@
 		3. sounds recursive: *how do I know the value of each state in the 1st place?*
 8. d
 9. 
+
+### unit 2
+1. value-based methods: don't train the policy; policy is a function defined by hand
+2. values of state action pair
+
+
+### Foundations of Deep RL, Pieter Abbeel
+1. Future awards discounted so that the agent is forced to take shortest path
+2. RL problem $\rightarrow$ frame as MDP $\rightarrow$ algo
+3. Grid world intuition
+	1. immediate reward + $\gamma *$ future rewards
+	2. optimal value func: the closer the starting state to the diamond (+1), the higher value
+	3. It's called Markov because Transition function and Reward function has no memory of how the agent got to $s$? $P(s'|s, a), R(s, a, s')$. Which also makes iteration possible.
+	4. It's called "bellman back-up", coz we work from $k=0$, which is no time steps left, to $k=H$ horizon.
+	5. cartoon starts at 31:14
+5. Value iteration
+	1. $V^{*}(s)$ is horizon dependent. 
