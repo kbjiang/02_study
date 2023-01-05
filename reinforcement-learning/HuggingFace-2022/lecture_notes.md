@@ -21,7 +21,7 @@
 
 ### unit 2
 1. value-based methods: don't train the policy; policy is a function defined by hand
-2. values of state action pair
+2. state-value function is action-value function without action dimension? but isn't action already defined by policy?
 
 
 ### Foundations of Deep RL, Pieter Abbeel
