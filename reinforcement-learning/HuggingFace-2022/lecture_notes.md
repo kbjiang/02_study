@@ -1,4 +1,4 @@
-### Unit 1
+## Unit 1
 1. Terminology: agent vs env, state vs reward, action, exploitation vs exploration
 ![[RL_process.jpg]]
 2. RL is a computational approach of learning from actions. I.e., the agent learns from env through trail and error.
@@ -6,8 +6,8 @@
 4. RL process is called Markov Decision Process (MDP). Markovian has no memory?
 5. state (complete) vs observation (partial)
 6. exploration vs exploitation (type of actions): 
-	1. exploration: trying **random** actions in order to **find more information about the env**
-	2. exploitation: using what we **already** know of the env to **maximize the reward**
+	1. exploration: trying **random** actions in order to *find more information about the env*
+	2. exploitation: using what we **already** know of the env to *maximize the reward*
 	3. the choice between a known and a new restaurants is a good intuition.
 7. The policy $\pi$: the agent's brain, the goal of training
 	1. policy-based: teach the agent what to do given the current state; learn policy func directly
@@ -17,9 +17,20 @@
 		2. edr is the agent can get if it starts in that state, then act according to policy (going to the state with the highest value)
 		3. sounds recursive: *how do I know the value of each state in the 1st place?*
 8. d
-9. 
 
-### unit 2
+---
+
+
+### spinning up
+1. Advantage Function shows how good/bad an action is comparing to average: $A^{\pi}(s, a)=Q^{\pi}(s, a)-V^{\pi}(s)$. This explains why $Q(s, a)$ is defined as take an *arbitrary* action $a$ at $s$ and follows $\pi$ ever after. 
+2. 
+
+
+ 
+
+
+
+## Unit 2
 1. value-based methods: don't train the policy; policy is a function defined by hand
 2. state-value function is action-value function without action dimension? but isn't action already defined by policy?
 
@@ -35,3 +46,8 @@
 	5. cartoon starts at 31:14
 5. Value iteration
 	1. $V^{*}(s)$ is horizon dependent. 
+6. Policy iteration
+	1. instead of $\sum_{max(a)}$ we have $\pi (a)$  
+7. Tabular Q-learning
+	1. we don't have access to transitional function $P(s'|s,a)$ nor the ability to iterate till convergence. Thus, instead of full Bellman Equation, we need to sample.
+
