@@ -3,6 +3,8 @@
 - non stationary and fixed step size; non converging but ok
 - $(R_n-Q_n)$ provides a direction for updating $Q$.
 - *sample-average* can only have varying (1/n) step size.
+- 2.7: true value of action $a$, with $c$ determining the confidence level.
+- 2.7: the $ln$ of $t$ punishes actions been selected frequently, i.e., forces more exploration
 
 ### Exercises
 - Exercise 2.1 In $\mathit{\epsilon}$-greedy action selection, for the case of two actions and $\epsilon$= 0.5, what is the probability that the greedy action is selected?
@@ -36,7 +38,7 @@ Q_{n+1} &= Q_n + \alpha_n[R_n - Q_n] \\
 \end{align*}
 $$
 - Exercise 2.5
-- 2.6: The spikes of optimal action percentage always show up at step $t=num\_ of\_bandits + 1$, prior to which the percentage is about $1/num\_of\_bandits$. This makes sense coz the agent iterate through all arms exactly once in the first $num\_of\_bandits$ steps. At each step, it brings down the value of the corresponding Q estimate. At step $t+1$, the true optimal action has the fair chance to stand out, therefore the spike.
+- 2.6: The spikes of optimal action percentage always show up at step $t=num\_ of\_bandits + 1$, prior to which the agent just randomly pick an arm and with prob around $1/num\_of\_bandits$. Therefore, on average, the agent iterate through all arms exactly once in the first $num\_of\_bandits$ steps. At each step, it brings down the value of the corresponding Q estimate. At step $t+1$, the *true* optimal action has the best/fair chance to stand out, therefore the spike.
 - 2.7: Given $o_0=0$ we have $o_1=\alpha$.
 $$
 \begin{align*}
@@ -48,4 +50,4 @@ o_n &= o_{n-1} + \alpha (1-o_{n-1}) \\
 &=1-(1-\alpha)^n
 \end{align*}
 $$
-this leads to $\beta_n=\frac{\alpha}{1-(1-\alpha)^n}$ and as n grows, $\beta$ gets closer to $\alpha$, that's the *recency-weighted* part. Also, it's easy to show that, from exercise 2.4, there is a $(1-\beta_1)$ term in the product as coefficient of $Q_1$. Since $\beta_1=1$, the whole coefficient goes to zero, therefore $withough initial bias.$
+this leads to $\beta_n=\frac{\alpha}{1-(1-\alpha)^n}$ and as n grows, $\beta$ gets closer to $\alpha$, that's the *recency-weighted* part. Also, it's easy to show that, from exercise 2.4, there is a $(1-\beta_1)$ term in the product as coefficient of $Q_1$. Since $\beta_1=1$, the whole coefficient goes to zero, therefore *without initial bias.*
