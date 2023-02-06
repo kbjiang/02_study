@@ -40,16 +40,18 @@
     \end{align*}
     $$
 - Exercise 2.5
-- 2.6: The spikes of optimal action percentage always show up at step $t=num\_ of\_bandits + 1$, prior to which the agent just randomly pick an arm and with prob around $1/num\_of\_bandits$. Therefore, on average, the agent iterate through all arms exactly once in the first $num\_of\_bandits$ steps. At each step, it brings down the value of the corresponding Q estimate. At step $t+1$, the *true* optimal action has the best/fair chance to stand out, therefore the spike.
+- 2.6: The spikes of optimal action percentage always show up at step $t=num\_ of\_bandits + 1$, prior to which the agent just randomly pick an arm and with prob around $1/num\_of\_bandits$. Therefore, on average, the agent iterate through all arms exactly once in the first $num\_of\_bandits$ steps. (At each step, it brings down the value of the corresponding Q estimate.) At step $t+1$, the *true* optimal action is more likely to be selected coz its 1st Q estimate is likely higher than the others.
 - 2.7: Given $o_0=0$ we have $o_1=\alpha$.
-$$
-\begin{align*}
-o_n &= o_{n-1} + \alpha (1-o_{n-1}) \\
-&=\alpha + (1-\alpha)o_{n-1} \\
-&=\alpha+\alpha(1-\alpha)+(1-\alpha)^2o_{n-2} \\
-&=\alpha\sum_{i=0}^{n-2}(1-\alpha)^i + (1-\alpha)^{n-1}o_1 \\
-&=\alpha\sum_{i=0}^{n-1}(1-\alpha)^i \\
-&=1-(1-\alpha)^n
-\end{align*}
-$$
-this leads to $\beta_n=\frac{\alpha}{1-(1-\alpha)^n}$ and as n grows, $\beta$ gets closer to $\alpha$, that's the *recency-weighted* part. Also, it's easy to show that, from exercise 2.4, there is a $(1-\beta_1)$ term in the product as coefficient of $Q_1$. Since $\beta_1=1$, the whole coefficient goes to zero, therefore *without initial bias.*
+    $$
+    \begin{align*}
+    o_n &= o_{n-1} + \alpha (1-o_{n-1}) \\
+    &=\alpha + (1-\alpha)o_{n-1} \\
+    &=\alpha+\alpha(1-\alpha)+(1-\alpha)^2o_{n-2} \\
+    &=\alpha\sum_{i=0}^{n-2}(1-\alpha)^i + (1-\alpha)^{n-1}o_1 \\
+    &=\alpha\sum_{i=0}^{n-1}(1-\alpha)^i \\
+    &=1-(1-\alpha)^n
+    \end{align*}
+    $$
+    this leads to $\beta_n=\frac{\alpha}{1-(1-\alpha)^n}$ and as n grows, $\beta$ gets closer to $\alpha$, that's the *recency-weighted* part. Also, it's easy to show that, from exercise 2.4, there is a $(1-\beta_1)$ term in the product as coefficient of $Q_1$. Since $\beta_1=1$, the whole coefficient goes to zero, therefore *without initial bias.*
+
+- 2.8: *UCB spikes*. Prior to the 11th step, the agent would iterate through all arms once to have $N(a)=1\ \forall a$ since $N(a)=0$ is autmomatically the optimal action. At 11th step, true optimal action $a^*$ is most likely to be selected across all bandits because the variance term is the same for all. Thus the spike. After 11th step, $N(a^*)$ becomes the largest and get punished, the higher $c$ the less likely all bandits take the same action. The spike is gone. This is more clear according to the optimal action curves.
