@@ -55,3 +55,5 @@
     this leads to $\beta_n=\frac{\alpha}{1-(1-\alpha)^n}$ and as n grows, $\beta$ gets closer to $\alpha$, that's the *recency-weighted* part. Also, it's easy to show that, from exercise 2.4, there is a $(1-\beta_1)$ term in the product as coefficient of $Q_1$. Since $\beta_1=1$, the whole coefficient goes to zero, therefore *without initial bias.*
 
 - 2.8: *UCB spikes*. Prior to the 11th step, the agent would iterate through all arms once to have $N(a)=1\ \forall a$ since $N(a)=0$ is autmomatically the optimal action. At 11th step, true optimal action $a^*$ is most likely to be selected across all bandits because the variance term is the same for all. Thus the spike. After 11th step, $N(a^*)$ becomes the largest and get punished, the higher $c$ the less likely all bandits take the same action. The spike is gone. This is more clear according to the optimal action curves.
+
+- 2.9: *Softmax to sigmoid in case of two actions* Easy to see that $\pi(a) = 1/(1+e^{-(H_a-H_b)})$. When $a$ is preferrable, this term is greater than 1/2, and vice versa.
