@@ -35,3 +35,29 @@ q_{\pi}(s,a)&=r(s, a) + \gamma \sum_{s'} p(s'|s, a) \ v_{\pi}(s')) \\
 \end{align*}
 $$
 
+3.14. The Bellman equation reads:
+$$v_{\pi}(s)=\sum_a \pi (a|s) \sum_{s', r} p(s', r|s, a)[r + \gamma v_\pi (s')]$$
+The center cell (s) has equal chances to move to the four neighbouring cells, i.e., $\pi (a|s)=1/4$. And since each action $a$ maps to an unique $s'$, $p(s', r|s, a)$ is 1 for all cases. With $r=0\ \text{and}\ \gamma=0.9$, the RHS of the equation becomes:
+$$1/4 * 1 * 0.9 * (2.3+0.7+0.4-0.4) = 0.675$$
+3.15. Easy to see now $G_t(c)=\sum_{k=0}^{\infty} \gamma^k (R_{t+k+1} + c)=G_t + c/(1-\gamma)$ , therefore $v_c=c/(1-\gamma)$.
+3.16. As argued in 3.7., we'd like to punish the robot if it takes it too long to find the exit. Adding a positive constant may flip the signs of some rewards. That would defeat the purpose and change the task.
+3.17. by first glance, the only difference from Eqn (3.14) should be that now we do not have the summation over $a$
+$$
+\begin{align*}
+q_{\pi}(s)&=\sum_{s', r}p(s', r|s, a)[r + \gamma v_{\pi}(s')] \\
+&=\sum_{s', r}p(s', r|s, a)[r + \gamma \sum_{a'} \pi(a'|s')q_{\pi}(s', a')] \\
+&=R_{t+1}(s, a)+\gamma \sum_{s', r}p(s', r|s, a) \mathbb{E}_{\pi}[G_{t+1}|S_{t+1}=s']
+\end{align*}
+$$ where result from Ex. 3.12 is used.
+3.18. $$
+\begin{align*}
+v_{\pi}(s) &= \mathbb{E}_{\pi}(q_{\pi}(s,a)|S_t=s) \\
+		&= \sum_a \pi(a|s)*q_{\pi}(s,a)
+\end{align*}
+$$
+3.19. $$
+\begin{align*}
+v_{\pi}(s) &= \mathbb{E}_{\pi}(q_{\pi}(s,a)|S_t=s) \\
+		&= \sum_a \pi(a|s)*q_{\pi}(s,a)
+\end{align*}
+$$
