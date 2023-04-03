@@ -22,32 +22,16 @@
 
 
 ### spinning up
-1. Advantage Function shows how good/bad an action is comparing to average: $A^{\pi}(s, a)=Q^{\pi}(s, a)-V^{\pi}(s)$. This explains why $Q(s, a)$ is defined as take an *arbitrary* action $a$ at $s$ and follows $\pi$ ever after. 
-2. 
-
-
- 
-
-
+1. Trajectory $\tau$ is unique like an id. Therefore we have $R(\tau) = \sum \gamma^t r_t$ and $P(\tau|\pi) \sim P(s_{t+1}|s_t, a_t)\pi(a_t|s_t)$ 
+2. `pi_net` is deterministic with multi-dim output. Should not confuse with softmax.
+3. Advantage Function shows how good/bad an action is comparing to average: $A^{\pi}(s, a)=Q^{\pi}(s, a)-V^{\pi}(s)$. This explains why $Q(s, a)$ is defined as take an *arbitrary* action $a$ at $s$ and follows $\pi$ ever after. 
 
 ## Unit 2
-1. value-based methods: don't train the policy; policy is a function defined by hand
-2. state-value function is action-value function without action dimension? but isn't action already defined by policy?
-
-
-### Foundations of Deep RL, Pieter Abbeel
-1. Future awards discounted so that the agent is forced to take shortest path
-2. RL problem $\rightarrow$ frame as MDP $\rightarrow$ algo
-3. Grid world intuition
-	1. immediate reward + $\gamma *$ future rewards
-	2. optimal value func: the closer the starting state to the diamond (+1), the higher value
-	3. It's called Markov because Transition function and Reward function has no memory of how the agent got to $s$? $P(s'|s, a), R(s, a, s')$. Which also makes iteration possible.
-	4. It's called "bellman back-up", coz we work from $k=0$, which is no time steps left, to $k=H$ horizon.
-	5. cartoon starts at 31:14
-5. Value iteration
-	1. $V^{*}(s)$ is horizon dependent. 
-6. Policy iteration
-	1. instead of $\sum_{max(a)}$ we have $\pi (a)$  
-7. Tabular Q-learning
-	1. we don't have access to transitional function $P(s'|s,a)$ nor the ability to iterate till convergence. Thus, instead of full Bellman Equation, we need to sample.
+1. Good intuition with mice and cheese in this unit.
+2. MC vs TD
+	1. both follow the same update rule: $V(s_t) = V(s_t) + \alpha (X_{s_t} - V(s_t))$ where $X$ is the true state value.
+	2. MC: $X = G_t$ ; all values are from real experience; it's unbiased.
+	3. TD: $X = R(s_{t+1}) + \gamma V(s_{t+1})$ ; it's bootstrapping and biased by initial values. However, asymptotically it approach the true value with more experiences.
+	4. On bias and variance, see S&B Fig. 6.1. Also discussion [here](https://stats.stackexchange.com/questions/355820/why-do-temporal-difference-td-methods-have-lower-variance-than-monte-carlo-met) and [here](https://stats.stackexchange.com/questions/336974/when-are-monte-carlo-methods-preferred-over-temporal-difference-ones)
+3. ![[Pasted image 20230403144846.png]]
 
