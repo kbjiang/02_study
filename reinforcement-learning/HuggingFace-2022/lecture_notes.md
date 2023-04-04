@@ -35,3 +35,10 @@
 	4. On bias and variance, see S&B Fig. 6.1. Also discussion [here](https://stats.stackexchange.com/questions/355820/why-do-temporal-difference-td-methods-have-lower-variance-than-monte-carlo-met) and [here](https://stats.stackexchange.com/questions/336974/when-are-monte-carlo-methods-preferred-over-temporal-difference-ones)
 3. ![[Pasted image 20230403144846.png]]
 
+
+### Unit 3
+1. Nice walk through of Deep Q Algo. Note how
+	1. used two NNs to fix the training target
+	2. every $C$ step the target NN was updated by the behavior NN.
+2. Nice implementation of DQ Algo, and nice repo overall.
+	1. https://github.com/vwxyzjn/cleanrl/blob/master/cleanrl/dqn_atari.py
