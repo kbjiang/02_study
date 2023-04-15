@@ -42,3 +42,10 @@
 	2. every $C$ step the target NN was updated by the behavior NN.
 2. Nice implementation of DQ Algo, and nice repo overall.
 	1. https://github.com/vwxyzjn/cleanrl/blob/master/cleanrl/dqn_atari.py
+
+### Unit 4 Policy gradient with Pytorch
+1. Stochastic policy, parameterize the policy directly. $\pi_{\theta}(s)=\mathbb{P}(A|s, \theta)$
+2. Good illustration. ![[Pasted image 20230411220207.png]]
+3. Advantages:
+	1. Can learn stochastic policy so that no need to implement an exploration/exploitation trade-off by hand. E.g., no epsilon-greedy needed.
+	2. works well with aliased states. Aliased states are those states seem or are the same, but require different actions. This could happen when the agent only have partial access to the env. In such cases, deterministic policy won't be able to explore multiple actions. See this [example](https://youtu.be/y3oqOjHilio?t=1465).
