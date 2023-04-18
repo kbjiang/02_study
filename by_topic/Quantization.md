@@ -16,3 +16,4 @@
 ### Misc
 1. TF32 is for Ampere architecture and later
 2. codebook/index
+3. pytorch tutorial https://youtu.be/c3MT2qV5f9w
