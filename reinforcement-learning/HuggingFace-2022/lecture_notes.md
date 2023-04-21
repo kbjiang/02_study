@@ -48,4 +48,8 @@
 2. Good illustration. ![[Pasted image 20230411220207.png]]
 3. Advantages:
 	1. Can learn stochastic policy so that no need to implement an exploration/exploitation trade-off by hand. E.g., no epsilon-greedy needed.
-	2. works well with aliased states. Aliased states are those states seem or are the same, but require different actions. This could happen when the agent only have partial access to the env. In such cases, deterministic policy won't be able to explore multiple actions. See this [example](https://youtu.be/y3oqOjHilio?t=1465).
+	2. works well with aliased states. Aliased states are those states seem or are the same, but require different actions. This could happen when the agent only have partial access to the env. In such cases, deterministic policy won't be able to explore multiple actions. See this [example](https://youtu.be/y3oqOjHilio?t=1465). Also S&B E.g. 13.1.
+4. Derivation from $\nabla_\theta J(\theta) = \nabla \sum_{\tau} P(\tau; \theta) R(\tau)$  to 
+5. intuition
+	1. probability of paths changes based on reward $R$.
+	2. the path itself is not changed, just its probability
