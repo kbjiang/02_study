@@ -53,3 +53,7 @@
 5. intuition
 	1. probability of paths changes based on reward $R$.
 	2. the path itself is not changed, just its probability
+6. TODO
+	1. really nice example on policy gradient: https://youtu.be/cQfOQcpYRzE
+	2. Hongyi's intro to RL https://youtu.be/XWukX-ayIrs?list=PLJV_el3uVTsMhtt7_Y6sgTHGHp1Vb2P2J
+	3. 
