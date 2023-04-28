@@ -1,0 +1,4 @@
+1. Fig 1. Very nice summary. ![[Pasted image 20230417105135.png]]
+2. really nice recap of the Transformer Architecture in 2.2. Note how 
+	1. Eqn. 1 and 2, $\text{softmax}(Q\ K^T) \in \mathbb{R}^{1\times m}$ when $Q=x W_q$ and $K = CW_k$, so it bears the meaning of weighing each of $m$ vectors in $V$.  
+	2. Note, $C \in \mathbb{R}^{m \times d}$ is the input sequence with $m$ tokens; $x \in \mathbb{R}^{1 \times d}$ is one token that queries the whole sequence, could be either self- or cross-attention; $W \in \mathbb{R}^{d \times d_h}$ are model parameters project inputs into *model's representation* of $Q, K \ \text{and} \ V$.

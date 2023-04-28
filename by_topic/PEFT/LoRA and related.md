@@ -4,16 +4,18 @@
 	3. Both adapter (which is a MLP) and PT (changes the token sequences) are less natural comparing to LoRA. LoRA is a low rank approximation, with greater rank, LoRA gets better; while the others has an optimal value.![[Pasted image 20230420101615.png]]
 	4. no additional latency at inference, coz $W_0$, $U$ and $V$ can be combined into one at inference time.
 2. How it works
-	1. Theoretically it's equivalent to SVD of full weight update matrix $\Delta W$ and keep only first $k$ rank of it
-	2. In practice, you just need two matrices with matching size and let them learn $\Delta W$. 
+	1. Theoretically it's equivalent to SVD of full weight update matrix $\Delta W$ and keep only first $k$ rank of it. 
+	2. It deals with the concatenated outputs after the multiple attention heads.
+	3. In practice, you just need two matrices with matching size and let them learn $\Delta W$. 
 3. why it works
 	1. *When adapting to a specific task, Aghajanyan et al. (2020) shows that the pre-trained language models have a low “instrisic dimension” and can still learn efficiently despite a random projection to a smaller subspace.*
 4. Me:
-	1. me: it's like residual connection? For finetuning, the weight changes are supposed to be minor and a lower rank is sufficient.
-	2. shards?
+	1. shards?
+	2. where does the speed up come from? If due to less gradient calculation, why only by 25%?
 	3. Table 6 shows that even very low ranks of 1 or 2 return decent result. Suggesting significant over parameterization?
-5. [In gradient view](https://kexue.fm/archives/9590)
-	1. Eq 2 makes sense mathematically; need to visualize the *back-propagate* graph to see how it's done while training.
+	4. [In gradient view](https://kexue.fm/archives/9590) Eq 2 makes sense mathematically, however in real life LoRA author did claim 25% speed up due to less gradient calculation.
+	5. analogy to linear combination and eigenvector. Input as vector, model as matrix blah blah...
+	6. need to visualize the *back-propagate* graph to see how it's done while training.
 
 [Li et al., 2018](https://arxiv.org/pdf/1804.08838.pdf)
 1. Main idea/result:
@@ -22,14 +24,17 @@
 	3. The main mathematical idea here is Degree of Freedom.
 2. To train in a random subspace, $\theta_0^{(D)}$ is also randomly initialized in Eqn. 2. This was extended to be fixed (pretrained weights) in LoRA.
 	1. It's interesting how having $\theta_0^{(D)}$ helps with subspace training even though it's not trainable. See results in section *Are random subspaces really more parameter-efficient for FC nets?* 
-	2. it has to be the forward pass? or extra calculation at backward?
-	3. In section *Are convnets always better on MNIST? Measuring dint90 on shuffled data*, it is shown that noisy distribution requires more DOF to model.
+	2. In section *Are convnets always better on MNIST? Measuring dint90 on shuffled data*, it is shown that noisy distribution requires more DOF to model.
 3. Features of subspace training
 	1. it's architecture and dataset specific
 	2. it operates in the entire parameter space. Recall that it's a random projection.
-	3. does NOT speed up inference
+	3. does NOT speed up inference. What about training?
 	4. can be combined with quantization
-4. Refs
+4. Questions
+	1. *Why does it work?* It has to be the forward pass? or extra calculation at backward?
+	2. How about speed? Should be slower comparing to pretrained $\theta_0^{(D)}$?
+	3. increasing $\theta_0^{(D)}$ does not change intrinsic dim; however, in Aghajanyan et al. the intrinsic dim descreases as pretrained model gets larger. Why? And note the training is different between these two results.
+5. Refs
 	1. https://www.uber.com/blog/intrinsic-dimension/
 
 
@@ -40,6 +45,6 @@
 	2. Finetuning using $\theta_d$: *One interpretation of the intrinsic parameter vector is that it encodes the task at hand with respect to the original pre-trained representations.*
 3. Why *the process of pre-training itself implicitly minimizes the intrinsic dimension*
 	1. it's shown that pretrained models are redundant in capacity and allows for significant sparsification.
-	2. Sec 5.1 shows intrisic dimension descreases with increasing pretraining updates. Note 'full solution', against which $d_{90}$ is measured, at update steps are obtained by finetuning corresponding checkpoint model in the standard way.![[Pasted image 20230424130405.png]]
+	2. Sec 5.1 shows intrisic dimension descreases with increasing pretraining updates. Note 'full solution' at update steps, against which $d_{90}$ is measured, are obtained by finetuning corresponding checkpoint model in the standard way.![[Pasted image 20230424130405.png]]
 4. Therefore, *standard pre-trained models can learn a large set of NLP tasks with very few parameters*
 5. 
