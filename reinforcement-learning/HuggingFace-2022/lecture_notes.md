@@ -49,11 +49,10 @@
 3. Advantages:
 	1. Can learn stochastic policy so that no need to implement an exploration/exploitation trade-off by hand. E.g., no epsilon-greedy needed.
 	2. works well with aliased states. Aliased states are those states seem or are the same, but require different actions. This could happen when the agent only have partial access to the env. In such cases, deterministic policy won't be able to explore multiple actions. See this [example](https://youtu.be/y3oqOjHilio?t=1465). Also S&B E.g. 13.1.
-4. Derivation from $\nabla_\theta J(\theta) = \nabla \sum_{\tau} P(\tau; \theta) R(\tau)$  to 
-5. intuition
-	1. probability of paths changes based on reward $R$.
-	2. the path itself is not changed, just its probability
+4. Derivation from $\nabla_\theta J(\theta) = \nabla \sum_{\tau} P(\tau; \theta) R(\tau)$  to  $\nabla_\theta J(\theta) = \sum_{t=0} \nabla_{\theta} \ \log \pi_{\theta}(a_t|s_t)R(\tau)$.
+	1. $P(\tau;\theta)=\prod_{t=0} P(s_{t+1}|s_t, a_t) \pi_{\theta}(a_t|s_t))$ and $P(s_{t+1}|s_t, a_t)$ is the *MDP dynamic* and $\pi$ is agent policy.
+	2. intuition: log probability of taking action $a_t$ changes according to reward $R(\tau)$. Note reward is independent of $t$ therefore every $t$ along this path $\tau$ will get changed.
 6. TODO
 	1. really nice example on policy gradient: https://youtu.be/cQfOQcpYRzE
 	2. Hongyi's intro to RL https://youtu.be/XWukX-ayIrs?list=PLJV_el3uVTsMhtt7_Y6sgTHGHp1Vb2P2J
-	3. 
+	3. [PyTorch probability distributions](https://pytorch.org/docs/stable/distributions.html#)
