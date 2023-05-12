@@ -51,7 +51,11 @@
 	2. works well with aliased states. Aliased states are those states seem or are the same, but require different actions. This could happen when the agent only have partial access to the env. In such cases, deterministic policy won't be able to explore multiple actions. See this [example](https://youtu.be/y3oqOjHilio?t=1465). Also S&B E.g. 13.1.
 4. Derivation from $\nabla_\theta J(\theta) = \nabla \sum_{\tau} P(\tau; \theta) R(\tau)$  to  $\nabla_\theta J(\theta) = \sum_{t=0} \nabla_{\theta} \ \log \pi_{\theta}(a_t|s_t)R(\tau)$.
 	1. $P(\tau;\theta)=\prod_{t=0} P(s_{t+1}|s_t, a_t) \pi_{\theta}(a_t|s_t))$ and $P(s_{t+1}|s_t, a_t)$ is the *MDP dynamic* and $\pi$ is agent policy.
-	2. intuition: log probability of taking action $a_t$ changes according to reward $R(\tau)$. Note reward is independent of $t$ therefore every $t$ along this path $\tau$ will get changed.
+	2. The step where we can replace *expectation* $\sum P f(x)$ with *sampling* $1/m \sum_{i} f(x^{(i)})$. 
+	3. intuition: log probability of taking action $a_t$ changes according to reward $R(\tau)$. Note reward is independent of $t$ therefore every $t$ along this path $\tau$ will get changed.
+5. The *loss function* in Policy optimization differs from ML loss function fundamentally (see [here](https://spinningup.openai.com/en/latest/spinningup/rl_intro3.html#implementing-the-simplest-policy-gradient) for details):
+	1. the data distribution depends on the parameters.
+	2. it does not measure performance. There's no target value to "getting closer" to; this loss is just for derivation calculation. It's absolute value or it's trend does not mean much.
 6. TODO
 	1. really nice example on policy gradient: https://youtu.be/cQfOQcpYRzE
 	2. Hongyi's intro to RL https://youtu.be/XWukX-ayIrs?list=PLJV_el3uVTsMhtt7_Y6sgTHGHp1Vb2P2J
