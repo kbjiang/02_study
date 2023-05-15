@@ -60,3 +60,8 @@
 	1. really nice example on policy gradient: https://youtu.be/cQfOQcpYRzE
 	2. Hongyi's intro to RL https://youtu.be/XWukX-ayIrs?list=PLJV_el3uVTsMhtt7_Y6sgTHGHp1Vb2P2J
 	3. [PyTorch probability distributions](https://pytorch.org/docs/stable/distributions.html#)
+	4. [openai-spinningup](https://spinningup.openai.com/en/latest/spinningup/rl_intro3.html)
+		1. *Don't let the past distract you*. The argument against $R(\tau)$ does not convince me coz the full $R(\tau)$ term follows derivation. It's just an alternative, not a replacement. The argument about less variance (*But how is this better*) at sample estimate makes sense though.
+		2. Baseline part is clean.
+	5. [jonathan-hui](https://jonathan-hui.medium.com/rl-policy-gradients-explained-9b13b688b146)
+	6. https://github.com/MrSyee/pg-is-all-you-need/tree/master
