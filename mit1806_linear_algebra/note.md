@@ -3,3 +3,8 @@
 1. **The system $Ax=b$ is solvable if and only if $b$ is in the column space of $A$.**
     1. In words, $b$ is any linear combination ($x$) of $A$
     1. Zero vector must be included for system to be solvable.
+
+
+### Other resources
+1. [Visualize matrix](https://youtu.be/4csuTO7UTMo)
+2. 
