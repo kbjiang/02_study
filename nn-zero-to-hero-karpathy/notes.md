@@ -19,22 +19,23 @@
 	                topo.append(v)
 	        build_topo(self)
 		```
+		2. `self.grad` stores `d(out)/d(self) * out.grad`, not `d(self)/d(self._prev)`.
 	2. functions `op` and `_backward()`.
 		1. There is a 1:1 mapping. For each `op`  we should define its `_backward()`. See definition of multiplying two `Value`s below. 
-		2. `grad` stores gradient calculated as parent w.r.t `self`. And `+=` since there can be multiple parents. Not to confuse with multiple runs of backpropagation, where `.zero_grad()` should be applied at each run. 
+		2.  `+=` since there can be multiple parents. Not to confuse with multiple runs of backpropagation, where `.zero_grad()` should be applied at each run. 
 		```python
 		def __mul__(self, other):
 			other = other if isinstance(other, Value) else Value(other)
 			# Need to specify `_prev` when calculate `out`
 			out = Value(self.data * other.data, (self, other), '*')
 
-			# Note that `self.grad` stores d(out)/d(self)
+			# Note that `self.grad` stores d(out)/d(self) * out.grad
 			def _backward():
 				# `+=` since there can be multiple parents.
 				self.grad += other.data * out.grad
 				other.grad += self.data * out.grad
 			out._backward = _backward
-	
+
 			return out			
 		```
 		 3. Apparently same can be done with Pytorch. [PYTORCH: DEFINING NEW AUTOGRAD FUNCTIONS](https://pytorch.org/tutorials/beginner/examples_autograd/two_layer_net_custom_function.html)
