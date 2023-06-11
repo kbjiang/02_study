@@ -1,4 +1,5 @@
 1. visualize nn
+	1. 
 2. numpy, pandas...
 3. CUDA
 4. spark of AGI

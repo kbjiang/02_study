@@ -19,7 +19,7 @@
 	                topo.append(v)
 	        build_topo(self)
 		```
-		2. `self.grad` stores `d(out)/d(self) * out.grad`, not `d(self)/d(self._prev)`.
+		2. `self.grad` stores `d(out)/d(self) * out.grad`, not `d(self)/d(self._prev)`. Similarly, `op` stores the operation on `self`.
 	2. functions `op` and `_backward()`.
 		1. There is a 1:1 mapping. For each `op`  we should define its `_backward()`. See definition of multiplying two `Value`s below. 
 		2.  `+=` since there can be multiple parents. Not to confuse with multiple runs of backpropagation, where `.zero_grad()` should be applied at each run. 
@@ -41,3 +41,4 @@
 		 3. Apparently same can be done with Pytorch. [PYTORCH: DEFINING NEW AUTOGRAD FUNCTIONS](https://pytorch.org/tutorials/beginner/examples_autograd/two_layer_net_custom_function.html)
 4. Class `nn`
 	1. Single neurons are just collections of weights and bias of type `Value`. Once we have neurons, layers and MLPs follow naturally.
+	2. Without layers like normalization, each input sample is independent from each other, batching is just a mathematical convenience.
