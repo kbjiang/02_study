@@ -1,4 +1,3 @@
-## Micrograd
 1. Video [link](https://youtu.be/VMj-3S1tku0?list=PLAqhIrjkxbuWI23v9cThsA9GvCAUhRvKZ); Github [link](https://github.com/karpathy/micrograd); Homework [link](https://www.youtube.com/redirect?event=video_description&redir_token=QUFFLUhqbXlZYTI5d1hBQ2VCU3E4a2ZiSnlXS25ZQXYwd3xBQ3Jtc0trbzlfZ0UyeUdHYlFnMl83Q040b2RLUi0zWVE2cE1NNkVDblpfUXJYYU9FRVhUd3FsS1FHZW5PblRqaGNaMDQ3RHBwbnNRdkgyVERiRFBMRE5TZEN6dG5QTDFpV1gtQjMxa0RYcHJfSERuQVpnN1dIQQ&q=https%3A%2F%2Fcolab.research.google.com%2Fdrive%2F1FPTx1RXtBfc4MaTkf7viZZD4U2F9gtKN%3Fusp%3Dsharing&v=VMj-3S1tku0) and local solution.
 2. Big idea: 
 	1. Backpropagation can be done *recursively*. All one need is *local* gradient (parent w.r.t `self`; saved at `self.grad`) and *global* gradient (`.grad` of parent.) 
@@ -39,6 +38,7 @@
 			return out			
 		```
 		 3. Apparently same can be done with Pytorch. [PYTORCH: DEFINING NEW AUTOGRAD FUNCTIONS](https://pytorch.org/tutorials/beginner/examples_autograd/two_layer_net_custom_function.html)
-4. Class `nn`
+		 4. See also [PyTorch Autograd Explained](https://youtu.be/MswxJw-8PvE)
+1. Class `nn`
 	1. Single neurons are just collections of weights and bias of type `Value`. Once we have neurons, layers and MLPs follow naturally.
 	2. Without layers like normalization, each input sample is independent from each other, batching is just a mathematical convenience.

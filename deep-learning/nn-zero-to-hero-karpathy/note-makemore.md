@@ -29,7 +29,7 @@
 
 
 ### Visualization
-1.  https://youtu.be/-at7SLoVK_I 
-2. https://youtu.be/i94OvYb6noo?t=4247
-3. https://cs.stanford.edu/people/karpathy/convnetjs/demo/classify2d.html
-4. https://playground.tensorflow.org/
+
+### On optimizers
+1. https://youtu.be/hd_KFJ5ktUc
+2. https://www.ruder.io/optimizing-gradient-descent/
