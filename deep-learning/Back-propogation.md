@@ -10,6 +10,7 @@
 2. We could pass `retrain_graph=True` , to all but last `backward`, if were to call `backward` more than once. 
 	1. It retains the intermediate gradients on the computational graph;
 	2. See discussion [here](https://discuss.pytorch.org/t/runtimeerror-trying-to-backward-through-the-graph-a-second-time-but-the-buffers-have-already-been-freed-specify-retain-graph-true-when-calling-backward-the-first-time/6795).
+ 3. Right from the creators. http://blog.ezyang.com/2019/05/pytorch-internals/
 
 ## resources
 1. https://youtu.be/VMj-3S1tku0
