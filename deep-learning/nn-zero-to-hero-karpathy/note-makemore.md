@@ -15,6 +15,10 @@
 
 ### Lecture 3
 1. Big idea
+	1. The statistics of activations and gradients. See this [timestamp](https://youtu.be/P6sfmUTpUmc?t=4451)
+	2. Stabilize NN, i.e., roughly unit Gaussian activations throughout the network, with Reasonable initialization ("Kaiming init")  and/or *Batch Norm* layers. Latter is more popular coz the former is tricky.
+	3. But Batch Norm couples samples in the same batch, so should be avoid and use Group/Layer Norms???
+	4. Nice *diagnostic tools* starting "PyTorch-ifying the code" to the end.  *Worth revisit.*
 2. NN initialization
 	1. Keep each layer more or less unit normal distributed to avoid large values saturating activations. E.g., large input to `tanh` would leads to zero gradient and kill the neuron.
 	2. Turned out proper initialization in terms of forward pass leads to proper backwards propagation, and vice versa.
@@ -26,6 +30,11 @@
 	1. It's across samples, thus has a shape of `(1, n_hidden)`. This is also why bias in a linear layer before batch norm layer become *USELESS*, coz for a single neuron it's the same for each sample and get cancelled out. See this [timestamp](https://youtu.be/P6sfmUTpUmc?t=3696)
 	2. It also has *gain* and *bias* parameter, which provides the freedom to learn about the batches' mean and std. Those two are *trainable*, as opposed to the running mean and std.
 	4. Input samples in a minibatch are now coupled through normalization, i.e., get different loss than when fed in one at a time. However, this is *not* necessarily undesirable. See this [timestamp](https://youtu.be/P6sfmUTpUmc?t=3014).
+ 4. Good sections starting "PyTorch-ifying the code" to the end.  Notebook [link](https://github.com/karpathy/nn-zero-to-hero/blob/master/lectures/makemore/makemore_part3_bn.ipynb)
+	 1. nice implementation to go over again.
+	 2. nice visualization as diagnostic tools
+		 1. shows how to stabilize the statistics of activations/gradients across each layer via adjusting gain
+		 2. The change/data ratio should be around 10e-3; can be an indicator for adjusting learning rate.
 
 
 ### Visualization
