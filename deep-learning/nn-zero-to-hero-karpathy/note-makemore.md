@@ -35,6 +35,9 @@
 	 2. nice visualization as diagnostic tools
 		 1. shows how to stabilize the statistics of activations/gradients across each layer via adjusting gain
 		 2. The change/data ratio should be around 10e-3; can be an indicator for adjusting learning rate.		![[Pasted image 20230612182303.png]]![[Pasted image 20230612182315.png]]![[Pasted image 20230612182346.png]]
+5. Maverick Meerkat's answer to  https://stats.stackexchange.com/questions/27112/danger-of-setting-all-initial-weights-to-zero-in-backpropagation
+
+
 
 ### On optimizers
 1. https://youtu.be/hd_KFJ5ktUc
