@@ -39,6 +39,7 @@
 		```
 		 3. Apparently same can be done with Pytorch. [PYTORCH: DEFINING NEW AUTOGRAD FUNCTIONS](https://pytorch.org/tutorials/beginner/examples_autograd/two_layer_net_custom_function.html)
 		 4. See also [PyTorch Autograd Explained](https://youtu.be/MswxJw-8PvE)
-1. Class `nn`
+4. Class `nn`
 	1. Single neurons are just collections of weights and bias of type `Value`. Once we have neurons, layers and MLPs follow naturally.
 	2. Without layers like normalization, each input sample is independent from each other, batching is just a mathematical convenience.
+5. No need to reinvent wheels. E.g., one can have `cross_entropy` as a single function and without worrying about how to backpropagate `exp`.
