@@ -11,7 +11,7 @@
 1. Big idea
 	Train a MLP and shared bunch of best practices. See also his post on [A Recipe for Training Neural Networks](https://karpathy.github.io/2019/04/25/recipe/)
 2. Find a good initial learning rate. [Link](https://youtu.be/TCH_1BHY58I?t=2740)
-3. PyTorch internals ref http://blog.ezyang.com/2019/05/pytorch-internals/
+3. PyTorch internals ref http://blog.ezyang.com/2019/05/pytorch-internals/ (tough read!)
 
 ### Lecture 3
 1. Big idea
@@ -36,6 +36,17 @@
 		 1. shows how to stabilize the statistics of activations/gradients across each layer via adjusting gain
 		 2. The change/data ratio should be around 10e-3; can be an indicator for adjusting learning rate.		![[Pasted image 20230612182303.png]]![[Pasted image 20230612182315.png]]![[Pasted image 20230612182346.png]]
 5. Maverick Meerkat's answer to  https://stats.stackexchange.com/questions/27112/danger-of-setting-all-initial-weights-to-zero-in-backpropagation
+
+### Lecture 4
+1. Big Idea: it's all about calculating backpropagation.
+2. See lecture IPYNB.
+	1. `grad` is always the same shape as `data`
+	2. Interesting duality
+		1. Broadcast in forward pass leads to a `sum` in affected dimension (multiple parents, single child) in backward pass.
+		2. Sum in forward pass leads to a broadcast in affected dimension (routing of parent gradident) in backward pass.
+	3. `logit_maxes.grad` is zero. Its value is not supposed to affect loss, therefore its gradient should be zero.
+3. A good post on https://karpathy.medium.com/yes-you-should-understand-backprop-e2f06eab496b. 
+4. A good video on activation functions. https://youtu.be/gYpoJMlgyXA?t=848
 
 
 
