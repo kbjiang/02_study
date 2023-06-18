@@ -9,7 +9,8 @@
 
 ### Lecture 2
 1. Big idea
-	Train a MLP and shared bunch of best practices. See also his post on [A Recipe for Training Neural Networks](https://karpathy.github.io/2019/04/25/recipe/)
+	1. Train a MLP and shared bunch of best practices. See also his post on [A Recipe for Training Neural Networks](https://karpathy.github.io/2019/04/25/recipe/)
+	2. Each *column* of weight corresponds to each neuron!
 2. Find a good initial learning rate. [Link](https://youtu.be/TCH_1BHY58I?t=2740)
 3. PyTorch internals ref http://blog.ezyang.com/2019/05/pytorch-internals/ (tough read!)
 
@@ -48,6 +49,18 @@
 3. A good post on https://karpathy.medium.com/yes-you-should-understand-backprop-e2f06eab496b. 
 4. A good video on activation functions. https://youtu.be/gYpoJMlgyXA?t=848
 
+### Lecture 6
+1. Big idea
+	1. Using next char generation, step by step build: self-attention, multiheads, feedforward...
+	2. Adding optimization parts: residual connection, LayerNorm, dropout
+	3. Can skip `bigram` part when revisit
+2. Good intuitions
+	1. `Key` is the token's brand, `Query` is what it wants and `Value` is what it offers. It's the "communication" between tokens.
+	2. `FeedForward` is on token level and done independently on each token. It's the token "thinking" about what it now has. [timestamp](https://youtu.be/kCc8FmEb1nY?list=PLAqhIrjkxbuWI23v9cThsA9GvCAUhRvKZ&t=5162)
+	3. Think of *residual pathway* $x$  as a gradient highway at initialization (before *residual block* $\Delta x$ becomes meaningful.) [timestamp](https://youtu.be/kCc8FmEb1nY?list=PLAqhIrjkxbuWI23v9cThsA9GvCAUhRvKZ&t=5320)
+3. LayerNorm
+	1. Normalizes among neurons, as opposed to data points. No need running mean/std.
+	2. [timestamp](https://youtu.be/kCc8FmEb1nY?list=PLAqhIrjkxbuWI23v9cThsA9GvCAUhRvKZ&t=5573)
 
 
 ### On optimizers
