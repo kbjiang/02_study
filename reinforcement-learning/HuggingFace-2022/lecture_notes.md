@@ -32,8 +32,11 @@
 	1. both follow the same update rule: $V(s_t) = V(s_t) + \alpha (X_{s_t} - V(s_t))$ where $X$ is the true state value.
 	2. MC: $X = G_t$ ; all values are from real experience; it's unbiased.
 	3. TD: $X = R(s_{t+1}) + \gamma V(s_{t+1})$ ; it's bootstrapping and biased by initial values. However, asymptotically it approach the true value with more experiences.
-	4. On bias and variance, see S&B Fig. 6.1. Also discussion [here](https://stats.stackexchange.com/questions/355820/why-do-temporal-difference-td-methods-have-lower-variance-than-monte-carlo-met) and [here](https://stats.stackexchange.com/questions/336974/when-are-monte-carlo-methods-preferred-over-temporal-difference-ones)
-3. ![[Pasted image 20230403144846.png]]
+3. On bias and variance
+	1. see S&B Fig. 6.1. 
+	2. Two posts: [post 1](https://www.endtoend.ai/blog/bias-variance-tradeoff-in-reinforcement-learning/) and [post 2](https://blog.mlreview.com/making-sense-of-the-bias-variance-trade-off-in-deep-reinforcement-learning-79cf1e83d565explains) explain why MC is high variance while TD is high bias. 
+	3. Also discussion [here](https://stats.stackexchange.com/questions/355820/why-do-temporal-difference-td-methods-have-lower-variance-than-monte-carlo-met) and [here](https://stats.stackexchange.com/questions/336974/when-are-monte-carlo-methods-preferred-over-temporal-difference-ones)
+4. 
 
 
 ### Unit 3
@@ -65,3 +68,6 @@
 		2. Baseline part is clean.
 	5. [jonathan-hui](https://jonathan-hui.medium.com/rl-policy-gradients-explained-9b13b688b146)
 	6. https://github.com/MrSyee/pg-is-all-you-need/tree/master
+
+### Unit 7 Multi-agent learning
+1. Nice [video](https://youtu.be/qgb0gyrpiGk) from MATLAB. Other videos in the same RL series look good too!
