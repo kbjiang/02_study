@@ -71,3 +71,14 @@
 
 ### Unit 7 Multi-agent learning
 1. Nice [video](https://youtu.be/qgb0gyrpiGk) from MATLAB. Other videos in the same RL series look good too!
+2. Self-play
+	1. Why: the recent self is an opponent with comparable skill level
+	2. How to balance training stability and diversity: how often we change opponents, num. of opponents etc.
+3. Evaluation in adversarial games
+	1. Cumulative reward is not always meaningful; metric is dependent only on the skill of the opponent.
+4. Have NOT been thorough. Should do so when revisit.
+
+### Unit 8
+1. Understand the clipped surrogate objective function
+	1. 
+
