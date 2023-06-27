@@ -111,7 +111,8 @@
 	3. we could only influence the *direction* of gradient by maximizing objective, so it takes time to train.
 4. Implementation
 	1.  [video](https://www.youtube.com/watch?v=MEt6rrxH8W4&ab_channel=Weights%26Biases)
-	2. it allows parallel actors and multiple epochs. See this [post](https://stackoverflow.com/questions/46422845/what-is-the-way-to-understand-proximal-policy-optimization-algorithm-in-rl)
+	2. TODO: add comment to ppo.py
+	3. it allows parallel actors and multiple epochs. See this [post](https://stackoverflow.com/questions/46422845/what-is-the-way-to-understand-proximal-policy-optimization-algorithm-in-rl)
 5. References
 	1. See section 3.4 of this [thesis](https://fse.studenttheses.ub.rug.nl/25709/1/mAI_2021_BickD.pdf) for more intuitions. E.g., for area 3: ![[Pasted image 20230625105153.png]]
 	2. Diagram from this [post](https://stackoverflow.com/questions/46422845/what-is-the-way-to-understand-proximal-policy-optimization-algorithm-in-rl)![[Pasted image 20230626224733.png]]
