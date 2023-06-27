@@ -90,7 +90,7 @@
 		1. Avoid drastic change of objective when it's already in our favor. 
 			1. Area 4 is already decreasing the probability of taking action associated with negative $A$
 			2. Area 5 is already increasing the probability of taking action associated with positive $A$
-		2. Me: *only* admit large change when current example is very different from previous belief. 
+		2. Me: *only* admit large contribution to $L^{CLIP}$ when current example is very different from previous belief. We need the update of weights in these cases.
 			1. Area 3 is decreasing the probability of taking action associated with positive $A$
 			2. Area 6 is increasing the probability of taking action associated with negative $A$ 
 	3. ![[Pasted image 20230624080039.png]]
@@ -104,11 +104,15 @@
 	2. in areas 1 and 2, the ratio $r$ is in reasonable range, therefore no clipping and policy is updated as usual. 
 	3. in area 4 and 5, return clipped and $\theta$ *independent* therefore the weights is not updated. You can understand it as, *the ratio change is already in the right direction, we do NOT want to push it too hard.* 
 		1. E.g., for area 4, probability of taking this sub-expectation action is already significantly low, i.e., $r<1-\epsilon$, we can leave it alone for now.
-	4. in area 3, $r < 1-\epsilon$ and $A>0$, $r$ is positive by definition, the unclipped overtakes the clipped and return $r_t(\theta)\hat{A}$. In this case, since this action is better than expected ($A>0$), the resultant gradient change would point to maximizing $r_t(\theta)\hat{A}_t$ , which in turn increase $r_t(\theta)$. Similar reasoning goes with area 6. *In both cases, the SGA will try to pull the ratio into $1\pm \epsilon$*.
+	4. in area 3, $r < 1-\epsilon$ and $A>0$, $r$ is positive by definition, the unclipped overtakes the clipped and return $r_t(\theta)\hat{A}$. In this case, since this action is better than expected ($A>0$), the resultant gradient change would point to maximizing $r_t(\theta)\hat{A}_t$ , which in turn increase $r_t(\theta)$. Similar reasoning goes with area 6. *In both cases, the SGA will try to pull the ratio into $1\pm \epsilon$*. It's like 'fixing' previous mistakes.
 3. My thoughts.
 	1. It's all about proper objective that inspires desired actions
 	2. proper means make favorable actions ($A>0$) more probable ($r>1$) but not by too much; and vice versa.
 	3. we could only influence the *direction* of gradient by maximizing objective, so it takes time to train.
-4. References
+4. Implementation
+	1.  [video](https://www.youtube.com/watch?v=MEt6rrxH8W4&ab_channel=Weights%26Biases)
+	2. it allows parallel actors and multiple epochs. See this [post](https://stackoverflow.com/questions/46422845/what-is-the-way-to-understand-proximal-policy-optimization-algorithm-in-rl)
+5. References
 	1. See section 3.4 of this [thesis](https://fse.studenttheses.ub.rug.nl/25709/1/mAI_2021_BickD.pdf) for more intuitions. E.g., for area 3: ![[Pasted image 20230625105153.png]]
+	2. Diagram from this [post](https://stackoverflow.com/questions/46422845/what-is-the-way-to-understand-proximal-policy-optimization-algorithm-in-rl)![[Pasted image 20230626224733.png]]
 
