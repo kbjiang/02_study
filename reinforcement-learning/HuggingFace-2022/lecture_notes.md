@@ -61,13 +61,14 @@
 	2. it does not measure performance. There's no target value to "getting closer" to; this loss is just for derivation calculation. It's absolute value or it's trend does not mean much.
 6. TODO
 	1. really nice example on policy gradient: https://youtu.be/cQfOQcpYRzE
-	2. Hongyi's intro to RL https://youtu.be/XWukX-ayIrs?list=PLJV_el3uVTsMhtt7_Y6sgTHGHp1Vb2P2J
-	3. [PyTorch probability distributions](https://pytorch.org/docs/stable/distributions.html#)
-	4. [openai-spinningup](https://spinningup.openai.com/en/latest/spinningup/rl_intro3.html)
+	2. really nice explanation: [# L3 Policy Gradients and Advantage Estimation (Foundations of Deep RL Series)](https://youtu.be/AKbX1Zvo7r8?list=PLwRJQ4m4UJjNymuBM9RdmB3Z9N5-0IlY0)
+	3. Hongyi's intro to RL https://youtu.be/XWukX-ayIrs?list=PLJV_el3uVTsMhtt7_Y6sgTHGHp1Vb2P2J
+	4. [PyTorch probability distributions](https://pytorch.org/docs/stable/distributions.html#)
+	5. [openai-spinningup](https://spinningup.openai.com/en/latest/spinningup/rl_intro3.html)
 		1. *Don't let the past distract you*. The argument against $R(\tau)$ does not convince me coz the full $R(\tau)$ term follows derivation. It's just an alternative, not a replacement. The argument about less variance (*But how is this better*) at sample estimate makes sense though.
 		2. Baseline part is clean.
-	5. [jonathan-hui](https://jonathan-hui.medium.com/rl-policy-gradients-explained-9b13b688b146)
-	6. https://github.com/MrSyee/pg-is-all-you-need/tree/master
+	6. [jonathan-hui](https://jonathan-hui.medium.com/rl-policy-gradients-explained-9b13b688b146)
+	7. https://github.com/MrSyee/pg-is-all-you-need/tree/master
 
 ### Unit 7 Multi-agent learning
 1. Nice [video](https://youtu.be/qgb0gyrpiGk) from MATLAB. Other videos in the same RL series look good too!
@@ -114,6 +115,9 @@
 	2. TODO: add comment to ppo.py
 	3. it allows parallel actors and multiple epochs. See this [post](https://stackoverflow.com/questions/46422845/what-is-the-way-to-understand-proximal-policy-optimization-algorithm-in-rl)
 5. References
-	1. See section 3.4 of this [thesis](https://fse.studenttheses.ub.rug.nl/25709/1/mAI_2021_BickD.pdf) for more intuitions. E.g., for area 3: ![[Pasted image 20230625105153.png]]
-	2. Diagram from this [post](https://stackoverflow.com/questions/46422845/what-is-the-way-to-understand-proximal-policy-optimization-algorithm-in-rl)![[Pasted image 20230626224733.png]]
+	1. [# L4 TRPO and PPO (Foundations of Deep RL Series)](https://youtu.be/KjWF8VIMGiY?list=PLwRJQ4m4UJjNymuBM9RdmB3Z9N5-0IlY0)
+		1. Very nice introduction. From regular policy gradient to PPO.
+		2. Especially showing the standard as 1st order approximation of PPO.
+	2. See section 3.4 of this [thesis](https://fse.studenttheses.ub.rug.nl/25709/1/mAI_2021_BickD.pdf) for more intuitions. E.g., for area 3: ![[Pasted image 20230625105153.png]]
+	3. Diagram from this [post](https://stackoverflow.com/questions/46422845/what-is-the-way-to-understand-proximal-policy-optimization-algorithm-in-rl)![[Pasted image 20230626224733.png]]
 
