@@ -56,8 +56,12 @@
 	3. Can skip `bigram` part when revisit
 2. Good intuitions
 	1. `Key` is the token's brand, `Query` is what it wants and `Value` is what it offers. It's the "communication" between tokens.
-	2. `FeedForward` is on token level and done independently on each token. It's the token "thinking" about what it now has. [timestamp](https://youtu.be/kCc8FmEb1nY?list=PLAqhIrjkxbuWI23v9cThsA9GvCAUhRvKZ&t=5162)
-	3. Think of *residual pathway* $x$  as a gradient highway at initialization (before *residual block* $\Delta x$ becomes meaningful.) [timestamp](https://youtu.be/kCc8FmEb1nY?list=PLAqhIrjkxbuWI23v9cThsA9GvCAUhRvKZ&t=5320)
+	2. `FeedForward` is on token level and done independently and identically on each position. It's the token individually "thinking" about what it now has. [timestamp](https://youtu.be/kCc8FmEb1nY?list=PLAqhIrjkxbuWI23v9cThsA9GvCAUhRvKZ&t=5162) 
+		1. In original paper, "While the linear transformations are the same across different positions, they use different parameters from layer to layer. Another way of describing this is as two convolutions with kernel size 1."
+	3. Each block has two parts: 
+		1. `attention` is for *communication* (cross tokens)
+		2. `ffwd` is for computation (single token).
+	4. Think of *residual pathway* $x$  as a gradient highway at initialization (before *residual block* $\Delta x$ becomes meaningful.) [timestamp](https://youtu.be/kCc8FmEb1nY?list=PLAqhIrjkxbuWI23v9cThsA9GvCAUhRvKZ&t=5320)
 3. LayerNorm
 	1. Normalizes among neurons, as opposed to data points. No need running mean/std.
 	2. [timestamp](https://youtu.be/kCc8FmEb1nY?list=PLAqhIrjkxbuWI23v9cThsA9GvCAUhRvKZ&t=5573)
