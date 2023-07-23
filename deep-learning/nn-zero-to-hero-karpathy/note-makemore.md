@@ -63,8 +63,11 @@
 		2. `ffwd` is for computation (single token).
 	4. Think of *residual pathway* $x$  as a gradient highway at initialization (before *residual block* $\Delta x$ becomes meaningful.) [timestamp](https://youtu.be/kCc8FmEb1nY?list=PLAqhIrjkxbuWI23v9cThsA9GvCAUhRvKZ&t=5320)
 3. LayerNorm
-	1. Normalizes among neurons, as opposed to data points. No need running mean/std.
+	1. Normalizes along the embedding dimension of input of a hidden layer. This makes sense, coz *input is the gradient of weights during back propagation*.
 	2. [timestamp](https://youtu.be/kCc8FmEb1nY?list=PLAqhIrjkxbuWI23v9cThsA9GvCAUhRvKZ&t=5573)
+
+### Lecture 6.a (implementation)
+1. 
 
 
 ### On optimizers
