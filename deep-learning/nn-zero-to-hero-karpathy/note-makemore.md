@@ -76,10 +76,9 @@
 	2. `W_q` is trainable parameter, `Q=W_q*x` and `wei` are the intermediate variable that are data dependent.
 4. Two take aways
 	1. *Understand the Transformer architecture in a modular way*
-			1. The attention part focus on communication between tokens and *preserves input shape*.
-			2. The feedforward part focus on transformation of single token representation.
-			3. If think of `Block` (model level) or `Head` (block level) as a black box, its output is just a representation of input data with same shape.
-	3. On sequence or on token
+		1. The attention part focus on communication between tokens and *preserves input shape*; the feedforward part focus on transformation of single token representation.
+		2. If think of `Block` (model level) or `Head` (block level) as a black box, its output is just a representation of input data with same shape.
+	2. On sequence or on token
 		1. `Head.wei` and `positional_embedding` are the only parameters of the model cares about sequence (`:T`), others are all on token level.
 
 
