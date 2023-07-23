@@ -58,16 +58,29 @@
 	1. `Key` is the token's brand, `Query` is what it wants and `Value` is what it offers. It's the "communication" between tokens.
 	2. `FeedForward` is on token level and done independently and identically on each position. It's the token individually "thinking" about what it now has. [timestamp](https://youtu.be/kCc8FmEb1nY?list=PLAqhIrjkxbuWI23v9cThsA9GvCAUhRvKZ&t=5162) 
 		1. In original paper, "While the linear transformations are the same across different positions, they use different parameters from layer to layer. Another way of describing this is as two convolutions with kernel size 1."
-	3. Each block has two parts: 
+	3. Each attention block has two parts: 
 		1. `attention` is for *communication* (cross tokens)
-		2. `ffwd` is for computation (single token).
+		2. `ffwd` is for *computation* (single token).
 	4. Think of *residual pathway* $x$  as a gradient highway at initialization (before *residual block* $\Delta x$ becomes meaningful.) [timestamp](https://youtu.be/kCc8FmEb1nY?list=PLAqhIrjkxbuWI23v9cThsA9GvCAUhRvKZ&t=5320)
 3. LayerNorm
 	1. Normalizes along the embedding dimension of input of a hidden layer. This makes sense, coz *input is the gradient of weights during back propagation*.
 	2. [timestamp](https://youtu.be/kCc8FmEb1nY?list=PLAqhIrjkxbuWI23v9cThsA9GvCAUhRvKZ&t=5573)
 
-### Lecture 6.a (implementation)
-1. 
+### Lecture 6.a ([implementation](https://github.com/karpathy/ng-video-lecture/blob/master/gpt.py))
+1. In `GPTLanguageModel.forward()` , we flatten `logits` and `targets` when calculating the loss.
+2. In `GPTLanguageModel.generate()` 
+	1. We only care about the last position of `logits`. That's the position with most/all context information.
+	2. Good place to imagine how a sequence of tokens (batch size 1) go through `Head.forward()`.
+3. In `Head`
+	1. The `:T` in `self.tril` is necessary since at the beginning of generation the length of sequence is smaller than `block_size`.
+	2. `W_q` is trainable parameter, `Q=W_q*x` and `wei` are the intermediate variable that are data dependent.
+4. Two take aways
+	1. *Understand the Transformer architecture in a modular way*
+			1. The attention part focus on communication between tokens and *preserves input shape*.
+			2. The feedforward part focus on transformation of single token representation.
+			3. If think of `Block` (model level) or `Head` (block level) as a black box, its output is just a representation of input data with same shape.
+	3. On sequence or on token
+		1. `Head.wei` and `positional_embedding` are the only parameters of the model cares about sequence (`:T`), others are all on token level.
 
 
 ### On optimizers
