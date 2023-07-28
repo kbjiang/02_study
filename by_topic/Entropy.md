@@ -20,9 +20,13 @@
 	2. Does not matter which of p and q has more information, CE and KL are always non negative.
 	3. Neither is symmetrical. I.e., $H(p,q) != H(q, p)$. Easy to see from the definition equation.
 3. 
+
 ### Cross entropy vs *log_loss* and *log-likelihood*:
 1. in softmax $p(k|x) = \text{exp}(z_k)/\sum \text{exp}(z_i)$, $z_i$ is called *logits* or *un-normalized log-probabilities*.
 2. "Any loss consisting of a negative log-likelihood is a cross-entropy between the empirical distribution defined by the training set and the probability distribution defined by model. For example, mean squared error is the cross-entropy between the empirical distribution and a Gaussian model"
+3. 
+
+
 ### Refs:
 1. https://machinelearningmastery.com/what-is-information-entropy/
 2. https://machinelearningmastery.com/cross-entropy-for-machine-learning/
