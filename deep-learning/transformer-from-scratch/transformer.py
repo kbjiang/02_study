@@ -47,7 +47,7 @@ class Head(nn.Module):
         wei = F.softmax(wei, dim=-1) # (B, T, T_y)
         wei = self.dropout(wei)
         # perform the weighted aggregation of the values
-        out = wei @ v # (B, T, T) @ (B, T_y, hs) -> (B, T, hs)
+        out = wei @ v # (B, T, T_y) @ (B, T_y, hs) -> (B, T, hs)
         return out
 
 class MultiHeadAttention(nn.Module):
