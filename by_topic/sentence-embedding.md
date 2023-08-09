@@ -37,5 +37,9 @@
 4. log-prob and x entropy [machine learning - Log probabilities in reference to softmax classifier - Cross Validated (stackexchange.com)](https://stats.stackexchange.com/questions/289369/log-probabilities-in-reference-to-softmax-classifier)
 	1. it simplifies the gradient calculation
 
+
+### [Paper](https://arxiv.org/pdf/2212.03533.pdf) on E5
+
+
 ### Resources
 1. https://huggingface.co/blog/mteb
