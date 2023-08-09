@@ -66,6 +66,7 @@ def collate_fn(batch):
     tgt_batch = pad_sequence(tgt_batch, padding_value=PAD_IDX, batch_first=True)
     return src_batch, tgt_batch
 
+# https://github.com/karpathy/nanoGPT/blob/master/train.py
 # learning rate decay scheduler (cosine with warmup)
 def get_lr(it):
     # 1) linear warmup for warmup_iters steps
@@ -80,6 +81,7 @@ def get_lr(it):
     coeff = 0.5 * (1.0 + math.cos(math.pi * decay_ratio)) # coeff ranges 0..1
     return min_lr + coeff * (learning_rate - min_lr)
 
+# https://pytorch.org/tutorials/beginner/translation_transformer.html
 def train_epoch(model, optimizer, epoch):
     model.train()
     train_dataloader = DataLoader(train_iter, batch_size=batch_size, collate_fn=collate_fn)

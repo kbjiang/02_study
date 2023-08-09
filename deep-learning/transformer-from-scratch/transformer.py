@@ -28,11 +28,10 @@ class Head(nn.Module):
         self.query = nn.Linear(n_embd, head_size, bias=False)
         self.value = nn.Linear(n_embd, head_size, bias=False)
         self.register_buffer('tril', torch.tril(torch.ones(block_size, block_size)))
-
         self.dropout = nn.Dropout(dropout)
 
     def forward(self, x, y):
-        # x is for decoder, y is for encoder
+        # x is the input for query, y is for key and value; x and y can be the same
         # input of size (batch, time-step, channels)
         # output of size (batch, time-step, head size)
         B,T,C = x.shape
@@ -51,7 +50,7 @@ class Head(nn.Module):
         return out
 
 class MultiHeadAttention(nn.Module):
-    """ multiple heads of attention in parallel """
+    """ multiple heads of self-attention in parallel """
 
     def __init__(self, num_heads, head_size, is_causal=False):
         super().__init__()
@@ -112,6 +111,7 @@ class DecoderBlock(nn.Module):
         self.ln4 = nn.LayerNorm(n_embd)
 
     def forward(self, x, y):
+        # x is decoder input, y is encoder output
         x = x + self.msa(self.ln1(x), self.ln1(x))
         x = x + self.xa(self.ln2(x), self.ln3(y))
         x = x + self.ffwd(self.ln4(x))
@@ -144,6 +144,7 @@ class PositionalEncoding(nn.Module):
         return self.encoding[:T, :]
 
 class Transformer(nn.Module):
+    """ Transformer with encoder-decoder structure"""
 
     def __init__(self):
         super().__init__()
@@ -152,6 +153,7 @@ class Transformer(nn.Module):
         self.token_embedding_table_enc = nn.Embedding(vocab_size_enc, n_embd)
         self.position_embedding = PositionalEncoding(n_embd, device=device)
         self.encoder_blocks = nn.Sequential(*[EncoderBlock(n_embd, n_head=n_head) for _ in range(n_layer)])
+        # cannot use nn.Sequential for DecoderBlock because it takes two inputs
         self.decoder_blocks = nn.ModuleList([DecoderBlock(n_embd, n_head=n_head) for _ in range(n_layer)])
         self.ln_f = nn.LayerNorm(n_embd) # final layer norm
         self.lm_head = nn.Linear(n_embd, vocab_size)
@@ -193,23 +195,27 @@ class Transformer(nn.Module):
 
         return logits, loss
 
-    def generate(self, idx_enc):
-        # idx is (B, T) array of indices in the current context
+    def generate(self, idx_enc, greedy=False):
+        # every generation starts with the BOS token
         B = idx_enc.shape[0]
         idx = torch.ones(B,1).fill_(BOS_IDX).type(torch.long).to(device)
         for i in range(block_size):
-        # for i in range(10):
             # get the predictions
             logits, _ = self(idx, idx_enc)
             # focus only on the last time step
             logits = logits[:, -1, :] # becomes (B, C)
-            # apply softmax to get probabilities
-            probs = F.softmax(logits, dim=-1) # (B, C)
-            # sample from the distribution
-            idx_next = torch.multinomial(probs, num_samples=1) # (B, 1)
+            if greedy:
+                idx_next = torch.argmax(logits, dim=-1)
+            else:
+                # apply softmax to get probabilities
+                probs = F.softmax(logits, dim=-1) # (B, C)
+                # sample from the distribution
+                idx_next = torch.multinomial(probs, num_samples=1) # (B, 1)
+            # once predicts EOS, everything follows becomes EOS
             idx_next = torch.where(idx[:, -1]==EOS_IDX, EOS_IDX, idx_next.squeeze())
             # append sampled index to the running sequence
             idx = torch.cat((idx, idx_next[:, None]), dim=1) # (B, T+1)
+            # stop generation if everything is EOS
             if torch.all(idx[:, -1]==EOS_IDX):
                 break
         return idx

@@ -4,3 +4,5 @@
 	1. Actually the whole series is good.
 4. Original post: [https://ai.googleblog.com/2017/08/transformer-novel-neural-network.html](https://ai.googleblog.com/2017/08/transformer-novel-neural-network.html)
 5. Good reference, but too long: [https://e2eml.school/transformers.html](https://e2eml.school/transformers.html)
+6. [nanoGPT/transformer_sizing.ipynb at master · karpathy/nanoGPT · GitHub](https://github.com/karpathy/nanoGPT/blob/master/transformer_sizing.ipynb)
+7. 
