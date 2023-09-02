@@ -1,6 +1,14 @@
 ### My understanding
-1. Why `fp16`? Coz not all operations need *single precision (32bit)* as shown in the graph.  ![[Pasted image 20230829223457.png]]
-2. One major op is Loss scaling.
+1. Why `fp16`? Coz not all operations need *single precision (32bit)* as shown in the graph. ![[Pasted image 20230831071818.png]]
+2. ![[Pasted image 20230831071909.png]]
+3. ![[Pasted image 20230829223457.png]]
+4. Two major ideas:
+	1. casting
+	2. scaling
+5. https://youtu.be/9tpLJpqxdE8
+	1. fp16 model
+	2. fp16 gradient, fp32 master copy
+	3. fp16 loss => fp32 loss, 16:28, how scaled fp 32 loss to scaled fp16 gradients?
 ### Refs
 1. Nice [post](https://blog.csdn.net/qq_35985044/article/details/108285982)
 2. Nice intro [video](https://youtu.be/b5dAmcBKxHg)
