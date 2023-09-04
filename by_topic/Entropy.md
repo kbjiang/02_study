@@ -30,5 +30,6 @@
 ### Refs:
 1. https://machinelearningmastery.com/what-is-information-entropy/
 2. https://machinelearningmastery.com/cross-entropy-for-machine-learning/
-3. See [here](https://stats.stackexchange.com/questions/335197/why-kl-divergence-is-non-negative) for a proof of KL's non-negative. 
-4. Section 7 of [paper](https://arxiv.org/pdf/1512.00567.pdf)
+3. https://thegradient.pub/understanding-evaluation-metrics-for-language-models/
+4. See [here](https://stats.stackexchange.com/questions/335197/why-kl-divergence-is-non-negative) for a proof of KL's non-negative. 
+5. Section 7 of [paper](https://arxiv.org/pdf/1512.00567.pdf)
