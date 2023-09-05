@@ -18,7 +18,7 @@
 		1. each process get the same architecture
 		2. process 0 initializes the weights and then broadcast it to all other gpus
 2. https://youtu.be/3XUG7cjte2U
-	1. API/COMM https://youtu.be/3XUG7cjte2U?t=307
+	1. API/COMM https://youtu.be/3XUG7cjte2U?t=307 ![[Pasted image 20230905153550.png]]
 ### gradient checkpointing
 1. https://medium.com/tensorflow/fitting-larger-networks-into-memory-583e3c758ff9
 
