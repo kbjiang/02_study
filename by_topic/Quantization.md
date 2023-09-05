@@ -6,6 +6,8 @@
 	4. me: outliers are NOT errors, they are just feature of the transformers.
 	5. Around 31:20, 'perplexity has a -0.95 correlation with zero-shot performance', 'so one is a good measure of the other'; also 52:25
 	6. the 4bit for inference part is also interesting.
+ 2. His talk on QLoRa
+	 1. https://youtu.be/y9PHWGOa8HA
 
 ### Floating points and its calculation
 1. Nice article from [Wiki](https://en.wikipedia.org/wiki/Half-precision_floating-point_format) and the table in there. *Notice different precision smaller/greater than one.*

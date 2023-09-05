@@ -12,7 +12,15 @@
 		1. https://huggingface.co/docs/transformers/perf_train_gpu_many#dp-vs-ddp
 		2. DP: https://youtu.be/a6_pY9WwqdQ?t=223
 1. DDP https://youtu.be/SivkGd6LQoU
-	1. each process get the same architecture
-	2. process 0 initializes the weights and then broadcast it to all other gpus
+	1. concepts of nodes, process/gpu, worlds, global rank, local rank...
+	2. So the idea is to define multiple processes with desired data and ops, then link each to a gpu, then spawn 
+	3. Initialization
+		1. each process get the same architecture
+		2. process 0 initializes the weights and then broadcast it to all other gpus
+2. https://youtu.be/3XUG7cjte2U
+	1. API/COMM https://youtu.be/3XUG7cjte2U?t=307
 ### gradient checkpointing
 1. https://medium.com/tensorflow/fitting-larger-networks-into-memory-583e3c758ff9
+
+MIT 6.S965
+1. https://youtube.com/playlist?list=PL80kAHvQbh-ocildRaxjjBy6MR1ZsNCU7&si=7l0UEADknT1jdnmh
