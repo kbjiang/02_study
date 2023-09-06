@@ -22,5 +22,10 @@
 ### gradient checkpointing
 1. https://medium.com/tensorflow/fitting-larger-networks-into-memory-583e3c758ff9
 
+### Pytorch
+1. Nice code walkthrough https://youtu.be/-LAtx9Q6DA8?t=487 The series is also good.
+
+### Nvidia
+1. https://youtu.be/azLCUayJJoQ?t=1453 Nice summary
 MIT 6.S965
 1. https://youtube.com/playlist?list=PL80kAHvQbh-ocildRaxjjBy6MR1ZsNCU7&si=7l0UEADknT1jdnmh

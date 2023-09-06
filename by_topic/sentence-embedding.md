@@ -39,6 +39,8 @@
 
 
 ### [Paper](https://arxiv.org/pdf/2212.03533.pdf) on E5
+1. It's mostly about preparing high quality training data
+2. Training: contrastive learning
 
 
 ### Resources
