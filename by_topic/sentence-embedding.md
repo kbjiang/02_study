@@ -36,6 +36,7 @@
 	2. loss along both row and col directions of $M \times M$ , coz $(x_i, y_j) \neq (x_j, y_i)$ .
 4. log-prob and x entropy [machine learning - Log probabilities in reference to softmax classifier - Cross Validated (stackexchange.com)](https://stats.stackexchange.com/questions/289369/log-probabilities-in-reference-to-softmax-classifier)
 	1. it simplifies the gradient calculation
+5. Blog post: https://openai.com/blog/new-and-improved-embedding-model
 
 
 ### [Paper](https://arxiv.org/pdf/2212.03533.pdf) on E5
