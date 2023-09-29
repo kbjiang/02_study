@@ -8,7 +8,15 @@
 
 ## Statistics for applications Fall 2016
 ### Lecture 1
-1. probability vs statistics, big picture
-2. statistical modeling
-	1. what we know + everything else (randomness, or lack of info.)
-	2. in comes estimators of model parameters
+1. Probability vs Statistics, both stem from *randomness*.
+	1. Probability: 
+		1. simple random process, like rolling dice
+	2. Statistics: 
+		1. more complicated process; need to estimate parameters from data
+		2. statistical modeling = simple process (what we know) + random noise (lack of info, randomness etc.)
+2. What this course is about 
+	1. Understand mathematics behind statistical methods
+	2. Justify quantitative statements given modeling assumptions 
+	3. Describe interesting mathematics arising in statistics
+	4. Provide a math toolbox to extend to other models.
+3. It's all about *replacing mean with sample average*...
