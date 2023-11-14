@@ -1,0 +1,1 @@
+1. OpenAI case study. https://youtu.be/ahnGLM-RC1Y?t=910
