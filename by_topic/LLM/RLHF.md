@@ -23,3 +23,4 @@
 3. DPO instead of PPO
 	1. Why not directly learn from preference samples (those RM model was trained on)?
 	2. https://youtu.be/vuWbJlBePPA
+4. Chip Huyen https://huyenchip.com/2023/05/02/rlhf.html
