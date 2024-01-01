@@ -21,6 +21,6 @@
 	3. It's important to include KL term in reward to avoid over optimization against reward model. See Figure 5 of [reference](https://arxiv.org/pdf/2009.01325.pdf)
 		1. Note this term is *NOT* the ratio function in PPO algorithm, which is the ratio between the probabilities of taking same action at same state now and previously. See [HF course](https://huggingface.co/learn/deep-rl-course/unit8/clipped-surrogate-objective).
 3. DPO instead of PPO
-	1. Why not directly learn from preference samples (those RM model was trained on)?
-	2. https://youtu.be/vuWbJlBePPA
+	1. Why not directly learn from preference samples (those RM model was trained on)?  https://youtu.be/vuWbJlBePPA
+	2. Finetune Llama 2 with DPO. https://huggingface.co/blog/dpo-trl
 4. Chip Huyen https://huyenchip.com/2023/05/02/rlhf.html
