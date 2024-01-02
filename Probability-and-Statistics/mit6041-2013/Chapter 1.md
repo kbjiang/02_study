@@ -3,6 +3,7 @@ Course:
 Lecture: 1-4
 Topic: #Probability #Probability/Foundation #Counting 
 
+## Lectures
 ### Probability model
 1. Sample space, all possible *outcomes*, also called elements. E.g., $\Omega = \{H, T\}$
 	1. It needs to be complete and elements should be *mutual exclusive*. 
@@ -50,7 +51,8 @@ Topic: #Probability #Probability/Foundation #Counting
 		1. instead of $k$ out of $n$, think $k$ and $n-k$. Can be easily expended to $n_1, n_2,\cdots,n_r$
 		2. E.g., 7 cards from 52-card deck, the num of combinations include exactly 3 aces is $\binom{4}{3} \times \binom{48}{4}$
 
-### Me: interesting/challenging
+## My comments
+### Interesting/challenging
 1. *Set* vs *Probability*.
 	1. Distinction is important coz their operations are different
 	2. Additive Rule: $\mathbf{P}(A\cup B)=\mathbf{P}(A) + \mathbf{P}(B)$
@@ -72,6 +74,13 @@ Topic: #Probability #Probability/Foundation #Counting
 		1. $\mathbf{P}(\text{series subsystem succeeds})=p_1 p_2 \cdots p_m$
 		2. $\mathbf{P}(\text{parallel subsystem succeeds})=1 - (1-p_1) (1-p_2) \cdots (1-p_m)$
 			![[Pasted image 20231228074342.png|600]]
-### Me: good trick 
+5. *A problem I got wrong.* Total $n$ ball and $m$ are red. Now randomly select $k$, probability of having $i$ red.
+	1. Correct way: partition by red and non-red.
+	2. My way:
+		1. Probability of $i$th ball is red $m/n$. This is true.
+			1. E.g., $\mathbf{P}(2r)=\mathbf{P}(2r|1r)\mathbf{P}(1r) + \mathbf{P}(2r|\neg 1r)\mathbf{P}(\neg 1r)=\frac{m-1}{n-1}\frac{m}{n}+\frac{m}{n-1}(1-\frac{m}{n})=\frac{m}{n}$.
+		2. Then it's "flip $k$ times and $i$ head" and easy to use binomial coefficient $\binom{k}{i} p^{i} (1-p)^{k-i}$ right? 
+			1. *No!* because each flip in the sequence is not independent! The probability of this ball being red depends on the previous selections.
+### Good trick 
 1. To simplify question, try to make the problem discrete first.
 		1. E.g., Romeo and Juliet (Example 1.5. p13) problem, instead of continuous one hour, simplify and assume that both can only arrive at every 15 minutes, then the sample space is discrete.
