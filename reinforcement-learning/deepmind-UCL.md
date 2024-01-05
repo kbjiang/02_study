@@ -1,2 +1,0 @@
-### Lecture 1
-1. Normally, a poker playing agent only observes public cards therefore its observation is not Markovian. However, the Blackjack (Example 5.1, p93) in Sutton assumes infinite deck with replacement, therefore knowing the history does not help with current situation, and brings back the Markovian feature. 
