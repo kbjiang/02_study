@@ -16,6 +16,10 @@ Topic: #Probability #RandomVariable
 		1. Notice the cases of *p*. ![[Pasted image 20240102104442.png|700]]
 		2. Notice how there's nothing new from previous chapter except new notations.
 3. $\mathbf{E}[X|X>1]=\mathbf{E}[X]+1$ one toss is wasted.
+4. Joint PMF for multiple RVs.
+	1. The RVs associate with the same experiment, i.e., same sample space.
+	2. The RVs don't have to be independent
+		1. Example 2.11, $X_i$ is equal but not independent from each other.
 
 ## My comments
 1. *Bernoulli* vs *Binomial* random variables
