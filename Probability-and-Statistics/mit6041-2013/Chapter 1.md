@@ -74,7 +74,9 @@ Topic: #Probability #Probability/Foundation #Counting
 		1. $\mathbf{P}(\text{series subsystem succeeds})=p_1 p_2 \cdots p_m$
 		2. $\mathbf{P}(\text{parallel subsystem succeeds})=1 - (1-p_1) (1-p_2) \cdots (1-p_m)$
 			![[Pasted image 20231228074342.png|600]]
-5. *A problem I got wrong.* Total $n$ ball and $m$ are red. Now randomly select $k$, probability of having $i$ red.
+5. Example 1.30 and 1.31
+	1. $\sum\limits_{k=0}^{n} \binom{n}{k}=2^n.$ The sum of all numbers of $k$ element subsets $\equiv$ The number of all possible subsets.
+6. *A problem I got wrong.* Total $n$ ball and $m$ are red. Now randomly select $k$, probability of having $i$ red.
 	1. Correct way: partition by red and non-red.
 	2. My way:
 		1. Probability of $i$th ball is red $m/n$. This is true.
