@@ -1,5 +1,6 @@
 Date: 2023-12-30
 Course:
+Chapter: 1
 Lecture: 1-4
 Topic: #Probability #Probability/Foundation #Counting 
 
