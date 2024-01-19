@@ -1,4 +1,4 @@
-Date: 2024-01-02
+Date: 2024-01-08
 Course:
 Chapter: 2
 Lecture: 5-7
