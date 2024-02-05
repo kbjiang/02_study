@@ -31,18 +31,17 @@ Topic: #Probability #CountinuousRandomVariable
 1. *The four steps for solving probability problems*
 	1. set up sample space $\rightarrow$ probability law $\rightarrow$ identify event of interest $\rightarrow$ calculate
 	2. E.g., Buffon's needle.
-		1. 
-3. Usually $g(E[x])\neq E[g(x)]$ when $g(x)$ is not linear. 
-	1. Careful with reasoning using expectations!
-	2. E.g., distance and speed to calculate travel time. $E[D/V]\neq D/E[V]$
-4. Example 2.11, Hat problem, https://youtu.be/EObHWIEKGjA?t=2411
-	1. $X=\sum_i X_i$ where $X_i$'s are dependent.
-	2. Expectation does not care about dependence when the function of RV is linear
-	3. Variance involves $X^2 = \sum_i X_i^2 + \sum_{i, j:i\neq j} X_i X_j$.
-5. Geometric distribution
-	1. *Example 2.17*. Number of toss till first success.
-	2. $\mathbf{E}[X|X-1>0]=\mathbf{E}[X-1|X-1>0]+1=\mathbf{E}[X]+1$. The system is memory-less. I.e., if first trail fails, we just wasted one toss and got back to where we started.
-6. Independence $\implies \rho=0$ but not the other way around.
+2. $Z=X+Y$, $X$ and $Y$ independent. We have  $$
+		\begin{align}
+		\mathbf{P}(Z\le z|X=x)=&\mathbf{P}(X+Y\le z|X=x) \\
+		=&\mathbf{P}(x + Y \le z|X=x) \\
+		=&\mathbf{P}(x + Y \le z) \quad  \text{due to independence of $Y$ and $X$.} \\
+		=&\mathbf{P}(Y \le z - x) \\
+		\end{align}
+		$$
+	1. Notation is important: *can NOT go from line 1 to line 3 directly* because $X+Y$ is not independent of $X$, but $x+Y$ is since $x$ is just a number.
+	2. By differentiating both sides $f_{X, Z}(x, z) = f_X(x)f_{Z|X}(z|x) = f_X(x)f_Y(z-x)$. Notice it's $f_Y$ in the last part.
+3. Independence $\implies \rho=0$ but not the other way around.
 
  
 ## Interesting/Challenging problems and tricks
