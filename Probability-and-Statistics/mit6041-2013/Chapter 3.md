@@ -26,6 +26,14 @@ Topic: #Probability #CountinuousRandomVariable
 		1. Notice var is *not linear* so the multiplication of RVs does not apply
 6. Good example: the stick at the end of lecture 9
 
+### Lecture 12: Iterated Expectations; Sum of a Random Number of R.V.s
+1.  $\mathbf{E}[X|Y]$ is a R.V., *a function of* $Y$
+	1. $\mathbf{E}[X|Y = y]$ is a realization; PDF $f_{X|Y}(x|y)$ is a function of $x$.
+		1. PDF and expectation are very different!
+	2. We can talk about iterated expectations and variance of the former
+	3. The bookstore example
+2. Law of total variance
+
 
 ## My comments
 1. *The four steps for solving probability problems*
@@ -54,5 +62,6 @@ Topic: #Probability #CountinuousRandomVariable
 		3. ![[Pasted image 20240118080317.png|800]]
 2. Three pieces form a triangle, Lecture 9, recitation problem 4
 3. Absent minded prof., Lecture 9, tutorial problem 3
-3. Problem set 5, problem 6. See how $\mathbf{P}(B|A)\neq \mathbf{P}(B)$ which means $B$ and $A$ are not independent. This is because the PDF of 2nd toss has already changed.
+4. Problem set 5, problem 6. See how $\mathbf{P}(B|A)\neq \mathbf{P}(B)$ which means $B$ and $A$ are not independent. This is because the PDF of 2nd toss has already changed.
 	1. Conditional probability can be tricky. The condition changes the PDF and the independence. Need to be careful.
+5. Recitation 12, problem 2.
