@@ -33,6 +33,8 @@ Topic: #Probability #CountinuousRandomVariable
 	2. We can talk about iterated expectations and variance of the former
 	3. The bookstore example
 2. Law of total variance
+	1. It's understanding. The plot of three sections of students from lecture video
+	2. *can be used to break down complicated variance calculation.*
 
 
 ## My comments
