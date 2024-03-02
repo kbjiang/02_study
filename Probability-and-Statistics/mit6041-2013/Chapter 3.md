@@ -27,14 +27,18 @@ Topic: #Probability #CountinuousRandomVariable
 6. Good example: the stick at the end of lecture 9
 
 ### Lecture 12: Iterated Expectations; Sum of a Random Number of R.V.s
-1.  $\mathbf{E}[X|Y]$ is a R.V., *a function of* $Y$
+1. The point being *if $\mathbf{E}[X]$ and/or $\text{var}(X)$ is hard to calculate directly, do it in stages by conditioning.*
+	1. E.g. 4.17 the stick problem
+2. $\mathbf{E}[X|Y]$ is a R.V., *a function of* $Y$
 	1. $\mathbf{E}[X|Y = y]$ is a realization; PDF $f_{X|Y}(x|y)$ is a function of $x$.
 		1. PDF and expectation are very different!
 	2. We can talk about iterated expectations and variance of the former
 	3. The bookstore example
-2. Law of total variance
+3. Law of total variance
 	1. It's understanding. The plot of three sections of students from lecture video
-	2. *can be used to break down complicated variance calculation.*
+	2. *Pay attention to whose PDF is used!* The widgets and crates. Recitation 13.
+4. Random number of R.V.s
+	1. $H = X_1 + X_2 + ... X_N$ where $N$ is a R.V. *Don't do $\mathbf{E}[H] = \sum \mathbf{E}[X_i]$ but $\mathbf{E}\mathbf{E}[X_1+X_2...X_N|N]$.*
 
 
 ## My comments
@@ -50,7 +54,7 @@ Topic: #Probability #CountinuousRandomVariable
 		\end{align}
 		$$
 	1. Notation is important: *can NOT go from line 1 to line 3 directly* because $X+Y$ is not independent of $X$, but $x+Y$ is since $x$ is just a number.
-	2. By differentiating both sides $f_{X, Z}(x, z) = f_X(x)f_{Z|X}(z|x) = f_X(x)f_Y(z-x)$. Notice it's $f_Y$ in the last part.
+	2. By differentiating both sides we have $f_{Z|X}(z)=f_Y(z-x)$, therefore $f_{X, Z}(x, z) = f_X(x)f_{Z|X}(z|x) = f_X(x)f_Y(z-x)$.
 3. Independence $\implies \rho=0$ but not the other way around.
 
  
