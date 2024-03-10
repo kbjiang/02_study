@@ -1,0 +1,4 @@
+Epoch: 0, Batch: 2000, Train loss: 8.359, Val loss: 6.944, LR:  3e-05, Time: 1914.578s
+Epoch: 0, Batch: 4000, Train loss: 6.417, Val loss: 6.274, LR:  6e-05, Time: 1579.037s
+Epoch: 0, Batch: 6000, Train loss: 5.862, Val loss: 5.800, LR:  9e-05, Time: 1719.101s
+Epoch: 0, Batch: 8000, Train loss: 5.455, Val loss: 5.391, LR:  0.00012, Time: 1601.826s

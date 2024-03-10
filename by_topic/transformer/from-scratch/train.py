@@ -161,8 +161,8 @@ if __name__ == "__main__":
         )
 
     print("load training dataset...")
-    train_iter = load_dataset('opus100', language_pair='en-es', split='train')['translation']
-    val_iter = load_dataset('opus100', language_pair='en-es', split='validation')['translation']
+    train_iter = load_dataset('Helsinki-NLP/opus-100', 'en-es', split='train')['translation']
+    val_iter = load_dataset('Helsinki-NLP/opus-100', 'en-es', split='validation')['translation']
     train_dataloader = DataLoader(train_iter, batch_size=batch_size, collate_fn=collate_fn)
     val_dataloader = DataLoader(val_iter, batch_size=batch_size, collate_fn=collate_fn)
 
