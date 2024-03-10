@@ -71,8 +71,9 @@ Topic: #Probability #CountinuousRandomVariable
 4. Problem set 5, problem 6. See how $\mathbf{P}(B|A)\neq \mathbf{P}(B)$ which means $B$ and $A$ are not independent. This is because the PDF of 2nd toss has already changed.
 	1. Conditional probability can be tricky. The condition changes the PDF and the independence. Need to be careful.
 5. Recitation 12, problem 2.
-6. Problem set 6
+6. *Problem set 6*
 	1. problem 2, use the graphics to calculate convolution!
+		1. Either find the limits (contains $z$) for integration, or use graphics to move across different $z$.
 	2. problem 3, see how to model it as a sum of Bernoulli R.V.
 	3. Problem set 6, problem 5, part (b)
 		1. With $G$ being the total money brought to the meeting, we have $G=M_1 + M_2 + ... M_K$ where $K$ is the number of attending members. 
