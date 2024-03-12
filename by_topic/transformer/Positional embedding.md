@@ -1,1 +1,0 @@
-1. https://kazemnejad.com/blog/transformer_architecture_positional_encoding/
