@@ -8,6 +8,7 @@ Topic: #Probability #RandomProcess
 ### Lecture 13: Bernoulli Process
 1. Important to distinguish *Distribution* and *Process*!
 	1. E.g., Poisson distribution does not involve $\tau$ while Poisson process does.
+	2. It's helpful to picture an arrival process; for Bernoulli process, it means people arrive at discrete times.
 2. Two PMFs are involved in Bernoulli process. 
 	1. *Binomial*: Arrival/non-arrival in each time slot.
 	2. *Geometric*: Arrival time between each arrival.
@@ -18,7 +19,12 @@ Topic: #Probability #RandomProcess
 	2. ![[Pasted image 20240317165916.png|600]]
 
 ### Lecture 14: Poisson process - I
-1. $P(k, \tau)$ , fix $\tau$ and $\sum_{k} P(k, \tau)=1$$.
+1. The Poisson process is a *continuous-time analog* of the Bernoulli process applies to situations where there is *no natural way of dividing time into discrete periods*.
+	1. E.g., when modeling the number of traffic accident, instead of arbitrary unit time (every second, minute or hour), it's preferrable to consider very small time periods and continuous-time model.
+2. Consider an arrival process $P(k, \tau)=\mathbf{P}(\text{exactly } k \text{ arrivals during interval } \tau)$
+	1. fix $\tau$ and $\sum_{k} P(k, \tau)=1$$.
+3. Definition of the Poisson Process
+	1. $P$ is same for all interval $\tau$.
 ## My comments
 1. It's important to distinguish *Distribution* and *Process*. E.g., Poisson distribution does not involve $\tau$ while Poisson process does.
 ## Interesting/Challenging problems and tricks
