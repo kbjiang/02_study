@@ -5,7 +5,7 @@
 4. Original post: [https://ai.googleblog.com/2017/08/transformer-novel-neural-network.html](https://ai.googleblog.com/2017/08/transformer-novel-neural-network.html)
 5. Good reference, but too long: [https://e2eml.school/transformers.html](https://e2eml.school/transformers.html)
 6. [nanoGPT/transformer_sizing.ipynb at master · karpathy/nanoGPT · GitHub](https://github.com/karpathy/nanoGPT/blob/master/transformer_sizing.ipynb)
-7. Nice series from [CodeEmporium](https://youtu.be/QCJQG4DuHT0?si=cZnMAHEQuNZWe4J-)
+7. Nice video from [CodeEmporium](https://youtu.be/Nw_PJdmydZY). 
 
 
 ### Positional embedding
