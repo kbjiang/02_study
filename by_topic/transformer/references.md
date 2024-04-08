@@ -5,7 +5,6 @@
 4. Original post: [https://ai.googleblog.com/2017/08/transformer-novel-neural-network.html](https://ai.googleblog.com/2017/08/transformer-novel-neural-network.html)
 5. Good reference, but too long: [https://e2eml.school/transformers.html](https://e2eml.school/transformers.html)
 6. [nanoGPT/transformer_sizing.ipynb at master · karpathy/nanoGPT · GitHub](https://github.com/karpathy/nanoGPT/blob/master/transformer_sizing.ipynb)
-7. Nice video from [CodeEmporium](https://youtu.be/Nw_PJdmydZY). 
 
 
 ### Positional embedding
@@ -15,3 +14,8 @@
 1. it's done at the *layer/embedding* dimension; optionally the batch dimension
 2. Nice clear example https://youtu.be/G45TuC6zRf4
 3. https://pytorch.org/docs/stable/generated/torch.nn.LayerNorm.html
+
+### Visualization
+1. 3Blue1Brown [Visualizing Attention, a Transformer's Heart](https://youtu.be/eMlx5fFNoYc)
+2. Recommended by Yufan. https://bbycroft.net/llm
+3. Nice video from [CodeEmporium](https://youtu.be/Nw_PJdmydZY). 

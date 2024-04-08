@@ -58,11 +58,12 @@ Topic: #Probability #RandomVariable
 
  
 ## Interesting/Challenging problems and tricks
-1. Prob 40, p133. Six kind of coupons with equal probability, what's the expected number of collection before one gets all coupons at least once? 
+1. Example 3.6, p150. The PMF of the maximum of R.V.s (which itself is a R.V. as well.)
+2. Prob 40, p133. Six kind of coupons with equal probability, what's the expected number of collection before one gets all coupons at least once? 
 	1. My wrong solution:
 		1. Let $X_i$ as the RV for expected number of submissions for $i$th coupon *after collecting $(i-1)$th coupon*. So the total number should be $X=\sum X_i$. Given $p_{X_i}(x_i)=1/6$ it's easy to get expectation is 36. This is wrong because $p_{X_i}(x_i)$ are not equal--it's less likely to encounter new type of coupons when some types are already collected.
 	2. Solution: 
 		1. https://youtu.be/3mu47FWEuqA
 		2. Intuitively, $\mathbf{E}[X_1]=1$ which is obvious. Then $X_2$ is just a geometric with $p=5/6$ (one collected, five left) therefore $\mathbf{E}[X_2]=6/5$. Similarly we'll have $\mathbf{E}[X_i]=6/(6-i) \text{ for } i \ge 0$ and the sum is $\mathbf{E}[X]$.
-2. Prob 33, p128. 
+3. Prob 33, p128. 
 	1. I had a similar solution of having $X$ as the number of tosses before the 1st head shows up, and the toss after that decides if game finishes or keep playing with probability $p$ and $1-p$ respectively. So the number of two successive head $Y$ is a weighted sum of $X+1, 2X+1, 3X+1...$, Finally calculate $\mathbf{E}(Y)$ from the sum of $\mathbf{E}(X)$. BUT I got wrong number and not sure about the logic...
