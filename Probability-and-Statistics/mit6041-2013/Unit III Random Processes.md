@@ -43,6 +43,18 @@ Topic: #Probability #RandomProcess
 3. To argue if a process is Poisson, just think of the rate of a single arrival in a small time interval $\delta$. Example 6.13, p318.
 ## Interesting/Challenging problems and tricks
 1. P328, Pr 6. An interesting alternative way to see splitting Bernoulli process. 
-2. P335, Pr 22. *Think of Bernoulli as a point in sample space being available with probability p.*
-3. Lecture 15. The fishing example: blah blah
+2. P335, Pr 22. *Think of Bernoulli $X_i$ as keeping or discarding an event.*
+	1. Event is a success for Binomial or an arrival for Poisson.
+3. *Competing exponentials*. By seeing exponentials as 1st arrival of Poisson process simplifies problems.
+	1. Example 6.15 and 6.16 on P320.
+	2. P335 ,Pr 24. Merging of two Poisson processes with different nature. I.e., $N$ and $T$.
+		1. My mistake is thinking in terms of how many $N$ can I fit in $T$, instead I should think of them as two competing processes.
+	3. Recitation 15, Pr 3. $X, Y, Z$ are independent exponential R.V.s with parameters $\lambda, \mu, \nu$. What is $\mathbf{P}(X<Y<Z)$?
+		1. Think of $X, Y, Z$ as 1st arrivals of three Poisson processes. By merging those processes, the R.V.s are "competing" to arrive first.
+		2. $\mathbf{P}(X<Y<Z) = \mathbf{P}(X<\text{min}(Y, Z) \cap  Y<Z)$. This is easy to see that the probability of 1st arrival being $X$ is $\mathbf{P}(X<\text{min}(Y, Z))=\frac{\lambda}{\lambda + \mu + \nu}, \text{ and similarly } \mathbf{P}(Y < Z|X \text{ has arrived})=\frac{\mu}{\mu + \nu}$. 
+			1. Same result can be calculated as $\int_{0}^{\infty}\int_{0}^{z}\int_{0}^{y}f_Xf_Yf_Zdxdydz$.
+4. Lecture 15. The fishing example: blah blah
 	1. $\mathbf{P}(\text{fish for more than two and less than five hours})$ can be calculated as $\mathbf{P}(0, 2)(1-\mathbf{P}(2, 5))$ or $\int_{2}^{5} f_{Y_1}(t)dt$. Try calculate.
+5. Lecture 15, problem set 7, prob 2 (f). It's cute how the problem 
+	1. Treat the failure part separately (conditional probability) and framed it as Sums of a Random Number of Random Variables.
+	2. The sum of failure and success is the Pascal of order $m$. 
