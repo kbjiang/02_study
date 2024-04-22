@@ -3,6 +3,9 @@
 3. https://youtu.be/i94OvYb6noo?t=4247
 4. https://cs.stanford.edu/people/karpathy/convnetjs/demo/classify2d.html
 5. https://playground.tensorflow.org/
+6. [Watching Neural Networks Learn](https://www.youtube.com/@EmergentGarden)
+	1. A nice comparison between traditional NN and NN uses Fourier features, i.e., $sin(x), cos(x)$ instead of $x$.
+	2. The Fourier features are quite good at approximating *low-dimensional* functions.
 
 
 ### [Deep Learning Bootcamp: Phillip Isola](https://youtu.be/UEJqxSVtfY0)
