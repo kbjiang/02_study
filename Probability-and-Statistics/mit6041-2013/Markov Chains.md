@@ -7,15 +7,20 @@ Topic: #Probability #RandomProcess #MarkovChain
 ## Lectures
 ### Lecture 16: Markov Chains - I
 1. Markov chains
-	1. Unlike the Bernoulli and Poisson, the *future depends on the past*. Markov chain in specific: 
-		1. Future only depends on present state $X_n$; does NOT matter how it gets to present state.
-		2. $p_{ij}$ independent of $X_n$.
+	1. Unlike the Bernoulli and Poisson, the *future depends on the past*. In specific for Markov, it only depends on current state. 
+		1. The state of each time step is a R.V., namely $X_i$, which $\in (1, m)$
+		2. $p_{i, i+1} = P(X_i, X_{i+1}|X_i) = P(X_i, X_{i+1}|X_i, X_{i-1}, ... X_0)$. How we got to $i$ does not matter.
 	2. *state*: summarizes the effect of the past on the future
 2. $n$-Step Transition Probabilities $r_{ij}(n)$
 	1. Probability that state after $n$ time periods will be $j$, given current state is $i$.
-3. Classification of states
+	2. $p_{ij}=r_{ij}(1)$.
+### Lecture 17: Markov Chains - II
+1. Classification of states
 	1. *Accessible*
 	2. *Recurrent* vs *Transient*
+		1. Recurrent class
+2. Periodic states
+	1. It's about groups of states. E.g., here all X states goes into a non-X state, therefore these two groups form a periodic chain.![[Pasted image 20240426065757.png]]
 	
 
 ## My comments
@@ -23,3 +28,4 @@ Topic: #Probability #RandomProcess #MarkovChain
 2. Compare definitions between *Bernoulli* (p297) and *Poisson* (p310) process. When $\tau \to 0$, the latter is the limiting case of former 
 3. To argue if a process is Poisson, just think of the rate of a single arrival in a small time interval $\delta$. Example 6.13, p318.
 ## Interesting/Challenging problems and tricks
+1. Notation $P(\text{transition to }S_2| \text{ in }S_3\text{ \& State Change})$. The *state change* opposed to circling back to itself.
