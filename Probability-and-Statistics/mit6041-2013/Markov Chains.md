@@ -32,3 +32,7 @@ Topic: #Probability #RandomProcess #MarkovChain
 1. Notation $P(\text{transition to }S_2| \text{ in }S_3\text{ \& State Change})$. The *state change* opposed to circling back to itself.
 2. Lec 17, Prob set 8, Prob 2. Random walk.
 	1. Notice in part (b), the maximum by itself is not Markovian, but (max, current) pair is.
+3. Lec 18, Rec 19, 
+	1. Prob 1 (e). The conditional probability calculation. 
+		1. $P(X_{n+1}=j|X_n=i, A)$  is really $P((X_{n+1}=j|A)|X_n=i)$, where $X_n = i$ is the world we are in.
+	2. Prob 1 (h). Since we only care about next visit, which means transitions after that does not matter, therefore we can think of $S_{6-1}$ as absorbing, then the Expected Time to Absorption applies.

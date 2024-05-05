@@ -1,10 +1,12 @@
 ### Generic
-1. https://lilianweng.github.io/posts/2023-01-27-the-transformer-family-v2/
-2. Hongyi Lee: [https://youtu.be/n9TlOhRjYoc](https://youtu.be/n9TlOhRjYoc)
-3. This video: [https://youtu.be/C4jmYHLLG3A?list=PLam9sigHPGwOBuH4_4fr-XvDbe5uneaf6](https://youtu.be/C4jmYHLLG3A?list=PLam9sigHPGwOBuH4_4fr-XvDbe5uneaf6)
-4. Original post: [https://ai.googleblog.com/2017/08/transformer-novel-neural-network.html](https://ai.googleblog.com/2017/08/transformer-novel-neural-network.html)
-5. Good reference, but too long: [https://e2eml.school/transformers.html](https://e2eml.school/transformers.html)
-6. [nanoGPT/transformer_sizing.ipynb at master · karpathy/nanoGPT · GitHub](https://github.com/karpathy/nanoGPT/blob/master/transformer_sizing.ipynb)
+1. Wang Mutou https://youtu.be/GGLr-TtKguA
+	1. very good
+2. Lilian Weng https://lilianweng.github.io/posts/2023-01-27-the-transformer-family-v2/
+3. Hongyi Lee [https://youtu.be/n9TlOhRjYoc](https://youtu.be/n9TlOhRjYoc)
+4. This video [https://youtu.be/C4jmYHLLG3A?list=PLam9sigHPGwOBuH4_4fr-XvDbe5uneaf6](https://youtu.be/C4jmYHLLG3A?list=PLam9sigHPGwOBuH4_4fr-XvDbe5uneaf6)
+5. Original post [https://ai.googleblog.com/2017/08/transformer-novel-neural-network.html](https://ai.googleblog.com/2017/08/transformer-novel-neural-network.html)
+6. Good reference, but too long: [https://e2eml.school/transformers.html](https://e2eml.school/transformers.html)
+7. [nanoGPT/transformer_sizing.ipynb at master · karpathy/nanoGPT · GitHub](https://github.com/karpathy/nanoGPT/blob/master/transformer_sizing.ipynb)
 
 
 ### Positional embedding
