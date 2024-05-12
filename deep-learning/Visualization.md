@@ -6,6 +6,7 @@
 6. [Watching Neural Networks Learn](https://www.youtube.com/@EmergentGarden)
 	1. A nice comparison between traditional NN and NN uses Fourier features, i.e., $sin(x), cos(x)$ instead of $x$.
 	2. The Fourier features are quite good at approximating *low-dimensional* functions.
+7. universal approximation theorem https://youtu.be/Ln8pV1AXAgQ
 
 
 ### [Deep Learning Bootcamp: Phillip Isola](https://youtu.be/UEJqxSVtfY0)
