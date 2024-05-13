@@ -19,15 +19,17 @@ Topic: #Probability #RandomProcess #MarkovChain
 	1. *Accessible*
 	2. *Recurrent* vs *Transient*
 		1. Recurrent class
+	3. dependence on initial state
 2. Periodic states
 	1. It's about groups of states. E.g., here all X states goes into a non-X state, therefore these two groups form a periodic chain.![[Pasted image 20240426065757.png]]
 	
 ### Lecture 18: Markov Chains - III
 1. Erlang example starting 15:00 of the lecture video
 ## My comments
-1. It's important to distinguish *Distribution* and *Process*. E.g., Poisson distribution does not involve $\tau$ while Poisson process does.
-2. Compare definitions between *Bernoulli* (p297) and *Poisson* (p310) process. When $\tau \to 0$, the latter is the limiting case of former 
-3. To argue if a process is Poisson, just think of the rate of a single arrival in a small time interval $\delta$. Example 6.13, p318.
+1. State classification (including periodicity) matters because
+	1. only *aperiodic* chains have *steady-state* distribution. See start of Section 7.3.
+	2. absorbing state needs to be defined. See Section 7.4.
+2. Steady-state distribution, Expected time to absorption and Mean First Passage/Recurrent Time, all have element of Bootstrapping.
 ## Interesting/Challenging problems and tricks
 1. Notation $P(\text{transition to }S_2| \text{ in }S_3\text{ \& State Change})$. The *state change* opposed to circling back to itself.
 2. Lec 17, Prob set 8, Prob 2. Random walk.

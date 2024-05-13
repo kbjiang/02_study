@@ -7,6 +7,7 @@
 	1. A nice comparison between traditional NN and NN uses Fourier features, i.e., $sin(x), cos(x)$ instead of $x$.
 	2. The Fourier features are quite good at approximating *low-dimensional* functions.
 7. universal approximation theorem https://youtu.be/Ln8pV1AXAgQ
+8. Visualize Matrix multiplication and Attention https://pytorch.org/blog/inside-the-matrix/
 
 
 ### [Deep Learning Bootcamp: Phillip Isola](https://youtu.be/UEJqxSVtfY0)
