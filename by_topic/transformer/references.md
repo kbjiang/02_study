@@ -21,3 +21,7 @@
 1. 3Blue1Brown [Visualizing Attention, a Transformer's Heart](https://youtu.be/eMlx5fFNoYc)
 2. Recommended by Yufan. https://bbycroft.net/llm
 3. Nice video from [CodeEmporium](https://youtu.be/Nw_PJdmydZY). 
+
+### Position-wise Feed-forward
+1. The same FFN is used for every position, i.e., *weight sharing*, just like how a CNN kernel is shared at each location
+2. Indeed, the FFN is a kernel of size $1\times1\times 4d_{\text{model}}$  when we think of the token dimension as "channel"
