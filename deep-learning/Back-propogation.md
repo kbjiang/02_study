@@ -13,5 +13,7 @@
  3. Right from the creators. http://blog.ezyang.com/2019/05/pytorch-internals/
 
 ## resources
-1. https://youtu.be/VMj-3S1tku0
-2. Paperspace tutorial: [PyTorch Basics: Understanding Autograd and Computation Graphs (paperspace.com)](https://blog.paperspace.com/pytorch-101-understanding-graphs-and-automatic-differentiation/)
+1. Very detailed video shows the math and how back-propagation is similar to forward-propagation
+	1. https://youtu.be/yI1PNZRmAI4
+2. https://youtu.be/VMj-3S1tku0
+3. Paperspace tutorial: [PyTorch Basics: Understanding Autograd and Computation Graphs (paperspace.com)](https://blog.paperspace.com/pytorch-101-understanding-graphs-and-automatic-differentiation/)
