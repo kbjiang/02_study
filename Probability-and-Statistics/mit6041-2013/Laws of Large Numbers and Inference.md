@@ -12,17 +12,15 @@ Topic: #Probability #LawsOfLargeNumber
 	3. But we usually concerns with $\mathbf{P}(M_n)$ where $M_n$ is a single experiment and ask the likelihood of it being in some interval?
 2. Chebyshev Inequality
 	1. links expectation and variance with probability
+	2. valid for *ANY* R.V.s.
 3. The Weak Law of Large Numbers
-	1. *Only* deals with sample mean
+	1. Is an application of Chebyshev. *Only* deals with sample mean R.V.
 4. Convergence in Probability however can be about any R.V.
 	1. $Y_n$ converges in probability $\nRightarrow$ $\mathbf{E}[Y_n]$ converges too. See Example 5.8, page 272.
 5. The example of Y_n = {0, n} at lec. vid. 23:00
 6. intuition leads to CLT around 40:30
 ## My comments
-1. State classification (including periodicity) matters because
-	1. only *aperiodic* chains have *steady-state* distribution. See start of Section 7.3.
-	2. absorbing state needs to be defined. See Section 7.4.
-2. Steady-state distribution, Expected time to absorption and Mean First Passage/Recurrent Time, all have element of Bootstrapping.
+1. Chebyshev is for any R.V., while Weak LLN is specific for sample mean R.V.
 ## Interesting/Challenging problems and tricks
 1. Notation $P(\text{transition to }S_2| \text{ in }S_3\text{ \& State Change})$. The *state change* opposed to circling back to itself.
 2. Lec 17, Prob set 8, Prob 2. Random walk.
