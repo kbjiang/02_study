@@ -10,8 +10,9 @@ Topic: #Probability #LawsOfLargeNumber
 	1. Sample mean $M_n$ is average of $n$ samples from one sampling process (one experiment)
 	2. Expectation $\mathbf{E}[M_n]$ is average of infinite $M_n$
 	3. But we usually concerns with $\mathbf{P}(M_n)$ where $M_n$ is a single experiment and ask the likelihood of it being in some interval?
-2. Chebyshev Inequality
-	1. links expectation and variance with probability
+2. Markov/Chebyshev Inequality
+	1. links expectation/expectation and variance with probability
+		1. Useful when mean and variance are easy to compute but dist. is hard to get
 	2. valid for *ANY* R.V.s.
 3. The Weak Law of Large Numbers
 	1. Is an application of Chebyshev. *Only* deals with sample mean R.V.
@@ -22,10 +23,4 @@ Topic: #Probability #LawsOfLargeNumber
 ## My comments
 1. Chebyshev is for any R.V., while Weak LLN is specific for sample mean R.V.
 ## Interesting/Challenging problems and tricks
-1. Notation $P(\text{transition to }S_2| \text{ in }S_3\text{ \& State Change})$. The *state change* opposed to circling back to itself.
-2. Lec 17, Prob set 8, Prob 2. Random walk.
-	1. Notice in part (b), the maximum by itself is not Markovian, but (max, current) pair is.
-3. Lec 18, Rec 19, 
-	1. Prob 1 (e). The conditional probability calculation. 
-		1. $P(X_{n+1}=j|X_n=i, A)$  is really $P((X_{n+1}=j|A)|X_n=i)$, where $X_n = i$ is the world we are in.
-	2. Prob 1 (h). Since we only care about next visit, which means transitions after that does not matter, therefore we can think of $S_{6-1}$ as absorbing, then the Expected Time to Absorption applies.
+1. 
