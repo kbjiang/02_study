@@ -8,6 +8,7 @@ Topic: #Probability #LawsOfLargeNumber
 ### Lecture 19: Weak Law of Large Numbers
 1. It considers *long sequence* of identical independent R.V.s. 
 	1. Sample mean $M_n$ is average of $n$ samples from one sampling process (one experiment)
+		1. sample size $n$ is what matters. See 3B1B part of [[#My comments]]
 	2. Expectation $\mathbf{E}[M_n]$ is average of infinite $M_n$
 	3. But we usually concerns with $\mathbf{P}(M_n)$ where $M_n$ is a single experiment and ask the likelihood of it being in some interval?
 2. Markov/Chebyshev Inequality
@@ -20,7 +21,15 @@ Topic: #Probability #LawsOfLargeNumber
 	1. $Y_n$ converges in probability $\nRightarrow$ $\mathbf{E}[Y_n]$ converges too. See Example 5.8, page 272.
 5. The example of Y_n = {0, n} at lec. vid. 23:00
 6. intuition leads to CLT around 40:30
+
+### Lecture 20: Central Limit Theorem
+1. *Only* requires mean and variance!
+2. For $X$ that are *discrete distribution*, the CDF always converges to normal, but PMF may differ between different $X$ dist.
+	1. For Binomial, PMF can be approximated with "half" approximation
 ## My comments
 1. Chebyshev is for any R.V., while Weak LLN is specific for sample mean R.V.
+2. Very nice 3B1B [video](https://youtu.be/zeJD6dqJ5lo) on this topic, with a lot of intuition
+	1. This [time stamp](https://youtu.be/zeJD6dqJ5lo?t=1373) is an lopsided example where sample size is too small to apply CLT. 
+	2. This [time stamp](https://youtu.be/zeJD6dqJ5lo?t=537), the convolution is probably responsible for CLT. Meaning no matter how $X_i$ distributed, the sum dist. is always normal.
 ## Interesting/Challenging problems and tricks
 1. 
