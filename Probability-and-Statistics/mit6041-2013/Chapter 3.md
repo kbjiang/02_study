@@ -56,7 +56,9 @@ Topic: #Probability #CountinuousRandomVariable
 	1. Notation is important: *can NOT go from line 1 to line 3 directly* because $X+Y$ is not independent of $X$, but $x+Y$ is since $x$ is just a number.
 	2. By differentiating both sides we have $f_{Z|X}(z)=f_Y(z-x)$, therefore $f_{X, Z}(x, z) = f_X(x)f_{Z|X}(z|x) = f_X(x)f_Y(z-x)$.
 3. Independence $\implies \rho=0$ but not the other way around.
-
+4. Nice [visualization](https://www.youtube.com/watch?v=IaSGqQa5O-M) on convolution
+	1. understand $z$ as a parameter in $f_X(x)f_Y(z-x)$ 
+	2. Convolution is like a moving average
  
 ## Interesting/Challenging problems and tricks
 1. Prob 9, p188. Mixed Distribution.

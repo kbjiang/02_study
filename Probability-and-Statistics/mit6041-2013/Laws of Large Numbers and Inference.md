@@ -28,8 +28,8 @@ Topic: #Probability #LawsOfLargeNumber
 	1. For Binomial, PMF can be approximated with "half" approximation
 ## My comments
 1. Chebyshev is for any R.V., while Weak LLN is specific for sample mean R.V.
-2. Very nice 3B1B [video](https://youtu.be/zeJD6dqJ5lo) on this topic, with a lot of intuition
+2. Very nice 3B1B videos on this topic, with a lot of intuition
 	1. This [time stamp](https://youtu.be/zeJD6dqJ5lo?t=1373) is an lopsided example where sample size is too small to apply CLT. 
-	2. This [time stamp](https://youtu.be/zeJD6dqJ5lo?t=537), the convolution is probably responsible for CLT. Meaning no matter how $X_i$ distributed, the sum dist. is always normal.
+	3. This [time stamp](https://youtu.be/IaSGqQa5O-M?t=658) is more on convolution and shows the sum of R.V.s are like moving average which gets more smooth with more R.V.s.
 ## Interesting/Challenging problems and tricks
 1. 
