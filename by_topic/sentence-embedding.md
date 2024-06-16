@@ -43,6 +43,10 @@
 1. It's mostly about preparing high quality training data
 2. Training: contrastive learning
 
+### [Paper]([2401.00368 (arxiv.org)](https://arxiv.org/pdf/2401.00368)) on Embedding via LLM
+1. Synthetic data over 93 embedding tasks
+2. LLM (decoder-only) hidden state as embedding
+
 
 ### Resources
 1. https://huggingface.co/blog/mteb
