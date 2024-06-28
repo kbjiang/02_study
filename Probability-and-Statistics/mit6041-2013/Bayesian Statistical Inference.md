@@ -20,8 +20,14 @@ Topic: #Probability #Bayesian #Inference
 	2. It is *optimal* for *any* given $x$ in *terms* of minimizing mean square error.
 	3. I.e., $\hat{\theta} = \mathbf{E}[\theta|X=x]$ minimizes $\mathbf{E}[(\Theta - \hat{\theta})^2|X=x]$ and similarly, $\hat{\Theta} = \mathbf{E}[\Theta|X]$ and $\mathbf{E}[(\theta - \hat{\theta})^2]$.
 		1. Former is *number*, while latter is *R.V.*.
+<<<<<<< Updated upstream
 		3. In following screenshot. First point is average over $f_{\tilde{\Theta}}$, second is over $f_{\tilde{\Theta}|X}$, third is over $f_{\tilde{\Theta}}$ (where $\tilde{\Theta}\coloneqq \Theta - \hat{\Theta}$) or equivalently $f_{\Theta, X}$, and it was obtained by using Law of Iterated Expectation. 
 			1. ![[ Pasted image 20240617084538.png|800]]
+=======
+		2. In following screenshot. First point is average over $f_{\tilde{\Theta}}$, where $\tilde{\Theta}\coloneqq \Theta - \hat{\Theta}$, second is over $f_{{\Theta}|X}$, third is over $f_{\Theta - g(X)}$ and was obtained by using Law of Iterated Expectation.
+			1. ![[Pasted image 20240617084538.png|800]]
+			2. it's usually tedious to calculate $f_{\tilde{\Theta}}$, luckily we only need the expectation.
+>>>>>>> Stashed changes
 ### Lecture 20: Central Limit Theorem
 ## My comments
 1. hypothesis testing aims, few possible values for unknown, aims at small *probability* of incorrect decision; think MAP
