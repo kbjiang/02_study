@@ -16,7 +16,8 @@
 ### Visualization
 1. 3Blue1Brown [Visualizing Attention, a Transformer's Heart](https://youtu.be/eMlx5fFNoYc)
 2. Recommended by Yufan. https://bbycroft.net/llm
-3. Nice video from [CodeEmporium](https://youtu.be/Nw_PJdmydZY). 
+3. [Transformer by hand](https://www.linkedin.com/posts/tom-yeh_transformer-aibyhand-deeplearning-activity-7215281110396620800-fGev?utm_source=share&utm_medium=member_desktop)
+4. Nice video from [CodeEmporium](https://youtu.be/Nw_PJdmydZY). 
 
 ### Position-wise Feed-forward
 1. The same FFN is used for every position, i.e., *weight sharing*, just like how a CNN kernel is shared at each location
