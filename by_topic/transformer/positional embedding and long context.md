@@ -11,6 +11,7 @@ tags: #UnderstandTransformers #PositionalEmbedding
 				&M_{\phi, k} = \begin{bmatrix} cos(\omega_k.\phi) & sin(\omega_k.\phi) \\ 
 							-sin(\omega_k.\phi) & cos(\omega_k.\phi) \end{bmatrix} \\
 				 \end{align*} $$
+			 2. Pair of $\omega_k$ is in embedding dimension, while $t$ and $\phi$ are in position dimension. 
 	2. [王木头](https://youtu.be/GGLr-TtKguA?t=4096)
 		1. positional encoding (original) and Fourier series. 
 			1. The whole $P$ matrix is a Fourier expansion. 
@@ -18,10 +19,11 @@ tags: #UnderstandTransformers #PositionalEmbedding
 			4. The large base (10,000) in denominator allows long wavelength at high dimensional (equivalently, lower frequency), which allows larger $t$ without repeating the encoding.
 				1. too large of a base may lose accuracy at starting positions?
 			5. ![[Pasted image 20240615210146.png|800]]
-		2. absolute vs relational positional encoding.
 	3. Nice [video](https://youtu.be/T3OT8kqoqjc)with explanation and visualization. 
 		1. Binary ![[Pasted image 20240625222228.png|400]]
 		2. Sinusoidal![[Pasted image 20240625222502.png|400]]
+	4. Another nice [video](https://youtu.be/BkyEZwAf-Rw). 
+		1. Think of each pair of sin/cos (*embedding* direction) as *clocks* rotating with different frequency. At position 0, all clocks are synced in phase; as position increase (*position* direction), each clock will rotate individually in multiples of delta position.
 1. Rotary Positional Encoding, [RoFormer (arxiv.org)](https://arxiv.org/pdf/2104.09864)
 	1. Positional info
 		1. not added to the values, so segregation between positional and contextual info

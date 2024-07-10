@@ -46,3 +46,4 @@ Topic: #Probability #Bayesian #Inference
 	2. Beta functions
 2. Example 8.2, P414
 	1. With one measurement ($x$) the posterior distribution is updated; with multiple measurements ($x_1, ..., x_n$), the range becomes more confined.![[Pasted image 20240708084253.png|400]]
+	2. Actually, Examples 8.2, 8.7, 8.12 and 8.15 makes a good sequel. 
