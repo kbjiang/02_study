@@ -48,3 +48,6 @@ Topic: #Probability #Bayesian #Inference
 2. Example 8.2, P414
 	1. With one measurement ($x$) the posterior distribution is updated; with multiple measurements ($x_1, ..., x_n$), the range becomes more confined.![[Pasted image 20240708084253.png|400]]
 	2. Actually, Examples 8.2, 8.7, 8.12 and 8.15 makes a good sequel. 
+3. Problem set 10, 5(d)
+	1. $T_1$ and $T_2$ are NOT independent because they both depend on $Q$. In other words, knowing $T_1$ changes belief on $T_2$. However, once $Q$ is given, they become (conditionally) independent.
+	2. $\mathbf{E}[T_1 T_2] = \mathbf{E}[\mathbf{E}[T_1 T_2|Q]] = \mathbf{E}[\mathbf{E}[T_1|Q]\ \mathbf{E}[T_2|Q]]$ 
