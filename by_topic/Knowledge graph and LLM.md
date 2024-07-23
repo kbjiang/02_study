@@ -5,3 +5,4 @@
 4. An overview video https://youtu.be/RBKHLt3n9rM
 5. MSR KG on agriculture C:\Users\kejia\OneDrive - Microsoft\06-knowledge-graph
 6. [DeepLearning.AI course](https://learn.deeplearning.ai/courses/knowledge-graphs-rag/lesson/3/querying-knowledge-graphs)
+7. See [[RAG]] for GraphRAG

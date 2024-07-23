@@ -6,15 +6,16 @@ Topic: #Probability #Bayesian #Inference
 
 ## Lectures
 ### Lecture 21-22: Bayesian Statistical Inference
-1. Bayesian treats the unknown as a R.V. It does *not* mean nature is uncertain, but our *prior* belief of the distribution of the unknown.
+1. The goal is to find estimators (*functions of the observations*) that have some desirable properties, such as small estimation error, for the unknown $\Theta$ (Bayesian) or $\theta$ (Classical).
+2. Bayesian treats the unknown as a R.V. It does *not* mean nature is uncertain, but our *prior* belief of the distribution of the unknown.
 	1. ![[Pasted image 20240529073352.png|500]]
 	2. Note in both cases, estimator $\hat{\Theta}$ is a R.V. 
 	3. Estimators are *functions of observations $X$*
-2. Maximum a Posteriori Probability (MAP) estimator
+3. Maximum a Posteriori Probability (MAP) estimator
 	1. Defined as the R.V. $\hat{\Theta}=g(X)$. In natural language, some decision rule. 
 	2. It is *optimal* for *any* given $x$ in terms of "making a correct decision" (p420 footnote), which means $\hat{\theta}=\theta_{\text{True}}$. By definition, MAP selects the $\theta$ with most probability of being $\theta_{\text{True}}$ according to posteriori dist. 
 	3. This is the "greedy" one.
-3. Conditional Expectation estimator or Least Mean Square (LMS) estimator
+4. Conditional Expectation estimator or Least Mean Square (LMS) estimator
 	1. it is unbiased, i.e. $E[\Theta - E[\Theta|X]]=0$
 		1. This is over PDF $f_{\Theta, X}$
 		2. Does NOT mean every experiment has zero bias; only on AVERAGE over many experiments ($X$)
@@ -24,12 +25,12 @@ Topic: #Probability #Bayesian #Inference
 		1. Former is *number*, while latter is *R.V.*.
 		2. In following screenshot. First point is average over $f_{\tilde{\Theta}}$, second is over $f_{\tilde{\Theta}|X}$, third is over $f_{\tilde{\Theta}}$ (where $\tilde{\Theta}\coloneqq \Theta - \hat{\Theta}$) or equivalently $f_{\Theta, X}$, and it was obtained by using Law of Iterated Expectation. 
 			1. ![[ Pasted image 20240617084538.png|600]]
-4. Linear Least Mean Square (LMS) estimator
+5. Linear Least Mean Square (LMS) estimator
 	1. Nice intuition at the beginning of P439
 	2. When distributions are normal, Linear LMS and LMS coincide. "Thus, there are two alternative perspectives on linear LMS estimation: either as a computational shortcut (avoid the evaluation of a possibly complicated formula for $\mathbf{E}[\Theta|X]$, or as a model simplification (replace less tractable distributions by normal ones) ."
 	3. Transformation of observation $Y=h(X)$ does not affect LMS but Linear LMS, since the latter assume that linearity is a good proximation. Therefore right transformation, e.g. $X$ or $X^2$, is important to Linear LMS.
 ## My comments
-1. hypothesis testing aims, few possible values for unknown, aims at small *probability* of incorrect decision; think MAP
+1. hypothesis testing: few possible values for unknown, aims at small *probability* of incorrect decision; think MAP
 2. Estimation: aim at a small *estimation error*; think Conditional Expectation Estimator
 3. $\tilde{\Theta}, \hat{\Theta}$ are both R.V.s with their own prob. dist. Think of $Z = X + Y$.
 	1. Similarly, $\hat{\Theta} - \Theta = 0$ is an equality between R.V.s; the RHS is a trivial R.V.. 

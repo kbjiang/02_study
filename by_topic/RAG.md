@@ -16,3 +16,7 @@
 		1. generate summary for text as well, and retrieve exclusively on summaries. Note: use large chunk size like 4k.
 		2. separate indices for each modality and then fuse rankings
 	3. image size matters to GPT4-V, too large rate limit issue, too small miss out detail info
+
+### GraphRag
+1. Paper and post.
+2. Good introduction/tutorial [video](https://youtu.be/LF7I6raAIL4)Explanation of how it works starts at timestamp 2:40.
