@@ -9,7 +9,10 @@ Topic: #Probability #Inference
 1. Unknow parameters $\theta$ as constants. 
 	1. Observation $X$ is random and its distribution $p_X(x;\theta)$ depends on the value of $\theta$. ";" is to distinguish from conditional distribution, since $\theta$ is *not* an R.V.
 	2. A separate probabilistic model for each possible value of $\theta$; a "good" hypothesis testing or estimation procedure will be one possesses certain desirable properties *under every candidate model*.
-	3. $\mathbf{E}_{\theta}[\hat{\theta}]=\int f_{\hat{\theta}}(\hat{\theta}; \theta) \hat{\theta} d\hat{\theta}$. Here $\hat{\theta}$ is an R.V. and depends on $\theta$ via observations $X$; $f_{\hat{\theta}}$ depends on value of $\theta$.
+	3. $\mathbf{E}_{\theta}[\hat{\theta}]=\int f_{\hat{\theta}}(\hat{\theta}; \theta) \hat{\theta} d\hat{\theta}$. Here $\hat{\theta}$ is an R.V. and depends on $\theta$ via observations $X$; $f_{\hat{\theta}}$ depends on value of $\theta$. See example on notation [[#^fd8ec2|here]].
+	4. Useful terminology.
+		1. ![[Pasted image 20240724071345.png|800]]
+		2. Highlighted: $\mathbf{E}_{\theta}[\hat{\theta}_n]$ is population mean. Think of many $n$ sample experiments therefore independent of $X$. See [[#^ffe4fa|here]] for an example. 
 2. Maximum likelihood Estimation
 	1. *Equivalent to MAP* with uniform flat prior dist.
 3. Confidence interval
@@ -24,3 +27,12 @@ Topic: #Probability #Inference
 	1. p466. $M_n=\frac{X_1 + ... + X_n}{n}$ is the estimator of true/population mean, which is also an R.V., which has its own variance.
 	2. p467. $\bar{S}_n^2 = \frac{1}{n}\sum_{i=1}{n}(X_i - M_n)^2$ is the estimator of true/population variance.
 ## Interesting/Challenging problems and tricks
+1. Tutorial 11, problem 2, (b) & (c)
+	1. *Notation*: $\hat{p}_n = \frac{1}{3n}\sum_{i=1}^{n}k_i$ vs $\hat{P}_n = \frac{1}{3n}\sum_{i=1}^{n}X_i$. ^fd8ec2
+	2. how to show unbiased. $$
+		\begin{align}
+		\mathbf{E}_p[\hat{P}_n] = &\ \frac{1}{3n}\sum_{i=1}^n\mathbf{E}_p[X_i] \\
+		=&\ \frac{1}{3n}\sum_{i=1}^n 3p \\
+		=&\ p
+		\end{align}
+		$$ ^ffe4fa
