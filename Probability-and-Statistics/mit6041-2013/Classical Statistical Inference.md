@@ -5,7 +5,7 @@ Lecture:
 Topic: #Probability #Inference 
 
 ## Lectures
-### Lecture 23-25: Classical Statistical Inference
+### Lecture 23: Classical Statistical Inference
 1. Unknow parameters $\theta$ as constants. 
 	1. Observation $X$ is random and its distribution $p_X(x;\theta)$ depends on the value of $\theta$. ";" is to distinguish from conditional distribution, since $\theta$ is *not* an R.V.
 	2. A separate probabilistic model for each possible value of $\theta$; a "good" hypothesis testing or estimation procedure will be one possesses certain desirable properties *under every candidate model*.
@@ -16,12 +16,13 @@ Topic: #Probability #Inference
 2. Maximum likelihood Estimation
 	1. *Equivalent to MAP* with uniform flat prior dist.
 3. Confidence interval
-	1. Interpretation is subtle. The intervals are the R.V.s, not $\theta$. The intervals are supposed to contain $\theta$ with a certain high probability, for every possible value if it.
+	1. Interpretation is subtle. The intervals, $\hat{\Theta}_n \pm \delta$, are the R.V.s, not $\theta$. The intervals are supposed to contain $\theta$ with a certain high probability, for every possible value if it.
 	2. Instead of "the true parameter lies in the confidence interval with probability 0.95.", it should be "For a concrete interpretation, suppose that $\theta$ is fixed. *We construct a confidence interval many times*, using the same statistical procedure, i.e., each time, we obtain an independent collection of $n$ observations and construct the corresponding $95\%$ confidence interval. We then expect that about $95\%$ of these confidence intervals will include $n$. This should be true regardless of what the value of $\theta$ is." (bottom of p469)
 	3. Two possible approximations
 		1. sample mean has a normal dist. (CLT)
 		2. variance approximated (is true variance is not known)
 	4. Student's distribution ($t$-distribution) for small $n$ ($n\le 50$) 
+### Lecture 24: Classical Statistical Inference
 ## My comments
 1. Do NOT confuse *variance of an estimator* with *an estimator of variance*.
 	1. p466. $M_n=\frac{X_1 + ... + X_n}{n}$ is the estimator of true/population mean, which is also an R.V., which has its own variance.

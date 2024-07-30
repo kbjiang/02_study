@@ -38,8 +38,9 @@ Topic: #Probability #Bayesian #Inference
 5. A lot of averages, need to be careful about 
 	1. over *which variable* it is averaged.
 		1. Total variance: $\text{var}(\Theta) = \text{var}(\mathbf{E}[\Theta|X]) + \mathbf{E}[\text{var}(\Theta|X)]$, the LHS is *unconditional* and a number, RHS arguments are both functions of $X$ basing on $f_{\theta|X}$, then $f_X$.
-	2. if it's a calculation of a number (conitional) or a R.V. (unconditional)
-6. Why observation $X$ needs to be a R.V. as well?
+	2. if it's a calculation of a number (conditional) or a R.V. (unconditional)
+6. $X$ is a *single* observation in the sense that *same* experimental config and run many times; $\{X_i\},\ i \in {1, 2, ..., m}$ are *multiple* observations where each has its own experimental config.
+7. Why observation $X$ needs to be a R.V. as well?
 	1. This is demanded by Bayesian inference. I.e., the joint distribution of $\Theta, X$. In theory, $X$ being deterministic could be a special case.
 	2. Shows how $X$ is affected by $\Theta$.
 ## Interesting/Challenging problems and tricks
