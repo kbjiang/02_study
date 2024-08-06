@@ -22,7 +22,12 @@ Topic: #Probability #Inference
 		1. sample mean has a normal dist. (CLT)
 		2. variance approximated (is true variance is not known)
 	4. Student's distribution ($t$-distribution) for small $n$ ($n\le 50$) 
-### Lecture 24: Classical Statistical Inference
+### Lecture 24: Classical Statistical Inference II
+1. Linear Regression
+	1. It is NOT probabilistic, but can have probabilistic explanations. See *Justification of the Least Squares Formulation* on p478 and *Bayesian Linear Regression* on p480.
+	2. *Practical Considerations* p484
+		1. *Heteroskedasticity*. Noise $W_i$ is dependent on value of $x_i$.
+		2. *Multicollinearity*. Say $y=\theta_0 + \theta_1 x_1 + \theta_2 x_2$ and $x_1, x_2$ are highly correlated, then $\theta_{1,2}$ will become very sensitive.
 ## My comments
 1. Do NOT confuse *variance of an estimator* with *an estimator of variance*.
 	1. p466. $M_n=\frac{X_1 + ... + X_n}{n}$ is the estimator of true/population mean, which is also an R.V., which has its own variance.

@@ -10,7 +10,7 @@ Topic: #Probability #Bayesian #Inference
 2. Bayesian treats the unknown as a R.V. It does *not* mean nature is uncertain, but our *prior* belief of the distribution of the unknown.
 	1. ![[Pasted image 20240529073352.png|500]]
 	2. Note in both cases, estimator $\hat{\Theta}$ is a R.V. 
-	3. Estimators are *functions of observations $X$*
+	3. ==*Estimators* are *functions of observations $X$==*, while *estimates* $x$ are the realized values.
 3. Maximum a Posteriori Probability (MAP) estimator
 	1. Defined as the R.V. $\hat{\Theta}=g(X)$. In natural language, some decision rule. 
 	2. It is *optimal* for *any* given $x$ in terms of "making a correct decision" (p420 footnote), which means $\hat{\theta}=\theta_{\text{True}}$. By definition, MAP selects the $\theta$ with most probability of being $\theta_{\text{True}}$ according to posteriori dist. 
@@ -24,25 +24,36 @@ Topic: #Probability #Bayesian #Inference
 	3. I.e., $\hat{\theta} = \mathbf{E}[\theta|X=x]$ minimizes $\mathbf{E}[(\Theta - \hat{\theta})^2|X=x]$ and similarly, $\hat{\Theta} = \mathbf{E}[\Theta|X]$ and $\mathbf{E}[(\theta - \hat{\theta})^2]$.
 		1. Former is *number*, while latter is *R.V.*.
 		2. In following screenshot. First point is average over $f_{\tilde{\Theta}}$, second is over $f_{\tilde{\Theta}|X}$, third is over $f_{\tilde{\Theta}}$ (where $\tilde{\Theta}\coloneqq \Theta - \hat{\Theta}$) or equivalently $f_{\Theta, X}$, and it was obtained by using Law of Iterated Expectation. 
-			1. ![[ Pasted image 20240617084538.png|600]]
+			1. Nice summary ![[ Pasted image 20240617084538.png|600]]
 5. Linear Least Mean Square (LMS) estimator
 	1. Nice intuition at the beginning of P439
 	2. When distributions are normal, Linear LMS and LMS coincide. "Thus, there are two alternative perspectives on linear LMS estimation: either as a computational shortcut (avoid the evaluation of a possibly complicated formula for $\mathbf{E}[\Theta|X]$, or as a model simplification (replace less tractable distributions by normal ones) ."
 	3. Transformation of observation $Y=h(X)$ does not affect LMS but Linear LMS, since the latter assume that linearity is a good proximation. Therefore right transformation, e.g. $X$ or $X^2$, is important to Linear LMS.
 ## My comments
-1. hypothesis testing: few possible values for unknown, aims at small *probability* of incorrect decision; think MAP
+1. Hypothesis testing: 
+	1. few possible values for unknown, aims at small *probability* of incorrect decision; think MAP
 2. Estimation: aim at a small *estimation error*; think Conditional Expectation Estimator
-3. $\tilde{\Theta}, \hat{\Theta}$ are both R.V.s with their own prob. dist. Think of $Z = X + Y$.
+3. ==How to understand $X$ *single* observation and {$X_i$} *multiple* observations==
+	1. $X$ is *assumed* to be drawn from some distribution, therefore we have $\mathbf{E}[X]$. 
+		1. $X$ can take any value $x$; and we are looking for $\hat{\theta}$ that is optimal at every $x$. E.g., Fig. 8.8 p432.
+		2. The fact that $x$ can take any value should NOT be confused with multiple observations
+	2. Each $X_i$ is its own R.V., which is described by joint PDF $f_{\Theta, X_1, ..., X_n}$.
+		1. DO NOT confuse with linear regression with multiple data points?
+4. ==How to understand multiple observations vs multiple features==
+	1. Example 8.2 and 8.3 p414 are multiple observations.
+		1. More observations brings more accurate estimate: Eg 8.3 the variance of estimated mean decrease at $\sqrt{n}$ as CLT; Eg 8.2 the $max\{x_1, ..., x_n\}$ limits the range of $\Theta|X$.
+	2. Example 8.5, each $x_i$ is a feature, i.e., if a keyword present or not.
+	3. The math is equivalent! Both ends up with PDF in $n$ dimensional space. 
+5. Why observation $X$ needs to be a R.V. as well?
+	1. This is demanded by Bayesian inference. I.e., the joint distribution of $\Theta, X$. In theory, $X$ being deterministic could be a special case.
+	2. Shows how $X$ is affected by $\Theta$.
+6. $\tilde{\Theta}, \hat{\Theta}$ are both R.V.s with their own prob. dist. Think of $Z = X + Y$.
 	1. Similarly, $\hat{\Theta} - \Theta = 0$ is an equality between R.V.s; the RHS is a trivial R.V.. 
-4. posterior => how to report it? => estimator
-5. A lot of averages, need to be careful about 
+7. posterior => how to report it? => estimator
+8. A lot of averages, need to be careful about 
 	1. over *which variable* it is averaged.
 		1. Total variance: $\text{var}(\Theta) = \text{var}(\mathbf{E}[\Theta|X]) + \mathbf{E}[\text{var}(\Theta|X)]$, the LHS is *unconditional* and a number, RHS arguments are both functions of $X$ basing on $f_{\theta|X}$, then $f_X$.
 	2. if it's a calculation of a number (conditional) or a R.V. (unconditional)
-6. $X$ is a *single* observation in the sense that *same* experimental config and run many times; $\{X_i\},\ i \in {1, 2, ..., m}$ are *multiple* observations where each has its own experimental config.
-7. Why observation $X$ needs to be a R.V. as well?
-	1. This is demanded by Bayesian inference. I.e., the joint distribution of $\Theta, X$. In theory, $X$ being deterministic could be a special case.
-	2. Shows how $X$ is affected by $\Theta$.
 ## Interesting/Challenging problems and tricks
 1. Example 8.3 and 8.4, P415 & 417. 
 	1. The same family of posterior and prior distributions enables *recursive inference*
