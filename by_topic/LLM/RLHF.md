@@ -24,3 +24,7 @@
 	1. Why not directly learn from preference samples (those RM model was trained on)?  https://youtu.be/vuWbJlBePPA
 	2. Finetune Llama 2 with DPO. https://huggingface.co/blog/dpo-trl
 4. Chip Huyen https://huyenchip.com/2023/05/02/rlhf.html
+5. Nice X [post](https://x.com/karpathy/status/1821277264996352246) from Andrej Karpathy. *# RLHF is just barely RL*
+	1. He called the RM just a "vibe check" and "*1. The vibes could be misleading - this is not the actual reward (winning the game). This is a crappy proxy objective. But much worse, 2. You'd find that your RL optimization goes off rails as it quickly discovers board states that are adversarial examples to the Reward Model. Remember the RM is a massive neural net with billions of parameters imitating the vibe. There are board states are "out of distribution" to its training data, which are not actually good states, yet by chance they get a very high reward from the RM.*"
+	2. So the major reason is that RM as a reward is not good enough. Language is too open-ended comparing to games like Go. *"But how do you give an objective reward for summarizing an article? Or answering a slightly ambiguous question about some pip install issue? Or telling a joke? Or re-writing some Java code to Python?"*
+	3. I guess that's why DPO works, because RL is not really necessary for existing LLM alignment.
