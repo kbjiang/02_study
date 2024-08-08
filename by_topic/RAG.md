@@ -20,6 +20,7 @@
 ### GraphRag
 1. Paper and post.
 2. Good introduction/tutorial [video](https://youtu.be/LF7I6raAIL4)Explanation of how it works starts at timestamp 2:40.
+3. Nice post on its [cost analysis](https://techcommunity.microsoft.com/t5/ai-azure-ai-services-blog/graphrag-costs-explained-what-you-need-to-know/ba-p/4207978)
 
 ### Other talks
 1. [Stanford CS25: V3 I Retrieval Augmented Language Models](https://youtu.be/mE7IDf2SmJg)
