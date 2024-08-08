@@ -24,13 +24,16 @@ tags: #UnderstandTransformers #PositionalEmbedding
 		2. Sinusoidal![[Pasted image 20240625222502.png|400]]
 	4. Another nice [video](https://youtu.be/BkyEZwAf-Rw). 
 		1. Think of each pair of sin/cos (*embedding* direction) as *clocks* rotating with different frequency. At position 0, all clocks are synced in phase; as position increase (*position* direction), each clock will rotate individually in multiples of delta position.
+
+### Rotary Positional Encoding (ROPE)
 1. Rotary Positional Encoding, [RoFormer (arxiv.org)](https://arxiv.org/pdf/2104.09864)
 	1. Positional info
 		1. not added to the values, so segregation between positional and contextual info
 		2. is injected at every layer, not just the initial one
-	3. One rotary matrix $\mathbf{R}_{\Theta, m}^d$ for each position $m$. Therefore, *different rotation angles in different positions and different dimensions.*
+	2. One rotary matrix $\mathbf{R}_{\Theta, m}^d$ for each position $m$. Therefore, *different rotation angles in different positions and different dimensions.*
 		1. very similar to the intuition of matrix $M$ above.
-	4. In attention layer, only relative rotary $\mathbf{R}_{\Theta, n-m}^d$ (from query-key ${q}_m^{\intercal}\ k_n$) matters.
+	3. In attention layer, only relative rotary $\mathbf{R}_{\Theta, n-m}^d$ (from query-key ${q}_m^{\intercal}\ k_n$) matters.
+	4. Nice [post](https://blog.eleuther.ai/rotary-embeddings/) with clean implementation. 
 2. Extend context window size beyond that during pre-training
 	1. Position Interpolation [2306.15595 (arxiv.org)](https://arxiv.org/pdf/2306.15595)
 		1. interpolate position index to match context window size during pre-training; turns out to be better than extrapolation.

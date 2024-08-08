@@ -15,6 +15,7 @@
 2. Nice [video](https://youtu.be/Lakz2MoHy6o) showing *implementation* of the Convolutional layer from scratch.
 	1. At 7:30, he shows the forward equation of a convolutional layer is a just a generalization of that of FFN, by replacing multiplication with cross-correlation
 3. Detailed visualization videos. [CNN e2e](https://youtu.be/JboZfxUjLSk) and [backpropagation](https://youtu.be/z9hJzduHToc). 
+4. Nice [visualization](https://youtu.be/eASwKmKYWeo) on feature maps
 
 ### What is Convolution?
 1. [3Blue1Brown](https://youtu.be/KuXjwB4LzSA)

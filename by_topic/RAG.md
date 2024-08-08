@@ -20,3 +20,6 @@
 ### GraphRag
 1. Paper and post.
 2. Good introduction/tutorial [video](https://youtu.be/LF7I6raAIL4)Explanation of how it works starts at timestamp 2:40.
+
+### Other talks
+1. [Stanford CS25: V3 I Retrieval Augmented Language Models](https://youtu.be/mE7IDf2SmJg)
