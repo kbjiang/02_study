@@ -28,6 +28,20 @@ Topic: #Probability #Inference
 	2. *Practical Considerations* p484
 		1. *Heteroskedasticity*. Noise $W_i$ is dependent on value of $x_i$.
 		2. *Multicollinearity*. Say $y=\theta_0 + \theta_1 x_1 + \theta_2 x_2$ and $x_1, x_2$ are highly correlated, then $\theta_{1,2}$ will become very sensitive.
+2. Binary Hypothesis Testing
+	1. The goal is to find a rejection region $R$ to minimize the overall probability of error (Type I & Type II)
+	2. Terminology
+		1. Likelihood Ratio $L(X)=\frac{p_X(x; H_1)}{p_X(x; H_0)}$.
+		2. For all $x$, one calculate $L(x)$ and set a threshold $\xi$, which leads to rejection region $R=\{x|L(x)>\xi\}$.
+		3. False rejection probability: $P(L(X)>\xi; H_0)$. Basically, greater $\xi$ favors $H_0$, i.e., $H_1$ needs to be a lot more likely to be considered.
+	3. About $\xi$
+		1. when $\xi=1$ we treat two hypothesis equally; basically doing Maximum Likelihood at every $x$.
+		2. in general, choose a *undesirability of false rejection,* $\alpha$,  and find $\xi$ using $P(L(X)>\xi; H_o) = \alpha$.
+			1. when $\xi$ takes extreme values, prob. of error can be 0 or 1. Think ROC.
+			2. ![[Pasted image 20240809075850.png|300]]
+	4. Think $\xi$ along $y$ axis
+		1. ![[Pasted image 20240809074815.png|600]]
+	5. E.g. 9.10, p487
 ## My comments
 1. Do NOT confuse *variance of an estimator* with *an estimator of variance*.
 	1. p466. $M_n=\frac{X_1 + ... + X_n}{n}$ is the estimator of true/population mean, which is also an R.V., which has its own variance.
