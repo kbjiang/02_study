@@ -11,11 +11,17 @@
 		2. Parameter Sharing: same feature can show up at different locations
 			1. filter/neuron scans input image $\iff$ receptive field of the image being sent through the CNN one at a time 
 	3. Do NOT forget the *channel dimension* of filters! E.g., for 2D conv, it's always $(N, C, H, W)$.
-		1. Nice image![[Pasted image 20240613183351.png|800]]
-2. Nice [video](https://youtu.be/Lakz2MoHy6o) showing *implementation* of the Convolutional layer from scratch.
+		1. Nice image![[Pasted image 20240613183351.png|600]]
+2. Best [visualization](https://youtu.be/JB8T_zN7ZC0) from Brandon Rohrer.
+	1. Convolutional layer: each feature/filter in it returns a *filtered* version of the input
+	2. Fully connected layer: each feature votes for each of the final category
+	3. Great four-pixel toy example: [15:14](https://youtu.be/JB8T_zN7ZC0?t=915) - 26:49
+		1. ![[Pasted image 20240816093450.png|800]]
+		2. A trained neuron *identifies* a certain pattern, when it sees such a pattern it gets *activated*. This is very perceptron.
+3. Nice [video](https://youtu.be/Lakz2MoHy6o) showing *implementation* of the Convolutional layer from scratch.
 	1. At 7:30, he shows the forward equation of a convolutional layer is a just a generalization of that of FFN, by replacing multiplication with cross-correlation
-3. Detailed visualization videos. [CNN e2e](https://youtu.be/JboZfxUjLSk) and [backpropagation](https://youtu.be/z9hJzduHToc). 
-4. Nice [visualization](https://youtu.be/eASwKmKYWeo) on feature maps
+4. Detailed visualization videos. [CNN e2e](https://youtu.be/JboZfxUjLSk) and [backpropagation](https://youtu.be/z9hJzduHToc). 
+5. Nice [visualization](https://youtu.be/eASwKmKYWeo) on feature maps
 
 ### What is Convolution?
 1. [3Blue1Brown](https://youtu.be/KuXjwB4LzSA)
