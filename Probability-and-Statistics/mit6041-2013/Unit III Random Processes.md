@@ -61,3 +61,6 @@ Topic: #Probability #RandomProcess
 6. Lecture 15, problem set 7, prob 2 (f). It's cute how the problem 
 	1. Treat the failure part separately (conditional probability) and framed it as Sums of a Random Number of Random Variables.
 	2. The sum of failure and success is the Pascal of order $m$. 
+7. Final exam Fall 2009, problem 4 (f).
+8. Final exam Fall 2010, problem 2, part 4, (a), (d). The sum of two independent Poisson is equivalent as merging.
+9. Final exam Fall 2010, problem 2, part 7. Split $[0,1]$ into $\lambda_A$ intervals.

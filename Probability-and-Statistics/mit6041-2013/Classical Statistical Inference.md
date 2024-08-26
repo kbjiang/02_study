@@ -58,3 +58,4 @@ Topic: #Probability #Inference
 		\end{align}
 		$$ ^ffe4fa
 2. E.g. 9.10, p487
+3. Final exam Fall 2010, problem 2, part 7. Split $[0,1]$ into $\lambda_A$ intervals.
