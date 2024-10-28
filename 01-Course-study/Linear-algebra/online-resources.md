@@ -5,3 +5,4 @@
 
 ## Visualization
 1. [SVD Visualized, Singular Value Decomposition explained](https://youtu.be/vSczTbgc8Rc)
+2. [Dear linear algebra students, This is what matrices and matrix manipulation really look like](https://youtu.be/4csuTO7UTMo)
