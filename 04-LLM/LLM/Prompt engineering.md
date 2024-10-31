@@ -14,7 +14,7 @@
 1. There are roughly three (not entirely distinct) frames for prompt engineering:
 	- LLMs as internet.zip or interpolative stochastic parrots
 	- LLMs as more flexible dynamical systems
-	- LLMs as pseudocognitive artifacts
+	- LLMs as pseudo-cognitive artifacts
 2.  LLMs as flexible dynamical systems
 	1. Stereotypical association between concepts in pretraining data and token completion
 		1. Self-attention selects important tokens in the context that are indicative for completion. This abstraction of meaning guides the completion as an interpretation of the pretraining data. This only works when associated data is 'thick'.
