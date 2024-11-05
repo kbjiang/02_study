@@ -26,10 +26,13 @@
 
 
 ## I.6 Eigenvalues and Eigenvectors
-1. Eigenvectors does not change direction
+1. Eigenvalues and eigenvectors
 	1. $\sum \lambda_i == \text{trace}(A)$ and $\prod \lambda_{i} == \text{det}(A)$.
 	2. $A$ and $A^{-1}$ have the same eigenvectors and reciprocal eigenvalues. Think of undoing previous stretching.
 	3. $A$ and $A^{T}$ have the same eigenvalues. 
+	4. One eigenvalue may have *multiple* eigenvectors. Just think in terms of nullspace of $A-\lambda I$.
+		1. E.g., identity matrix has $\lambda = 1$ and $Ax=x,\ \forall x$.  
+		2. See *Quick proofs* on P44.
 2. similar matrices ($B = MAM^{-1}$) have same eigenvalues
 	1. $A = X \Lambda X^{-1}$ where $X$ is the matrix of eigenvectors and $\Lambda$ has eigenvalues on its diagonal.
 	2. if $A$ is $S$ (symmetric), $S = Q \Lambda Q^{T}$.
@@ -37,3 +40,9 @@
 	1. Eigenvector with zero eigenvalue lives in nullspace of $A$
 	2. P42, ex 15. $A = [1\  1; 3\  3]$  has rank 1 of $A-\lambda I$. But it has multiple eigenvalues, so no shortage of eigenvectors, but zero eigenvalue.
 4. Nice visualization/application [[02_study/01-Course-study/Linear-algebra/online-resources#^eigens-visual]]
+
+## I.7 Symmetric Positive Definite Matrices
+1. Why 2nd derivatives being positive definite means minimum? What does eigenvalue mean in this case? P49 bottom.
+2. similar matrices ($B = MAM^{-1}$) have same eigenvalues
+	1. $A = X \Lambda X^{-1}$ where $X$ is the matrix of eigenvectors and $\Lambda$ has eigenvalues on its diagonal.
+	2. if $A$ is $S$ (symmetric), $S = Q \Lambda Q^{T}$.
