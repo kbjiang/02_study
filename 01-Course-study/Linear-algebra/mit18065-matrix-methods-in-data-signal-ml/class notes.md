@@ -43,6 +43,12 @@
 
 ## I.7 Symmetric Positive Definite Matrices
 1. Why 2nd derivatives being positive definite means minimum? What does eigenvalue mean in this case? P49 bottom.
-2. similar matrices ($B = MAM^{-1}$) have same eigenvalues
-	1. $A = X \Lambda X^{-1}$ where $X$ is the matrix of eigenvectors and $\Lambda$ has eigenvalues on its diagonal.
-	2. if $A$ is $S$ (symmetric), $S = Q \Lambda Q^{T}$.
+2. Symmetric matrix $S$ is a special case of $A$
+	1. real eigenvalues
+	2. *can chose* orthogonal eigenvectors, therefore a basis, therefore decomposition
+3. SPDM is a special case of $S$
+
+## I.8
+1. Singular values $\Leftrightarrow$ eigenvalues
+4. Other references
+	1. [Steve Brunton](https://youtu.be/nbBvuuNVfco)
