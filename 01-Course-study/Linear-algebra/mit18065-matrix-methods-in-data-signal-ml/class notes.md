@@ -50,5 +50,17 @@
 
 ## I.8
 1. Singular values $\Leftrightarrow$ eigenvalues
+2. $A^T A v = \sigma^2 v,\ A A^T u = \sigma^2 u$.
+3. The geometry of SVD
+	1. When see *orthogonal* matrix, think of *rotation*
 4. Other references
 	1. [Steve Brunton](https://youtu.be/nbBvuuNVfco)
+
+## I.9
+1. PCA
+	1. is *linear*
+	2. Data matrix $A \Rightarrow$ Covariance matrix $S=AA^T/(n-1) \Rightarrow$  P76, 77
+2. PCA vs Least Square
+	1. PCA always mean zero and look for error along the direction of singular vectors
+	2. ![[PCA-vs-LS.excalidraw|800]]
+3. 
