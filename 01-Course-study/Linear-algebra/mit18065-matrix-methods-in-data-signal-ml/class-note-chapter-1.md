@@ -4,9 +4,9 @@
 	1. Turns out rows in $R$ are the *basis* of $A$'s *row* space.
 	2. Running example	
 	$$\begin{align*}
-	A &= \begin{pmatrix} 2 & 1 & 3\\ 3 & 1 & 4\\ 5 & 7 & 12 \end{pmatrix} \\
-	&= \begin{pmatrix} 2 & 1 \\ 3 & 1\\ 5 & 7 \end{pmatrix}
-	 \begin{pmatrix} 1 & 0 & 1\\ 0 & 1 & 1 \end{pmatrix}	= CR \\
+	A &= \left[\begin{array}{ccc} 2 & 1 & 3\\ 3 & 1 & 4\\ 5 & 7 & 12 \end{array}\right] \\
+	&= \left[\begin{array}{cc} 2 & 1 \\ 3 & 1\\ 5 & 7 \end{array}\right]
+	 \left[\begin{array}[ccc] 1 & 0 & 1\\ 0 & 1 & 1 \end{array}\right]	= CR \\
 	\end{align*}
 	$$
 ## I.2 Matrix-matrix multiplication
@@ -59,8 +59,29 @@
 ## I.9
 1. PCA
 	1. is *linear*
-	2. Data matrix $A \Rightarrow$ Covariance matrix $S=AA^T/(n-1) \Rightarrow$  P76, 77
+	2. Data matrix $A$ (centered at zero mean) $\Rightarrow$ Covariance matrix $S=AA^T/(n-1) \Rightarrow$  P76, 77
+		1. It's NOT $A^T A$ because each row is a data point and we should have $S$ of shape $m\times m$.
+		2. It represents the *joint distribution* of the columns, e.g., one col for height the other for weight. 
+		3. Think of vector $(h_i, w_i)$ and the diagonal/off-diagonal entries of $S$ relates to variances/covariances respectively. 
+			1. E.g., if weight and height are highly correlated, you'd have large off-diagonal entries
 2. PCA vs Least Square
-	1. PCA always mean zero and look for error along the direction of singular vectors
+	1. PCA always centered (zero mean) and look for error along the direction of singular vectors. Eqn 20 on P77.
 	2. ![[PCA-vs-LS.excalidraw|800]]
-3. 
+
+
+## I. 11
+1. Norm is a *function* that calculates the "size" of a nonzero vector $v$
+	1. *Norm does NOT affect the vector nor their operation.* It's just a useful function one can define, like a metric.
+	2. Must have $\|v\|\ge 0$, $\| c v\|= |c| \|v\|$ and  $\| v + w\| \le \|v\| +\|w\|$.
+		1. Counterexample is $p=1/2$, see P88b.
+		2. Norm defines a space, e.g., $\forall v$ s.t. the $\mathscr{l}^p$ properties are satisfied, we say $v$ is in $\mathscr{l}^p$ space.
+	3. Only $\mathscr{l}^2$ makes sense in ordinary geometry, via inner product and angles between vectors. P90t.
+		1. As a result, its unit length is isotropic as we experience in daily life.
+2. Norm for matrices
+	1. *Norm does NOT affect the vector nor their operation.* It's just a useful function one can define, like a metric.
+	2. Must have $\|v\|\ge 0$, $\| c v\|= |c| \|v\|$ and  $\| v + w\| \le \|v\| +\|w\|$.
+		1. $\|A\|=\underset{v\neq 0}{\text{max}} \frac{\|Av\|}{\|v\|}$ leads to $|AB| \le \|A\|\|B\|$.
+	3. Frobenius is $\mathscr{l}^2$ of vectors, but not matrices?
+3. Norms matter in optimization problem
+	1. Different norms lead to different solutions
+	2. E.g., $\mathscr{l}^1$ is good cause it is sparse. Bottom of P89.

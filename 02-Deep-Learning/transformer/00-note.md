@@ -7,6 +7,8 @@
 5. Original post [https://ai.googleblog.com/2017/08/transformer-novel-neural-network.html](https://ai.googleblog.com/2017/08/transformer-novel-neural-network.html)
 6. Good reference, but too long: [https://e2eml.school/transformers.html](https://e2eml.school/transformers.html)
 7. [nanoGPT/transformer_sizing.ipynb at master · karpathy/nanoGPT · GitHub](https://github.com/karpathy/nanoGPT/blob/master/transformer_sizing.ipynb)
+8. Good visualization with dimensions (Sebastian Raschka)
+	1. ![[Pasted image 20241110210414.png|600]]
 
 ### LayerNorm
 1. it's done at the *layer/embedding* dimension; optionally the batch dimension
