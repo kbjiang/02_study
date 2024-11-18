@@ -1,14 +1,11 @@
-## II. 2 Least Squares: Four ways
-1. Least square
-	1. Find $\underset{x}{\text{min}}\|Ax-b\|^2$ , note $x$ is in $C(A^T)$.
-2. Pseudoinverse of $A$: $A^{+}$
-	1. $A^+ = A^{-1}$ if $A$ is invertible
-		1. $A$ has to be *square* to have $AA^{-1}=A^{-1}A$
-		2. any $A$ can have $A^+$ with accommodating shape
-	2. $A^+A=I$ in $C(A)$ and $AA^+=I$ in $C(A^T)$
-		1. $A^+A = \left[\begin{array}{cc}  I & 0 \\ 0 & 0  \\ \end{array}\right] \begin{array}{c} \text{row space} \\	\text{nullspace} \\ \end{array}$
-	3. $A^+$ share the same nullspace as $A^T$
-	4. $A^+$ solves LS in one step
+## III. 1 Changes in $A^{-1}$ from changes in $A$.
+1. Perturb $A$, how does $A^{-1}$ change?
+	1. Three examples: $(I-uv^T)^{-1}$, $(I-UV^T)^{-1}$ and $(A-UV^T)^{-1}$
+2. Two points
+	1. rank-$k$ change in $A$ leads to same rank change in $A^{-1}$
+	2. Instead of $n\times n$ inverse, just need to do $k \times k$ inverse, where $k$ is the rank of $U$ and $V$. 
+3. Least square, adding new data
+	1. Solve normal equation leveraging $A$, instead of the perturbed version.
 
 ## II.4 Randomized Linear Algebra
 1. Approximation of $AB$ can be modeled as choosing rank-1 component of $a_i b^{T}_i$ with probability $\{p_{i}\}$.

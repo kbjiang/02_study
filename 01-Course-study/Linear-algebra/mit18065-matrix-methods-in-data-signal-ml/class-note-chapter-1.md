@@ -27,7 +27,7 @@
 
 ## I.6 Eigenvalues and Eigenvectors
 1. Eigenvalues and eigenvectors
-	1. $\sum \lambda_i == \text{trace}(A)$ and $\prod \lambda_{i} == \text{det}(A)$.
+	1. $\sum \lambda_i = \text{trace}(A)$ and $\prod \lambda_{i} = \text{det}(A)$.
 	2. $A$ and $A^{-1}$ have the same eigenvectors and reciprocal eigenvalues. Think of undoing previous stretching.
 	3. $A$ and $A^{T}$ have the same eigenvalues. 
 	4. One eigenvalue may have *multiple* eigenvectors. Just think in terms of nullspace of $A-\lambda I$.
@@ -62,7 +62,7 @@
 	2. Data matrix $A$ (centered at zero mean) $\Rightarrow$ Covariance matrix $S=AA^T/(n-1) \Rightarrow$  P76, 77
 		1. It's NOT $A^T A$ because each row is a data point and we should have $S$ of shape $m\times m$.
 		2. It represents the *joint distribution* of the columns, e.g., one col for height the other for weight. 
-		3. Think of vector $(h_i, w_i)$ and the diagonal/off-diagonal entries of $S$ relates to variances/covariances respectively. 
+		3. Think of a data point/vector $(h_i, w_i)$ and the diagonal/off-diagonal entries of $S$ relates to variances/covariances respectively. 
 			1. E.g., if weight and height are highly correlated, you'd have large off-diagonal entries
 2. PCA vs Least Square
 	1. PCA always centered (zero mean) and look for error along the direction of singular vectors. Eqn 20 on P77.
