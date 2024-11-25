@@ -30,6 +30,9 @@ Topic: #Probability #RandomProcess
 		1. fix $\tau$ and $\sum_{k} P(k, \tau)=1$.
 3. Definition of the Poisson Process
 	1. $P$ is same for all interval $\tau$.
+4. Poisson distribution
+	1. *rare event* ($p\rightarrow 0$) with *long time/large population* ($n \rightarrow \infty$) to produce a decent chance of occurrence ($\lambda = np > \epsilon$).
+	2. *intuition*: NOT for the prob. of me being struck by lightning (one in a million in my lifetime) but that of someone in a city of 100k population will be struck.
 
 ### Lecture 15: Poisson process - II
 1. The fishing example: blah blah
@@ -40,7 +43,8 @@ Topic: #Probability #RandomProcess
 	3. another "average family size is 4" vs "on average, a person is from a family size of 6".
 3. 
 ## My comments
-1. It's important to distinguish *Distribution* and *Process*. E.g., Poisson distribution does not involve $\tau$ while Poisson process does.
+1. It's important to distinguish *Distribution* and *Process*.
+	1. E.g., Poisson distribution does not involve $\tau$ while Poisson process does.
 2. Compare definitions between *Bernoulli* (p297) and *Poisson* (p310) process. When $\tau \to 0$, the latter is the limiting case of former 
 3. To argue if a process is Poisson, just think of the rate of a single arrival in a small time interval $\delta$. Example 6.13, p318.
 ## Interesting/Challenging problems and tricks
