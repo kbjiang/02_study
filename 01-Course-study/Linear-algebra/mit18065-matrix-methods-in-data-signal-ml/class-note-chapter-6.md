@@ -14,7 +14,26 @@
 		2. think of movement in the  $x\textendash y$ plane!
 	3. Fig VI.9 on P349. See how we have $90\degree$ zig-zag for exact line search.
 2. Momentum
-	1. Add momentum to smooth the zig-zag. For quadratic model, the descent is much faster. Eqn (17) P353.
+	1. Add momentum to achieve faster descent (much less zig-zag). 
+	2. Analytical results for quadratic model, Eqn (17) P353.
 
-## notes to me
-1. Go to PCA p76-77 when covariance matrices.
+## VI.5 Stochastic Gradient Descent
+1. Two challenges with Full GD; both addressed by SGD.
+	1. Too slow
+	2. $\nabla_x L=0$ leads to a lot of saddle points. This is replaced by SGD and early stopping
+2. SGD
+		1. early steps of SGD converge fast and in the right direction
+			1. [Intuition](https://youtu.be/k3AiUhwHQ28?list=PLUl4u3cNGP63oMNUHXqIUcrkS2PivhN3k&t=1569) and P362
+			2. Too large of a mini batch size leads to a small "region of confusion" and overfitting
+		2. we do NOT want to get to the real minimal, which leads to overfitting, therefore early stopping at vicinity.
+3. In ML, optimization is the sum of error at each data point, i.e., $f=\text{min}_x\frac{1}{n}\underset{i}{\sum} f_i(x)$.
+	1. This is different from classical optimization where we have analytical $f$; here $f$ is dictated by data
+	2. ML loss function is not even convex.
+	1. Even more so with full GD.
+4. Random Kaczmarz
+	1. It's the SGD for solving normal equation, 
+		1. i.e., solve random components $a_i^T x_k=b_i$ at each step
+		2. step size is the projection. See Eqn(3) on P363 and Eqn(4) on P364. Latter is a projection on $x_k - x^*$.
+5. References
+	1. [[October#^inductive-bias]] argued that SGD converges to solutions with minimum norm, which leads to good generalization.
+	2. [[November#UNDERSTANDING DEEP LEARNING REQUIRES RETHINKING GENERALIZATION]] 

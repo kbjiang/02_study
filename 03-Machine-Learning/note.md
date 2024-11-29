@@ -5,3 +5,5 @@
 
 
 ## [Overview of Statistical Learning Theory Part 1](https://youtu.be/BxQxsuRjoR8)
+## [Optimization's Hidden Gift to Learning: Implicit Regularization](https://youtu.be/gh9vrvLx7Mo #DL-generalization 
+1. Nathan Srebro
