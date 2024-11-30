@@ -13,6 +13,7 @@
 		1. The gradient is NOT along the $f$ surface, but in $x\textendash y$ plane!
 		2. think of movement in the  $x\textendash y$ plane!
 	3. Fig VI.9 on P349. See how we have $90\degree$ zig-zag for exact line search.
+		1. Exact line search: $x_{k+1}$ exactly minimizes $f(x)$ along the direction of $x_k - s \nabla f(x)$.
 2. Momentum
 	1. Add momentum to achieve faster descent (much less zig-zag). 
 	2. Analytical results for quadratic model, Eqn (17) P353.
