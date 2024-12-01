@@ -1,14 +1,16 @@
 ## II. 2 Least Squares: Four ways
 1. Least square
-	1. Find $\underset{x}{\text{min}}\|Ax-b\|^2$ , note $x$ is in $C(A^T)$.
-2. Pseudoinverse of $A$: $A^{+}$
+	1. Find $\underset{x}{\text{min}}\|Ax-b\|^2$ which minimizes the error.
+	2. Note that $x$ is not necessarily in $C(A^T)$: it could have components in $\text{null}(A)$ which does not increase the error, only it's norm.
+2. Pseudoinverse $A^{+}$: even when $A$ is not invertible!
 	1. $A^+ = A^{-1}$ if $A$ is invertible
 		1. $A$ has to be *square* to have $AA^{-1}=A^{-1}A$
 		2. any $A$ can have $A^+$ with accommodating shape
-	2. $A^+A=I$ in $C(A)$ and $AA^+=I$ in $C(A^T)$
-		1. $A^+A = \left[\begin{array}{cc}  I & 0 \\ 0 & 0  \\ \end{array}\right] \begin{array}{c} \text{row space} \\	\text{nullspace} \\ \end{array}$
-	3. $A^+$ share the same nullspace as $A^T$
-	4. $A^+$ solves LS in one step
+	2. $A^+$ share the same nullspace as $A^T$
+	3. $A^+$ solves LS in one step
+	4. Special case: when $A$ have independent columns, i.e., $r=n$.
+			1. $A^+ A=1$. No guarantee $AA^+=1$
+			2. pseudoinverse and normal equation are equivalent.
 
 ## II.4 Randomized Linear Algebra
 1. Approximation of $AB$ can be modeled as choosing rank-1 component of $a_i b^{T}_i$ with probability $\{p_{i}\}$.
@@ -19,5 +21,9 @@
 		1. Uniform won't work--best to choose large columns/rows more often. That's why norm-squared sampling.
 		2. use Lagrangian multiplier to do so
 
+## References
+1. https://math.stackexchange.com/questions/2253443/difference-between-least-squares-and-minimum-norm-solution
+	1. The confusingly named "solution of minimum norm" is just the particular solution.
+2. https://see.stanford.edu/materials/lsoeldsee263/08-min-norm.pdf
 ## Notes to myself
 skipped most of *II.1 Numeric Linear Algebra*

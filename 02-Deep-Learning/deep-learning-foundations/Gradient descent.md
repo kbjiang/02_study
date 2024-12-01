@@ -1,15 +1,3 @@
-## UNDERSTANDING DEEP LEARNING REQUIRES RETHINKING GENERALIZATION
-Tags: #DL-fundation  #DL-generalization #SGD 
-Authors: Chiyuan Zhang et.al.
-Paper link: https://arxiv.org/pdf/1611.03530
-Talk link: 
-Related: 
-### Why interesting
-### Ideas/conclusions
-1. Optimization does not mean generalization
-2. Regularization is helpful, but not essential to generalization
-3. Good exploration on SGD leading to minimal norm solution and decent generalization
-
 ## Multiple papers by Nathan Srebro
 Tags: #DL-fundation  #DL-generalization #SGD 
 Authors: Nathan Srebro et.al.
@@ -20,8 +8,9 @@ Paper link:
 	1. His dissertation, good overview
 Talk link: 
 1. [Optimization's Hidden Gift to Learning: Implicit Regularization](https://youtu.be/gh9vrvLx7Mo)
-	1. Instead of number of parameter, we need better "complexity measure" to measure generalizability, i.e., norms.
-	2. About how SGD is implicitly minimizing certain norms
+	1. It's easy to find global minima, i.e., zero training loss, but which ones can generalize.
+	2. Instead of number of parameter, we need better "complexity measure" to measure generalizability, i.e., norms.
+	3. About how SGD is implicitly minimizing certain norms
 Related: 
 
 ## Towards Understanding the Implicit Regularization Effect of SGD
@@ -34,6 +23,8 @@ Talk link:
 	1. SGD vs GD; 2nd order term leads to diffusion perpendicular to gradient flow
 Related: 
 
-## References
-1. [[October#^inductive-bias]]
+## Related
+1. Reconciling modern machine-learning practice and the classical bias–variance trade-off [[October#^inductive-bias]]
 	1. SGD leads to good inductive bias, i.e., minimal nuclear norm or The Occam's Razor.
+2. UNDERSTANDING DEEP LEARNING REQUIRES RETHINKING GENERALIZATION [[November#^e1473e]]
+	1. Section 5.
