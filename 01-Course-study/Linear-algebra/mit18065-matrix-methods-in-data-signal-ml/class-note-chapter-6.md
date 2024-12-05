@@ -35,6 +35,9 @@
 	1. It's the SGD for solving normal equation, 
 		1. i.e., solve random components $a_i^T x_k=b_i$ at each step
 		2. step size is the projection. See Eqn(3) on P363 and Eqn(4) on P364. Latter is a projection on $x_k - x^*$.
-5. References
-	1. [[October#^inductive-bias]] argued that SGD converges to solutions with minimum norm, which leads to good generalization.
-	2. [[November#UNDERSTANDING DEEP LEARNING REQUIRES RETHINKING GENERALIZATION]] 
+## References
+1. [A birds-eye view of optimization algorithms](https://fa.bianp.net/teaching/2018/eecs227at/)
+	1. Good overview and visualization
+2. [[October#^inductive-bias]]
+	1. argued that SGD converges to solutions with minimum norm, which leads to good generalization.
+3. [[November#UNDERSTANDING DEEP LEARNING REQUIRES RETHINKING GENERALIZATION]] #Optimization
