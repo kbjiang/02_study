@@ -6,7 +6,7 @@
 3. Newton's method vs Gradient descent
 	1. Newton error decreases quadratically $(x^*-x)^2$.
 
-## VI.4 Gradient Descent
+## VI.4 Gradient Descent ^GD
 1. The geometry
 	1. $f(x, y)=ax + by$ is a plane consists of all parallel $ax+by=c$ lines.
 	2. The gradient $[a, b]$ is the steepest direction, perpendicular to $c$ lines.
@@ -14,6 +14,7 @@
 		2. think of movement in the  $x\textendash y$ plane!
 	3. Fig VI.9 on P349. See how we have $90\degree$ zig-zag for exact line search.
 		1. Exact line search: $x_{k+1}$ exactly minimizes $f(x)$ along the direction of $x_k - s \nabla f(x)$.
+		2. For isotropic $f$, i.e., equal eigenvalues, there is no zig-zag, as the gradient points to $x^*$.
 2. Momentum
 	1. Add momentum to achieve faster descent (much less zig-zag). 
 	2. Analytical results for quadratic model, Eqn (17) P353.
@@ -36,8 +37,10 @@
 		1. i.e., solve random components $a_i^T x_k=b_i$ at each step
 		2. step size is the projection. See Eqn(3) on P363 and Eqn(4) on P364. Latter is a projection on $x_k - x^*$.
 ## References
-1. [A birds-eye view of optimization algorithms](https://fa.bianp.net/teaching/2018/eecs227at/)
-	1. Good overview and visualization
+1. [[Gradient descent#^dg-momentum]]
+	1. Very closely related to VI.4
 2. [[October#^inductive-bias]]
 	1. argued that SGD converges to solutions with minimum norm, which leads to good generalization.
 3. [[November#UNDERSTANDING DEEP LEARNING REQUIRES RETHINKING GENERALIZATION]] #Optimization
+4. [A birds-eye view of optimization algorithms](https://fa.bianp.net/teaching/2018/eecs227at/)
+	1. Good overview and visualization
