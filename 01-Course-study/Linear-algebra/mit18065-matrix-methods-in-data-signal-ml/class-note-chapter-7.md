@@ -1,4 +1,9 @@
-## VII.1 Intro
-1. *Continuous piecewise linear* (CPL) functions
+## VII.1 The construction of Deep Neural Networks
+1. The initial weights $x_0$
+	1. initial variance $\sigma^2$ 
+	2. the number of hidden neurons
+2. *Continuous piecewise linear* (CPL) functions
 	1. Linear for simplicity, continuous to model an unknown but reasonable rule, piecewise to achieve nonlinearity
-	2. [[December#^spline4dl]]
+	2. Think of origami with flat (assuming ReLU) pieces go to infinity
+		1. $v_o$ (input) has $m$ components and $A_1v_0+b_1$ (hidden layer 1) has $N$ neurons. It's $N$ linear functions in dim-$m$ space.
+	3. [[December#^spline4dl]]
