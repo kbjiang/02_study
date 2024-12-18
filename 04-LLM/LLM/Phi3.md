@@ -14,3 +14,10 @@
 3. Talk by the author https://youtu.be/FThvfkXWqtE
 
 ## How does vision processor fit in
+
+
+# CLIP
+1. how does it load pretrained weights? I.e., `post_init()`
+2. the pooling layer and `BaseModelOutputWithPooling`
+3. tokenizer vs processor
+4. modelwithprojection == get_text_feature ??
