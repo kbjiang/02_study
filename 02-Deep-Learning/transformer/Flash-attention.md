@@ -16,7 +16,7 @@ Related:
 	2. Recomputation
 		1. do not save intermediate result; recompute during back-propagation
 
-# How FlashAttention Accelerates Generative AI Revolution
+# How Flash Attention Accelerates Generative AI Revolution
 Tags: #Transformers  #FlashAttention 
 Authors: Jia-bin Huang
 Paper link: 
@@ -35,6 +35,10 @@ Related:
 		3. Only when $x_N$, i.e., $i=N$, is calculated do we have one completed weighted value according to $q$.
 		4. ![[Pasted image 20241216215430.png|600]]
 	3. Here each tile can be multiple rows/cols. ![[flash-attention-jia-bin.mp4]]
-# References on GPU and its memory
-1. https://horace.io/brrr_intro.html
-2. https://www.youtube.com/watch?v=-2ebSQROew4
+
+# Reference
+1. Visualization of the HBM and SRAM
+	1. https://youtube.com/playlist?list=PLBWdTDczuFNrxnetcH-5CVLRP1u4Ua87m&si=fxUC4FEZPJRNbbgM
+2. on GPU and its memory
+	1. https://horace.io/brrr_intro.html
+	2. https://www.youtube.com/watch?v=-2ebSQROew4

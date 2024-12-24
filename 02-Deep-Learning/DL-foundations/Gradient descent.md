@@ -1,4 +1,4 @@
-## Multiple papers by Nathan Srebro
+# Multiple papers by Nathan Srebro
 Tags: #DL-fundation  #DL-generalization #SGD 
 Authors: Nathan Srebro et.al.
 Paper link: 
@@ -15,7 +15,7 @@ Related:
 2. Instead of number of parameter, we need better "complexity measure" to measure generalizability, i.e., norms.
 3. About how SGD is implicitly minimizing certain norms
 
-## Towards Understanding the Implicit Regularization Effect of SGD
+# Towards Understanding the Implicit Regularization Effect of SGD
 Tags: #DL-fundation  #DL-generalization #SGD 
 Authors: Pierfrancesco Beneventano
 Paper link: 
@@ -30,7 +30,7 @@ Related:
 3. without replacement, each batch no longer i.i.d., which is consequential
 
 
-## Why Momentum Really Works ^dg-momentum
+# Why Momentum Really Works ^dg-momentum
 Tags: #DL-fundation #SGD 
 Authors: Gabriel Goh
 Paper link: 
@@ -55,6 +55,23 @@ Related:
 		1. ![[Pasted image 20241210212005.png|400]]
 3. The visualization in *Example: Polynomial Regression* is also very good.
 
+
+# Newton's method
+Tags: #DL-fundation  #SGD #Newton-method
+Authors: 
+Paper link: 
+1. https://en.wikipedia.org/wiki/Newton%27s_method_in_optimization and figure within
+2. https://www.geeksforgeeks.org/optimization-in-neural-networks-and-newtons-method/
+Talk link: 
+Related: 
+### Why interesting
+### Ideas/conclusions
+1. With 2nd order info, $x_{k+1} = x_k - f'{x_k}/f''{x_k}$. *The geometric interpretation of Newton's method is that at each iteration, it amounts to the fitting of a parabola to the graph of $f(x)$ the trial value $x_k$, having the same slope and curvature as the graph at that point.*
+	1. This would be much faster than GD, as the local approximation is much more accurate; however 2nd order info is very expensive to obtain.
+	2. Red is Newton's method, green is GD.
+		1. ![[Pasted image 20241224144817.png|300]]
+2. Illustration of the method
+	1. ![[Pasted image 20241224144707.png|800]]
 
 ## References
 1. [[class-note-chapter-6#^GD]]
