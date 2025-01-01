@@ -1,5 +1,5 @@
-## **Learning Transferable Visual Models From Natural Language Supervision**
-Tags: #LMM
+# **Learning Transferable Visual Models From Natural Language Supervision**
+Tags: #LMM #CLIP
 Authors: 
 Talk link: 
 Paper link: 
