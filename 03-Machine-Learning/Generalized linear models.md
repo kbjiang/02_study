@@ -12,7 +12,7 @@
 		1. E.g., for logistic regression, the residual is either $0$ or $1$, then we use a binomial distribution.
 		2. E.g., for residuals that have comparable mean and variance, we use Poisson distribution ![[Pasted image 20250120180718.png|600]]
 	2. The estimator function $\hat{y}(x)$ models the expectation, the probability models tracks the residual $e = y - \hat{y}$.
-		1. for every point $x$, we have a distribution, could be i.i.d or not.
+		1. for every point $x$, we have a distribution; could be i.i.d (normal) or not (Poisson).
 4. MISC
 	1. Summary table ![[Pasted image 20250120163435.png|600]]
 	2. Ref: https://youtu.be/Obpz_Uvo2rQ?list=PLLTSM0eKjC2cYVUoex9WZpTEYyvw5buRc
@@ -23,3 +23,4 @@
 
 ## Reference
 1. Very good lectures on statistics: https://www.tilestats.com/
+2. Python Bayesian model-building interface https://bambinos.github.io/bambi/
