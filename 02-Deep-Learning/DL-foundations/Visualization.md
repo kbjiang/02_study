@@ -2,7 +2,6 @@
 2. https://youtu.be/-at7SLoVK_I 
 3. https://youtu.be/i94OvYb6noo?t=4247
 4. https://cs.stanford.edu/people/karpathy/convnetjs/demo/classify2d.html
-5. https://playground.tensorflow.org/
 6. [Watching Neural Networks Learn](https://www.youtube.com/@EmergentGarden)
 	1. A nice comparison between traditional NN and NN uses Fourier features, i.e., $sin(x), cos(x)$ instead of $x$.
 	2. The Fourier features are quite good at approximating *low-dimensional* functions.
@@ -10,6 +9,7 @@
 8. Visualize Matrix multiplication and Attention https://pytorch.org/blog/inside-the-matrix/
 
 
+###  [Neural Network playground](https://playground.tensorflow.org/)
 ### [Deep Learning Bootcamp: Phillip Isola](https://youtu.be/UEJqxSVtfY0)
 1. What is "deep learning":
 	1. *Neural nets*: A class of machine learning architectures that use stacks of *linear transformations* interleaved with *pointwise nonlinearities*
