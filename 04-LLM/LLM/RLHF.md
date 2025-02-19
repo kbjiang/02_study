@@ -28,3 +28,5 @@
 	1. He called the RM just a "vibe check" and "*1. The vibes could be misleading - this is not the actual reward (winning the game). This is a crappy proxy objective. But much worse, 2. You'd find that your RL optimization goes off rails as it quickly discovers board states that are adversarial examples to the Reward Model. Remember the RM is a massive neural net with billions of parameters imitating the vibe. There are board states are "out of distribution" to its training data, which are not actually good states, yet by chance they get a very high reward from the RM.*"
 	2. So the major reason is that RM as a reward is not good enough. Language is too open-ended comparing to games like Go. *"But how do you give an objective reward for summarizing an article? Or answering a slightly ambiguous question about some pip install issue? Or telling a joke? Or re-writing some Java code to Python?"*
 	3. I guess that's why DPO works, because RL is not really necessary for existing LLM alignment.
+6. Nice post on why RLHF is not True RL
+	1. https://www.linkedin.com/pulse/why-rlhf-other-rl-like-methods-dont-bring-true-rl-llmsand-atlas-wang-s1efc/
