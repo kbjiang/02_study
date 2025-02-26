@@ -26,3 +26,7 @@
 	2. Number of *nearly* perpendicular (superposed) vectors in a high dim space are exponential of space dimension.
 		1. Means MLP can hold way way more nearly orthogonal concepts than there are dimensions.
 		2. https://transformer-circuits.pub/2022/toy_model/index.html
+
+
+## Encoder-Decoder vs Decoder-only
+1. 2nd part of this [talk](https://youtu.be/3gb-ZkVRemQ) by Hyung Won Chung #UnderstandTransformers   
