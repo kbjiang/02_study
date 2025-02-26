@@ -20,8 +20,9 @@ Related:
 		2. knowledge in the tokens of the context window == working memory
 3. Models need tokens to think https://youtu.be/7xTGNNLPyMI?t=6416&si=9iWt94PqoNIajcFY
 	1. Good example of two *labels*. The left is worse coz all hangs on a *single* token `$3`, while the right has the calculations spread out, each step is easy enough. 
-	2. *Basically the model needs tokens/multiple passes of data/intermediate steps to think*. If ask for only the answer, the model will have to squeeze many steps in one pass of the data, which can be challenging.
-		1. ![[Pasted image 20250225232641.png|600]]
+	2. *Basically the model needs tokens/multiple forward passes/intermediate steps to think*. If ask for only the answer, the model will have to squeeze many steps in a single forward pass, which can be challenging.
+		1. tokens are like hints, leading the model to the right subspace
+		2. ![[Pasted image 20250225232641.png|600]]
 4. Very nice explanation on why we cannot predefine the learning paths for LLMs (by SFT/imitation) and RL is indispensable
 	1. Via RL, LLM overtime figures out the paths best suit itself
 5. Good resources
