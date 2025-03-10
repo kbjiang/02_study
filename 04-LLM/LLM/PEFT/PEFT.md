@@ -1,7 +1,5 @@
 1. looks like chronically we have *Adapator --> LoRA --> PEFT*
 2. Nice explanation covers all topics: https://youtu.be/YVU5wAA6Txo
-3. it's independent of int8.
-4. bitsandbytes
 
 ### Papers
 1. Adapter:
