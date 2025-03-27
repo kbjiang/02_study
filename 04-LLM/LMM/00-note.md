@@ -10,3 +10,6 @@ Related:
 1. Two methods for LMM training
 	1. the Unified Embedding Decoder Architecture (e.g., LLaVa)
 	2. the Cross-Modality Attention Architecture (no, replace text encoder with image encoder in seq2seq architecture)
+
+
+https://distill.pub/2021/multimodal-neurons/
