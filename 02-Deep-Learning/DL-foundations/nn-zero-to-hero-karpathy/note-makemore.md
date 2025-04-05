@@ -28,9 +28,12 @@
 	1. residual corrections; batch/layer/group normalizations; better optimizer like Adam
 	2. Just do `torch.randn(fin, fout)/sqrt(fin)` as a rule of thumb
 3. *Batch normalization*
-	1. It's across samples, thus has a shape of `(1, n_hidden)`. This is also why bias in a linear layer before batch norm layer become *USELESS*, coz for a single neuron it's the same for each sample and get cancelled out. See this [timestamp](https://youtu.be/P6sfmUTpUmc?t=3696)
-	2. It also has *gain* and *bias* parameter, which provides the freedom to learn about the batches' mean and std. Those two are *trainable*, as opposed to the running mean and std.
-	3. Input samples in a minibatch are now coupled through normalization, i.e., get different loss than when fed in one at a time. However, this is *not* necessarily undesirable. See this [timestamp](https://youtu.be/P6sfmUTpUmc?t=3014).
+	1. Nice summary at [timestamp](https://youtu.be/P6sfmUTpUmc?t=3802). 
+		1. BN layers are sprinkled *all over* the network to normalize the statistics of *activations* after some linear layer, for e.g., MLP or CONV.
+	2. It's across samples and independent for each neuron, thus has a shape of `(1, n_hidden)`. This is also why bias in a linear layer before batch norm layer become *USELESS*, coz for a single neuron it's the same for each sample and get cancelled out. See this [timestamp](https://youtu.be/P6sfmUTpUmc?t=3696)
+	3. It also has *gain* and *bias* parameter, which provides the freedom to learn about the batches' mean and std. Those two are *trainable*, as opposed to the running mean and std.
+	4. Input samples in a minibatch are now coupled through normalization, i.e., get different loss than when fed in one at a time. However, this is *not* necessarily undesirable. See this [timestamp](https://youtu.be/P6sfmUTpUmc?t=3014).
+		1. Accidentally the batch-dependent activation acts like a regularizer therefore stabilizes the training.
  4. Good sections starting "PyTorch-ifying the code" to the end.  Notebook [link](https://github.com/karpathy/nn-zero-to-hero/blob/master/lectures/makemore/makemore_part3_bn.ipynb)
 	 1. nice implementation to go over again.
 	 2. nice visualization as diagnostic tools
