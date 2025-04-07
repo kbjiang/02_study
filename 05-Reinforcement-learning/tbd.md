@@ -9,3 +9,8 @@
 		3. Detail starts at 5:43.
 	
 
+## Resources
+1. Reinforcement Learning: A Comprehensive Overview by Kevin Murphy. Author of probabilistic machine learning MIT
+	1. https://arxiv.org/pdf/2412.05265v2
+2. This lecture series. 深度强化学习 by Shusen Wang
+	1. https://youtu.be/jflq6vNcZyA?si=puViyPNlWnWYTWvD
