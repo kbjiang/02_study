@@ -16,3 +16,17 @@
 		1. equal
 		2. root dominant
 		3. leaf dominant
+
+### Module 3
+1. Quicksort
+	1. The power horse is the `partition` subroutine which 
+		1. move all elements $<p$ to the left of pivot $p$ and all $>p$ to its right; sets up for recursive calls
+		2. consequently, $p$ is at the right position now and is done
+	2. in-place
+	3. the analysis of running time of randomized Quicksort is beautiful. https://youtu.be/sToWtKSYlMw
+		1. Identify the target random variable
+		2. Decompose into smaller r.v., i.e., indicators
+		3. The spirit again is to divide a complicated problem into smaller, manageable parts
+### Module 4
+1. random is good proxy of best-case scenario
+		
