@@ -18,7 +18,8 @@ Topic: #coding #interview
 ### [TwoSums](https://leetcode.com/problems/two-sum/) 
 1. Good use case for `hashmap` i.e., `dictionary`. Gives `O(n)` complexity
 ### [3Sum](https://leetcode.com/problems/3sum/description/)
-1. Sort, fix 1st number than two pointer. See [solution](https://youtu.be/IIxoo93bmPQ)
+1. *Sort it!*
+2. Then fix 1st number than two pointer. See [solution](https://youtu.be/IIxoo93bmPQ)
 ### [Product of Array Except Self](https://leetcode.com/problems/product-of-array-except-self/)
 1. Good example: identify *repeated* computation. Do NOT have to calculate those partial products every time!
 	<details>
@@ -48,6 +49,14 @@ Topic: #coding #interview
 			1. Big idea is to AVOID back track on the main string (therefore $O(n)$), only move in the LPS ($O(m)$).
 		2. [Video](https://youtu.be/GTJr8OvyEVQ) for KMP in action
 		3. implementation?
+	3. When criteria (such as 'max/min') and grouped (such as 'subarray') are involved, try `sliding window`, i.e. `two pointers`.
+		1. see this [section](https://youtu.be/MK-NZ4hN7rs?t=1030)
 ### [Longest Substring without repeating characters](https://leetcode.com/problems/longest-substring-without-repeating-characters/)
 1. The big idea is to iterate and ignore anything goes before the last time current character repeated 
 2. Good [vid](https://youtu.be/pY2dYa1m2VM) with very nice use of hash. Use *two pointers*!
+
+### [Encode and Decode Strings](https://neetcode.io/problems/string-encode-and-decode)
+1. Key is to include string lengths in the encoded string.
+
+### 3. Search
+### [Binary search](https://leetcode.com/problems/binary-search/description/)
