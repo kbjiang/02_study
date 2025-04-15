@@ -48,3 +48,6 @@ Topic: #coding #interview
 			1. Big idea is to AVOID back track on the main string (therefore $O(n)$), only move in the LPS ($O(m)$).
 		2. [Video](https://youtu.be/GTJr8OvyEVQ) for KMP in action
 		3. implementation?
+### [Longest Substring without repeating characters](https://leetcode.com/problems/longest-substring-without-repeating-characters/)
+1. The big idea is to iterate and ignore anything goes before the last time current character repeated 
+2. Good [vid](https://youtu.be/pY2dYa1m2VM) with very nice use of hash. Use *two pointers*!
