@@ -58,5 +58,48 @@ Topic: #coding #interview
 ### [Encode and Decode Strings](https://neetcode.io/problems/string-encode-and-decode)
 1. Key is to include string lengths in the encoded string.
 
-### 3. Search
+## 3. Search
 ### [Binary search](https://leetcode.com/problems/binary-search/description/)
+1. Use indices for searching problem!
+	1. If the target is close to one end of array, the `mid` will first approach the target from one side then the other.
+2. pay attention to edge cases when close to solution
+3. needs `if arr[mid] == target` as the base case
+	1. this is not needed if we are changing the value itself, instead of indices. See [[coding interview#[Kth smallest element in a sorted matrix](https //leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/description/)]]
+
+### [Kth smallest element in a sorted matrix](https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/description/) using Binary search
+1. Needs to calculate the number of elements smaller than `mid`. 
+	1. See [Ref2](https://www.cnblogs.com/firecode7/p/16120445.html) for a good explanation; [Ref1](https://leetcode-solution-leetcode-pp.gitbook.io/leetcode-solution/medium/378.kth-smallest-element-in-a-sorted-matrix) for Python implementation
+2. Here we are changing the value itself `1` every step, e.g., `right = mid - 1`
+	1. `-1` is important otherwise infinite loop when `left==right`
+	2.  Do NOT need `if counts == k` as there could be multiple `mid` fit the bill
+	3. `right` will eventually ends up too small by 1, that's why we need `left` to pass `right` before return `left`.
+		1. As opposed to [Sqrt(x)](https://leetcode.com/problems/sqrtx/) where `right` is returned because we are looking for round down
+	4. See [Ref1](https://leetcode-solution-leetcode-pp.gitbook.io/leetcode-solution/medium/378.kth-smallest-element-in-a-sorted-matrix) for Python solution
+
+## 4. Matrix
+### [Set Matrix Zeroes](https://youtu.be/T41rL0L3Pnw)
+1. idea is to use 1st row and 1st column as indicator
+2. for $O(1)$ solution, the entry at $(0, 0)$ needs an extra memory because it cannot be the indicator for both 1st row and 1st column
+
+### [Spiral Matrix](https://leetcode.com/problems/spiral-matrix/description/)
+1. Very nice [solution](https://leetcode.com/problems/spiral-matrix/solutions/3502927/c-java-python-image-explanation-recursion-and-single-for-loop/) 
+	1. recursion on each edge, i.e., from $m \times n$ to $n \times (m-1)$
+	2. use `dr, dc` to control change of direction
+	3. starting point is $(0, -1)$
+
+### [Valid Sudoku](https://leetcode.com/problems/valid-sudoku/description/) (coding trick)
+1. Nice [solution](https://youtu.be/TjFXEUCMqI8) with use of `defaultdict(set)`, it's easier than regular `dict` coz it provides a default value for keys don't exist yet.
+
+## 5. Binary Search Trees
+### data structures
+1. `node`, `keye`, `root`, `child`, `depth` 
+2. Traversal 
+
+### [Diameter of Binary Tree](https://leetcode.com/problems/diameter-of-binary-tree/)
+1. This [time stamp]](https://youtu.be/K81C31ytOZE?t=281) shows how to deal with global/nonlocal variable
+2. This [video](https://youtu.be/81lu4qO9snY) has very good visualization of recursion
+
+### [Binary Tree Level Order Traversal](https://leetcode.com/problems/binary-tree-level-order-traversal/description/)
+1. BFS and queue
+	1. `while queue` is the condition to terminate loop when queue becomes empty
+2. Good [explanation](https://youtu.be/KFkjJ7pjWVw)
