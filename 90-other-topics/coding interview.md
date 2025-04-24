@@ -154,7 +154,7 @@ Topic: #coding #interview
 ### [98. Validate Binary Search Tree](https://leetcode.com/problems/validate-binary-search-tree/)
 1. Brutal force will take $O(n^2)$
 2. [Solution](https://youtu.be/s6ATEkipzow) uses boundaries from root and is $O(n)$.
-	1. to see how the boundaries work, just think the limits of `root.right` and `root.right.left`, the `root.val` naturally becomes the loweer limit of `root.right.left` 
+	1. to see how the boundaries work, just think the limits of `root.right` and `root.right.left`, the `root.val` naturally becomes the lower limit of `root.right.left` 
 
 
 ## - Graph
@@ -182,4 +182,122 @@ Topic: #coding #interview
 ### 133. [Clone Graph](https://leetcode.com/problems/clone-graph/)
 1. DFS and update values dynamically. [solution](https://youtu.be/mQeF6bN8hMk)
 
+### 417. [Pacific Atlantic Water Flow](https://leetcode.com/problems/pacific-atlantic-water-flow/description/) (understanding)
+1. [Solution](https://youtu.be/_ufr9Yz25lw) provided both DFS and BFS, but I prefer BFS which makes more sense to me. 
+	1. the DFS needs to start at specific rows/cols, the generic DFS does not work
+2. *The BFS*
+	1. starts with points on the boundaries, think of the ocean as super starting points
+	2. always have `visted` so that we do duplicate efforts 
+		1. and only when `pop` the element do we add it to `visited`!
+	3. at each level, only add legit `(next_r, next_c)` to `q`
+		1. Every node in `visited` will be valid. *This is like you can only explore connected next nodes.*
+		2. invalid cells may get added at later levels. 
+			1. E.g., `9` in `[[1,2,3,4],[12,13,14,5],[11,16,15,6],[10,9,8,7]]` will be ignored at step 1 but added at last step. This means `9` is not directly connected to `10` but can be reached via `5->6->7->8->9`.
+3. *The vanilla DFS* in this situation won't work
+	1. To avoid infinite loop, visited cell has to be skipped; however it might need update like in the example above.
+	2. E.g., ... ???
+
+### [Valid tree](https://neetcode.io/problems/valid-tree)
+1. For a graph to be a tree (undirected)
+	1. every node is connected, i.e., a tree has only one component and one can traverse the whole tree starting any node
+	2. no cycle: any two nodes have exactly one path
+2. For undirected tree, it's a good idea to keep both directions in the adjacency list
+3. Since we need to use `visited` to determine base case, the use of `prev` in `dfs(node, prev)` keeps track of where we came from
+	1. this enables us to start from any node
+	2. to start, use `dfs(node, -1)` since no node would have `-1`.
+4. `n == len(visited)` makes sure every node is connected
+5. Full code
+	```python
+	def is_valid_tree(n, edges):	
+		# get adjacency list	
+		adj = {i:[] for i in range(n)}
+		for i, j in edges:
+			adj[i].append(j)
+			adj[j].append(i)
+	
+		visited = set()
+		def dfs(node, prev):
+			if node in visited:  # cycle exists
+				return False
+	
+			visited.add(node)
+			for nei in adj[node]:
+				if nei == prev:  # since we cannot use `visited`
+					continue
+				if not dfs(nei, node):
+					return False
+			return True
+	
+		import random
+		root = random.choice(range(n))  # can start at any node
+		no_cycle = dfs(root, -1)  # -1 is outside of possible node value
+		all_connected = n == len(visited)  # if tree, should be able to traverse all nodes
+		return no_cycle and all_connected
+
+	# example: not valid tree, cycle of 1->2->3->1
+	n = 5
+	edges = [[0, 1], [1, 2], [2, 3], [1, 3], [1, 4]]	  
+	
+	```
+
 Tow-D Maze
+
+## - Hash table
+### Data structure
+
+### [380. Insert Delete GetRandom O(1)](https://leetcode.com/problems/insert-delete-getrandom-o1/)
+1. I did not understand the problem, see [solution](https://youtu.be/j4KwhBziOpg) for explanation
+	1. basically need to avoid any $O(n)$ ops such as `list(self.val_map)` which is required for `random.choice` for the `getRandom()`
+
+### [146 LRU Cache](https://leetcode.com/problems/lru-cache/description/)
+1. The pattern is `hash map` and `double linked list`. 
+	1. it's helpful to have `self.head` and `self.tail` as dummy nodes
+	2. they tend to initialize an empty list with `self.head.next, self.tail.prev = self.tail, self.head`
+
+## - Linked list
+### Data structure
+1. Think of `node` as pointing to the *entire linked list starts at `node`*, not just a single node.
+	1. E.g., [[#[206. Reverse Linked List](https //leetcode.com/problems/reverse-linked-list/)]] for a linked list `1->2->3->4`, the recursion is `reverse(1) = connect(1, reverse(2)) = connect(1, connect(2, reverse(3)))`, not `reverse(1) = connect(1, reverse(2, 3, 4))`
+	2. E.g., [21. Merge Two Sorted Lists](https://leetcode.com/problems/merge-two-sorted-lists/). When only `list1` is left non-empty, one  can just do `cur.next = list1` to connect the whole list
+2. Notice when *it's just pointing vs when it's changing* values!
+	1. [[#[21. Merge Two Sorted Lists](https //leetcode.com/problems/merge-two-sorted-lists/)]]
+
+### Techniques
+1. Dummy nodes before/after head/tail
+	1. E.g., [[#[21. Merge Two Sorted Lists](https //leetcode.com/problems/merge-two-sorted-lists/)]]
+2. two pointers
+	1. one is $k$ ahead the other
+	2. one is faster than the other
+### [21. Merge Two Sorted Lists](https://leetcode.com/problems/merge-two-sorted-lists/)
+1. all `ListNode()` are just *pointers*!
+	1. `cur` is used to iterate through the list; 
+		1. compare `cur = cur.next` and `cur.next = cur.next.next`. The former is just updating the pointer, *the latter changes the actual data* in memory.
+	2. `dummy` is useful when we want to return the whole list at the end.
+### [206. Reverse Linked List](https://leetcode.com/problems/reverse-linked-list/)
+1. use of two pointers `prev, curr`.
+	```python
+	    def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+	        prev, curr = None, head
+	        while curr:
+	            nxt = curr.next
+	            curr.next = prev
+	            prev = curr
+	            curr = nxt
+	        return prev
+	```
+	1. This actually changes the physical data and `head` will be affected! 
+2. for recursive, see my solution online
+
+### [143. Reorder List](https://leetcode.com/problems/reorder-list/)
+1. [Solution](https://youtu.be/S5bfdUTrKLM)
+	1. Reverse the 2nd half of the list *in place*. 
+
+
+## - Stack
+### Data Structure
+
+### [227 Basic Calculator II](https://leetcode.com/problems/basic-calculator-ii/)
+1. Nice [solution](https://www.youtube.com/watch?v=iua49ZFeptY&t=521s)
+	1. with details on how to *extract full numbers from string*. My online solution used `split()`.
+	2. Take high priority calculation on the fly. At the end, just need to take the sum of the stack.
+		1. E.g.,  `-num` is `-1*num` and do `stack.push(-num)` on the fly.
