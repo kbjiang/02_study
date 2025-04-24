@@ -301,3 +301,16 @@ Tow-D Maze
 	1. with details on how to *extract full numbers from string*. My online solution used `split()`.
 	2. Take high priority calculation on the fly. At the end, just need to take the sum of the stack.
 		1. E.g.,  `-num` is `-1*num` and do `stack.push(-num)` on the fly.
+
+## - Recursion
+### Data Structure
+1. backtracking
+	1. popular for 
+
+### [78. Subsets](https://leetcode.com/problems/subsets/)
+1. Nice [solution](https://youtu.be/REOH22Xwdkk) explaining the backtracking
+	1. subset is duplicated at every level $i$.
+### [17. Letter Combinations of a Phone Number](https://leetcode.com/problems/letter-combinations-of-a-phone-number/)
+1. I just wanted to show the solution (my online) where
+	1. the base case is at a maximum instead of a minimum
+	2. no `return` until base case
