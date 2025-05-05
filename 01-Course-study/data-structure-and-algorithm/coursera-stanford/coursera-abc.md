@@ -29,4 +29,7 @@
 		3. The spirit again is to divide a complicated problem into smaller, manageable parts
 ### Module 4
 1. random is good proxy of best-case scenario
+2. sorting vs selection
+3. Nice proof with 25-75 split
+	1. details blah blah; modeling it as coin flipping
 		

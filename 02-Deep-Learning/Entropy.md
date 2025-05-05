@@ -1,33 +1,23 @@
-### Information entropy
-1. The basic intuition behind information theory is that learning that an unlikely event has occurred is more informative than learning that a likely event has occurred.
-2. Quantification of the amount of information in things like *events, random variables, and distributions*.
-	1. for single event: $h(x) = -log(p(x))$. Here $p(x)$ determins the amount of info in this event.
-	2. for the distribution: $H(X) =\sum_x p(x)h(x)$, here $p(x)$ is for expectation.
-3. 
-
-### Cross entropy and KL divergence
-1. Differences:
-	1. "… the cross entropy is the average number of bits **needed** to encode data coming from a source with distribution p when we use model q …". In other words, $H(p, p)=H(p)$.
-		$$
-		H(p, q) = -\sum_x p(x)*log(q(x))
-	$$
-	2. "... the KL divergence is the average number of **extra** bits needed to encode the data, due to the fact that we used distribution q to encode the data instead of the true distribution p." That's why it's also called "relative entropy". In other words, $KL(p, p)=0$. 
-		$$
-		KL(p||q) = H(p, q) - H(p) = \sum_x p*log(\frac{p}{q})
-	$$
-2. Similarity:
-	1. The more different p and q are, the higher the value.
-	2. Does not matter which of p and q has more information, CE and KL are always non negative.
-	3. Neither is symmetrical. I.e., $H(p,q) != H(q, p)$. Easy to see from the definition equation.
-3. 
-
-### Cross entropy vs *log_loss* and *log-likelihood*:
+## The Key Equation Behind Probability
+1. Nice [video](https://youtu.be/KHVR587oW8I) with very good intuitions
+2. Entropy as average surprise
+	1. $h(s) = f(p_s)$ where $h$ is the *entropy or the measure of surprise* of the given state $s$, which should be a function of the probability $p_s$.
+		1. More rare more surprise, therefore one possibility is $h$ relates to  $1/p_s$ 
+		2. Probabilities multiply while surprises add, therefore the $log$
+		3. Put together: $H = \sum{p_s}log(1/p_s)$
+3. In reality we don't know $p_s$ but only our belief/model $q_s$. 
+	1. ![[Pasted image 20250505070603.png|600]]
+4. KL divergence
+	1. In $H(P, Q)$ there are two sources of surprises
+		1. Model $q_s$ is different from true distribution $p_s$
+		2. inherent uncertainty of $p_s$, i.e., entropy $H$
+	2. Therefore we need to exclude $H$ to show how different $q$ and $p$ are
+		1. $D_{KL} = \sum{p_s}log(1/q_s) - \sum{p_s}log(1/p_s) = \sum{p_s}log(p_s/q_s)$.
+## Cross entropy vs *log_loss* and *log-likelihood*:
 1. in softmax $p(k|x) = \text{exp}(z_k)/\sum \text{exp}(z_i)$, $z_i$ is called *logits* or *un-normalized log-probabilities*.
 2. "Any loss consisting of a negative log-likelihood is a cross-entropy between the empirical distribution defined by the training set and the probability distribution defined by model. For example, mean squared error is the cross-entropy between the empirical distribution and a Gaussian model"
-3. 
 
-
-### Refs:
+## Refs:
 1. https://machinelearningmastery.com/what-is-information-entropy/
 2. https://machinelearningmastery.com/cross-entropy-for-machine-learning/
 3. https://thegradient.pub/understanding-evaluation-metrics-for-language-models/
