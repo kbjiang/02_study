@@ -1,4 +1,4 @@
-## Divide and Conquer, Sorting and Searching, and Randomized Algorithms
+# Divide and Conquer, Sorting and Searching, and Randomized Algorithms
 ### Module 1
 1. Asymptotic notation in seven words: *suppress constant factors and lower-order terms*. 
 	1. constant factors: system dependent
@@ -33,3 +33,8 @@
 3. Nice proof with 25-75 split
 	1. details blah blah; modeling it as coin flipping
 		
+# Graph Search, Shortest Paths, and Data Structures
+## X. Graph search and connectivity (week 1)
+### Module 1
+1. think of graph as *sequences of decisions* take you from one state to another.
+	1. e.g., solving Sudoku
