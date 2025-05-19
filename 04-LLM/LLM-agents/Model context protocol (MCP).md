@@ -14,7 +14,13 @@
 			1. one server specific to one tool
 			2. provided by vendor of the tool
 ## How it works
-1. [MCP Deep Dive - 深入研究 MCP 運作原理、架構與元件理解](https://youtu.be/6aOw26BVy4M)
+1. ![[Pasted image 20250514162251.png|600]]
+2. ![[Pasted image 20250514162850.png|600]]
+3. local transport ![[Pasted image 20250514164804.png|600]]
+4. The use of *mcp inspector* was good
+	1. https://github.com/modelcontextprotocol/inspector
+	2. to inspect the mcp server
+5. [MCP Deep Dive - 深入研究 MCP 運作原理、架構與元件理解](https://youtu.be/6aOw26BVy4M)
 	1. Good deep dive on components/mechanism; do not fully understand yet
 
 ## Hands-on

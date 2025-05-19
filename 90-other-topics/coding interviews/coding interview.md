@@ -69,9 +69,11 @@ Topic: #coding #interview
 
 ## - Sorting and Search
 ### [Binary search](https://leetcode.com/problems/binary-search/description/)
-1. Use indices for searching problem!
+1. Use indices/pointers for searching problem!
 	1. If the target is close to one end of array, the `mid` will first approach the target from one side then the other.
 2. pay attention to edge cases when close to solution
+	1. the mid points and the end condition `l < r` or `l <= r` or `l < r-1`
+	2. return `l` or `r`?
 3. needs `if arr[mid] == target` as the base case
 	1. this is not needed if we are changing the value itself, instead of indices. See [[coding interview#[Kth smallest element in a sorted matrix](https //leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/description/)]]
 
@@ -85,6 +87,8 @@ Topic: #coding #interview
 		1. As opposed to [Sqrt(x)](https://leetcode.com/problems/sqrtx/) where `right` is returned because we are looking for round down
 	4. See [Ref1](https://leetcode-solution-leetcode-pp.gitbook.io/leetcode-solution/medium/378.kth-smallest-element-in-a-sorted-matrix) for Python solution
 
+### [26. Remove Duplicates from Sorted Array](https://leetcode.com/problems/remove-duplicates-from-sorted-array/)
+1. Use left pointer $l$ to make sure `a[:l]` are the unique elements ran into so far. This is crucial for in-place.
 ## - Matrix
 ### [Set Matrix Zeroes](https://youtu.be/T41rL0L3Pnw)
 1. idea is to use 1st row and 1st column as indicator
@@ -296,6 +300,9 @@ Tow-D Maze
 ## - Stack
 ### Data Structure
 
+### [20. Valid Parentheses](https://leetcode.com/problems/valid-parentheses/)
+### [739. Daily Temperatures](https://leetcode.com/problems/daily-temperatures/)
+1. See my solution online
 ### [227 Basic Calculator II](https://leetcode.com/problems/basic-calculator-ii/)
 1. Nice [solution](https://www.youtube.com/watch?v=iua49ZFeptY&t=521s)
 	1. with details on how to *extract full numbers from string*. My online solution used `split()`.
@@ -315,7 +322,12 @@ Tow-D Maze
 	1. the base case is at a maximum instead of a minimum
 	2. no `return` until base case
 
-
+## - Heap
+### [23. Merge k Sorted Lists](https://leetcode.com/problems/merge-k-sorted-lists/)
+1. Each step use a heap to find the min pointer and insert one new pointer, both `log(k)` time.
+2. [solution](https://youtu.be/RyrVWP76lVo)
+	1. the tuple of `(node.val, i, node)` where `i` is the ith list; in case of same `node.val` of nodes
+	2. use `res` and `cur` where `cur` is to append node to `res`; I keep forgetting to do so
 
 ## References
 1. https://www.techinterviewhandbook.org/
