@@ -127,9 +127,17 @@ Topic: #coding #interview
 2. For level wise question, use `queue`.
 3. Binary Tree vs Binary Search Tree
 4. A lot of recursive calls
+	1. Return values
+		1. Top Down: base case return `None`. E.g., `inorder traversal` of trees; E.g., backtracking
+		2. Bottom up: need value from subproblem, so return cannot be null.
 	2. usually use `if not root`, i.e., None node, as base case
 	3. usually something like `f(root.val) & g(root.left) & g(root.right)` where `f` is the regular operation and $g$ is the recursive call
 
+### [124. Binary Tree Maximum Path Sum](https://leetcode.com/problems/binary-tree-maximum-path-sum/)
+1. Nice explanation in [tutorial](https://youtu.be/5jz66VkGMCY?list=PLV5qT67glKSErHD66rKTfqerMYz9OaTOs&t=1003)
+	1. The recursion can ONLY have either left or right to avoid double visit of root. E.g., 3->15->5->15->20 in figure below
+	2. To include contribution from both ends, at each step do `cur_sum = recurse(root.left) + recurse(root.right) + root.val`
+	3. ![[Pasted image 20250519110557.png|800]]
 ### [Diameter of Binary Tree](https://leetcode.com/problems/diameter-of-binary-tree/)
 1. This [time stamp](https://youtu.be/K81C31ytOZE?t=281) shows how to deal with global/nonlocal variable, i.e., use `self.res`
 2. This [video](https://youtu.be/81lu4qO9snY) has very good visualization of recursion
@@ -141,7 +149,7 @@ Topic: #coding #interview
 		1. `queue` is 1st in 1st out; add node's children before removing it
 		2. The space complexity is `O(n)` coz last level could be `n/2`
 2. Good [explanation](https://youtu.be/KFkjJ7pjWVw) and Python [implementation](https://youtu.be/6ZnyEApgFYg?t=393)
-### [Lowest Common Ancestor of a Binary Tree](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/)
+### [236. Lowest Common Ancestor of a Binary Tree](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/)
 1. [Solution](https://www.jiakaobo.com/leetcode/236.%20Lowest%20Common%20Ancestor%20of%20a%20Binary%20Tree.html)
 2. The challenge for me is to know *what to return* at each recursion
 	1. Idea is to return upwards till we find a root with both `left` and `right` not null.
@@ -179,27 +187,26 @@ Topic: #coding #interview
 	3. BFS tells us the *shortest* path from node $a$ to node $b$; DFS tells us if a path from $a$ to $b$ even exists
 	4. BFS iterative, DFS recursive
 
-### 542. [01 Matrix](https://leetcode.com/problems/01-matrix/)
+### [542. 01 Matrix](https://leetcode.com/problems/01-matrix/)
 1. first find *all possible starting points*, then run BFS. See [solution](https://youtu.be/YTnYte6U61w)
 	1. This can be thought of as all starting points are 1 step from a single super starting point.
 
-### 133. [Clone Graph](https://leetcode.com/problems/clone-graph/)
+### [133. Clone Graph](https://leetcode.com/problems/clone-graph/) (understanding)
 1. DFS and update values dynamically. [solution](https://youtu.be/mQeF6bN8hMk)
 
-### 417. [Pacific Atlantic Water Flow](https://leetcode.com/problems/pacific-atlantic-water-flow/description/) (understanding)
+### [417. Pacific Atlantic Water Flow](https://leetcode.com/problems/pacific-atlantic-water-flow/description/) (understanding)
 1. [Solution](https://youtu.be/_ufr9Yz25lw) provided both DFS and BFS, but I prefer BFS which makes more sense to me. 
 	1. the DFS needs to start at specific rows/cols, the generic DFS does not work
+	2. *The vanilla DFS* in this situation won't work
+		1. Coz you may end up visiting a location over and over, infinite loop, before it's registered. See example in BFS below.
 2. *The BFS*
 	1. starts with points on the boundaries, think of the ocean as super starting points
-	2. always have `visted` so that we do duplicate efforts 
+	2. always have `visted` so that we do not duplicate efforts 
 		1. and only when `pop` the element do we add it to `visited`!
 	3. at each level, only add legit `(next_r, next_c)` to `q`
 		1. Every node in `visited` will be valid. *This is like you can only explore connected next nodes.*
 		2. invalid cells may get added at later levels. 
 			1. E.g., `9` in `[[1,2,3,4],[12,13,14,5],[11,16,15,6],[10,9,8,7]]` will be ignored at step 1 but added at last step. This means `9` is not directly connected to `10` but can be reached via `5->6->7->8->9`.
-3. *The vanilla DFS* in this situation won't work
-	1. To avoid infinite loop, visited cell has to be skipped; however it might need update like in the example above.
-	2. E.g., ... ???
 
 ### [Valid tree](https://neetcode.io/problems/valid-tree)
 1. For a graph to be a tree (undirected)
@@ -249,6 +256,8 @@ Tow-D Maze
 ## - Hash table
 ### Data structure
 
+### [138. Copy List with Random Pointer](https://leetcode.com/problems/copy-list-with-random-pointer/)
+1. Cute problem
 ### [380. Insert Delete GetRandom O(1)](https://leetcode.com/problems/insert-delete-getrandom-o1/)
 1. I did not understand the problem, see [solution](https://youtu.be/j4KwhBziOpg) for explanation
 	1. basically need to avoid any $O(n)$ ops such as `list(self.val_map)` which is required for `random.choice` for the `getRandom()`
@@ -277,6 +286,7 @@ Tow-D Maze
 	1. `cur` is used to iterate through the list; 
 		1. compare `cur = cur.next` and `cur.next = cur.next.next`. The former is just updating the pointer, *the latter changes the actual data* in memory.
 	2. `dummy` is useful when we want to return the whole list at the end.
+
 ### [206. Reverse Linked List](https://leetcode.com/problems/reverse-linked-list/)
 1. use of two pointers `prev, curr`.
 	```python
@@ -312,7 +322,7 @@ Tow-D Maze
 ## - Recursion
 ### Data Structure
 1. backtracking
-	1. popular for 
+	1. base case return `None`. E.g., `inorder traversal` of trees.
 
 ### [78. Subsets](https://leetcode.com/problems/subsets/)
 1. Nice [solution](https://youtu.be/REOH22Xwdkk) explaining the backtracking
