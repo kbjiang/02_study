@@ -7,9 +7,7 @@
 	2. The Fourier features are quite good at approximating *low-dimensional* functions.
 7. universal approximation theorem https://youtu.be/Ln8pV1AXAgQ
 8. Visualize Matrix multiplication and Attention https://pytorch.org/blog/inside-the-matrix/
-
-
-###  [Neural Network playground](https://playground.tensorflow.org/)
+9. Great resource [Neural Network playground](https://playground.tensorflow.org/)
 ### [Deep Learning Bootcamp: Phillip Isola](https://youtu.be/UEJqxSVtfY0)
 1. What is "deep learning":
 	1. *Neural nets*: A class of machine learning architectures that use stacks of *linear transformations* interleaved with *pointwise nonlinearities*
@@ -20,7 +18,7 @@
 3. The `linear` and `pointwise nonlinear (e.g., Relu)` transformation visualized
 	1. Linear mapping does affine transformation (right top), while `ReLU` clamps data to the positive quadrant ![[Pasted image 20240319085849.png|800]]
 	2. A nonlinear classification visualization. See how after training the red and blue dots are separated into their own corner 
-		1. ![[visualize-nonlinear-classification.mp4]]
+		1. Every level is two dimensional $\equiv$ every layer has two neurons ![[visualize-nonlinear-classification.mp4]]
 4. Universal approximation with NN
 	1. functions as sum of bumps
 		1. ![[Pasted image 20240320061907.png|800]]

@@ -42,6 +42,12 @@ Topic: #coding #interview
 1. Example of *Kadane's* algorithm. Here is an [explanation](https://youtu.be/86CQq3pKSUw) on maximum sum
 2. Idea is 
 	1. to see the impact of existing sum/product on current element, i.e., compare `current_sum` with `nums[i]` and reset if negative impact from `current_sum`
+
+### Sliding window (important technique)
+1. Interview: you are given an array of 1's and 0's. You are also given a number k. What is the length of the longest continuous subsequence of 1's you can pick from the given array? You can substitute at most k 0's with 1's. Write a script in python.
+	1. Example: input [1, 0, 1, 0, 0, 1, 0, 0, 1, 1, 1, 1, 1], k=2;	output: 8
+	2. The mental picture is looking for a sliding window with no more than k zeros.
+	
 ## - String
 ### data structures
 1. Tries: 
@@ -323,10 +329,54 @@ Tow-D Maze
 ### Data Structure
 1. backtracking
 	1. base case return `None`. E.g., `inorder traversal` of trees.
+2. See [小小福讲算法](https://youtu.be/AqGagBmFXgw) for three types of recursion
+	1. pay attention to the *return of base cases*
 
-### [78. Subsets](https://leetcode.com/problems/subsets/)
-1. Nice [solution](https://youtu.be/REOH22Xwdkk) explaining the backtracking
-	1. subset is duplicated at every level $i$.
+### All solutions of a maze (try both BFS and DFS)
+1. This is DFS, the backtracking is explicit
+	1. BFS is good to find shortest solution, but not all of them
+2. The `return` without any value means go back to previous calling point; 
+```python
+def find_all_paths(maze, start, end, path, solutions, visited):
+    x, y = start
+    if not (0 <= x < len(maze) and 0 <= y < len(maze[0])):
+        return
+    if maze[x][y] == 1 or visited[x][y]:
+        return
+        
+    # Move forward: add to path and mark as visited
+    path.append((x, y))
+    visited[x][y] = True
+
+    if (x, y) == end:
+        solutions.append(list(path))  # Make a copy of the current path
+    else:
+        for dx, dy in [(-1,0), (1,0), (0,-1), (0,1)]:
+            find_all_paths(maze, (x+dx, y+dy), end, path, solutions, visited)
+    
+    # Backtrack: remove from path and unmark as visited
+    path.pop()
+    visited[x][y] = False
+
+# Example usage:
+maze = [
+    [0, 1, 0, 0],
+    [0, 0, 0, 1],
+    [1, 0, 1, 0],
+    [0, 0, 0, 0]
+]
+start = (0, 0)
+end = (3, 3)
+solutions = find_all_paths(maze, start, end)
+print(f"Found {len(solutions)} solutions.")
+for path in solutions:
+    print(path)
+```
+### [78. Subsets](https://leetcode.com/problems/subsets/) (important)
+1. In this [solution](https://youtu.be/z4uA-09uX4w?list=PLV5qT67glKSErHD66rKTfqerMYz9OaTOs&t=780)
+	1. I like the `subset.pop()` for explicit backtracking
+	2. Either subset is duplicated at every level, or `subset.copy()` in base case. This is because `subset` is a pointer, all `subset` in `res` will point to the same thing if no `.copy()`.
+	3. 
 ### [17. Letter Combinations of a Phone Number](https://leetcode.com/problems/letter-combinations-of-a-phone-number/)
 1. I just wanted to show the solution (my online) where
 	1. the base case is at a maximum instead of a minimum
