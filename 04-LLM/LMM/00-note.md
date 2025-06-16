@@ -1,4 +1,4 @@
-## **Understanding Multimodal LLMs**
+## Understanding Multimodal LLMs
 Tags: #LMM
 Authors: Sebastian Raschka
 Talk link: 
