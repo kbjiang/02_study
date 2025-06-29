@@ -38,3 +38,6 @@
 ### Module 1
 1. think of graph as *sequences of decisions* take you from one state to another.
 	1. e.g., solving Sudoku
+2. P42. `DFS` can be done iteratively as well. 
+	1. Just need to replace `queue` in `BFS` (P27) with `stack`. In recursive version, the *stacking* is done inexplicitly.
+	2. The answer to footnote 21 on P42 should be yes, given `s` is marked as unexplored to begin with.
