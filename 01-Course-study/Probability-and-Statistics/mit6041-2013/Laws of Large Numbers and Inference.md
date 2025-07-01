@@ -22,14 +22,17 @@ Topic: #Probability #LawsOfLargeNumber
 5. The example of Y_n = {0, n} at lec. vid. 23:00
 6. intuition leads to CLT around 40:30
 
-### Lecture 20: Central Limit Theorem
-1. *Only* requires mean and variance!
-2. For $X$ that are *discrete distribution*, the CDF always converges to normal, but PMF may differ between different $X$ dist.
+### Lecture 20: Central Limit Theorem #CLT
+1. First read [[statistics#Sampling Distribution of a Statistic CLT]] 
+	1. to grasp the concept of *sample statistic* and *sampling distribution*.
+	2. to build the intuition of CLT
+2. *Only* requires mean and variance!
+3. For $X$ that are *discrete distribution*, the CDF always converges to normal, but PMF may differ between different $X$ dist.
 	1. For Binomial, PMF can be approximated with "half" approximation
 ## My comments
 1. Chebyshev is for any R.V., while Weak LLN is specific for sample mean R.V.
-2. Very nice 3B1B videos on this topic, with a lot of intuition
+2. Other intuitions in 3B1B videos
 	1. This [time stamp](https://youtu.be/zeJD6dqJ5lo?t=1373) is an lopsided example where sample size is too small to apply CLT. 
-	3. This [time stamp](https://youtu.be/IaSGqQa5O-M?t=658) is more on convolution and shows the sum of R.V.s are like moving average which gets more smooth with more R.V.s.
+	2. This [time stamp](https://youtu.be/IaSGqQa5O-M?t=658) is more on convolution and shows the sum of R.V.s are like moving average which gets more smooth with more R.V.s.
 ## Interesting/Challenging problems and tricks
 1. 
