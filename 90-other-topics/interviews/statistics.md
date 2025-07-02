@@ -36,6 +36,8 @@
 ### The Bootstrap
 1. To mimic multiple samples. See  [[#^whybootstrap]].
 	1. P63, python snippet. `sample = resample(loans_income)` is same size as `loans_income` but could have duplicates, i.e., some row in `loans_income` was drawn multiple times
+2. *Bootstrap* vs *Permutation*. See [[#^resampling]]
+	1. see...
 ### Student's t-Distribution
 1. See [[Bertsekas-Introduction-to-probability-2nd.pdf]] P471
 
@@ -46,6 +48,8 @@
 2. Usually used to assess the output from A/B test
 3. *Null hypothesis*
 	1. The difference could be by change. Our hope is to prove this is not true.
+### *Resampling*^resampling
+1. Both *bootstrap* and *permutation*
 
 
 https://youtu.be/JQc3yx0-Q9E
