@@ -52,7 +52,7 @@ Tags: #Tokenization #BPE
 	5. sentencepiece (a library)
 		1. unlike `tiktoken`, which only does inference, `sentencepiece` does training as well
 	6. Misc
-		1. Modern tokenization rids of preprocessing/normalizations because they are not necessary, nor are concepts like "sentence" or "paragraph". Just treat the text as a large bytes string!
+		1. Modern tokenization rids of preprocessing/normalizations because they *restrict the space of model-able strings*, nor are concepts like "sentence" or "paragraph". Just treat the text as a large bytes string!
 		2. [Quirks of LLM tokenization](https://www.youtube.com/watch?v=zduSFxRajkE&t=6701s). It's worth rewatching
 			1. The `.DefaultCellStyle` is a single token in the vocab. It has difficulty with "how many 'l's are there in this word."
 			2. Very good explanation on `SolidGoldMagikarp` towards the end of this session. The discrepancy between training datasets used for tokenization and LLM itself leads to tokens whose embedding never got updated during model training, which would throw the model off big time during inference.
