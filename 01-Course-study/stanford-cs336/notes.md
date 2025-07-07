@@ -1,5 +1,5 @@
 # Lecture 1: Overview and Tokenization
-### What can we learn in this class that transfers to frontier models?
+## What can we learn in this class that transfers to frontier models?
 - There are three types of knowledge:
 	- **Mechanics**: how things work (what a Transformer is, how model parallelism leverages GPUs)
 	- **Mindset**: squeezing the most out of the hardware, taking scale seriously (scaling laws)
@@ -29,17 +29,37 @@
 	3. unlike char/word tokenizer with predefined vocab, here vocab is fluid and requires training
 
 # Lecture 2: Pytorch, Resource Accounting
-### Memory accounting
+## Overview of this lecture
+- We will discuss all the **primitives** needed to train a model.
+- We will go bottom-up from tensors to models to optimizers to the training loop.
+- We will pay close attention to efficiency (use of **resources**).
+## Memory accounting
 1. When to `float32` or `bfloat16`
 	1. Former for accumulating things like optimizer, latter for transitory things
-### Compute accounting
+## Compute accounting
 1. Pytorch tensors are just *pointers* into allocated memory
 2. tensor storage
 	1. ![[Pasted image 20250705162749.png|600]]
-3. tensor slicing
-	1. no duplicated storage. Views are free, copying takes both memory and compute
-	2. `assert same_storage(x, y)`
-	3. non-contiguous
+3. [tensor view](https://docs.pytorch.org/docs/stable/tensor_view.html#tensor-view-doc)
+	1. Views are free; no duplicated storage.
+	2. Taking a view of contiguous tensor could potentially produce a non-contiguous tensor.
+		```
+		Original tensor:
+		tensor([[0, 1], [2, 3]])
+		Strides: (2, 1)   # t.stride()
+		Storage: [0, 1, 2, 3]  # list(t.storage())
+		Is contiguous: True  # t.is_contiguous()
+		
+		Transposed view:
+		tensor([[0, 2], [1, 3]])
+		Strides: (1, 2)
+		Storage: [0, 1, 2, 3]
+		Is contiguous: False
+		
+		Memory layout explanation:
+		Original: stride=(2,1) means only 1 step to immediate next element in memory, e.g., from '0' to '1'
+		Transposed: stride=(1,2) means 2 steps from '0' to '1', no longer contiguous
+		```
 4. `tensor_matmul`
 5. `einops`
 	1. name each dimension
