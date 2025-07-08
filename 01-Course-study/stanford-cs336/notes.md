@@ -34,15 +34,12 @@
 - We will go bottom-up from tensors to models to optimizers to the training loop.
 - We will pay close attention to efficiency (use of **resources**).
 ## Memory accounting
-1. When to `float32` or `bfloat16`
-	1. Former for accumulating things like optimizer, latter for transitory things
-## Compute accounting
 1. Pytorch tensors are just *pointers* into allocated memory
 2. tensor storage
 	1. ![[Pasted image 20250705162749.png|600]]
 3. [tensor view](https://docs.pytorch.org/docs/stable/tensor_view.html#tensor-view-doc)
 	1. Views are free; no duplicated storage.
-	2. Taking a view of contiguous tensor could potentially produce a non-contiguous tensor.
+	2. Taking a view of *contiguous* tensor could potentially produce a non-contiguous tensor.
 		```
 		Original tensor:
 		tensor([[0, 1], [2, 3]])
@@ -60,14 +57,24 @@
 		Original: stride=(2,1) means only 1 step to immediate next element in memory, e.g., from '0' to '1'
 		Transposed: stride=(1,2) means 2 steps from '0' to '1', no longer contiguous
 		```
-4. `tensor_matmul`
-5. `einops`
-	1. name each dimension
-6. floating-point operation (FLOP) is a basic operation like addition or multiplication 
-	1. not `FLOP/s`
-	2. `mat_mul` dominates the cost; `O(n^3)` 
-	3. MFU measures how good we are squeezing the hardware
-7. total FLOPs 
+4. `float32`, `float16`, `bfloat16`
+## Compute accounting
+### tensor_operations_flops
+1. floating-point operation (FLOP) is a basic operation like addition or multiplication 
+	1. not `FLOP/s`: floating-point operations per second (also written as FLOPS), which is used to measure the speed of hardware.
+2. Matrix multiplication `mat_mul`
+	1. In general, no other operation that you'd encounter in deep learning is as expensive as matrix multiplication for large enough matrices.
+	2. Interpretation
+		1. B is the number of data points; (D K) is the number of parameters 
+		2. FLOPs for forward pass is ==2 (# tokens) (# parameters)==; 2 is because of both multiplication and addition.
+3. Model FLOPs utilization (MFU)
+	1. (actual FLOP/s) / (promised FLOP/s); measures how good we are squeezing the hardware
+	2. depends on hardware; $<0.5$ is considered bad
+### gradients_flops
+1. FLOPs in backward pass
+
+
+2. total FLOPs 
 	1. Forward pass: 2 (# data points) (# parameters) FLOPS
 	2. Backward pass: 4 (# data points) (# parameters) FLOPS
 	3. 6 in total; what about `activations`, `optimizers`?

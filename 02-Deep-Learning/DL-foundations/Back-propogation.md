@@ -2,7 +2,7 @@
 
 1. Autograd explained (A helpful [Post](https://towardsdatascience.com/pytorch-autograd-understanding-the-heart-of-pytorchs-magic-2686cd94ec95#:~:text=is%20not%20needed.-,Backward()%20function,gradients%20are%20then%20stored%20in%20.))
 	1. [PyTorch Autograd Explained - In-depth Tutorial](https://www.youtube.com/watch?v=MswxJw-8PvE): 'explain how the PyTorch autograd system works by going through some examples and visualize the graphs with diagrams'
-	2. A nice [Doc](https://ml-cheatsheet.readthedocs.io/en/latest/backpropagation.html) on memoization.
+	2. A nice [Doc](https://ml-cheatsheet.readthedocs.io/en/latest/backpropagation.html) on memorization.
 		1. 'The term *layer error* refers to the derivative of cost with respect to a layer’s *input*. '
 		2. Nice derivations.  *H* is activation, *Z* is input, *W* is weights. Notice which the derivative is w.r.t.
      - <img src="https://i.loli.net/2021/03/23/Ty2edFA6WrhH8kC.png" alt="image-20210322185316458" style="zoom:50%;" />
