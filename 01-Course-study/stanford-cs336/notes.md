@@ -33,7 +33,7 @@
 - We will discuss all the **primitives** needed to train a model.
 - We will go bottom-up from tensors to models to optimizers to the training loop.
 - We will pay close attention to efficiency (use of **resources**).
-## Memory accounting
+## Tensor basic, model basic...
 1. Pytorch tensors are just *pointers* into allocated memory
 2. tensor storage
 	1. ![[Pasted image 20250705162749.png|600]]
@@ -57,9 +57,19 @@
 		Original: stride=(2,1) means only 1 step to immediate next element in memory, e.g., from '0' to '1'
 		Transposed: stride=(1,2) means 2 steps from '0' to '1', no longer contiguous
 		```
-4. `float32`, `float16`, `bfloat16`
+## Memory accounting
+1. `float32`, `float16`, `bfloat16`
+2. For the `Cruncher` example:
+	1. Parameters: num_parameters = (D * D * num_layers) + D 
+	2. Activations: num_activations = B * D * num_layers
+	3. Gradients: num_gradients = num_parameters 
+	4. Optimizer states: num_optimizer_states = num_parameters 
+	5. total_memory (float32):  4 * (num_parameters + num_activations + num_gradients + num_optimizer_states)
+3. What is optimizer state?
+	1. it contains all info for *resuming model training*, including learning rate, momentum, model weights etc.
+	2. `optimizer.state` vs `optimizer.params_group`?
 ## Compute accounting
-### tensor_operations_flops
+### tensor_operations_FLOPs
 1. floating-point operation (FLOP) is a basic operation like addition or multiplication 
 	1. not `FLOP/s`: floating-point operations per second (also written as FLOPS), which is used to measure the speed of hardware.
 2. Matrix multiplication `mat_mul`
@@ -70,11 +80,15 @@
 3. Model FLOPs utilization (MFU)
 	1. (actual FLOP/s) / (promised FLOP/s); measures how good we are squeezing the hardware
 	2. depends on hardware; $<0.5$ is considered bad
-### gradients_flops
+### gradients_FLOPs
 1. FLOPs in backward pass
-
-
-2. total FLOPs 
-	1. Forward pass: 2 (# data points) (# parameters) FLOPS
-	2. Backward pass: 4 (# data points) (# parameters) FLOPS
-	3. 6 in total; what about `activations`, `optimizers`?
+	1. ==(2+2) (# tokens) (# parameters)==
+		1. (2+2): one for activation  derivatives $h.\text{grad}$, the other for weights derivatives $w.\text{grad}$ 
+		2. Doubles forward pass:  $f=WX$ is one mat mul; $\partial{f}/\partial{W}$ and $\partial{f}/\partial{X}$ are two mat mul.
+	2. in lecture example
+		1. set batch size $B=1$ will recover standard backpropagation 
+		2. all activation are just identity function, i.e., $\sigma(x)=x$ for all $h$.
+### total FLOPs 
+1. Forward pass: 2 (# data points) (# parameters) FLOPS
+2. Backward pass: 4 (# data points) (# parameters) FLOPS
+3. 6 in total

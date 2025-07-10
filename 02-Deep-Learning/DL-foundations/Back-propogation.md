@@ -1,7 +1,10 @@
 ## Backward()
 
 1. Michael Nelson
-	1. combine backpropagation with a learning algorithm such as stochastic gradient descent
+	1. Notation $w_{jk}^{l+1}$: the weight connects $j$th and $k$th neuron of $(l+1)$th and $l$th layer, respectively.
+		1. in backpropagation direction, it makes sense to have $j$ before $k$ in the subscript.
+	2. motivation of treating $\delta={dC}/{dz}$ as the error
+	3. Derivation of four equations
 2. Autograd explained (A helpful [Post](https://towardsdatascience.com/pytorch-autograd-understanding-the-heart-of-pytorchs-magic-2686cd94ec95#:~:text=is%20not%20needed.-,Backward()%20function,gradients%20are%20then%20stored%20in%20.))
 	1. [PyTorch Autograd Explained - In-depth Tutorial](https://www.youtube.com/watch?v=MswxJw-8PvE): 'explain how the PyTorch autograd system works by going through some examples and visualize the graphs with diagrams'
 	2. A nice [Doc](https://ml-cheatsheet.readthedocs.io/en/latest/backpropagation.html) on memorization.
