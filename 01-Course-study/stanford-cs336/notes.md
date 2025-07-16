@@ -58,14 +58,20 @@
 		Transposed: stride=(1,2) means 2 steps from '0' to '1', no longer contiguous
 		```
 ## Memory accounting
-1. `float32`, `float16`, `bfloat16`
-2. For the `Cruncher` example:
+tags: #memory #gpu
+1. Precision `float32`, `bfloat16`
+	1. depends on layer. E.g., *QKV* can be half precision
+	2. depends on phase. E.g., quantization at inference time
+2. For the `Cruncher` example memory breakdown
 	1. Parameters: num_parameters = (D * D * num_layers) + D 
 	2. Activations: num_activations = B * D * num_layers
+		1. need for calculating gradients
 	3. Gradients: num_gradients = num_parameters 
 	4. Optimizer states: num_optimizer_states = num_parameters 
 	5. total_memory (float32):  4 * (num_parameters + num_activations + num_gradients + num_optimizer_states)
-3. What is optimizer state?
+3. For Transformers memory breakdown, see [[02_study/02-Deep-Learning/GPU#^gpt2mem|GPU]]
+	1. Shows memory usage at different phase of model training, i.e., *steady* vs *peak*.
+4. What is optimizer state?
 	1. it contains all info for *resuming model training*, including learning rate, momentum, model weights etc.
 	2. `optimizer.state` vs `optimizer.params_group`?
 ## Compute accounting
@@ -92,3 +98,6 @@
 1. Forward pass: 2 (# data points) (# parameters) FLOPS
 2. Backward pass: 4 (# data points) (# parameters) FLOPS
 3. 6 in total
+
+## References
+1. See [[02_study/02-Deep-Learning/GPU|GPU]] for more on GPU and its memory usage.

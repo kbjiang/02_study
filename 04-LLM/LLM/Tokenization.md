@@ -141,4 +141,8 @@ b"\x80".decode("utf-8", errors="replace")
 - Continuation bytes cannot appear alone - they must follow a lead byte
 - Lead bytes have patterns: `110xxxxx`, `1110xxxx`, or `11110xxx`
 - ASCII characters (0-127) use single bytes with pattern `0xxxxxxx`
-2. https://github.com/youkaichao/fast_bpe_tokenizer/blob/master/tiktoken_explained.ipynb
+2. [你懂乱码吗？锟斤拷烫烫烫（详解ASCII、Unicode、UTF-32、UTF-8编码）| Mojibake?](https://youtu.be/kOp0W08Ad0s?list=TLPQMTYwNzIwMjVVgBeEjqmfrQ)
+3. Replacement character
+	1. from one encoding to another
+	2. ![[Pasted image 20250715233643.png|600]]
+4. https://github.com/youkaichao/fast_bpe_tokenizer/blob/master/tiktoken_explained.ipynb
