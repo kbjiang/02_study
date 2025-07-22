@@ -98,6 +98,5 @@ tags: #memory #gpu
 1. Forward pass: 2 (# data points) (# parameters) FLOPS
 2. Backward pass: 4 (# data points) (# parameters) FLOPS
 3. 6 in total
-
 ## References
 1. See [[02_study/02-Deep-Learning/GPU|GPU]] for more on GPU and its memory usage.

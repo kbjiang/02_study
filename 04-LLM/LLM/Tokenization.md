@@ -12,7 +12,7 @@ Tags: #Tokenization #BPE
 	1. First encodes Unicode code points into bytes with UTF-8, then find most popular pairs of bytes iteratively, till desired vocab size is reached.
 	2. Problem with naive BPE
 		1. `dog.`, `dog!`, `dog?` could all be in the vocab (repetitive, waste of vocab) and mixing of semantic and punctuation
-		2. solution: `regex...`
+		2. solution: `pretokenization` so that different words/parts do not cross over
 	3. Algorithm for building the vocab (high level)
 		1. As in `tiktoken`. unicode code points -> bytes -> merge popular pair of bytes
 			1. No `unk` or `oov` because it does not exclude rare code points as `sentencepiece` does
