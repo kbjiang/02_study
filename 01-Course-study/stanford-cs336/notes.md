@@ -100,3 +100,25 @@ tags: #memory #gpu
 3. 6 in total
 ## References
 1. See [[02_study/02-Deep-Learning/GPU|GPU]] for more on GPU and its memory usage.
+
+# Lecture 3: Architectures, Hyperparameters
+## Recent trends
+1. `pre-norm` instead of `post-norm`
+	1. keeping normalization out of residual stream helps
+2. `rmsnorm` instead of `layernorm`
+	1. Normalization ops takes up 0.17% FLOPs, but 25% running time. `rmsnorm` is faster with less trainable params
+3. dropping bias terms in `FFN`
+
+## Activations
+1. Gated Linear Units (GLU): $\text{GLU}(x, W_1, W_2) = \sigma(W_1x)\odot W_2 x$
+	1. $\sigma$ can be any non-linear gating function, such as `ReLU`, `sigmoid`, `silu` etc., it controls the flow of $W_2 x$
+	2. *Motivation*: the linear part $W_2 x$ "reduce the vanishing gradient problem by providing a linear path for the gradients", while the gating part $\sigma(...)$ "retaining non-linear capabilities."
+	3. With the outgoing linear transformation, this becomes a `FFN`, i.e., $W_3 (\sigma(W_1x)\odot W_2 x)$
+		1. as opposed to vanilla `FFN` as $W_3 (\sigma(W_1x))$
+		2. $d_{ff}=8/3d_{model}$ instead of vanilla $4d_{model}$ to compensate for the extra params comes with gating. 
+
+## KV caching
+1. At training time, $QK^{T}$ is done in one go, whiles at inference time, things needs to be done autoregressively, meaning all $K_{i<t}$ are calculated multiple times. Similarly for $V$s. 
+	1. Nice illustration from [Post]([Transformers KV Caching Explained | by João Lages | Medium](https://medium.com/@joaolages/kv-caching-explained-276520203249)) 
+		1. ![[kv-caching.gif|800]]
+	2. KV caching needs only the same amount of FLOPs as during training $bnd^2$, i.e., no repetition. However it requires more RAM. This leads to *arithmetic intensity*.

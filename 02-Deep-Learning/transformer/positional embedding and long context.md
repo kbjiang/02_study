@@ -43,6 +43,8 @@ tags: #UnderstandTransformers #PositionalEmbedding
 		1. create `theta` for each dimension; create `idx` for each position
 		2. calculate their outer product to get the rotary matrix; save it as `buffer`
 		3. apply on to `q` and `k` vectors as an extra layer
+4. [Transformer升级之路：1、Sinusoidal位置编码追根溯源](https://spaces.ac.cn/archives/8231)
+	1. Kind of derived the Sinusoidal positional embedding.
 
 ### My comment
 1. Is $\text{sin}(\frac{1}{10000^{2k/d}}t)$ optimal? The low dimensions are quite dense and high dimensions are very sparse.

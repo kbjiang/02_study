@@ -22,3 +22,8 @@
 	2. existing: `repeat(ims[0], "h w c -> (repeat h) w c", repeat=5)`
 3. Order matters
 	1. E.g., `repeat(ims[1], "h w c -> h (repeat w) c", repeat=3)` vs `repeat(ims[0], "h w c -> h (w repeat) c", repeat=3)`, latter repeats each pixel three times.
+4. 
+### `einsum`
+1.  The output can be transposed, but the input should have the dimensions aligned. 
+	1. This is Ok: `"d_model d_ff, ... d_ff -> ... d_model"` 
+	2. This is Not: `"d_model d_ff, d_ff ... -> ... d_model"` 
