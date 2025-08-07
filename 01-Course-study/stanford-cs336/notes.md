@@ -116,9 +116,64 @@ tags: #memory #gpu
 	3. With the outgoing linear transformation, this becomes a `FFN`, i.e., $W_3 (\sigma(W_1x)\odot W_2 x)$
 		1. as opposed to vanilla `FFN` as $W_3 (\sigma(W_1x))$
 		2. $d_{ff}=8/3d_{model}$ instead of vanilla $4d_{model}$ to compensate for the extra params comes with gating. 
+2. ==`FFN` and `MLP` are different!== The latter is one linear layer followed with one non-linear activation, the former has non-linearity sandwiched between two linear layers.
 
-## KV caching
-1. At training time, $QK^{T}$ is done in one go, whiles at inference time, things needs to be done autoregressively, meaning all $K_{i<t}$ are calculated multiple times. Similarly for $V$s. 
+### Weight decay
+1. Interesting discussion. See [[August#Why Do We Need Weight Decay in Modern Deep Learning?]]
+## Other developments
+### KV caching
+1. At training time, $QK^{T}$ is chunky and done in one go, whiles at inference time, things needs to be done incrementally, meaning all $K_{i<t}$ are calculated multiple times. 
 	1. Nice illustration from [Post]([Transformers KV Caching Explained | by João Lages | Medium](https://medium.com/@joaolages/kv-caching-explained-276520203249)) 
 		1. ![[kv-caching.gif|800]]
-	2. KV caching needs only the same amount of FLOPs as during training $bnd^2$, i.e., no repetition. However it requires more RAM. This leads to *arithmetic intensity*.
+	2. KV caching needs only the same amount of FLOPs as during training $bnd^2$, i.e., no repetition. 
+	3. However it requires more memory access to move $KV$ in and out. See *arithmetic intensity* below.
+### Multi-query attention (MQA)
+1. [Multi-Query Attention is All You Need](https://fireworks.ai/blog/multi-query-attention-is-all-you-need)
+	1. single $KV$, multiple $Q$, rest is same as KV caching.
+	2. ![[Pasted image 20250803074723.png|800]]
+### Arithmetic/operational intensity
+1. Think of it as a measurement of the efficiency of your code. The more efficient, the better usage of each memory access (`FLOPs/byte`), i.e., higher arithmetic intensity 
+2. When arithmetic intensity is low, the total FLOPs is linear of memory bandwidth; high end got bounded by peak performance. See [Multi-Query Attention is All You Need](https://fireworks.ai/blog/multi-query-attention-is-all-you-need) for more detail.
+	1. ![[Pasted image 20250803073700.png|800]]
+3. Exemplary calculation for different inferences
+	1.  $b$ batch size, $n$ seq length, $h$ num of heads, $d$ hidden dimension, $k=d/h$
+	2. KV caching
+		1. Total arithmetic operation: $O(bnd^2$), leading term is mat_mul.
+		2. Total memory access: $O(bn^2d + nd^2)$, $n^2$ in 1st term is from  $\sum_{1}^{n}{i}$ due to moving $K\in \mathbf{R}^{i\times d}$ at each step of $n$ auto-generations; 2nd term is final projections of each $n$ generation.
+		3. arithmetic intensity: $O\Bigl( (\frac{n}{d} + \frac{1}{b})^{-1} \Bigr)$, favors short sequence and big model dimension, which is not good
+	3. MQA 
+		1. Total arithmetic operation: $O(bnd^2$), leading term is mat_mul.
+		2. Total memory access: $O(bn^2k + nd^2)$, similar to `KV caching`, except now we have single $k$ instead of $hk=d$
+		3. arithmetic intensity: $O\Bigl( (\frac{n}{dh} + \frac{1}{b})^{-1} \Bigr)$, factor of $h$ improvement.
+# Lecture 4: Mixture of experts #MoE 
+1. sparse *FNN* layer (MOE) vs dense FNN layer (vanilla)
+	1. ![[Pasted image 20250806075742.png|800]]
+	2. For inference, same FLOP, more param returns better results
+	3. For training, though more FLOP, much faster to train MOE to get to same loss
+		1. still much less than dense models in memory
+2. Routing function
+3. Training objectives: non differentiable
+4. ![[Pasted image 20250805151216.png|800]]
+
+## Training
+1. Discrete routing is hard because it's non-differentiable. Options:
+	1. auxiliary loss balancing
+	2. RL
+	3. ...
+2. Cannot turn on all experts during training, too much FLOPs
+3. fine-grained + shared experts
+4. upcycling
+5. DeepSeek MoE v3: MTP
+
+
+## Misc
+1. stochasticity of MoE models, 
+	1. even when $t=0$.
+2. numeric instability, mostly from `softmax`
+	1. ![[Pasted image 20250806182943.png|800]]
+3. DeepSeek MoE v3 latent attention
+## References
+1. [2401.06066](https://arxiv.org/pdf/2401.06066) deepseek
+2. [2101.03961](https://arxiv.org/pdf/2101.03961) switch transformers
+3. [2409.02060](https://arxiv.org/pdf/2409.02060) OLMoE
+4. DeepSeek v3?

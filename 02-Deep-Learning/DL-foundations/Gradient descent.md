@@ -1,5 +1,5 @@
 # Multiple papers by Nathan Srebro
-Tags: #DL-fundation  #DL-generalization #SGD 
+Tags:  #SGD #Optimization 
 Authors: Nathan Srebro et.al.
 Paper link: 
 1. [Implicit Regularization in Matrix Factorization](https://dl.acm.org/doi/pdf/10.5555/3295222.3295363)
@@ -16,22 +16,21 @@ Related:
 3. About how SGD is implicitly minimizing certain norms
 
 # Towards Understanding the Implicit Regularization Effect of SGD
-Tags: #DL-fundation  #DL-generalization #SGD 
+Tags: #SGD  #Optimization 
 Authors: Pierfrancesco Beneventano
 Paper link: 
 1.  [On the Trajectories of SGD Without Replacement](https://arxiv.org/pdf/2312.16143)
 Talk link: 
 1. [Towards Understanding the Implicit Regularization Effect of SGD](https://www.youtube.com/watch?v=G70dA2tmbu0)
 Related: 
-### Why interesting
 ### Ideas/conclusions
-1. Surprisingly, with and without replacement affects SGD quite a lot.
+1. Surprisingly, comparing to with replacement, *without replacement SGD* either finds better minima or gets there faster.
 2. SGD vs GD; 2nd order term leads to diffusion perpendicular to gradient flow
 3. without replacement, each batch no longer i.i.d., which is consequential
 
 
 # Why Momentum Really Works ^dg-momentum
-Tags: #DL-fundation #SGD 
+Tags: #SGD #Optimization 
 Authors: Gabriel Goh
 Paper link: 
 1.  [Why Momentum Really Works](https://distill.pub/2017/momentum/)
@@ -57,7 +56,7 @@ Related:
 
 
 # Newton's method
-Tags: #DL-fundation  #SGD #Newton-method
+Tags: #Optimization  #Newton-method
 Authors: 
 Paper link: 
 1. https://en.wikipedia.org/wiki/Newton%27s_method_in_optimization and figure within
