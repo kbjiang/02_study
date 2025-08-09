@@ -89,7 +89,7 @@ tags: #memory #gpu
 ### gradients_FLOPs
 1. FLOPs in backward pass
 	1. ==(2+2) (# tokens) (# parameters)==
-		1. (2+2): one for activation  derivatives $h.\text{grad}$, the other for weights derivatives $w.\text{grad}$ 
+		1. (2+2): one for activation derivatives $h.\text{grad}$, the other for weights derivatives $w.\text{grad}$ 
 		2. Doubles forward pass:  $f=WX$ is one mat mul; $\partial{f}/\partial{W}$ and $\partial{f}/\partial{X}$ are two mat mul.
 	2. in lecture example
 		1. set batch size $B=1$ will recover standard backpropagation 
@@ -153,7 +153,11 @@ tags: #memory #gpu
 		1. still much less than dense models in memory
 2. Routing function
 3. Training objectives: non differentiable
-4. ![[Pasted image 20250805151216.png|800]]
+	1. Switch Transformer
+		1. ![[Pasted image 20250805151216.png|800]]
+		2. $P$ in eqn (4) is differentiable and $p_i$ with largest $f_i$ got punished the most during training, i.e., balancing. ![[Pasted image 20250808104225.png|800]]
+	2. OLMoE
+		1. "getting rid of the load balancing loss is an important direction for future research as it constrains the flexibility of the model by forcing it to use all experts approximately equally... prior work has failed to find strong evidence of expert specialization...". *So really the benefit of MoE is more parameters but same FLOP at inferencing.*
 
 ## Training
 1. Discrete routing is hard because it's non-differentiable. Options:
@@ -164,6 +168,8 @@ tags: #memory #gpu
 3. fine-grained + shared experts
 4. upcycling
 5. DeepSeek MoE v3: MTP
+6. OLMoE
+	1. ![[Pasted image 20250808071442.png|800]]
 
 
 ## Misc
