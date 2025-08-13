@@ -130,7 +130,7 @@ tags: #memory #gpu
 ### Multi-query attention (MQA)
 1. [Multi-Query Attention is All You Need](https://fireworks.ai/blog/multi-query-attention-is-all-you-need)
 	1. single $KV$, multiple $Q$, rest is same as KV caching.
-	2. ![[Pasted image 20250803074723.png|800]]
+	2. ![[Pasted image 20250803074723.png|700]]
 ### Arithmetic/operational intensity
 1. Think of it as a measurement of the efficiency of your code. The more efficient, the better usage of each memory access (`FLOPs/byte`), i.e., higher arithmetic intensity 
 2. When arithmetic intensity is low, the total FLOPs is linear of memory bandwidth; high end got bounded by peak performance. See [Multi-Query Attention is All You Need](https://fireworks.ai/blog/multi-query-attention-is-all-you-need) for more detail.
@@ -145,6 +145,15 @@ tags: #memory #gpu
 		1. Total arithmetic operation: $O(bnd^2$), leading term is mat_mul.
 		2. Total memory access: $O(bn^2k + nd^2)$, similar to `KV caching`, except now we have single $k$ instead of $hk=d$
 		3. arithmetic intensity: $O\Bigl( (\frac{n}{dh} + \frac{1}{b})^{-1} \Bigr)$, factor of $h$ improvement.
+### Misc
+1. numeric instability
+	1. mostly from `softmax`
+		1. ![[Pasted image 20250806182943.png|800]]
+	2. `z-loss`
+		1. to "encourage the softmax normalizer `log(Z)` to be close to 0, which we found increases the stability of training." (PaLM)
+		2. ![[Pasted image 20250810082206.png|800]]
+			1. Intuition: When normalizer $Z(x)$ is close to 1, as a prob. dist. should be, then loss is just $U_r(x)$, which is stable.
+
 # Lecture 4: Mixture of experts #MoE 
 1. sparse *FNN* layer (MOE) vs dense FNN layer (vanilla)
 	1. ![[Pasted image 20250806075742.png|800]]
@@ -175,11 +184,35 @@ tags: #memory #gpu
 ## Misc
 1. stochasticity of MoE models, 
 	1. even when $t=0$.
-2. numeric instability, mostly from `softmax`
-	1. ![[Pasted image 20250806182943.png|800]]
-3. DeepSeek MoE v3 latent attention
+2. DeepSeek MoE v3 latent attention
 ## References
 1. [2401.06066](https://arxiv.org/pdf/2401.06066) deepseek
 2. [2101.03961](https://arxiv.org/pdf/2101.03961) switch transformers
 3. [2409.02060](https://arxiv.org/pdf/2409.02060) OLMoE
+	1. A bunch of ablation (Sec. 4) and MoE analysis (Sec. 5)
 4. DeepSeek v3?
+5. ST-MoE? (https://arxiv.org/pdf/2202.08906)
+	1. Good discussion on stability
+
+
+# Lecture 5: GPUs
+## Part 1
+1. CPU: large control, lots of branching, low latency
+2. GPU: small control, high throughput
+### GPU anatomy
+1. memory and physical proximity
+2. SM/SP
+	1. SM: atomic unit working on its own data
+3. threads, blocks and warp
+	1. these compute units leveraged by CUDA applications, i.e., from the software side
+4. GPUs operate in SIMT (single instruction multi-thread) model
+5. Compute (and esp matmuls) have scaled faster than memory
+	1. so need to respect the *memory hierarchy* to make things go fast
+6. Memory coalescing
+	1. ![[Pasted image 20250810210749.png|800]]
+		1. Therefore when read a torch matrix, the thread should move along columns to take advantage of `burst section`.
+## part 2
+![[Pasted image 20250810213451.png|800]]
+
+# Lecture 6: Kernels, Triton
+## Part 1
