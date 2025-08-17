@@ -215,4 +215,9 @@ tags: #memory #gpu
 ![[Pasted image 20250810213451.png|800]]
 
 # Lecture 6: Kernels, Triton
-## Part 1
+### Reference
+1. Horace He's [blog](https://horace.io/brrr_intro.html)
+	1. The discussion on memory/computation/overhead bounded
+2. [CUDA refresher](https://developer.nvidia.com/blog/tag/cuda-refresher/)
+	1. some basic concepts about CUDA, very useful.
+	2. "The CUDA programming model provides a heterogeneous environment where the host code is running the C/C++ program on the CPU and the kernel runs on a physically separate GPU device."
