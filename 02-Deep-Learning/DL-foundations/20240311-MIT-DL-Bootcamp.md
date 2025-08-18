@@ -12,6 +12,7 @@ Related: [[Visualization]] (bootcamp part)
 	1. compose simple modules to learn complex functions
 2. CV, RNN and Transformer
 	1. all have *weight sharing* and *local connection*. Conceptually similar.
+		1. In Transformer, the FFN layer is local to each token and is identically applied.
 
 1. Also the references within are classic papers
 

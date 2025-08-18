@@ -23,3 +23,6 @@
 2. it's important to keep in mind the dimension of `idx`, and which ones are for thread, which for matrices `A` and `B`.
 	1. Similarly, how to map indexing between `As/Bs` and `A/B`
 3. the original post misses a lot of information, see [[1D_Blocktiling_Explanation]] for more detail
+
+![[Pasted image 20250817181110.png|700]]
+![[Pasted image 20250817181322.png|700]]
