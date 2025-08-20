@@ -52,3 +52,8 @@
 		1. Think computation graph. `nodes` are operations and `edges` are tensors
 	4. *pre-compiled*, *runtime fusion,* ...
 4. Trying to understand `cudnn*Descriptor_t`.![[Pasted image 20250816110839.png|800]]
+
+### PyTorch Extensions
+1. Short section; see the example [here](https://github.com/kbjiang/cuda-course/tree/master/09_PyTorch_Extensions)
+	1. it shows customized CUDA extension can be *faster* than PyTorch built-in. Nice!
+	2. the build leads to error; Github Copilot solved it for me.

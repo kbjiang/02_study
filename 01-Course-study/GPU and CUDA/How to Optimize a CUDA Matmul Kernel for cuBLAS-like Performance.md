@@ -17,7 +17,7 @@
 1. "load a chunk of A and a chunk of B from global memory into *shared memory*. Then we’ll perform *as much work as possible* on the two chunks, with each thread still being *assigned one entry of C*. We’ll move the chunks along the columns of A and the rows of B performing partial sums on C until the result is computed."
 	1. ![[Pasted image 20250817083959.png|800]]
 	2. [code](https://github.com/siboehm/SGEMM_CUDA/blob/master/src/kernels/3_kernel_shared_mem_blocking.cuh)
-		1. line 21-22 defines buffer in *shared memory*; line 35-40 enables `coalescing` in column direction. ![[Pasted image 20250817093155.png|800]]
+		1. line 21-22 defines buffer in *shared memory*; line 35-40 enables `coalescing` in column direction. ![[Pasted image 20250817093155.png|700]]
 ### Kernel 4: 1D Blocktiling for Calculating Multiple Results per Thread
 1. The idea is that each thread now calculate `TM` entries of `C` in the column direction (therefore 1D blocktiling), to reduce SMEM accesses.
 2. it's important to keep in mind the dimension of `idx`, and which ones are for thread, which for matrices `A` and `B`.

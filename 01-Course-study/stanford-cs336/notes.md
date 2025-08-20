@@ -69,7 +69,7 @@ tags: #memory #gpu
 	3. Gradients: num_gradients = num_parameters 
 	4. Optimizer states: num_optimizer_states = num_parameters 
 	5. total_memory (float32):  4 * (num_parameters + num_activations + num_gradients + num_optimizer_states)
-3. For Transformers memory breakdown, see [[02_study/02-Deep-Learning/GPU#^gpt2mem|GPU]]
+3. For Transformers memory breakdown, see [[02_study/01-Course-study/GPU and CUDA/GPU#^gpt2mem|GPU]]
 	1. Shows memory usage at different phase of model training, i.e., *steady* vs *peak*.
 4. What is optimizer state?
 	1. it contains all info for *resuming model training*, including learning rate, momentum, model weights etc.
@@ -99,7 +99,7 @@ tags: #memory #gpu
 2. Backward pass: 4 (# data points) (# parameters) FLOPS
 3. 6 in total
 ## References
-1. See [[02_study/02-Deep-Learning/GPU|GPU]] for more on GPU and its memory usage.
+1. See [[02_study/01-Course-study/GPU and CUDA/GPU|GPU]] for more on GPU and its memory usage.
 
 # Lecture 3: Architectures, Hyperparameters
 ## Recent trends

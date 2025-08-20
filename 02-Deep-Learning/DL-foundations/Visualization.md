@@ -8,6 +8,8 @@
 7. universal approximation theorem https://youtu.be/Ln8pV1AXAgQ
 8. Visualize Matrix multiplication and Attention https://pytorch.org/blog/inside-the-matrix/
 9. Great resource [Neural Network playground](https://playground.tensorflow.org/)
+10. [[visualization_non_linearity_xor]]
+	1. showing how spaces is warped by non-linear transformations
 ### [Deep Learning Bootcamp: Phillip Isola](https://youtu.be/UEJqxSVtfY0)
 1. What is "deep learning":
 	1. *Neural nets*: A class of machine learning architectures that use stacks of *linear transformations* interleaved with *pointwise nonlinearities*
