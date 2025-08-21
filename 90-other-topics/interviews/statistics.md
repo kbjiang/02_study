@@ -53,3 +53,7 @@
 
 
 https://youtu.be/JQc3yx0-Q9E
+
+
+### Sample error and Confidence interval
+1. see this [example](02_study/90-other-topics/interviews/confidence_intervals_summary.md)
