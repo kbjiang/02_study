@@ -27,7 +27,7 @@ opt_square(torch.randn(10000, 10000).cuda())
 ## Lecture 3: Getting Started With CUDA for Python Programmers
 1. He basically showed even without knowing CUDA well, one can still write/use it with Pytorch.
 2. How? *Write in Python, then convert to CUDA* ([lecture link](https://youtu.be/4sgKnKbR-WE?list=TLPQMjcwODIwMjVEfZMeBMdhXQ))
-	1. `kernel` in Python, then ask GPT to convert it to `CUDA-C`
+	1. Write CUDA-syntax `kernel` in Python, then ask GPT to convert it to `CUDA-C`
 	2. `torch.load_inline` to convert `CUDA-C` into torch-compatible `module`.
 3. we need allocation of memory to allow parallel computing
 ```python

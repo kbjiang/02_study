@@ -193,6 +193,12 @@ tags: #memory #gpu
 4. DeepSeek v3?
 5. ST-MoE? (https://arxiv.org/pdf/2202.08906)
 	1. Good discussion on stability
+6. Implementation Qwen3 MOE from Sebastian Raschka
+	1. https://www.linkedin.com/feed/update/urn:li:activity:7357401606549655552/
+
+### *TODO*: 
+1. follow through this implementation from Sebastian Raschka
+	1. https://www.linkedin.com/feed/update/urn:li:activity:7357401606549655552/
 
 
 # Lecture 5: GPUs
