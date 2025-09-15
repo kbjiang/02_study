@@ -132,9 +132,11 @@ tags: #memory #gpu
 	1. single $KV$, multiple $Q$, rest is same as KV caching.
 	2. ![[Pasted image 20250803074723.png|700]]
 ### Arithmetic/operational intensity
+#GPU #GPU/roofline
 1. Think of it as a measurement of the efficiency of your code. The more efficient, the better usage of each memory access (`FLOPs/byte`), i.e., higher arithmetic intensity 
 2. When arithmetic intensity is low, the total FLOPs is linear of memory bandwidth; high end got bounded by peak performance. See [Multi-Query Attention is All You Need](https://fireworks.ai/blog/multi-query-attention-is-all-you-need) for more detail.
-	1. ![[Pasted image 20250803073700.png|800]]
+	1. The slope of the first part of the curve is the *peak bandwidth*
+	2. ![[Pasted image 20250803073700.png|800]]
 3. Exemplary calculation for different inferences
 	1.  $b$ batch size, $n$ seq length, $h$ num of heads, $d$ hidden dimension, $k=d/h$
 	2. KV caching

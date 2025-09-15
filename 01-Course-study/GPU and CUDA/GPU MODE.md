@@ -44,3 +44,15 @@ def rgb2grey_py(x):
 		res[i] = 0.2989*x[i] + 0.5870*x[i+n] + 0.1140*x[i+2*n]
 	return res.view(h,w)
 ```
+
+## Lecture 8: CUDA Performance Checklist
+1. Calculation of Arithmetic Intensity (AI)
+	1. Quantization increases AI
+2. Thread coarsening
+	1. Even a factor of *2* led to *10x* speed up
+3. Different bounded and what to do?
+	1. mem:
+	2. compute: better algorithm, very hard to do.
+### References
+1. Mark's [deck](https://docs.google.com/presentation/d/1cvVpf3ChFFiY4Kf25S4e4sPY6Y5uRUO-X-A4nJ7IhFE/edit?slide=id.p#slide=id.p) and references within
+2. 
