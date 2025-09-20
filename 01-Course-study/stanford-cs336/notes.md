@@ -220,8 +220,17 @@ tags: #memory #gpu
 	1. ![[Pasted image 20250810210749.png|800]]
 		1. Therefore when read a torch matrix, the thread should move along columns to take advantage of `burst section`.
 ## part 2
-![[Pasted image 20250810213451.png|800]]
+![[Pasted image 20250810213451.png|400]]
 
+### Understand this graph
+1. [What Shapes Do Matrix Multiplications Like? [medium]](https://www.thonking.ai/p/what-shapes-do-matrix-multiplications)
+	1. ![[Pasted image 20250919220735.png|800]]
+2. The graph
+	1. It should be understood as such that the FLOP/s is jumping all over the place as $N$ increases
+	2. Color-coded each dot by the highest power of 2 it’s divisible by. Lowest band is when $N$ is odd, rest bands with $K$ equals to 2, 8, 16 and 32. Also explains why from bottom to top, bands become more sparse.
+		1. ![[Pasted image 20250919221255.png|600]]
+	3. Tiling
+	4. 
 # Lecture 6: Kernels, Triton
 ### Reference
 1. Horace He's [blog](https://horace.io/brrr_intro.html)

@@ -19,7 +19,7 @@
 
 
 ## Logistic regression
-1. [StatQuest: Logistic Regression](https://www.youtube.com/@statquest)
+1. [StatQuest: Logistic Regression](https://youtu.be/yIYKR4sgzI8?si=6IKWgOg8npPVxclt)
 
 ## Reference
 1. Very good lectures on statistics: https://www.tilestats.com/
