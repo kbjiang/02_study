@@ -32,3 +32,7 @@
 		1. the $1 \times 1$ filter is actually $1 \times 1 \times 32$, which can be visualized as *one neuron* with 32 weights; and it is shared at each pixel/token. ![[Pasted image 20240613174011.png|800]]
 		2. # filters is the # of output channels; therefore the $n$ count of $1\times 1 \times d_{\text{model}}$ kernels can be thought of as $n$ neurons each with $d_{\text{model}}$ number of weights and input is one token/pixel with $d_{\text{model}}$ embedding/channel.
 
+
+## Misc
+1. Attention output always has `query` length, which CAN be different from `key` and `value`. 
+	1. That's why in cross-attention layer in encoder-decoder, the `query` is from decoder side (e.g., target language in translation) and `key`/`value` are from encoder side (e.g., language to be translated.) The sequences in two languages can be of different length.
