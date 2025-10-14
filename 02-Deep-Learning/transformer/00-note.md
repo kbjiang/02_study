@@ -36,3 +36,4 @@
 ## Misc
 1. Attention output always has `query` length, which CAN be different from `key` and `value`. 
 	1. That's why in cross-attention layer in encoder-decoder, the `query` is from decoder side (e.g., target language in translation) and `key`/`value` are from encoder side (e.g., language to be translated.) The sequences in two languages can be of different length.
+	2. This is also why `causal_mask` only applies to `self attention`, i.e., `query` has same length as `key`.

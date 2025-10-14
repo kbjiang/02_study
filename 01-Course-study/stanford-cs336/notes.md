@@ -238,3 +238,35 @@ tags: #memory #gpu
 2. [CUDA refresher](https://developer.nvidia.com/blog/tag/cuda-refresher/)
 	1. some basic concepts about CUDA, very useful.
 	2. "The CUDA programming model provides a heterogeneous environment where the host code is running the C/C++ program on the CPU and the kernel runs on a physically separate GPU device."
+# Lecture 7: Parallelism 1
+### Memory
+1. Memory breakdown
+> | Concept | Stored as | Lifetime | Purpose | Memory scale |
+> |----------|------------|-----------|-----------|---------------|
+> | **Model parameters** | FP16 | Persistent | Define model weights | x |
+> | **Master weights** | FP32 | Persistent | Used by optimizer for precise updates | x | 
+> | **Optimizer states** (`m`, `v`) | FP32 | Persistent | Store moving averages (Adam) | 2x |
+> | **Gradients** | FP16 | Temporary (per step) | Backpropagation | x |
+> | **Activations** | FP16 | Temporary (per batch) | Backpropagation | 5–10x |
+ 2. Master weights
+	 1. a **full-precision (FP32) copy** of each parameter for stable accumulation
+	 2. not to confuse with activations: the `master weights` belong to the optimizer’s bookkeeping, while activations belong to the computational graph.
+ 3. Typical flow
+	 1. Forward/backward uses FP16 parameters (for speed and memory savings).    
+	 2. Gradients are computed in FP16 (then possibly converted to FP32).
+	 3. Optimizer updates happen on **master FP32 weights**.
+	 4. The updated master weights are cast back to FP16 and copied into the model for the next forward pass.
+
+## Data parallel
+### ZeRO
+1. ZeRO stage 1
+	1. each GPU updates a part of the params *at the same time*.
+	2. compared with naive DDP
+2. ZeRO stage 2
+	1. just stage 1 with an extra reduce to have the right (sum of) gradient on the right rank.
+3. ZeRO stage 3 contains stage 1 and 2 as special cases?
+4. ZeRO stage 3 is just FSDP. See [[02_study/02-Deep-Learning/Pytorch/notes#Distributed parallelism|notes]]
+
+### Highlight
+1. 26:35 and the example prior to that
+	
