@@ -239,6 +239,7 @@ tags: #memory #gpu
 	1. some basic concepts about CUDA, very useful.
 	2. "The CUDA programming model provides a heterogeneous environment where the host code is running the C/C++ program on the CPU and the kernel runs on a physically separate GPU device."
 # Lecture 7: Parallelism 1
+> big separation between `computation` and `comminucation`. As a GPU, I should be agnostic to communications.
 ### Memory
 1. Memory breakdown
 > | Concept | Stored as | Lifetime | Purpose | Memory scale |
@@ -258,14 +259,27 @@ tags: #memory #gpu
 	 4. The updated master weights are cast back to FP16 and copied into the model for the next forward pass.
 
 ## Data parallel
+> 1. meaning each GPU a) gets a part of the data, and b) runs the same operation at the same time (SPMD)
+> 2. Even though ZeRO stage 3 (or FSDP) shards weight, but it's not considered model parallel. 
+> 	1. model parallel never moves weights around while FSDP broadcast weight every step
+> 	2. model parallel passes activations
+> 3. `pipelined`, `tensor`...?
 ### ZeRO
 1. ZeRO stage 1
 	1. each GPU updates a part of the params *at the same time*.
 	2. compared with naive DDP
 2. ZeRO stage 2
 	1. just stage 1 with an extra reduce to have the right (sum of) gradient on the right rank.
-3. ZeRO stage 3 contains stage 1 and 2 as special cases?
-4. ZeRO stage 3 is just FSDP. See [[02_study/02-Deep-Learning/Pytorch/notes#Distributed parallelism|notes]]
+3. ZeRO stage 3
+	1. contains stage 1 and 2 as special cases?
+	2. ZeRO stage 3 is just FSDP. See [[02_study/02-Deep-Learning/Pytorch/notes#Distributed parallelism|notes]]
+4. For stage 1 and 2, think of the sharding by model layer, while stage 3 shards on both layer (FSDP unit) and tensor (horizontal split)
+5. Communication analysis (Chap 7 of [ZeRO: Memory Optimizations Toward Training Trillion Parameter Models](https://arxiv.org/pdf/1910.02054))
+	1. Naive, stage 1 and 2
+		1. $2\Psi$ communication/data movement per training step--one for `reduce-scatter` of gradients, the other for `all-gather` of parameters.
+	2. stage 3
+		1. $3\Psi$. The `broadcasting` of weights at each step, both forward and backward passes, can be deemed as a spread out `all-gather`; and the usual `reduce-scatter` of gradients.
+		2. "Therefore, during the forward propagation it needs to receives the parameters for all the other partitions. However, *this can be pipelined to avoid the memory overhead.*"???
 
 ### Highlight
 1. 26:35 and the example prior to that
