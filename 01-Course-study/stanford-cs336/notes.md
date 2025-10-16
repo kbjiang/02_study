@@ -284,3 +284,21 @@ tags: #memory #gpu
 ### Highlight
 1. 26:35 and the example prior to that
 	
+# Lecture 8: Parallelism 2
+### Hardware
+1. Generalized hierarchy (from small/fast to big/slow):
+	- Single node, single GPU: L1 cache / shared memory
+	- Single node, single GPU: HBM
+	- Single node, multi-GPU: NVLink
+	- Multi-node, multi-GPU: NVSwitch
+2. Modern GPU
+	- Within a node: NVLink connects GPUs directly, bypass CPU (classic)
+	- Across nodes: NVSwitch connects GPUs directly, bypass Ethernet (classic)
+	- `nvidia-smi topo -m` shows the connections between GPUs
+### Software
+1. NCCL: NVIDIA collective communication library (low level )
+	1. NCCL translates collective operations into low-level packets that are sent between GPUs.
+	2. They are also GPU *kernels* highly optimized for communication
+2. PyTorch distributed library 
+3. Ring `AllReduce`
+	1. https://youtu.be/rj-hjS5L8Bw?t=478
