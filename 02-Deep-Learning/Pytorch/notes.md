@@ -22,6 +22,43 @@
 2. 
 3. 
 
+## `tensor.backward()`
+### The Gradient Argument
+- The `gradient` argument represents **∂(scalar_output)/∂(this_tensor)**. For when `this_tensor` is output itself, this argument is always `tensor(1.0)`.
+	- comes handy during test when no loss is defined, can just do `o.backward(d_o)` where `d_o` is just a random tensor.
+- By default, `backward()` assumes you're computing gradients of a **scalar** loss. But if your tensor is non-scalar, you need to specify what scalar you're actually differentiating.
+#### Example 1: Scalar output - gradient argument defaults to 1.0
+```python
+import torch
+x = torch.tensor([1.0, 2.0, 3.0], requires_grad=True)
+y = x.sum()  # y is scalar: y = x1 + x2 + x3
+print(f"y = {y}")
+y.backward()  # Equivalent to y.backward(torch.tensor(1.0))
+print(f"∂y/∂x = {x.grad}")  # Should be [1, 1, 1]
+```
+#### Example 2: Non-scalar output - must provide gradient
+```python
+x = torch.tensor([1.0, 2.0, 3.0], requires_grad=True)
+y = x * 2  # y is NOT scalar: y = [2, 4, 6]
+print(f"y = {y}")
+# This would error: y.backward()  # Error! y is not scalar
+# We need to specify: if loss = y.sum(), what is ∂loss/∂y?
+# ∂(y.sum())/∂y = [1, 1, 1]
+y.backward(torch.tensor([1.0, 1.0, 1.0]))
+print(f"∂(y.sum())/∂x = {x.grad}")  # Should be [2, 2, 2]
+```
+#### Key Insight:
+This is used by chain rule to compute ∂(final_scalar_loss)/∂x:
+```
+∂loss/∂x = ∂loss/∂y * ∂y/∂x
+           ↑           ↑
+      gradient arg   computed by autograd
+```
+
 ## How PyTorch works
 1. [PyTorch Autograd Explained - In-depth Tutorial](https://www.youtube.com/watch?v=MswxJw-8PvE)
-2. [PyTorch internals : ezyang’s blog](https://blog.ezyang.com/2019/05/pytorch-internals/)
+2. [PyTorch Hooks Explained - In-depth Tutorial](https://www.youtube.com/@elliotwaite)
+	1. Mostly it's for accessing/editing gradients during backpropagation; `tensor.retain_grad` is considered a hook
+	2. it can be for both tensor and module. 
+	3. it's handles, which can be removed later.
+3. [PyTorch internals : ezyang’s blog](https://blog.ezyang.com/2019/05/pytorch-internals/)

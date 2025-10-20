@@ -296,9 +296,27 @@ tags: #memory #gpu
 	- Across nodes: NVSwitch connects GPUs directly, bypass Ethernet (classic)
 	- `nvidia-smi topo -m` shows the connections between GPUs
 ### Software
-1. NCCL: NVIDIA collective communication library (low level )
+1. Collective communication terminology
+	- Reduce: performs some associative/commutative operation (sum, min, max)
+	- Gather: performs concatenation
+	- Broadcast/scatter is inverse of gather
+	- All: means destination is all devices
+2. NCCL: NVIDIA collective communication library (low level )
 	1. NCCL translates collective operations into low-level packets that are sent between GPUs.
 	2. They are also GPU *kernels* highly optimized for communication
-2. PyTorch distributed library 
-3. Ring `AllReduce`
+3. PyTorch distributed library 
+4. Ring `AllReduce`
 	1. https://youtu.be/rj-hjS5L8Bw?t=478
+
+
+### From assignment
+1. Each of these worker processes belong to a *process group*, which is initialized via `dist.init_process_group`. The process group represents multiple worker processes that will coordinate and communicate via a shared master. The master is defined by its IP address and port, and the master runs the process with rank 0. Collective communication operations like all-reduce operate on each process in the process group.
+	```python
+	def setup(rank, world_size):
+	    os.environ["MASTER_ADDR"] = "localhost"  # these defines the group
+	    os.environ["MASTER_PORT"] = "29500"
+	    # Use gloo backend for CPU, nccl for GPU
+	    backend = "nccl" if torch.cuda.is_available() else "gloo"
+	    dist.init_process_group(backend, rank=rank, world_size=world_size)
+	```
+2. blah
