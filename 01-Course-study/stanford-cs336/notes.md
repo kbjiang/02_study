@@ -257,13 +257,20 @@ tags: #memory #gpu
 	 2. Gradients are computed in FP16 (then possibly converted to FP32).
 	 3. Optimizer updates happen on **master FP32 weights**.
 	 4. The updated master weights are cast back to FP16 and copied into the model for the next forward pass.
-
 ## Data parallel
 > 1. meaning each GPU a) gets a part of the data, and b) runs the same operation at the same time (SPMD)
 > 2. Even though ZeRO stage 3 (or FSDP) shards weight, but it's not considered model parallel. 
 > 	1. model parallel never moves weights around while FSDP broadcast weight every step
 > 	2. model parallel passes activations
 > 3. `pipelined`, `tensor`...?
+> 4. `batch size` as an important resource
+> 	1. For DP along, there exists upper limit of "good" BSs, beyond which optimization diminishes quickly. 
+> 		1. ![[Pasted image 20251029155543.png|500]]
+> 		2. Intuition: within this limit, there are a lot of gradient noises and reducing this variance is valuable; beyond it, the training is really limited by number of gradient steps.
+> 		3. *Therefore we need to "spend" batch sizes in dimensions other than just data.*
+> 	2. [How to Parallelize a Transformer for Training | How To Scale Your Model](https://jax-ml.github.io/scaling-book/training/)
+> 		1. Different dimensions of parallelism, e.g., data, tensor
+> 		2. to remain compute-bound at moderate BS, use mixed FSDP + TP. ![[Pasted image 20251029155946.png]]
 ### ZeRO
 1. ZeRO stage 1
 	1. each GPU updates a part of the params *at the same time*.
@@ -283,6 +290,9 @@ tags: #memory #gpu
 
 ### Highlight
 1. 26:35 and the example prior to that
+
+### References
+1. [How to Parallelize a Transformer for Training | How To Scale Your Model](https://jax-ml.github.io/scaling-book/training/)
 	
 # Lecture 8: Parallelism 2
 ### Hardware

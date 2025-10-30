@@ -25,7 +25,7 @@
 ## `tensor.backward()`
 ### The Gradient Argument
 - The `gradient` argument represents **∂(scalar_output)/∂(this_tensor)**. For when `this_tensor` is output itself, this argument is always `tensor(1.0)`.
-	- comes handy during test when no loss is defined, can just do `o.backward(d_o)` where `d_o` is just a random tensor.
+	- comes handy during test when no loss is defined, can just do `o.backward(d_o)` where `d_o` is just a random tensor of shape `o`.
 - By default, `backward()` assumes you're computing gradients of a **scalar** loss. But if your tensor is non-scalar, you need to specify what scalar you're actually differentiating.
 #### Example 1: Scalar output - gradient argument defaults to 1.0
 ```python
