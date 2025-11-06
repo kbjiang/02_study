@@ -329,3 +329,79 @@ tags: #memory #gpu
 	    dist.init_process_group(backend, rank=rank, world_size=world_size)
 	```
 2. blah
+
+
+> Did not spend too much time on scaling laws or assignment 3. 
+# Lecture 9: Scaling laws 1
+1. Scaling laws 
+	1. To extrapolate learnings on smaller models to large models
+	2. can be the leap from theoretical upper bounds, which is usually quite loose, to more empirical prediction on performance.
+2. Model size vs data size (Chinchilla rule)
+	1. with fixed computation budget (IsoFLOP), find the point of lowest loss and lcoate the optimal token/parameter ratio. For Chinchilla this is 20:1.
+	2. Training efficiency (Chinchilla regime)
+	    - Optimal ratio: ~20:1
+	    - Reason: Minimizes loss for a fixed compute budget
+	3. Inference performance (modern LLMs)
+	    - Optimal ratio: 40–200:1
+	    - Reason: Improves generalization, data coverage, and long-tail reasoning
+
+# Lecture 11: Scaling laws 2
+1. muP
+	1. it's about setting good initialization and layer-wise learning rate so that activations are $\Theta(1)$.
+	2. It leads to scale-invariant learning-rate
+		1. ![[Pasted image 20251030205011.png]]
+	3. detailed derivation skipped
+
+| Goal                                        | Optimal Ratio | Reason                                               |
+| ------------------------------------------- | ------------- | ---------------------------------------------------- |
+| **Training efficiency** (Chinchilla regime) | ~20:1         | Minimize loss for fixed compute                      |
+| **Inference performance** (modern LLMs)     | 40–200:1      | Better generalization, coverage, long-tail reasoning |
+	2. This ratio has been pushed up dramatically in favor for inference
+
+### Reference
+1. Kaplan
+2. Chinchilla Hoffman+ 2022
+
+
+# Lecture 10: inference
+> Inference have to be done sequentially, the name of the game is to increase efficiency without hurting accuracy
+### Metrics
+1. Time-to-first-token (interactive app), Latency (*seconds/token*, interactive app), Throughput (*tokens/second*, batch processing)
+	1. High throughput $\neq$ low latency. May wait for a while for batching generating large number of tokens, which won't work for interactive apps.
+
+### Accounting
+1. review of arithmetic intensity
+
+2. KV caching
+	1. one query a step so each step is $O(t)$, where $t$ is current sequence length
+		1. as opposed to full QK attention with $O(t^2)$.
+	2. KV cache length grows as $t$ increases $O(t)$
+		1. In local attention, KV cache length stays the same $o(1)$, i.e., the size of the sliding window, but hurts performance
+3. Therefore the name of the game is to reduce the size of KV cache
+	1. why: KV caching cannot be batched, i.e., each KV is specific to each sequence; therefore memory limited, i.e., high memory IO
+	2. Tricks e.g.: GQA, local attention etc
+4. Quantization, pruning
+5. speculative sampling
+	1. The goal is to sample with a faster but similar distribution $p_x$, and make sure the algorithm recovers the sampling from the target distribution $q_x$. 
+		1. See proof at end of [paper]([2302.01318](https://arxiv.org/pdf/2302.01318)). 
+	2. [Speculative Decoding: When Two LLMs are Faster than One](https://www.youtube.com/@EfficientNLP)
+		1. Good intuition on $(q_x - p_x)_{+}$ for sampling after rejection ![[Pasted image 20251105180710.png]]
+		2. Tricky part is that $\forall x \ s.t. \  p_x < q_x$, there is contribution from resampling after rejection from $\forall x \ s.t. \  q_x <= p_x$.
+	3. [Accept-Reject Sampling : Data Science Concepts](https://www.youtube.com/@ritvikmath)
+		1. Provides derivation and intuition on accepting with prob. $q_x/p_x$.
+		2. This applies to the part where $p_x > q_x$ in speculative decoding.
+6. vLLM
+	1. small degradation on latency, but huge improve on throughput
+	2. Explanation on how it works
+		1. [E07 | Fast LLM Serving with vLLM and PagedAttention](https://www.youtube.com/@MLSysSingapore) (Chinese)
+		2. [Fast LLM Serving with vLLM and PagedAttention](https://www.youtube.com/@anyscale
+
+### References
+1. [All About Transformer Inference | How To Scale Your Model](https://jax-ml.github.io/scaling-book/inference/)
+2. vLLM
+	1. [vLLM: Easy, Fast, and Cheap LLM Serving, Woosuk Kwon, UC Berkeley](https://www.youtube.com/@AMDDevCentral)
+
+
+
+# RLHF
+1. deeplearning.ai post-training course https://youtu.be/beMtcPK-ldU
