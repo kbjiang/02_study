@@ -403,5 +403,95 @@ tags: #memory #gpu
 
 
 
+# Lecture 12: Evaluation
+> Good review on benchmarks.
+# Lecture 13: Data 1
+1. Data by phase
+	1. Pre-training, mid-training, post-training
+2. Common Crawl
+
+# Lecture 14: Data 2
+## Data filtering
+1. Given target $T$ and raw $R$, find subset of $R$ similar to $T$. ![[Pasted image 20251107135314.png|600]]
+	1. Estimate some model based on $R$ and $T$ and derive a scoring function
+	2. Keep examples in $R$ based on their score
+2. Instantiations
+	1. Generative model of $T$ (KenLM)
+	2. Discriminative classifier (fastText)
+	3. importance resampling (DSIR)
+## Fuzzy deduplication
+> To remove all pairs of documents that exceed a particular `Jaccard similarity` threshold
+### Naively
+1. each documents as a set of n-grams; then calculate `Jaccard similarity` of each pair of sets
+2. not feasible in time and memory
+### MinHash ([book3n.dvi](http://infolab.stanford.edu/~ullman/mmds/ch3n.pdf))
+2. `characteristic matrix` of sets
+3. MinHash `signature matrix`
+	1. `MinHash` function always looks for the 1st non-zero element of a column; but If think of permutation as part of hash function, then we have same number of hash function $h_i, i \in [0, n]$.
+	2. The point is to replace permutation (expensive) with hashing functions. See 3.3.5 of the book.
+
+### Locality-sensitive hashing (LSH) ([book3n.dvi](http://infolab.stanford.edu/~ullman/mmds/ch3n.pdf))
+> *To quickly find similar items in a set*
+1. How
+	1. compare only similar pairs by using many different hash functions to avoid quadratic growth in computation time
+	2. main concern is false negative, but can be reduced by careful tuning
+
+### MISC
+1. `Shingles` vs `bag of words`
+	1. both are any substring of length $k$, i.e., a $k$-shingle, found within the document
+	2. `Shingles` counts the 1st time a shingle showed up, while `bow` counts every time
+		1. E.g., for `{abcab}`, `Shingles` is `{ab, bc, ca}` while `bow` is `{ab, bc, ca, ab}`
+2. `NFD` unicode normalization #unicode 
+	>TODO: Connect this to `unicode` section in first lecture	
+	1. To separates pre-composed characters (like "é") into their base character ("e") and a combining accent (the acute accent mark).
+	2. Useful for removing accents from text as part of normalization.
+		```python
+		# remove accents
+		import unicodedata
+		def strip_accents(string):
+			# `normlize` separates, `combining` picks out combining chrs
+		    return "".join(c for c in unicodedata.normalize("NFD", string)
+		                   if not unicodedata.combining(c))
+		print("Antoine de Saint-Exupéry")
+		print(strip_accents("Antoine de Saint-Exupéry"))
+		# Output: Antoine de Saint-Exupery
+		```
+	3. More tests
+		```python
+		text = "Exupéry"
+		text_norm = unicodedata.normalize("NFD", text)
+		print(text)
+		# Exupéry
+		print(text_norm)
+		# Exupéry
+		assert text == text_norm, "prints same, but decomposed"
+
+		# unicode is now different
+		print([ord(t) for t in text])
+		# [69, 120, 117, 112, 233, 114, 121]
+		print([ord(t) for t in text_norm])
+		# [69, 120, 117, 112, 101, 769, 114, 121]
+		
+		# the acute accent is a combining char.
+		chr(233), chr(101), chr(769)
+		# ('é', 'e', '́')
+		assert unicodedata.combining(chr(101))==0
+		assert unicodedata.combining(chr(233))==0
+		assert unicodedata.combining(chr(769))!=0
+		
+		# show in different encodings
+		print(text.encode("ascii", "replace"))
+		# b'Exup?ry'
+		print(text.encode("utf-8"))
+		# b'Exup\xc3\xa9ry'
+		print(text_norm.encode("ascii", "replace"))
+		# b'Exupe?ry'
+		print(text_norm.encode("utf-8"))
+		# b'Exupe\xcc\x81ry'
+		```
+
+
+
+
 # RLHF
 1. deeplearning.ai post-training course https://youtu.be/beMtcPK-ldU
