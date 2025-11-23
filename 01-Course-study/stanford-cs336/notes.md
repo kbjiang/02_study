@@ -435,6 +435,8 @@ tags: #memory #gpu
 1. How
 	1. compare only similar pairs by using many different hash functions to avoid quadratic growth in computation time
 	2. main concern is false negative, but can be reduced by careful tuning
+2. How do `r` and `b` influence the slope and location of phase transition
+	1. TODO: see the notebook for plot
 
 ### MISC
 1. `Shingles` vs `bag of words`
@@ -490,7 +492,28 @@ tags: #memory #gpu
 		# b'Exupe\xcc\x81ry'
 		```
 
+# Lecture 15: Alignment - SFT/RLHF
+## SFT
+1. Knowledge extraction and alignment
+	1. *Instruction fine-tuning a model on "facts it doesn't know", i.e., not included in pre-trianing, makes it hallucinate*--it encourages the model to make things up in order to match the depth of the SFT data.
+		1. in other words, SFT works best when we are just extracting pre-training behaviors, not adding new ones.
+2. Mid-training
 
+## RLHF
+1. SFT (*imitation*) vs RLHF (*Optimization*)
+	1. SFT: Fit $\hat{p}(y|x) \approx p^*(y|x)$ for some reference distribution $p^*$.
+		1. pure generative modeling perspective
+		2. requires samples from reference policy
+	2. RLHF: Find $\hat{p}(y|x)$ s.t. $\underset{p}{\max}E_p[R(y, x)]$ for a reward $R(y, x)$
+		1. maximize some reward function that we can measure
+		2. *LMs are policies, no longer a model of some distribution*
+	3. Cost comparison ![[Pasted image 20251122074049.png|600]]
+		1. There are tasks that are much easier for experts to verify than to solve
+2. RLHF factors to consider
+	1. annotator demographic
+	2. human vs AI annotation
+	3. style: e.g. length
+	4. 
 
 
 # RLHF
