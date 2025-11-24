@@ -500,20 +500,56 @@ tags: #memory #gpu
 2. Mid-training
 
 ## RLHF
-1. SFT (*imitation*) vs RLHF (*Optimization*)
+1. *Lots of RL-related empirical results are highly contingent on the specifics of the experiment setup.* There's the risk of over-generalizing conclusions.
+2. **SFT (*imitation*) vs RLHF (*Optimization*)**
 	1. SFT: Fit $\hat{p}(y|x) \approx p^*(y|x)$ for some reference distribution $p^*$.
-		1. pure generative modeling perspective
-		2. requires samples from reference policy
+		1. *maximize likelihood* measured by KL
+		2. requires samples from reference distribution
 	2. RLHF: Find $\hat{p}(y|x)$ s.t. $\underset{p}{\max}E_p[R(y, x)]$ for a reward $R(y, x)$
-		1. maximize some reward function that we can measure
+		1. *maximize some reward* function that we can measure
 		2. *LMs are policies, no longer a model of some distribution*
-	3. Cost comparison ![[Pasted image 20251122074049.png|600]]
+	3. DPO can be a very illustrative example, where it leveraged the reward implicitly by linking it to policy in closed form(the Bradley-Terry model). Then it's no longer a RL problem (*maximizes reward*) but a SFT (*maximizes likelihood*).
+	4. Cost comparison ![[Pasted image 20251122074049.png|600]]
 		1. There are tasks that are much easier for experts to verify than to solve
-2. RLHF factors to consider
+3. RLHF factors to consider
 	1. annotator demographic
 	2. human vs AI annotation
 	3. style: e.g. length
-	4. 
+> from here on actually is covered in Lecture 16
+4. Watch out for
+	1. Overoptimization: where better proxy reward does not lead to better real human preference (e.g. win-rate)
+			1. In other words, you can *succeed the RL* while fail the real task
+	2. model collapse #LLM-calibration 
+		1. RLHF makes models no longer 'probabilistic models' -- no calibration by default![[Pasted image 20251123073459.png]]
+		2. This is by design, but *need to be careful when thinking of them as calibrated probabilistic models*.
+		3. *TODO:* look up the papers he mention on slide 13; one of them is GPT4 release 
+5. DPO
+	1. Conceptually, it is *MLE on the pairwise **implied** rewards* $r(x, y_w) - r(x, y_l)$, under nonparametric assumption and alternative parametrization. 
+		1. No reward, it's SFT: *to find a policy such that its implied reward is most likely to generate the pair-wise preference we have in the training data.*
+		2. ![[Pasted image 20251123064345.png]]
+	2. DPO update
+		1. ![[Pasted image 20251123070957.png]]
+	3. *TODO*: really understand the argument of $\sigma$ function. Compare with logistic regression.
+ 
+# Lecture 16: Alignment - RLVR
+1. Overall mindset (around 12:25)
+	1. *TODO*: RLHF is hard to scale, needs more efficient RL... Find domains where RL works well
+2. PPO
+	1. reward shaping
+		1. per-token KL penalty, last-token full reward
+		2. *TODO*: his comment on RL as a contextual bandit 22:55
+## GRPO
+1. Why not PPO or DPO
+	1. PPO: complicated implementation, requires a value model as well
+	2. DPO: data not inherently pairwise
+
+
+
+
+
+
+
+
 
 
 # RLHF
