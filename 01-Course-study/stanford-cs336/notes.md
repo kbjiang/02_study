@@ -424,18 +424,20 @@ tags: #memory #gpu
 ### Naively
 1. each documents as a set of n-grams; then calculate `Jaccard similarity` of each pair of sets
 2. not feasible in time and memory
-### MinHash ([book3n.dvi](http://infolab.stanford.edu/~ullman/mmds/ch3n.pdf))
+### MinHash
+1. [book3n.dvi](http://infolab.stanford.edu/~ullman/mmds/ch3n.pdf) and corresponding video [lecture](https://youtu.be/96WOGPUgMfw)
 2. `characteristic matrix` of sets
 3. MinHash `signature matrix`
 	1. `MinHash` function always looks for the 1st non-zero element of a column; but If think of permutation as part of hash function, then we have same number of hash function $h_i, i \in [0, n]$.
 	2. The point is to replace permutation (expensive) with hashing functions. See 3.3.5 of the book.
 
-### Locality-sensitive hashing (LSH) ([book3n.dvi](http://infolab.stanford.edu/~ullman/mmds/ch3n.pdf))
+### Locality-sensitive hashing (LSH)
 > *To quickly find similar items in a set*
-1. How
+1. [book3n.dvi](http://infolab.stanford.edu/~ullman/mmds/ch3n.pdf) and corresponding video [lecture](https://youtu.be/_1D35bN95Go)
+2. How
 	1. compare only similar pairs by using many different hash functions to avoid quadratic growth in computation time
 	2. main concern is false negative, but can be reduced by careful tuning
-2. How do `r` and `b` influence the slope and location of phase transition
+3. How do `r` and `b` influence the slope and location of phase transition
 	1. TODO: see the notebook for plot
 
 ### MISC
