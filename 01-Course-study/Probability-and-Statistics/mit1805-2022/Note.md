@@ -36,7 +36,7 @@
 ### Good problems
 1. concept questions of [Solutions from class 15 | Class 15 lecture slides and problems | 18.05 Courseware | MIT Open Learning Library](https://openlearninglibrary.mit.edu/courses/course-v1:MITx+18.05r_10+2022_Summer/courseware/week8/class15-slides-and-problems-wk/?child=last)
 	1. note how *So no amount of data will make the posterior non-zero if corresponding prior is zero.*
-## Class 17 & 18: Null Hypothesis Significance Testing (NHST)
+## Class 17, 18, 19, 20: Null Hypothesis Significance Testing (NHST)
 1. Conceptual takeaways
 	1. ==Distribution of the test statistic is computed assuming $\mathcal{H}_0$==
 		1. ==Section 5.4., example 2.== *Null distribution* is distribution of the $t$ statistic given $\mathcal{H}_0$, which is NOT the distribution of the data; but they have to be related for the test to be meaningful; in this case, population $\mu_0$ is the common factor.
@@ -72,12 +72,18 @@
 		1. Always count the number of data and its constraints.
 	2. $t$-test: when $\sigma$ is unknown, as opposed to the case of $z$-test.
 	3. chi-square statistic and chi-square distribution $\chi^2(df)$, where $df$ is degrees of freedom.
-	4.  ANOVA for more than one group?
-	5. When to use other tests?
+	4. When to use other tests? ANOVA for checking if more than two groups have same mean? two-sample $t$ test for two groups? $\chi^2$ for fitting the prob. dist.? 
+7. [Likelihood principle - Wikipedia](https://en.wikipedia.org/wiki/Likelihood_principle)
+	1. for PSet 9, Problem 2
+		1. For Bayesian framework, same data leads to same posterior; for NHST, the $p$-value depends on non-observed data ("at least as extreme as observed" depends on who the experiment is designed) therefore can be different for same observed data.
+	2. Class 20, 6 *Stopping Rules*. It is a good example showing how NHST is NOT consistent with this principle. See also Class 20, 8 *The likelihood principle*.
+8. Class 20 is very good discussion.
 
 ### Interesting problems
 1. Class 19, in class problem, concept question 1. We run a two-sample 𝑡-test for equal means, with 𝛼 = 0.05, and obtain a 𝑝-value of 0.04. What are the odds that the two samples are drawn from distributions with the same mean?
 	1. Unknown. $p$-value of 0.04 only means $P(\text{data as or more extreme}|H_0)=0.04$, does NOT say anything about $P(H_0​|\text{data})=0.04$, which is a posterior prob (non Frequentist).
+	2. ==So significance level really is about the test setup, something like "this test is so effective, that if $\mathcal{H}_0$ is true, it will only falsely reject is 5 percent of the time."== It attests to how effective the test is, or even the requirement defined prior to experimenting.
+		1. This is where $p$-value differs; the latter is evidence for hypothesis given the data.
 2. PSet 9, Problem 6, (b). 
 	1. If one of the tests has p-value less than 0.01, it is not proper to reject the null hypothesis. This is because the p-value of the entire experiment is greater than 0.01. That is, since we ran 3 tests each with probability 0.01 of a type I error the total probability of type I error is greater than 0.01--it will be close to 0.03. ==With multiple testing the true p-value of the test is larger than the p-value for each individual test.==
 	2. I mistakenly thought that "if one test is significant, then logically the null hypothesis can be rejected." ==The point is that I do NOT know the significant test I saw was TRUE.== It could be type I error!
@@ -85,6 +91,8 @@
 ### References
 1. [Likelihood principle - Wikipedia](https://en.wikipedia.org/wiki/Likelihood_principle)
 	1. for PSet 9, Problem 2
+		1. For Bayesian framework, same data leads to same posterior; for NHST, the $p$-value depends on non-observed data ("at least as extreme as observed" depends on who the experiment is designed) therefore can be different for same observed data.
+	2. Class 20, 6 *Stopping Rules*. It is a good example showing how NHST is NOT consistent with this principle. See also Class 20, 8 *The likelihood principle*.
 ## References
 1. Very good lectures on statistics: https://www.tilestats.com/
 2. Python Bayesian model-building interface https://bambinos.github.io/bambi/
