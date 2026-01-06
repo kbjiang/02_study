@@ -20,6 +20,7 @@
 
 ## Logistic regression
 1. [StatQuest: Logistic Regression](https://youtu.be/yIYKR4sgzI8?si=6IKWgOg8npPVxclt)
+	1. This is really good. [Logistic Regression Details Pt1: Coefficients](https://www.youtube.com/@statquest)
 
 ## Reference
 1. Very good lectures on statistics: https://www.tilestats.com/

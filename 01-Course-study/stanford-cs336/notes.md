@@ -527,12 +527,17 @@ tags: #memory #gpu
 		2. This is by design, but *need to be careful when thinking of them as calibrated probabilistic models*.
 		3. *TODO:* look up the papers he mention on slide 13; one of them is GPT4 release 
 5. DPO
-	1. Conceptually, it is *MLE on the pairwise **implied** rewards* $r(x, y_w) - r(x, y_l)$, under nonparametric assumption and alternative parametrization. 
-		1. No reward, it's SFT: *to find a policy such that its implied reward is most likely to generate the pair-wise preference we have in the training data.*
-		2. ![[Pasted image 20251123064345.png]]
+	1. Conceptually, it is *MLE on the pairwise **implied** rewards* $r(x, y_w) - r(x, y_l)$, under nonparametric assumption and alternative parametrization (reparametrization). 
+		1. reparametrization: $r(x,y)=\beta \log\frac{\pi_r(y|x)}{\pi_{\text{ref}(y|x)}} + \beta \log Z(x)$
+		2. No reward model, no sampling completion during training, it's SFT: *to find a policy such that its implied reward is most likely to generate the pair-wise preference we have in the training data.*
+		3. ![[Pasted image 20251123064345.png]]
 	2. DPO update
 		1. ![[Pasted image 20251123070957.png]]
-	3. *TODO*: really understand the argument of $\sigma$ function. Compare with logistic regression.
+	3. DPO loss
+		1. $\beta$ is like temperature
+		2. [Simplifying Alignment: From RLHF to Direct Preference Optimization (DPO)](https://huggingface.co/blog/ariG23498/rlhf-to-dpo)
+		3. [2305.18290](https://arxiv.org/pdf/2305.18290)
+	4. *TODO*: really understand the argument of $\sigma$ function. Compare with logistic regression.
 ### *Why is this not true RL*
 1. No interaction with environment (like in a game setting)
  
