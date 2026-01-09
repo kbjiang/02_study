@@ -103,14 +103,16 @@
 		
 ## Class 22: Confidence intervals
 1. It's relation with NHST
-	1. pivoting
-		1. it's basically the same null distribution of $\bar{x}$, just in reference of different means; when $n$ increase, both distribution narrows down.
-	2. $1-\alpha$ confidence interval $\Leftrightarrow$ significant level of $\alpha$
-	3. It's easier to think of $x$ in terms of *"is it in the non-rejection region?"*. E.g., if significance level $\alpha$ increase, meaning non-rejection region narrows, then confidence interval narrows down as well.
-	4. Mental picture
-		1. CI as random variable: the *procedure* produce same size intervals for any $\mu_0$.
-		2. $z$ CI for mean. The size of CI is constant as $\sigma$ is constant. ![[Pasted image 20260107202339.png]]
-		3. Chi square CI for variance. See how the size of CI depending on value of $s^2$ and $\sigma^2$.![[Pasted image 20260107220700.png]]
+	1. Pivoting: it's basically the same null distribution of $\bar{x}$, just in reference of different means.
+		1. $1-\alpha$ confidence interval $\Leftrightarrow$ significant level of $\alpha$
+		2. If $n$ increase, both distribution narrows down.
+		3. If significance level $\alpha$ increase, meaning non-rejection region narrows, then confidence interval narrows down as well.
+	2. Mental picture
+		1. ==Assume $\theta_0$ and sample many $\bar{x}$, then $1-\alpha$ fraction of such $\bar{x}$ will be in the non-rejection region, equivalently, $\theta_0$ will be in the CI of some $\bar{x}$.==
+			1. type I (CI) error: when $\bar{x}$ ends up in rejection region, $\theta_0$ is also out of CI 
+		2. CI as random variable: the *procedure* produce same size intervals for any $\mu_0$.
+		3. $z$ CI for mean. The size of CI is constant as $\sigma$ is constant. ![[Pasted image 20260107202339.png]]
+		4. Chi square CI for variance. See how the size of CI depending on value of $s^2$ and $\sigma^2$.![[Pasted image 20260107220700.png]]
 2. different CIs
 	1. Standardized mean $Z \sim \mathcal{N}(0, 1)$ for $\mu$: unknown $\mu$, known $\sigma$
 	2. Studentized mean $T \sim(n-1)$ for $\mu$: unknown $\mu$, unknown $\sigma$
@@ -128,6 +130,13 @@ $$P(I_x \text{ contains } \theta_0\ |\ \theta = \theta_0) = 1-\alpha$$
 1. PSet 10, Problem 5. 
 	1. part (b). Good example where low prior balance out $\mu$ inside 95% CI. This is why CI along cannot tell you how likely a hypothesis is.
 	2. part (c). Good conceptual questions.
+
+## Class 24: Bootstrap Confidence intervals
+1. percentile vs basic
+	1. use of quantile and critical value
+	2. former is more accurate. See R Studio 10, problem 1.
+
+
 
 ## References
 1. Very good lectures on statistics: https://www.tilestats.com/
