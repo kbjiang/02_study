@@ -23,7 +23,7 @@ Topic: #Probability #LawsOfLargeNumber
 6. intuition leads to CLT around 40:30
 
 ### Lecture 20: Central Limit Theorem #CLT
-1. First read [[statistics#Sampling Distribution of a Statistic CLT]] 
+1. First read [[Practical statistics for data scientists#Sampling Distribution of a Statistic CLT]] 
 	1. to grasp the concept of *sample statistic* and *sampling distribution*.
 	2. to build the intuition of CLT
 2. *Only* requires mean and variance!

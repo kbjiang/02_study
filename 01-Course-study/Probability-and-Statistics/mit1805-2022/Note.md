@@ -136,6 +136,12 @@ $$P(I_x \text{ contains } \theta_0\ |\ \theta = \theta_0) = 1-\alpha$$
 	1. use of quantile and critical value
 	2. former is more accurate. See R Studio 10, problem 1.
 
+## Class 26: Linear regression
+1. *Linear regression* can fit polynomials as well
+	1. the "linear" part means the *linear algebraic equations* for the unknown parameters
+	2. it's called *simple linear regression* when fitting a line
+2. regression to the mean
+	1. Response variable $y$ will tend to be 'closer' to (i.e., regress to) its mean than the predictor variable $x$ is to tis mean.
 
 
 ## References
