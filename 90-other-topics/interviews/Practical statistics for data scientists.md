@@ -1,4 +1,3 @@
-# Practical Statistics for Data Scientists
 ## Chapter 1. Exploratory Data Analysis
 ### Estimates of location
 **Definition**: To get a "typical value": an estimate of where most of the data is located. Things like *mean*, *quantile* and *outliers*

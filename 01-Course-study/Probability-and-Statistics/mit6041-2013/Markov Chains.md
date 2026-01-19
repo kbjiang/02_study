@@ -7,10 +7,11 @@ Topic: #Probability #RandomProcess #MarkovChain
 ## Lectures
 ### Lecture 16: Markov Chains - I
 1. Markov chains
-	1. Unlike the Bernoulli and Poisson, the *future depends on the past*. In specific for Markov, it only depends on current state. 
-		1. The state of each time step is a R.V., namely $X_i$, which $\in (1, m)$
-		2. $p_{i, i+1} = P(X_i, X_{i+1}|X_i) = P(X_i, X_{i+1}|X_i, X_{i-1}, ... X_0)$. How we got to $i$ does not matter.
-	2. *state*: summarizes the effect of the past on the future
+	1. Unlike the Bernoulli and Poisson, here the *future depends on the past*. Therefore the concept of a *state*, which *summarizes the effect of the past on the future*.
+		1. In specific for Markov, it only depends on current state. 
+	2. Need to define the right *state space*. Nice example P355, Example 7.6.
+	3. The state of each time step is a R.V., namely $X_i$, which $\in (1, m)$
+	4. $p_{i, i+1} = P(X_i, X_{i+1}|X_i) = P(X_i, X_{i+1}|X_i, X_{i-1}, ... X_0)$. How we got to $i$ does not matter.
 2. $n$-Step Transition Probabilities $r_{ij}(n)$
 	1. Probability that state after $n$ time periods will be $j$, given current state is $i$.
 	2. $p_{ij}=r_{ij}(1)$.

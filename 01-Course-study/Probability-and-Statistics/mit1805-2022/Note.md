@@ -96,9 +96,10 @@
 		5. When you reject H0​ at level α, you are saying:_“If I were to repeat this procedure many times in situations where H0​ is true, I would falsely reject it at most α of the time.” That is a statement about **the procedure**, not about **the hypothesis**.
 			1. See ==Class 20 in-class problem, Board question 2. "Stop!"== as an example. In experiment 3, one take both first 50 trials and possible 2nd 50 trails as part of the same experiment procedure and calculate the type I errors.
 2. Multiple tests
-	1. PSet 9, Problem 6, (b). If one of the tests has p-value less than 0.01, it is not proper to reject the null hypothesis. This is because the p-value of the entire experiment is greater than 0.01. That is, since we ran 3 tests each with probability 0.01 of a type I error the total probability of type I error is greater than 0.01--it will be close to 0.03. ==With multiple testing the true p-value of the test is larger than the p-value for each individual test.== 
-	2. See also Class 20 in-class problem, Board question 2. "Stop!".
-	3. I mistakenly thought that "if one test is significant, then logically the null hypothesis can be rejected." ==The point is that I do NOT know the significant test I saw was TRUE.== It could be type I error!
+	1. ==With multiple tests, the overall prob. of type I error f the test is larger than the that of each individual test.== Think of each test as a coin with head prob. $\alpha$. 
+		1. Bonferroni correction: to maintain overall type I error at $\alpha$, set $\alpha/n$ for individual tests, where $n$ is number of tests.
+		2. See also Class 20 in-class problem, Board question 2. "Stop!".
+	2. I mistakenly thought that "if one test is significant, then logically the null hypothesis can be rejected." ==The point is that I do NOT know the significant test I saw was TRUE.== It could be type I error!
 		1. This is why we use ANOVA which considers between group and within group variances.
 		
 ## Class 22: Confidence intervals
