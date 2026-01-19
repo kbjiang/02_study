@@ -104,3 +104,4 @@
 			1. Hard margin classifier => Support vector classifier (soft margin, allows misclassification, bias variance trade-off) => Support vector machine (project to higher dimensional space to accommodate nonlinearity)
 		3. go over [16. Learning: Support Vector Machines](https://www.youtube.com/@mitocw)
 			1. the math and the dual problem
+		4. also good https://youtu.be/iEQ0e-WLgkQ
