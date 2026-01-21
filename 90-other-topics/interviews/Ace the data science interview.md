@@ -75,6 +75,7 @@
 	5. Iterate
 ### Interview Questions
 1. 7.5. Multicollinearity
+	1. PS: thought it made coefficients unstable and interpretation difficult, the prediction accuracy usually stays
 2. 7.6. Random forest over Decision Tree
 3. 7.7. Missing data
 4. 7.11. Enough data to create an accurate model?
@@ -85,17 +86,19 @@
 5. 7.15. Cross validation
 	1. It is for ==evaluating== a model and uses training internally "Cross validation is a technique used to assess the performance of an algorithm in several resamples/ subsamples of training data."
 	2. It can be used for tuning hyperparameters. E.g., degree of polynomial in SVM
-6. 7.19. Information gain in decision tree
+6. 7.17. Collaborative Filtering
+	1. *Embeddings* for both users and items, then *minimize* the difference between observed rating and inner products. See [[temp-Collaborative-filtering]] for more.
+7. 7.19. Information gain in decision tree
 	1. Information gain is calculated using entropy, as opposed to Gini impurity, but the equation is the same
 		1. $\text{Gain} = I(\text{parent})-\sum_i w_i I(\text{child}_i)$, where $I$ is either entropy or Gini.
 	2. The entropy is calculated on target classes, NOT splitting feature!
-7. 7.20. $L_1$ vs $L_2$ penalties 
+8. 7.20. $L_1$ vs $L_2$ penalties 
 	1. Loss contours from Chapter 4 of [Hands on ML](https://learning.oreilly.com/library/view/hands-on-machine-learning/9798341607972/ch04.html) ![[Pasted image 20260118163129.png]]
 	2. During gradient descent
 		1. $L_1$ likely to "zero out" particular weights, in this case $\theta_2$, while $L_2$ does not.
 		2. when approaching minimal, $L_1$ bounces around because its gradient is always $\pm 1$, while gradients of $L_2$ shrinks .
-8. 7.26. $k$-means gradient descent
-9. 7.27. Kernel trick in SVM 
+9. 7.26. $k$-means gradient descent
+10. 7.27. Kernel trick in SVM 
 	1. TODO: 
 		1. go over appendix of [Hands-On Machine Learning with Scikit-Learn and PyTorch](https://ageron.github.io/homlp/HOMLP_Appendix_C.pdf)
 			1. *Kernel* is a function computes the dot product $\phi(\mathbf{a})^T\ \phi(\mathbf{b})$ based only on the original vectors $\mathbf{a}$ and $\mathbf{b}$, without having to know the transformation $\phi$.
@@ -105,3 +108,36 @@
 		3. go over [16. Learning: Support Vector Machines](https://www.youtube.com/@mitocw)
 			1. the math and the dual problem
 		4. also good https://youtu.be/iEQ0e-WLgkQ
+11. 7.30. The steps of building a churn prediction model
+	1. understand business usecase
+	2. model consideration: interpretability?
+	3. data and feature
+	4. deploy and refine
+12. 7.32. PCA
+	1. to frame it as a Lagrangian by maximizing variance of data in direction $w$ while constraining $\lVert w \rVert^2 = 1$
+	2. see [[temp-PCA]] for full detail
+13. 7.3.5. variance of least square estimates
+	1. see answer
+		1. matrix form of the solution and $y=X \beta + \epsilon$.
+		2. for last equation, $((X^T\ X)^{-1}X\epsilon)^2 = (X^T\ X)^{-1}X\ \Sigma_{\epsilon\epsilon} ((X^T\ X)^{-1}X)^T$, where $\mathbb{E}[\Sigma_{\epsilon\epsilon}]=\mathbb{I}*\sigma^2$ is the covariance matrix of noise, because it's NOT a dot product!
+	2. see 14.4.2 of Rice.
+
+## Product sense
+### Always 
+1. Ask clarifying question about the product. Do NOT assume anything.
+	1. E.g., "what is the goal for Youtube Premium pricing?" Sometimes current pricing might be for long term gain.
+2. Explain the product's business goal before providing solution
+3. Think about cost and align with stakeholders from different departments
+
+### Questions
+1. 10.10. Four steps for diagnosing metric change
+	1. scope of the metric change
+	2. hypothesize contributing factors
+	3. validate each factor
+	4. ?
+2. 10.12. Stickiness
+	1. Daily active user (DAU), WAU, MAU
+	2. the ratios such as DAU/WAU measures stickiness; lower meaning many people only use it weekly
+3. 10.16. Pricing
+	1. three dimensions: cost-based, value-based, competitor-based
+
