@@ -140,4 +140,3 @@
 	2. the ratios such as DAU/WAU measures stickiness; lower meaning many people only use it weekly
 3. 10.16. Pricing
 	1. three dimensions: cost-based, value-based, competitor-based
-

@@ -71,7 +71,8 @@
 	2. $T$ has only one parameter ($df$). Should be compared with unit Norm distribution.
 5. TODO: other tests
 	1. degrees of freedom
-		1. Always count the number of data and its constraints.
+		1. Always count the number of *observed data* and constraints. See ==Class 19, Example 10==, where both total and $\theta$ are used for calculating expected counts, therefore both count as constraints! As a comparison, Example 9 only consider total as constraint because $\theta=0.5$ is given.
+		2. Also Class 19 Example 12.
 	2. $t$-test: when $\sigma$ is unknown, as opposed to the case of $z$-test.
 	3. chi-square statistic and chi-square distribution $\chi^2(df)$, where $df$ is degrees of freedom.
 	4. When to use other tests? ANOVA for checking if more than two groups have same mean? two-sample $t$ test for two groups? $\chi^2$ for fitting the prob. dist.? 
@@ -101,6 +102,7 @@
 		2. See also Class 20 in-class problem, Board question 2. "Stop!".
 	2. I mistakenly thought that "if one test is significant, then logically the null hypothesis can be rejected." ==The point is that I do NOT know the significant test I saw was TRUE.== It could be type I error!
 		1. This is why we use ANOVA which considers between group and within group variances.
+3. Choose a smart hypothesis makes calculation much easier: [Hypothesis Testing Example: Salk Vaccine Trial](https://www.youtube.com/@Eigensteve)
 		
 ## Class 22: Confidence intervals
 1. It's relation with NHST
@@ -133,7 +135,10 @@ $$P(I_x \text{ contains } \theta_0\ |\ \theta = \theta_0) = 1-\alpha$$
 	2. part (c). Good conceptual questions.
 
 ## Class 24: Bootstrap Confidence intervals
-1. percentile vs basic
+1. ==Bootstrap works for statistics like median, maxima etc, while CLT only covers mean and sum.==
+	1. CLT asks: "What is the distribution of a statistic across repeated real-world samples?" Bootstrap asks: "Given one observed sample, how variable could this statistic be?"
+	2. see [[temp-bootstrap-vs-CLT]] for more discussion.
+2. percentile vs basic
 	1. use of quantile and critical value
 	2. former is more accurate. See R Studio 10, problem 1.
 
