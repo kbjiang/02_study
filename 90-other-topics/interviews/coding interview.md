@@ -1,29 +1,33 @@
-Date: 2025-03-14
-Course: https://www.techinterviewhandbook.org/algorithms/study-cheatsheet/
-Chapter: 
-Lecture: 
-Topic: #coding #interview
+#coding #interview
 
 ## My understanding
-1. Be familiar with data structures and their regular operations
+1. Be familiar with problem formulation, data structures and their regular operations
 	1. E.g., Binary trees and its traversal
+	2. The trick or *brain teasing* part should not be the focus.
+		1. E.g., the sum of linked list. They actually hinted the trick part
 2. Be familiar with basic coding, such as recursion
-3. The trick or *brain teasing* part should not be the focus.
-	1. The focus should be problem formulation and get familiar with the data structure
-	2. E.g., the sum of linked list. They actually hinted the trick part
-4. The complexity requirements: always look for less repeated computation
-	2. E.g., the two pointer problems
+3. The complexity requirements: always look for less repeated computation
+	1. E.g., the two pointer problems
 ## General recommendation
 1. Validate input first or ask if input is valid (saves time)
 2. Write pure functions as much as possible
 3. "If you are cutting corners in your code, state that out loud to your interviewer and say what you would do in a non-interview setting"
 4. As a last resort, just try each data structure and see which one works
-
-## - Array
+## Array
 1. Arrays hold values of the *same type* at *contiguous memory locations*.
-2. slicing and concatenating arrays would take O(n) time. Use start and end indices to demarcate a subarray/range where possible.
+2. Use start and end indices to demarcate a subarray/range wherever possible.
 3. `subsequence` vs `subarray`
+4. Time complexity
 
+| Operation             | Big-O     | Note                                                                                                 |
+| --------------------- | --------- | ---------------------------------------------------------------------------------------------------- |
+| Access                | O(1)      |                                                                                                      |
+| Search                | O(n)      |                                                                                                      |
+| Search (sorted array) | O(log(n)) |                                                                                                      |
+| Insert                | O(n)      | Insertion would require shifting all the subsequent elements to the right by one and that takes O(n) |
+| Insert (at the end)   | O(1)      | Special case of insertion where no other element needs to be shifted                                 |
+| Remove                | O(n)      | Removal would require shifting all the subsequent elements to the left by one and that takes O(n)    |
+| Remove (at the end)   | O(1)      | Special case of removal where no other element needs to be shifted                                   |
 ### [TwoSums](https://leetcode.com/problems/two-sum/) 
 1. Good use case for `hashmap` i.e., `dictionary`. Gives `O(n)` complexity
 ### [3Sum](https://leetcode.com/problems/3sum/description/)
