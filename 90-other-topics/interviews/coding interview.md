@@ -7,12 +7,25 @@
 		1. E.g., the sum of linked list. They actually hinted the trick part
 2. Be familiar with basic coding, such as recursion
 3. The complexity requirements: always look for less repeated computation
-	1. E.g., the two pointer problems
+	1. E.g., the `two sum` problem
 ## General recommendation
-1. Validate input first or ask if input is valid (saves time)
-2. Write pure functions as much as possible
-3. "If you are cutting corners in your code, state that out loud to your interviewer and say what you would do in a non-interview setting"
-4. As a last resort, just try each data structure and see which one works
+1. Read the problem carefully, each sentence can be useful.
+	1. E.g., in `two sums`, "each input would have **_exactly_ one solution**" is important.
+2. Validate input first or ask if input is valid (saves time)
+3. Write pure functions as much as possible
+4. "If you are cutting corners in your code, state that out loud to your interviewer and say what you would do in a non-interview setting"
+5. As a last resort, just try each data structure and see which one works
+
+## Methodology
+1. Bottom line
+	1. prioritize core data structures + pattern fluency way over memorizing clever tricks
+	2. therefore no need to do a lot of LC problems
+2. Follow 5-week plan (organized by topics) in https://www.techinterviewhandbook.org/best-practice-questions/
+	1. When stuck, find solution at https://neetcode.io/practice/practice/allNC
+	2. At the end I should redo problems without knowing its topics
+	3. Cross check https://neetcode.io/roadmap
+3. A better version is [Grind75](https://www.techinterviewhandbook.org/grind75/) where the list is updated for different time lines.
+4. Exercise notebook: [coding-interview.ipynb](C:\Users\kejia\Documents\GitHub\02_study\90-other-topics\interviews\)
 ## Array
 1. Arrays hold values of the *same type* at *contiguous memory locations*.
 2. Use start and end indices to demarcate a subarray/range wherever possible.
@@ -51,7 +64,23 @@
 1. Interview: you are given an array of 1's and 0's. You are also given a number k. What is the length of the longest continuous subsequence of 1's you can pick from the given array? You can substitute at most k 0's with 1's. Write a script in python.
 	1. Example: input [1, 0, 1, 0, 0, 1, 0, 0, 1, 1, 1, 1, 1], k=2;	output: 8
 	2. The mental picture is looking for a sliding window with no more than k zeros.
-	
+
+---
+##  Hash table
+### Learning
+ 1. Idea
+	 1. replace search $O(n)$ with array indexing $O(1)$.
+		 1. Get the key of the target object, and go directly to the corresponding *bucket*, without scanning.
+ 2. Space-time trade-off
+	 1. if use unique integer keys for each object, there will be a lot of wasted space to store the set of all possible keys $U$. 
+		 1. also called "Direct-address table"
+ 3. Hash function
+	 1. Instead of $U$, design $h$ to shrink array size to $\Theta(n)$.
+		 1. Therefore collisions
+ 4. References
+	 1. [Hash tables: Samuel's tutorial](https://youtu.be/r1XZGP5ppqQ?list=PL9t0xVFP90GBPScODccB2_PpouUUZ4j8C)
+### Coding
+
 ## - String
 ### data structures
 1. Tries: 
@@ -263,8 +292,8 @@
 
 Tow-D Maze
 
-## - Hash table
 ### Data structure
+
 
 ### [138. Copy List with Random Pointer](https://leetcode.com/problems/copy-list-with-random-pointer/)
 1. Cute problem
