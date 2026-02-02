@@ -1,14 +1,54 @@
 ## Chapter 1. Exploratory Data Analysis
+> both 'estimates of location/variability' use a single number to describe the aspects of the data.
 ### Estimates of location
-**Definition**: To get a "typical value": an estimate of where most of the data is located. Things like *mean*, *quantile* and *outliers*
-1. P3. *Key Terms for Data Types*. Taxonomy of data types.
-2. P9. *Metrics and Estimates*. Nice distinction between statistician and ds
+1. **Definition**: To get a "typical value": an estimate of where most of the data is located. Things like *mean*, *quantile* and *outliers*
+	1. P3. *Key Terms for Data Types*. Taxonomy of data types.
+	2. P9. *Metrics and Estimates*. Nice distinction between statistician and ds
 ### Estimates of variability
-**Definition**: measures whether the data values are tightly clustered or spread out. Things like *deviation*
-1. *deviation* is $x_i - \bar{x}$,  and *standard deviation* is related to $(x_i - \bar{x})^2$.
-2. *standard deviation* is much easier to interpret than *variance* since it's on same scale as the original data
-3. P15 box. Why $n-1$ for variance? Because one constraint.
-	1. For rigorous proof, see [[Bertsekas-Introduction-to-probability-2nd.pdf]] P467-P468
+1. **Definition**: measures whether the data values are tightly clustered or spread out. 
+2. *deviation* is $x_i - \bar{x}$,  and *standard deviation* is related to $(x_i - \bar{x})^2$.
+3. *standard deviation* is much easier to interpret than *variance* since it's on same scale as the original data
+4. ==Sensitivity of outliers from high to low==
+	1. var/std > mean absolute deviation >  median absolute deviation from the median (MAD)
+	2. var/std > percentile
+5. P15 box. $n-1$ degree of freedom because the sample mean is fixed.
+	1. For proof, see [[Bertsekas-Introduction-to-probability-2nd.pdf]] P467-P468
+### Exploring the data distribution
+1. Visualization functions in `Pandas`
+	1. Boxplot (1D): `whiskers` is 1.5 times the IQR (interquantile range, i.e., 0.25 ~ 0.75)
+	2. Histogram (2D): `bin` vs `frequency`
+
+### Exploring Two or More Variables
+1. *Contingency table*: this relates to $\chi^2$ test
+
+### Code
+1. use `df.plot.*` for regular plots
+2. Good use of `groupby`: 
+	```python
+	# `observed = False` to keep rows with zero `binnedPopulation`
+	for group, subset in df.groupby(by="binnedPopulation", observed=False)
+	```
+3. `bins` in histogram
+	```python
+	# `bins` can be list of end points
+	np.histogram(state['Murder.Rate'], bins=range(1, 12))
+	# equivalently, use `pd.cut`
+	# however, use `right=False` to make left edge closed (as in `numpy`)
+	pd.cut(state['Murder.Rate'], bins=range(1, 12), right=False).value_counts().sort_index()
+	# Confusingly, `plt.hist()` use `np` convention and is recommended for plotting histogram.
+	state['Murder.Rate'].plot.hist(density=True, xlim=[0, 12], bins=range(1, 12))
+	```
+4. use `pd.loc`
+```python
+# `loc[row condition, col condition]`
+telecom = sp500_px.loc[sp500_px.index >= '2012-07-01', telecomSymbols]
+```
+5. by category
+```python
+# use `ax`
+# use `by` to plot by category
+ax = airline_stats.boxplot(by='airline', column='pct_carrier_delay', figsize=(5, 5))
+```
 
 ## Chapter 2. Data and Sampling Distributions
 ### Selection Bias
