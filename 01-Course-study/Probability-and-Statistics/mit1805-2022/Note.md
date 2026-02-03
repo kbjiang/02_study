@@ -135,12 +135,14 @@ $$P(I_x \text{ contains } \theta_0\ |\ \theta = \theta_0) = 1-\alpha$$
 	2. part (c). Good conceptual questions.
 
 ## Class 24: Bootstrap Confidence intervals
-1. ==Bootstrap works for statistics like median, maxima etc, while CLT only covers mean and sum.==
+1. ==Bootstrap handles statistics like median, maxima etc easily, where CLT is less well-defined comparing to sample mean.==
 	1. CLT asks: "What is the distribution of a statistic across repeated real-world samples?" Bootstrap asks: "Given one observed sample, how variable could this statistic be?"
 	2. see [[temp-bootstrap-vs-CLT]] for more discussion.
-2. percentile vs basic
-	1. use of quantile and critical value
-	2. former is more accurate. See R Studio 10, problem 1.
+2. TODO: Justification of bootstrap. Class 24, 8.
+	1. It cannot improve point estimate on $\mu$, which is estimated by $\bar{x}$. The *empirical distribution* of $\bar{x}^*$ can be very close to *true distribution* of $\bar{x}$ when resampling many times, but provides no new info on $\mu$.
+		1. This is guaranteed by *Law of large numbers*. See Bertsekas P270, Example 5.4
+	2. the estimated mean may be off, i.e., $\bar{x}$ is far from $\mu$, but variance is good. We can do many resampling to get the variance of $\bar{x}^*$ (histogram), which approximates that of $\bar{x}$ ($\pm \sigma/\sqrt{n}$).
+		1. This is also why we also resample with size $n$, to mimic variance of $\bar{x}$.
 
 ## Class 26: Linear regression
 1. *Linear regression* can fit polynomials as well

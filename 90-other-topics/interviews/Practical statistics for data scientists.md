@@ -51,27 +51,28 @@ ax = airline_stats.boxplot(by='airline', column='pct_carrier_delay', figsize=(5,
 ```
 
 ## Chapter 2. Data and Sampling Distributions
+### Random sampling
+1. Even though there are many methodologies (e.g., stratified sampling) trying to make a sample representative, they *only work properly if the data ultimately come from random sampling*. 
+	1. Namely, within each group, the data you observed are like the data you didn’t observe.
+2. Stratified sampling
+	1. A simple random sample taken from the population would yield too few blacks and Hispanics, so those strata could be *overweighted* in stratified sampling to yield equivalent sample sizes.
+	2. the overweighting makes sure the estimate in under-represented groups is accurate, but also affects overall average cross group and needs to be fixed afterwards
 ### Selection Bias
-1. *vast search effect*. Abusing the data will lead to unreal patterns
-	1. P54. "The difference between a phenomenon that you verify when you test a hypothesis using an experiment and a phenomenon that you discover by perusing available data..." and the example followed
-	2. "Specifying a hypothesis and then collecting data following randomization and random sampling principles ensures against bias."
-2. *regression to the Mean*
-
-### Sampling Distribution of a Statistic #CLT
-1. Definitions in box on P57
-	1. *sample statistic*: A metric, also a random variable, calculated for a sample of data drawn from a larger population.
-		1. E.g., mean of five values (individual data is *value*)
-		2. "1000 means of five values", *sample size* is five; 1000 is *number of samples/experiments*
-	2. *standard Error*
-		1.  *standard error* measures the variability of a sample metric, *standard deviation* measures the variability of individual data points
-		2. For population distribution, the error of mean is always zero; the *standard deviation* is fixed and is for infinite data points
-		3. For *sampling distribution* of a statistic, the error of mean is the *standard error*. To estimate SE,
-			1. Either use CLT, ==where one sample is as good as multiple samples, as CLT only depends on *sample size n*==
-			2. Or draw multiple samples and keep updating the std of the means. Fresh samples are hard to get therefore *bootstrap*.^whybootstrap
-2. Central Limit Theorem
-	1. Illustrating examples from 3B1B [video](https://youtu.be/zeJD6dqJ5lo)
-		1. Galton Board: each collision with a peg is a Bernoulli, more levels of pegs, i.e., *larger sample size*, leads to Gaussian distribution of the final displacement.
-		2. Sum of dice: each dice is uniform, but the distribution (*sampling distribution*) of sum of large number of dice (*sample statistic*) follows Gaussian
+1. Definition: bias resulting from the way in which observations are selected.
+2. Vast search effect
+	1. repeated use of data which lead to something interesting *by chance*.  ==This is why we need holdout set==, e.g. train/test split.
+	2. "...difference between a phenomenon that you verify when you test a hypothesis using an experiment and a phenomenon that you discover by perusing available data..." and the coin flip example followed
+3. Regression to mean
+	1. selecting bias toward extremely high performers
+### The Bootstrap (vs CLT) #Bootstrap
+1. In data science, we use bootstrap to estimate sampling distribution of a statistic, instead of CLT.
+	1. Instead of calculating $\sigma/\sqrt{n}$, we resample and get the distribution/deviation of the statistic
+	2. For statistics like median, the CLT for its variance is less well-defined (comparing to sample mean), while bootstrapping is straightforward
+2. The random subset of training data in Random Forest is also an example of bootstrapping, i.e., bootstrap aggregating, or *bagging*.
+### QQ plot
+1. Given sample data, create quantiles
+2. Given quantile, plot $z$-score of sample against $z$-score of standard normal distribution
+	1. E.g., if heavy tail, then $z$-score of sample corresponds to quantile 0.1 will be *much more negative* than that of standard normal dist.
 ### The Bootstrap
 1. To mimic multiple samples. See  [[#^whybootstrap]].
 	1. P63, python snippet. `sample = resample(loans_income)` is same size as `loans_income` but could have duplicates, i.e., some row in `loans_income` was drawn multiple times
@@ -96,3 +97,9 @@ https://youtu.be/JQc3yx0-Q9E
 
 ### Sample error and Confidence interval
 1. see this [example](02_study/90-other-topics/interviews/confidence_intervals_summary.md)
+
+### To do
+1. Central Limit Theorem #CLT 
+	1. Illustrating examples from 3B1B [video](https://youtu.be/zeJD6dqJ5lo)
+		1. Galton Board: each collision with a peg is a Bernoulli, more levels of pegs, i.e., *larger sample size*, leads to Gaussian distribution of the final displacement.
+		2. Sum of dice: each dice is uniform, but the distribution (*sampling distribution*) of sum of large number of dice (*sample statistic*) follows Gaussian
