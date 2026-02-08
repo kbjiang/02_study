@@ -21,7 +21,7 @@
 	1. both means *linear* relationship between two R.V.
 	2. former ranges from $(-\infty, \infty)$ and has unit, latter is former normalized by variances, and ranges from $(-1, 1)$ and is unit-less. 
 3. 6.9. $t$-test and $z$-test
-	1. both require the test statistic, e.g. sample mean, to be normally distributed. This means either initial population is normal, or sample size is large ($n \ge 30$).
+	1. both require the test statistic, e.g. sample mean, to be normally distributed. This means either initial population is normal, or sample size is large ($n \ge 30$) so that CLT can be applied.
 	2. Use $t$-test instead of $z$-test when (a) number of data is small and (b) unknown population variance.
 4. 6.13, 6.14. Sum of expectations
 	1. Also geometric distribution

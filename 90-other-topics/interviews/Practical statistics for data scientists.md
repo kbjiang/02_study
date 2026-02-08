@@ -62,6 +62,7 @@ ax = airline_stats.boxplot(by='airline', column='pct_carrier_delay', figsize=(5,
 2. Vast search effect
 	1. repeated use of data which lead to something interesting *by chance*.  ==This is why we need holdout set==, e.g. train/test split.
 	2. "...difference between a phenomenon that you verify when you test a hypothesis using an experiment and a phenomenon that you discover by perusing available data..." and the coin flip example followed
+	3. similar to $p$-hacking?
 3. Regression to mean
 	1. selecting bias toward extremely high performers
 ### The Bootstrap (vs CLT) #Bootstrap
@@ -72,32 +73,124 @@ ax = airline_stats.boxplot(by='airline', column='pct_carrier_delay', figsize=(5,
 ### QQ plot
 1. Given sample data, create quantiles
 2. Given quantile, plot $z$-score of sample against $z$-score of standard normal distribution
-	1. E.g., if heavy tail, then $z$-score of sample corresponds to quantile 0.1 will be *much more negative* than that of standard normal dist.
-### The Bootstrap
-1. To mimic multiple samples. See  [[#^whybootstrap]].
-	1. P63, python snippet. `sample = resample(loans_income)` is same size as `loans_income` but could have duplicates, i.e., some row in `loans_income` was drawn multiple times
-2. *Bootstrap* vs *Permutation*. See [[#^resampling]]
-	1. see...
+	1. E.g., if heavy tail, then $z$-score of sample corresponds to quantile 0.1 will be *much more negative* than that of standard normal dist. I.e., extreme values are more likely.
 ### Student's t-Distribution
 1. See [[Bertsekas-Introduction-to-probability-2nd.pdf]] P471
+2. $t$-test vs $z$-test
+	1. both require the test statistic, e.g. sample mean, to be normally distributed. This means either initial population is normal, or sample size is large ($n \ge 30$) so that CLT can be applied. 
+	2. Use $t$-test instead of $z$-test when (a) number of data is small and (b) unknown population variance.
+### ==Chi-Squared distribution vs F-distribution==
+1. Chi-Squared is typically concerned with *counts* of items falling into category
+	1. Probability is just for calculating expected counts, never directly in $\chi^2$ statistic.
+2. F is similar except that it deals with *measured continuous* values rather than counts
+	1. *Continuous* does NOT mean float, can be integers like level of pain.
 
 ## Chapter 3. Statistical Experiments and Significance Testing
+> All these tests, $z$, $t$, ANOVA and $\chi^2$ are unified under NHST, in the sense all of their distributions, normal, $t$, $F$ and $\chi^2$, are derived under null hypothesis of ineffectiveness of the treatment, i.e., pure chance.
 ### Hypothesis Tests
 1. P93 box. Nice examples on *misinterpreting randomness*.
 	1. "we do see the real-world equivalent of six Hs in a row... we are inclined to attribute it to something real, not just to chance."
 2. Usually used to assess the output from A/B test
-3. *Null hypothesis*
-	1. The difference could be by change. Our hope is to prove this is not true.
-### *Resampling*^resampling
-1. Both *bootstrap* and *permutation*
+### ==Resampling==
+1. Goal: *to assess random variability in a statistic*
+	1. Two main types: *bootstrap* and *permutation*
+2. Bootstrap
+	1. Mostly for assessing the reliability (e.g. confidence interval) of an estimate, i.e., empirical distribution instead of relying on CLT
+	2. Always resamples with replacement
+3. Permutation
+	1. Mostly for testing hypotheses, typically involves ==two or more groups==
+	2. Usually resamples without replacement
+	3. ==It can be the empirical alternative to many tests, such as $t$, $\chi^2$ and ANOVA.==
+		1. See both examples in this section, one continuous (web stickiness), the other counts (ecommerce conversion)
+4. ==When sample size is low, statistical theory approximation becomes rough, the resampling is preferred.==
+### $t$-tests
+1. ==Conceptual==: I now prefer "==$t$-distribution is a reference distribution to which the observed $t$-statistic can be compared==" to "the $t$-statistic follows a $t$-distribution", because it's closer to the procedure
+	1. "Studentize" data, i.e., test statistic => compare against *predefined* $t$-distribution
+2. ==Many variants==
+	1. One-sample $t$-test for the mean: measures the variability of sample mean
+	2. two-sample $t$-test for comparing means: 
+		1. $H_0$ is $\bar{x}-\bar{y}=\Delta\mu$
+		2. DOF is $n+m-2$ coz both sample means are used for calculating sample variances
+	3. Paired two-sample $t$-test.
+### Multiple testing
+1. Multiplicity (multiple comparisons, many variables etc) increases the risk of concluding that something is significant by chance
+2. the $p$-value needs to be adjusted when multiple comparisons
+3. use holdout samples (train/test split)
+### Good examples
+1. "web stickiness" examples
+	1. Has code for permutation
+	2. The A/B version can be tested by either *two-sample* $t$-test of unequal variances or ANOVA
+	3. The A/B/C/D version can only be tested by ANOVA because it has more than two groups
+### Degree of freedom
+1. Factored variables in regression
+	1. E.g., "day of week" should only include indicators/dummy variables for Mon-Sat, to avoid multicollinearity error. ==TODO: prepare ML for this?==
+### ANOVA
+1. ANOVA (Analysis on variances)
+	1. More than two groups, alternative to $t$-test.
+2. Big idea
+	1. A *single overall* test (Omnibus test) that addresses "could all groups have the same value for the statistic of interest? could the ==difference among groups== due to chance?"  
+		1. In $t$-test, we quantify the difference by $\bar{x}-\bar{y}$ since only two groups
+		2. In ANOVA, we quantify the difference among groups with the variance of the means
+			1. This is also the quantity simulated in permutation test
+	2. Avoids the multiple pair-wise comparison, which has the risk of p-hacking
+3. $\chi^2$ is similar in logic
+4. "You can see that ANOVA and then two-way ANOVA are the first steps on the road toward a full statistical model, such as regression and logistic regression, in which multiple factors and their effects can be modeled"
+5. Q: is ANOVA symmetric in $n$ and $m$, i.e., does it care how to group the data? How about $\chi^2$? See 18.05 Class 19 4.4
+### Chi-square test
+1. Always calculate expected counts, do NOT use probability!
+2. `stats.chi2_contigency` for independence/homogeneity test, i.e., multiple rows of data
+3. `stats.chisquare` for "goodness-of-fit", i.e., one row of data.
+### Multi-arm Bandit algorithm
+1. NOT about test significance, but to reach conclusions faster than traditional statistical designs
+	1. Notice when 3+ treatments present, neither ANOVA nor $\chi^2$ reveals which treatment is the best, rather just if they have the same mean.
+2. "imagine a slot machine with more than one arm, each arm paying out at a different rate, you would have a multi-armed bandit, which is the full name for this algorithm."
+### Code
+1. "web stickiness" example. Mimic distribution of "Mean diff"
+	```python
+	# `equal_var` can be either True or False; DOF is `n+m-2`.
+	# `res.pvalue` counts for both sides, therefore `res.pvalue/2` to get single sided
+	res = stats.ttest_ind(
+	    session_times[session_times.Page == 'Page A'].Time,
+	    session_times[session_times.Page == 'Page B'].Time,
+	    equal_var=False)
+	print(f'p-value for single sided test: {res.pvalue / 2:.4f}')
+	```
+2. "ecommerce conversion" example. The out-of-box $p$-value was divided by two to make it one-sided, so that it can be compared with permutation calculation `np.mean([diff > obs_pct_diff for diff in perm_diffs])`.
+	1. The out-of-box $p$-value is the prob. of two groups being different, in either direction.
+3. `df.pivot`. 
+	```python
+	# example from section "Chi-Square Test: A Resampling Approach"
+	click_rate.pivot_table(index="Click", columns="Headline", values="Rate")
+	# Headline  Headline A  Headline B  Headline C
+	# Click                                       
+	# Click             14           8          12
+	# No-click         986         992         988
+	```
+4. code up example from section "Chi-Square Test: A Resampling Approach"
 
-
-https://youtu.be/JQc3yx0-Q9E
-
-
-### Sample error and Confidence interval
-1. see this [example](02_study/90-other-topics/interviews/confidence_intervals_summary.md)
-
+## 4. Regression and prediction
+### Simple linear regression
+1. least square is sensitive to outliers
+2. ==regression equation does not prove the direction of causation==
+3. metrics
+	1. `mean_squared_error`, `r2_score` (RSS)
+### Simple linear regression (Rice 14.2)
+1. $y_i = \beta_0 + \beta_1 x_i + e_i$, here $x_i$ are numbers, estimator of $\beta$'s, i.e., $\hat{\beta}$'s are R.V.s. Therefore, they will have variances and confidence intervals
+	1. Null hypothesis: $\beta$ is zero.
+	2. $\sigma$ is the ==variance of $e_i$==
+2. estimates and their variance
+	1. When $\sigma$ is known $$
+		\begin{aligned}
+		\hat{\beta}_1 &=\frac{\sum_{i=1}^n (x_i - \bar{x})y_i}{(x_i - \bar{x})^2} \\
+		\text{Var}(\hat{\beta}_1) &=\frac{\sigma^2}{\sum_{i=1}^n(x_i - \bar{x})^2} \text{, and compares against normal distribution}\\
+		\end{aligned}$$
+	2. When $\sigma$ is unknown, variance of $e_i$ needs to be estimated via RSS. $$
+		\begin{aligned}
+		\text{RSS} &= \sum_{i=1}^n e_i^2 = \sum_{i=1}^n (y_i - \hat{\beta}_0 - \hat{\beta}_1 x_i)^2 \\
+		s^2 &= \frac{\text{RSS}}{n-2}, \text{ estimated variance, $n-2$ DOF because two parameters estimated} \\
+		s_{\hat{\beta_1}}^2 &=\frac{s^2}{\sum_{i=1}^n(x_i - \bar{x})^2}, \text{ replace variance with sample error} \\
+		\frac{\hat{\beta_i}-\beta_i}{s_{\hat{\beta_1}}}	& \sim t_{n-2}  
+		\end{aligned}$$ 
 ### To do
 1. Central Limit Theorem #CLT 
 	1. Illustrating examples from 3B1B [video](https://youtu.be/zeJD6dqJ5lo)
