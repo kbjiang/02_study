@@ -189,8 +189,97 @@ ax = airline_stats.boxplot(by='airline', column='pct_carrier_delay', figsize=(5,
 		\text{RSS} &= \sum_{i=1}^n e_i^2 = \sum_{i=1}^n (y_i - \hat{\beta}_0 - \hat{\beta}_1 x_i)^2 \\
 		s^2 &= \frac{\text{RSS}}{n-2}, \text{ estimated variance, $n-2$ DOF because two parameters estimated} \\
 		s_{\hat{\beta_1}}^2 &=\frac{s^2}{\sum_{i=1}^n(x_i - \bar{x})^2}, \text{ replace variance with sample error} \\
-		\frac{\hat{\beta_i}-\beta_i}{s_{\hat{\beta_1}}}	& \sim t_{n-2}  
-		\end{aligned}$$ 
+		\frac{\hat{\beta_i}-\beta_i}{s_{\hat{\beta_1}}}	& \sim t_{n-2}, \text{ $\beta_i=0$ when null hypothesis means no linear relation between $x_i$'s and $y$.}  
+		\end{aligned}$$
+	3. $t$-statistic is asking "is this ONE predictor useful in predicting the target", while $F$-statistics asks "is there ANY predictor useful in predicting the target". 
+		1. Check out [[temp-ols-dof]] for more. 
+		2. The duality of viewing data
+			1. Row Space (Each observation is a point); for clustering, PCA, visualization etc
+			2. Column Space (one vector in **n-dimensional observation space**); for solving OLS, projection, understanding DOF etc.
+				1. ==Duality between data and feature==: E.g., the interception has a measurement of vector **1**
+				2. ??? (still missing a mental picture on beta) ==Relation to underlying distribution==: E.g., the interception has a delta distribution and always observes the same 1; similarly, each true $\beta_i$ dictates the observation $y_j$ given $x_{ij}$, where $\hat{\beta}_i$ will be inferred!
+			3. see [[temp-ols-dof#^geometric-view]] 
+### Confidence and Prediction intervals
+1. Confidence intervals:
+	1. Variability about coefficients; calculated from all data points
+2. Prediction:
+	1. about single prediction; greater than CI
+	2. With infinite data and a correctly specified model, confidence intervals shrink to zero because parameter uncertainty vanishes. Prediction intervals remain wide because they include irreducible noise from individual outcomes ($e_i$).
+### Factor variables in Regression
+1. For linear regression, convert to dummy variables
+	1.  `drop_first` to keep `k-1` types to avoid multicollinearity
+		1. when all are zero, indicates kth type
+	2. This also uses `multiplex` as reference
+		1. assuming coefficient for `townhouse` is `-50000`, this means that, while everything else the same, a `townhouse` is $50$k cheaper than a `mltuplex`. 
+	3. ==`get_dummies` only converts dtypes `bool`, `object` and `category`. Convert dtypes when necessary.==
+		```python
+		house["PropertyType"].value_counts()
+		# PropertyType
+		# Single Family    20720
+		# Townhouse         1710
+		# Multiplex          257
+		# Name: count, dtype: int64
+		
+		# Encoded to multiple dummies
+		# `drop_first`: keep `k-1` types, when all are zero, indicates kth type
+		X = pd.get_dummies(house["PropertyType"], drop_first=True, dtype=int)
+		# PropertyType_Single Family  PropertyType_Townhouse
+		# 1                           0                       0  # this is Multiplex
+		# 2                           1                       0
+		# 3                           1                       0
+		```
+	4. `dtype`:  before `get_dummies`, `PropertyType` is `object`, i.e. string; after `PropertyType_Townhouse` is `bool`
+### Factor Variables with Many Levels
+1. `dtype`: before `astype('category')`, `ZipGroup` is `int`; after it becomes `category`
+	1. Signals "this is a categorical variable, not a number"
+	2. `category` features will need to be `get_dummies` when fitting model; `int` feature won't work with `get_dummies`
+2. ==Nice coding example==
+	```python
+	# skipped code on grouping by `zipcode` and get counts by `zipcode`
+	# `groupby` then count makes sure same `ZipCode` falls under same `ZipGroup`
+	# needs `cum_count` for quantiling; think of CDF
+	zip_groups['cum_count'] = np.cumsum(zip_groups['count'])
+	# `labels=False` to return integer labels
+	# `retbins=False` to not return bin edges
+	zip_groups['ZipGroup'] = pd.qcut(zip_groups['cum_count'], q=5, labels=False,
+	                                 retbins=False)
+	
+	# skipped...
+	house['ZipGroup'] = house['ZipGroup'].astype('category')
+	```
+
+### Questions
+1. When fitted alone, "bathrooms" has a positive slope; when fitted with other predictor, it has a large negative slope, which is not consistent nor common sensical. How do I make sense of it?
+### Code
+1. Linear regression with statistical info
+```python
+import statsmodels.api as sm
+
+X_with_const = sm.add_constant(X)  # by default, no interception
+model = sm.OLS(y, X_with_const).fit()
+
+print(model.pvalues)      # p-values
+print(model.bse)          # standard errors
+print(model.summary())    # full summary table
+```
+2. `pd.cut` vs `pd.qcut`
+	1. `cut` bins data to equal width intervals, therefore bins may have unequal counts
+	2. `qcut` bins data to equal count intervals, therefore bins have roughly equal counts
+		```python
+		# basic example
+		data = [1, 2, 3, 4, 5, 100]
+		pd.cut(data, 3)   # Bins: (1, 34], (34, 67], (67, 100] — unequal counts
+		pd.qcut(data, 3)  # Bins: (0.9, 2.67], (2.67, 4.33], (4.33, 100] — ~2 items each
+		```
+3. Weighted regression
+	1. inverse-variance: variables with higher variances should have lower weights
+	2. by importance: e.g., recent events carry more weights
+	```python
+	house['Weight'] = house.Year - 2005
+	house_wt.fit(house[predictors], house[outcome], sample_weight=house.Weight)
+	```
+
+
 ### To do
 1. Central Limit Theorem #CLT 
 	1. Illustrating examples from 3B1B [video](https://youtu.be/zeJD6dqJ5lo)
