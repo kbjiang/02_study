@@ -121,9 +121,6 @@ ax = airline_stats.boxplot(by='airline', column='pct_carrier_delay', figsize=(5,
 	1. Has code for permutation
 	2. The A/B version can be tested by either *two-sample* $t$-test of unequal variances or ANOVA
 	3. The A/B/C/D version can only be tested by ANOVA because it has more than two groups
-### Degree of freedom
-1. Factored variables in regression
-	1. E.g., "day of week" should only include indicators/dummy variables for Mon-Sat, to avoid multicollinearity error. ==TODO: prepare ML for this?==
 ### ANOVA
 1. ANOVA (Analysis on variances)
 	1. More than two groups, alternative to $t$-test.
@@ -247,9 +244,26 @@ ax = airline_stats.boxplot(by='airline', column='pct_carrier_delay', figsize=(5,
 	# skipped...
 	house['ZipGroup'] = house['ZipGroup'].astype('category')
 	```
-
-### Questions
-1. When fitted alone, "bathrooms" has a positive slope; when fitted with other predictor, it has a large negative slope, which is not consistent nor common sensical. How do I make sense of it?
+### Ordered Factor Variables
+1. Where values reflect different levels
+2. Can be converted to numerical values and used as is
+### Interpreting the regression equation
+1. Correlated predictors
+	1. Coefficient for "Bedrooms" is positive when fitted alone, negative when fitted with other predictors. This is because the predictor variables are correlated: between two homes of the exact same size, the one with more but smaller bedrooms would be considered less desirable.
+2. Multicollinearity
+	1. Multicollinearity in regression must be addressed—variables should be removed until the multicollinearity is gone. See [[temp-multicollinearity_cheat_sheet#^9c9059]]
+3. Confounding variables
+	1. An important predictor missing from model and can lead to spurious relationships
+		1. E.g., has variables "being fit" and "has a gym membership", but missing "goes to gym daily"
+4. Interaction term between two variables
+	1. Need to include this interaction if interdependent with response
+### Regression Diagnostics
+1. Heteroskedasticity
+	1. Prediction errors differ for different ranges of the predicted value, and may suggest an incomplete model, i.e., more variables required
+2. ==Partial residual==
+	1. Isolate the relationship between predictor $X_i$ and the target, *taking into account all of the other predictors*
+		1. $\text{Partial residual = Residual } + \hat{b}_iX_i$, where Residual is $y - \sum \hat{b}_jX_j$.
+		2. Apparently this is better than just plot $X_i$ against $y$, where none of the other predictors are considered.
 ### Code
 1. Linear regression with statistical info
 ```python
