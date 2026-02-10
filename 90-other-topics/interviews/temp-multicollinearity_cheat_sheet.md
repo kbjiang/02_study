@@ -53,13 +53,16 @@ Predictions are often still good — this is mainly a **stability & interpretabi
   - Interaction terms
 - Prefer splines over high-degree polynomials
 
----
-
-## Diagnostics to check
-- Correlation matrix (quick scan)
-- **VIF**
-  - Rule of thumb: VIF > 5–10 is concerning
-- Coefficient stability across folds
+### detailed explanation
+1. For Polynomial terms
+	When you have uncentered $x$ and create $x^2$, they're highly correlated:
+	If $x = [1, 2, 3, 4, 5]$, then $x^2 = [1, 4, 9, 16, 25]$
+	The correlation between $x$ and $x^2$ is **0.98** — almost perfect multicollinearity.
+	Let $x_c = x - \bar{x}$, so $x_c = [-2, -1, 0, 1, 2]$ and $x_c^2 = [4, 1, 0, 1, 4]$
+	Now the correlation between $x_c$ and $x_c^2$ is **0** — orthogonal!
+2. For Interaction Terms
+	For interaction terms ($x_1 \cdot x_2$): Centering both variables reduces their correlation with the product term because:
+$$\text{Cov}(x_{1c}, x_{1c} \cdot x_{2c}) = E[x_{1c}^2 \cdot x_{2c}] \approx 0$$
 
 ---
 

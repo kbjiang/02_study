@@ -202,10 +202,12 @@ ax = airline_stats.boxplot(by='airline', column='pct_carrier_delay', figsize=(5,
 2. Prediction:
 	1. about single prediction; greater than CI
 	2. With infinite data and a correctly specified model, confidence intervals shrink to zero because parameter uncertainty vanishes. Prediction intervals remain wide because they include irreducible noise from individual outcomes ($e_i$).
-### Factor variables in Regression
-1. For linear regression, convert to dummy variables
+### ==Factor variables in Regression==
+1. For linear/logistic regression, convert to dummy variables
 	1.  `drop_first` to keep `k-1` types to avoid multicollinearity
 		1. when all are zero, indicates kth type
+		2. The dummies without dropping is multicollinear with intercept: intercept column ($x_0$) is $(1, 1, ..., 1)$, so is the sum of all dummies. 
+		3. let's say a factor variable has two values `v1` and `v2`. By dropping `v1` we make it the baseline. Let's say we fit and get $\beta_2=1.3$, this means $v_2=1$ contribute 1.3 more to $\hat{y}$ than when $v_{i\ne 1}=0$.
 	2. This also uses `multiplex` as reference
 		1. assuming coefficient for `townhouse` is `-50000`, this means that, while everything else the same, a `townhouse` is $50$k cheaper than a `mltuplex`. 
 	3. ==`get_dummies` only converts dtypes `bool`, `object` and `category`. Convert dtypes when necessary.==
@@ -225,7 +227,7 @@ ax = airline_stats.boxplot(by='airline', column='pct_carrier_delay', figsize=(5,
 		# 2                           1                       0
 		# 3                           1                       0
 		```
-	4. `dtype`:  before `get_dummies`, `PropertyType` is `object`, i.e. string; after `PropertyType_Townhouse` is `bool`
+	5. `dtype`:  before `get_dummies`, `PropertyType` is `object`, i.e. string; after `PropertyType_Townhouse` is `bool`
 ### Factor Variables with Many Levels
 1. `dtype`: before `astype('category')`, `ZipGroup` is `int`; after it becomes `category`
 	1. Signals "this is a categorical variable, not a number"
@@ -293,9 +295,129 @@ print(model.summary())    # full summary table
 	house_wt.fit(house[predictors], house[outcome], sample_weight=house.Weight)
 	```
 
+## 5. Classification
+### Naive Bayesian
+1. Calculates posterior probabilities, no coefficients needed
+2. *works only with categorical predictors;* needs to bin numeric ones into levels
+3. `sklearn`: smoothing parameter $\alpha$ to deal with absent predictor in some classes, i.e., zero likelihood
 
-### To do
-1. Central Limit Theorem #CLT 
+| Generative (Naive Bayes, LDA)             | Discriminative (Logistic Regression, SVM) |
+| ----------------------------------------- | ----------------------------------------- |
+| Models P(X \| Y) and P(Y)                 | Models P(Y \| X) directly                 |
+| Can generate new samples                  | Only classifies                           |
+| Makes assumptions about data distribution | Makes fewer assumptions                   |
+### Logistic regression
+1. Model *log-odds/logits* with linear regression
+	1. then map logits to probability, via logistic function, to make decision
+2. Interpreting
+	1. Use odds ratio, or, $\text{Odds}(Y=1|X=x_1)/\text{Odds}(Y=1|X=x_0)$. 
+		1. E.g., factor variable. "regression coefficient for `purpose_small_business` is 1.21526. This means that a loan to a small business compared to a loan to pay off credit card debt reduces the odds of defaulting versus being paid off by $exp(1.21526)\approx 3.4$".
+		2. E.g., numeric variable. "The variable `borrower_score` is a score on the borrowers’ creditworthiness and ranges from 0 (low) to 1 (high). The odds of the best borrowers relative to the worst borrowers defaulting on their loans is smaller by a factor of $exp(-4.61264) \approx 0.01$." A hundred times less likely to default!
+3. VS linear regression
+	1. Do not mix `log-odds` with target; the targets are always binary, not continuous as `log-odds`.
+
+| Aspect                   | Linear Regression               | Logistic Regression                 |
+| ------------------------ | ------------------------------- | ----------------------------------- |
+| Target variable          | Continuous                      | Binary                              |
+| Assumed distribution     | Gaussian (Normal)               | Bernoulli                           |
+| Link function            | Identity                        | Logit (sigmoid)                     |
+| Objective                | Minimize sum of squared errors  | Maximize log-likelihood             |
+| Loss function            | Mean Squared Error (MSE)        | Log loss / Cross-entropy            |
+| Estimation method        | Least Squares (OLS)             | Maximum Likelihood Estimation (MLE) |
+| Closed-form solution     | Yes                             | No                                  |
+| Optimization in practice | Closed-form or Gradient Descent | Gradient Descent / Newton / LBFGS   |
+| Output range             | (-∞, ∞)                         | [0, 1]                              |
+| Typical use case         | Regression                      | Classification                      |
+### Metrics
+1. Confusion table is the key
+	1. Precision/Recall (i.e., TPR): one is column-wise, the other is row-wise
+	2. True Positive Rate/True Negative Rate: both row-wise, i.e., true value based
+		![[Pasted image 20260209140910.png|600]]
+### Imbalanced Data
+1. prioritize up/down weighting over up/down sampling?
+
+### Code
+1. Logistic regression
+	```python
+	# `penalty` is on by default
+	# `C` is the inverse of regularization strength; large value negates penality
+	logit_reg = LogisticRegression(penalty='l2', C=1e42, solver='liblinear')
+	
+	# prediction
+	pred_log_prob = pd.DataFrame(logit_reg.predict_log_proba(X), columns=logit_reg.classes_)
+	pred_prob = pd.DataFrame(logit_reg.predict_proba(X), columns=logit_reg.classes_)
+	```
+
+
+## 6. Statistical ML
+1. "...are distinguished from classical statistical methods in that they are data-driven and do not seek to impose linear or other overall structure on the data". In other words, less statistical theories.
+### KNN
+1. for imbalanced data, set the cutoff at the probability of the rare event.
+2. important parameter is number of neighbor to consider $k$.
+3. Since it calculates the distance between data points, ==feature standardization is important!==
+4. *Curse of dimensionality:* Distance metrics become less meaningful in high-d
+```python
+from sklearn import preprocessing
+scaler = preprocessing.StandardScaler()
+scaler.fit(X)
+X_std = scaler.transform(X)
+newloan_std = scaler.transform(newloan)
+```
+### Tree models
+1. Compared to linear models, able to learn complex pattern; compared to KNN or naive Bayesian, very easy to interpret!
+2. Understand best by plotting
+	1. The rule at the top of each box actually applies to the children nodes; the `class=` is for current box
+	2. Conventionally, left `True`
+	3. ![[Pasted image 20260209221240.png|600]]
+3. The total "loss" in decision tree training is the **weighted sum of impurity across all leaf nodes**
+	$$\text{Total Impurity} = \sum_{\text{leaves}} \frac{n_{\text{leaf}}}{n_{\text{total}}} \times \text{Impurity}(\text{leaf})$$
+	Where impurity is measured by:
+	- **Gini**: $\sum_k p_k(1 - p_k)$
+	- **Entropy**: $-\sum_k p_k \log_2(p_k)$
+	- **Misclassification rate**: $1 - \max(p_k)$ 
+### Code
+1. Make categorical variables ordinal
+```python
+# `ordered=True` encodes `paid off` as 0 and `default` as 1
+loan_data['outcome'] = pd.Categorical(loan_data.outcome, categories=['paid off', 'default'], ordered=True)
+```
+
+
+## Topics
+### Things to do when new data
+```python
+df.head()  # feel the data
+df.dtypes  # check column types, numeric vs factor
+df.describe()  # check numeric variables
+df.select_dtypes(include=["object", "category", "bool"]).nunique()  # number of possible values for non-numeric variables
+df.object1 = df.object1.astype("category")  # change object col to 'category' dtype
+```
+### Multicollinearity
+1. Collinearity
+	1. Don't need to worry about it:
+		1. Tree-based models (Random Forest, XGBoost, Decision Trees) - they handle collinearity fine
+		2. Naive Bayes, k-NN - no coefficient estimation
+	2. Should worry about it:
+		1. Logistic regression (without regularization) - same multicollinearity issue as linear regression
+		2. Regularized logistic regression (L1/L2) - can handle it, but dropping doesn't hurt
+		3. do `drop_first=True`!
+### Standardization
+- Required/Strongly Recommended:
+	- KNN, SVM, Neural Networks - distance/gradient-based, sensitive to scale
+	- PCA - maximizes variance, needs equal scaling
+	- Ridge/Lasso - penalty applies uniformly only when scaled
+	- K-Means, hierarchical clustering
+- Not Required:
+	- Tree-based models (Decision Trees, Random Forest, XGBoost) - split on thresholds, scale-invariant
+	- Naive Bayes - probability-based
+	- Plain linear/logistic regression - coefficients adjust, though centering helps interpretability
+- One-hot variables (possibly from `get_dummies`) should be standardized as well
+- Practical rule
+	- If the algorithm uses distances, gradients, or regularization penalties, scale. If it uses splits or conditional probabilities, skip it.
+## To do
+1. ==Cheat sheet==
+	1. algorithms: popularity, required data processing, missing data, standardize data, how does it work, when to use, important parameters and how to adjust them, model specific metrics, model or data centric
+2. Central Limit Theorem #CLT 
 	1. Illustrating examples from 3B1B [video](https://youtu.be/zeJD6dqJ5lo)
 		1. Galton Board: each collision with a peg is a Bernoulli, more levels of pegs, i.e., *larger sample size*, leads to Gaussian distribution of the final displacement.
 		2. Sum of dice: each dice is uniform, but the distribution (*sampling distribution*) of sum of large number of dice (*sample statistic*) follows Gaussian
