@@ -191,11 +191,11 @@ ax = airline_stats.boxplot(by='airline', column='pct_carrier_delay', figsize=(5,
 	3. $t$-statistic is asking "is this ONE predictor useful in predicting the target", while $F$-statistics asks "is there ANY predictor useful in predicting the target". 
 		1. Check out [[temp-ols-dof]] for more. 
 		2. The duality of viewing data
-			1. Row Space (Each observation is a point); for clustering, PCA, visualization etc
-			2. Column Space (one vector in **n-dimensional observation space**); for solving OLS, projection, understanding DOF etc.
-				1. ==Duality between data and feature==: E.g., the interception has a measurement of vector **1**
-				2. ??? (still missing a mental picture on beta) ==Relation to underlying distribution==: E.g., the interception has a delta distribution and always observes the same 1; similarly, each true $\beta_i$ dictates the observation $y_j$ given $x_{ij}$, where $\hat{\beta}_i$ will be inferred!
-			3. see [[temp-ols-dof#^geometric-view]] 
+			1. Row Space (Feature being axes); for clustering, PCA,  visualization etc
+				1. basically the redundancy of the data provides info about feature
+			2. Column Space (Data/realizations being axes); for solving OLS, projection, understanding DOF etc.
+			3. ==Duality between data and feature==: data is the realizations of the feature. Therefore, data reflects the statistical nature/model of the feature. E.g., heights and weights of a group of men is correlated, and their covariance (data) can be leveraged. 
+			4. see [[temp-ols-dof#^geometric-view]] 
 ### Confidence and Prediction intervals
 1. Confidence intervals:
 	1. Variability about coefficients; calculated from all data points
@@ -259,6 +259,8 @@ ax = airline_stats.boxplot(by='airline', column='pct_carrier_delay', figsize=(5,
 		1. E.g., has variables "being fit" and "has a gym membership", but missing "goes to gym daily"
 4. Interaction term between two variables
 	1. Need to include this interaction if interdependent with response
+### TBD
+1. $R^2$ will always increase or stay the same as more variables are added, which is why **Adjusted R squared**is often used for multiple regression to account for model complexity.
 ### Regression Diagnostics
 1. Heteroskedasticity
 	1. Prediction errors differ for different ranges of the predicted value, and may suggest an incomplete model, i.e., more variables required
@@ -369,20 +371,125 @@ newloan_std = scaler.transform(newloan)
 	1. The rule at the top of each box actually applies to the children nodes; the `class=` is for current box
 	2. Conventionally, left `True`
 	3. ![[Pasted image 20260209221240.png|600]]
-3. The total "loss" in decision tree training is the **weighted sum of impurity across all leaf nodes**
-	$$\text{Total Impurity} = \sum_{\text{leaves}} \frac{n_{\text{leaf}}}{n_{\text{total}}} \times \text{Impurity}(\text{leaf})$$
-	Where impurity is measured by:
-	- **Gini**: $\sum_k p_k(1 - p_k)$
-	- **Entropy**: $-\sum_k p_k \log_2(p_k)$
-	- **Misclassification rate**: $1 - \max(p_k)$ 
+3. The *loss* on a given pair of feature and split, $k$ and $t_k$, is recursively minimized during training.
+	$$J(k, t_k) = \frac{m_\text{left}}{m}\text{G}_{\text{left impurity}} + \frac{m_\text{left}}{m} \text{G}_{\text{right impurity}}$$
+	1. Where impurity is measured by:
+		- **Gini**: $p_k(1 - p_k)$
+		- **Entropy**: $-p_k \log_2(p_k)-(1-p_k) \log_2(1-p_k)$
+	2. where $m = m_{\text{left}} + m_{\text{right}}$, i.e., total counts is the sum of both children's counts
+	3. The recursive partitioning algorithm is *not optimal*, because it only consider immediate children's impurities, i.e., *greedy*; exhaustive search is NP-hard.
+4. Avoid overfitting
+	1. `min_samples_split` (default `2`) and `min_sample_leaf` (default `1`)
+	2. ==`min_impurity_decrease`== to enforce certain purity gain for each split
+	3. TODO: Minimal Cost-Complexity *Pruning*. 
+		1. Point is to prune nodes with gain smaller than threshold `ccp_alpha`. Greater threshold leads to harsher pruning, and looking for sweet spot where train/test accuracy both high and close
+			1. ![[Pasted image 20260210064648.png|400]]
+		2. [1.10. Decision Trees — scikit-learn 1.8.0 documentation](https://scikit-learn.org/stable/modules/tree.html#minimal-cost-complexity-pruning) and [Post pruning decision trees with cost complexity pruning — scikit-learn 1.8.0 documentation](https://scikit-learn.org/stable/auto_examples/tree/plot_cost_complexity_pruning.html)
+
+### Random Forest
+> `ensemble` -> bagging -> random forest
+> Bagging: Bootstrapping aggregating
+1. Randomness
+	1. Bootstrapped $n$, $n < N$ (total num of records), records for each tree
+		1. This resample is also called the 'bag', as in 'out-of-bag' (OOB).
+		2. It gains in accuracy but lost interpretability of individual trees
+	2. Random select $p$, $p < P$ (total num of variables) and usually $\sqrt{P}$, variables at *each split*
+	3. Why helpful
+		1. Reduce overfitting and correlation between DTs.
+		2. Enables OOB score evaluation; this can be understood as *validation loss*
+2. Additional eval `oob_score_`. 
+	1. The misclassification rate on trees out-of-bag, i.e., not participated in training this tree, i.e., *validation loss*. 
+		```python
+		rf = RandomForestClassifier(n_estimators=500, random_state=1, oob_score=True)
+		print(rf.oob_score_)
+		```
+3. Feature importance
+	1. By accuracy decrease 
+		1. Randomly permuting the values has the effect of removing all predictive power for that variable. The accuracy can be computed from the out-of-bag data (so this measure is effectively a cross-validated estimate).
+	2. By Gini impurity decrease
+		1. Can be accessed in `rf.feature_importances_`. This measure is based on the training set and is therefore less reliable than a measure calculated on out-of-bag data.
+	3. See code!
+4. important hyperparameters
+	1. `min_samples_leaf` and `max_leaf_nodes`. The latter controls maximum number of nodes as well, given it's a complete binary tree.
 ### Code
 1. Make categorical variables ordinal
 ```python
 # `ordered=True` encodes `paid off` as 0 and `default` as 1
 loan_data['outcome'] = pd.Categorical(loan_data.outcome, categories=['paid off', 'default'], ordered=True)
 ```
+2. Feature importance from RF
+	1. This is an good example, with `cross validation` as well!
+```python
+from sklearn.model_selection import train_test_split
+```
+### Boosting
+> `ensemble` -> boosting -> Adaboost, gradient boosting...
+1. *How is boosting different from bagging*
+	1. weaker learners: usually one or two layers (trees become *stumps*)
+	2. different trees, different weights in final prediction
+	3. trees built sequentially and dependently (on the previous tree's mistakes)
+2. How AdaBoost is Trained
+	1. **Stump weight in final prediction**: The $j$th stump's weight (amount of say) is:
+   $$\alpha_j = \frac{1}{2} \ln\left(\frac{1 - \epsilon_j}{\epsilon_j}\right)$$
+		1. Lower error rate → higher $\alpha$ → more influence
+		2. Higher error rate → lower $\alpha$ → less influence
+		3. Error = 0.5 (random guess) → $\alpha = 0$ (ignored)
+			1. it's possible, but not in practice, for $\alpha < 0$ and the stump's prediction gets flipped in the final vote.
+	2. **Sample weight update**: After each iteration:
+		1.  Misclassified samples → weight increases (focus more on hard examples)
+		2. Correctly classified samples → weight decreases
+3. How Gradient Boosting works
+	1. it fit the new stump to the *residual errors* made by previous one
+	2. Nice manually worked out example in [Hands-On ML]([6. Ensemble Learning and Random Forests | Hands-On Machine Learning with Scikit-Learn and PyTorch](https://learning.oreilly.com/library/view/hands-on-machine-learning/9798341607972/ch06.html#id112))
+		1. also good discussion on `n_estimators_` and `n_iter_no_change` for early stopping
+4. Detailed explanation on many boosting algos from StatQuest
+	1. E.g., [AdaBoost, Clearly Explained](https://youtu.be/LsK-xG1cLYA) 
+5. Random Sampling/Features in Boosting
+	1. **AdaBoost**: Uses *all* data, but with *weights* that change each iteration. No randomness in sampling.
+	 2.  **Gradient Boosting**: Fits residuals sequentially on *all* data. Pure gradient descent, no randomness.
+	3. **Stochastic Gradient Boosting** (XGBoost, etc.): Adds optional randomization for regularization, not for creating diversity like in RF.
+6. #code Smart way to return error `abs(true_prob - pred_prob) > 0.5`
+7. XGBoost hyperparameters at the end of the section
+### Boosting vs Bagging: Overfitting Tendency
 
+| Method                | Random Samples             | Random Features          |
+| --------------------- | -------------------------- | ------------------------ |
+| **AdaBoost**          | No (uses weighted samples) | No                       |
+| **Gradient Boosting** | No (by default)            | No (by default)          |
+| **XGBoost/LightGBM**  | Optional (`subsample`)     | Optional (`colsample_*`) |
+| **Random Forest**     | Yes (bootstrap)            | Yes (at each split)      |
+|                       |                            |                          |
 
+| Aspect          | Bagging (Random Forest)        | Boosting (XGBoost, AdaBoost)                |
+| --------------- | ------------------------------ | ------------------------------------------- |
+| Training        | Parallel, independent trees    | Sequential, each tree fixes previous errors |
+| Focus           | Random subsets, diverse trees  | Hard examples get more weight               |
+| Noise handling  | Averaging reduces noise impact | Can chase noise (outliers get high weight)  |
+| More iterations | Usually helps or plateaus      | Can overfit if too many                     |
+1. Why Boosting is More Prone to Overfitting
+	1. **Bagging**: Trees are independent → errors are random → averaging cancels them out. Hard to overfit by adding more trees.
+	2. **Boosting**: Each tree deliberately corrects mistakes → if those "mistakes" are noise/outliers, the model learns noise. Sequential dependency amplifies errors.
+2. Regularization in Modern Boosting (XGBoost, LightGBM)
+	1. `max_depth`, `min_child_weight` — control tree complexity
+	2. `reg_lambda`, `reg_alpha` — L2/L1 penalties
+	3. `subsample`, `colsample_*` — stochastic boosting
+	4. Early stopping — stop before overfitting
+3. With proper tuning, boosting can generalize as well or better than bagging—but it requires more care.
+## Unsupervised ML
+1. Use cases
+	1. create predictive rules without labels, e.g. `k-means clustering`
+	2. dimension reduction, e.g. `PCA`
+	3. extended data exploration
+### Principal components analysis
+1. The idea is to decompose the Sample Covariance Matrix ($S$) into rank 1 components, each ranked by its contribution to the total covariance.
+	1. **Matrix orientation**:  If $X$ is centered data (n×p, samples as rows), then $S = \frac{1}{n-1} X^T X$ . The SVD of $X = U\Sigma V^T$ gives you the principal components directly as columns of $V$.
+	2. **Connection to SVD**: The right singular vectors $V$ are eigenvectors of $X^T X$, and eigenvalues of $S$ relate to singular values by $\lambda_i = \frac{\sigma_i^2}{n-1}$.
+	3. **Why SVD is cheaper**: Computing $X^T X$ explicitly squares the condition number and loses numerical precision. SVD works directly on $X$, avoiding this.
+2. The geometry behind
+	1. The sum of squared distances from the data points to $\mathbf{v}_1$ line is a minimum. In other words, $\mathbf{v}_1$ lies in the direction of most variance.
+	2. Here distance is *perpendicular* to singular vectors, unlike least square, where distance is vertical. More detail: Gilbert Strang, *Linear algebra and learning from data*, 77.
+		1. When project data $a_j$ onto singular vectors, the 2nd sum on the RHS is minimized, i.e., the residual variance. $$\sum_1^n \left\lVert a_j \right\rVert^2=\sum_1^n \left\lVert a_j^T u_1 \right\rVert^2 + \sum_1^n \left\lVert a_j^T u_2 \right\rVert^2$$
+3. *Centering is essential* since PCA captures variance around the mean.
 ## Topics
 ### Things to do when new data
 ```python
@@ -416,7 +523,7 @@ df.object1 = df.object1.astype("category")  # change object col to 'category' dt
 	- If the algorithm uses distances, gradients, or regularization penalties, scale. If it uses splits or conditional probabilities, skip it.
 ## To do
 1. ==Cheat sheet==
-	1. algorithms: popularity, required data processing, missing data, standardize data, how does it work, when to use, important parameters and how to adjust them, model specific metrics, model or data centric
+	1. algorithms: popularity, required data processing, missing data, standardize data, how does it work, when to use, important parameters and how to adjust them, model specific metrics, model or data centric, search of hyperparameter (`GridSearchCV`?), regularization
 2. Central Limit Theorem #CLT 
 	1. Illustrating examples from 3B1B [video](https://youtu.be/zeJD6dqJ5lo)
 		1. Galton Board: each collision with a peg is a Bernoulli, more levels of pegs, i.e., *larger sample size*, leads to Gaussian distribution of the final displacement.
