@@ -489,7 +489,37 @@ from sklearn.model_selection import train_test_split
 	1. The sum of squared distances from the data points to $\mathbf{v}_1$ line is a minimum. In other words, $\mathbf{v}_1$ lies in the direction of most variance.
 	2. Here distance is *perpendicular* to singular vectors, unlike least square, where distance is vertical. More detail: Gilbert Strang, *Linear algebra and learning from data*, 77.
 		1. When project data $a_j$ onto singular vectors, the 2nd sum on the RHS is minimized, i.e., the residual variance. $$\sum_1^n \left\lVert a_j \right\rVert^2=\sum_1^n \left\lVert a_j^T u_1 \right\rVert^2 + \sum_1^n \left\lVert a_j^T u_2 \right\rVert^2$$
+	3. In this graph, 1st principal component reflects the correlation between the two stocks, while the 2nd measures when their prices diverge.![[Pasted image 20260211143227.png]]
+		1. See also interesting interpretation of Fig 7-3
 3. *Centering is essential* since PCA captures variance around the mean.
+4. Code
+	1. the `loadings` has rows for principal components and columns for original features
+		```python
+		pcs = PCA(n_components=2)
+		pcs.fit(oil_px)
+		loadings = pd.DataFrame(pcs.components_, columns=oil_px.columns)
+		```
+### KMeans clustering
+1. Use case
+	1. Find natural, separate clusters in the data
+	2. Or given predefined number of clusters $K$, KMeans finds groups as different as possible
+2. Algorithm
+	1. Objective: minimize within-cluster sum of squares, i.e., `inertia`.  $$\text{Inertia} = \sum_{i=1}^{K} \|x_i - \mu_{c_i}\|^2$$
+	2. No guarantee on finding the best possible solution, therefore run several times using different random samples to initialize, i.e. `n_init`
+3. Eval
+	1. check the cluster sizes. If very imbalanced, may suggest outlier or distinct records, which could be investigated further
+		```python
+		print(counter(kmeans.labels_))
+		```
+4. Code
+```python
+	kmeans = KMeans(n_clusters=4, n_init='auto').fit(df)
+	df['cluster'] = kmeans.labels_
+	centers = pd.DataFrame(kmeans.cluster_centers_, columns=['XOM', 'CVX'])
+```
+
+
+
 ## Topics
 ### Things to do when new data
 ```python

@@ -1,3 +1,4 @@
+#RHLF
 1. NYU-CS2590 [lecture](https://nyu-cs2590.github.io/course-material/spring2023/lecture/lec10/main.pdf)
 	1. three approaches to alignment: 
 		1. prompting: unprincipled (no idea why works or not), unreliable
