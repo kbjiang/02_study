@@ -137,6 +137,20 @@ ax = airline_stats.boxplot(by='airline', column='pct_carrier_delay', figsize=(5,
 1. Always calculate expected counts, do NOT use probability!
 2. `stats.chi2_contigency` for independence/homogeneity test, i.e., multiple rows of data
 3. `stats.chisquare` for "goodness-of-fit", i.e., one row of data.
+
+### Conceptual comparison
+
+| Aspect                     | Chi‑squared tests                                                 | t‑test / ANOVA                                     |
+| -------------------------- | ----------------------------------------------------------------- | -------------------------------------------------- |
+| Data type                  | Categorical (counts, frequencies)                                 | Numeric (continuous response)                      |
+| What is compared           | Entire distribution of counts across categories                   | Means (a single parameter of the distribution)     |
+| Core question              | “Do observed frequencies match expected frequencies?”             | “Are population means equal?”                      |
+| Sensitivity                | Any deviation in any category contributes                         | Only differences in means (and variability) matter |
+| Test statistic depends on  | Differences between observed and expected counts across all cells | Group means and variances                          |
+| Distributional assumptions | Minimal (large-sample approximation)                              | Parametric (e.g., normality, equal variances)      |
+| Typical examples           | Goodness‑of‑fit, independence tests                               | One-/two‑sample t‑test, one‑way ANOVA              |
+| Intuitive summary          | How is probability mass allocated?                                | Where is the center of the distribution?           |
+|                            |                                                                   |                                                    |
 ### Multi-arm Bandit algorithm
 1. NOT about test significance, but to reach conclusions faster than traditional statistical designs
 	1. Notice when 3+ treatments present, neither ANOVA nor $\chi^2$ reveals which treatment is the best, rather just if they have the same mean.
@@ -518,6 +532,29 @@ from sklearn.model_selection import train_test_split
 	centers = pd.DataFrame(kmeans.cluster_centers_, columns=['XOM', 'CVX'])
 ```
 
+### Clustering algos comparison
+| Aspect                              | **K-Means**                      | **Hierarchical Clustering**     | **Gaussian Mixture Model (GMM)**                |
+| ----------------------------------- | -------------------------------- | ------------------------------- | ----------------------------------------------- |
+| **Type**                            | Centroid-based                   | Distance / linkage-based        | Probabilistic model-based                       |
+| **Cluster Assignment**              | Hard (one cluster per point)     | Hard                            | Soft (probability of belonging to each cluster) |
+| **Cluster Shape Assumption**        | Spherical / equal variance       | Flexible (depends on linkage)   | Elliptical (Gaussian covariance)                |
+| **Need to Specify K?**              | Yes                              | No (cut dendrogram later)       | Yes                                             |
+| **Scalability**                     | Very scalable                    | Poor for large datasets (O(n²)) | Moderate (slower than K-means)                  |
+| **Interpretability**                | High (centroids easy to explain) | High (dendrogram structure)     | Moderate (probabilistic interpretation)         |
+| **Handles Overlapping Clusters?**   | Poorly                           | Limited                         | Well                                            |
+| **Handles Non-Spherical Clusters?** | No                               | Sometimes                       | Yes                                             |
+| **Model Selection Method**          | Elbow, Silhouette                | Visual dendrogram cut           | AIC / BIC                                       |
+| **When to Use**                     | Large-scale segmentation         | Small datasets, exploratory     | When uncertainty or overlap matters             |
+| **Main Weakness**                   | Assumes equal variance clusters  | Doesn’t scale well              | Assumes Gaussian distribution                   |
+### Scaling
+1. Scaling is import for clustering, otherwise variables with large values will dominate
+	1. E.g., after scaling the variables, the sizes of clusters become much more even
+		```python
+		# `inverse_transform` to unscale cluster centers
+		scaler.inverse_transform(kmeans.cluster_centers_),
+		```
+### Categorical Variables 
+1. Gower's distance?
 
 
 ## Topics
