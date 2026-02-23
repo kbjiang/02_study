@@ -575,19 +575,20 @@ df.object1 = df.object1.astype("category")  # change object col to 'category' dt
 		1. Logistic regression (without regularization) - same multicollinearity issue as linear regression
 		2. Regularized logistic regression (L1/L2) - can handle it, but dropping doesn't hurt
 		3. do `drop_first=True`!
-### Standardization
+### Standardization #scaling
 - Required/Strongly Recommended:
 	- KNN, SVM, Neural Networks - distance/gradient-based, sensitive to scale
 	- PCA - maximizes variance, needs equal scaling
 	- Ridge/Lasso - penalty applies uniformly only when scaled
-	- K-Means, hierarchical clustering
+		- I.e., if $X_1 \gg X_2$, then $\beta_1 \ll \beta_2$ for them to contribute similarly in prediction. Therefore $\beta_2$ will be punished unfairly.
+	- *K-Means,* hierarchical clustering
 - Not Required:
 	- Tree-based models (Decision Trees, Random Forest, XGBoost) - split on thresholds, scale-invariant
 	- Naive Bayes - probability-based
 	- Plain linear/logistic regression - coefficients adjust, though centering helps interpretability
 - One-hot variables (possibly from `get_dummies`) should be standardized as well
 - Practical rule
-	- If the algorithm uses distances, gradients, or regularization penalties, scale. If it uses splits or conditional probabilities, skip it.
+	- If the algorithm uses distances, gradients, or regularization penalties, do scaling. If it uses splits or conditional probabilities, skip it.
 ## To do
 1. ==Cheat sheet==
 	1. algorithms: popularity, required data processing, missing data, standardize data, how does it work, when to use, important parameters and how to adjust them, model specific metrics, model or data centric, search of hyperparameter (`GridSearchCV`?), regularization

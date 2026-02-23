@@ -72,3 +72,12 @@ Neither is right or wrong a priori. It's a **modeling assumption** about the dat
 - If they are → the effect genuinely varies, and the simpler model was hiding real heterogeneity
 **The deeper point you're touching on:** All of regression is like this. Every time you choose a model specification, you're encoding assumptions about which causal relationships exist, which are constant, which are linear, etc. The model doesn't discover causal structure from data alone — **you** impose structure, and the data fills in the numbers. That's why domain knowledge and causal graphs matter so much: they guide which structure to impose.
 The interaction term doesn't make causation more or less real. It just gives the model more degrees of freedom to match reality — at the cost of needing more data to estimate reliably.
+
+
+### Q: importance of features?
+| Effect size | Precision (CI) | Interpretation                           |
+| ----------- | -------------- | ---------------------------------------- |
+| Large       | High           | ✅ Important & reliable                   |
+| Large       | Low            | ⚠️ Potentially important, need more data |
+| Small       | High           | ❌ Precisely negligible                   |
+| Small       | Low            | ❓ Inconclusive                           |

@@ -8,9 +8,6 @@
 	2. Assumptions
 2. MIT 6.S897, lecture [14](https://youtu.be/gRkUhg9Wb-I) and 15
 	1. https://youtu.be/gRkUhg9Wb-I
-3. *What if* Chapter 1
-	1. "association is defined by a different risk in *two disjoint subsets* of the population determined by the *individuals’ actual treatment* value (A = 1 or A = 0), whereas causation is defined by a different risk in the *same population* under two *different treatment values* (a = 1 or a = 0)." ![[Pasted image 20260214092217.png]]
-
 ## Causal Inference for the Brave and True
 ### 01 - Introduction to causality
 1. $Y$ is the outcome, $Y_0 = Y(0)$ is the *potential outcome* without treatment, similar for $Y_1$.
@@ -19,6 +16,8 @@
 	1. $ATE = \mathbf{E}[Y_{1} - Y_{0}],\ ATT = \mathbf{E}[Y_{1} - Y_{0}|T=1]$
 		1. $\text{Association}=\mathbf{E}[Y|T=1] - \mathbf{E}[Y|T=0] = \mathbf{E}[Y_1|T=1] - \mathbf{E}[Y_0|T=0]$. See how I cannot drop the "$|T=1/0$" in the last equation--association is sample based, i.e., all factual.
 	2. $ATE$ and $ATT$ contain counterfactual terms. 
+	3. *What if* Chapter 1
+		1. "association is defined by a different risk in *two disjoint subsets* of the population determined by the *individuals’ actual treatment* value (A = 1 or A = 0), whereas causation is defined by a different risk in the *same population* under two *different treatment values* (a = 1 or a = 0)." ![[Pasted image 20260214092217.png|500]]
 3. Domain knowledge
 	1. Just from the following data frame, there's no way to tell if `sex` is a confounder that causes the skewed distribution of both `drug` and `days`, or it is just correlated with them. The causation has to come from *domain knowledge*.
 		```python
@@ -35,10 +34,11 @@
 	E[Y_1|T=0]-E[Y_1|T=1]=0 \end{align}$$
 	3. *==TWO INTERPRETATIONS==*
 		1. Treatment and control groups are comparable
-			1. This means no EXPLICIT confounders, i.e., some missing feature that makes the two groups not comparable. E.g., ?? 
+			1. This means no EXPLICIT confounders, i.e., some missing feature that makes the two groups not comparable. E.g., ignored `IQ` when calculating the effect of `education` on `wage`.
 			2. To remedy, just include that feature
 		2. Or that knowing the treatment assignment doesn’t give any information on how the outcome was previous to the treatment
-			1. This means treatment was not designed fairly, and the identity of the groups implicitly introduced confounding. We need to MAKE IT EXPLICIT by including the identity dummies. This is exactly what happened in Panel data and Fixed Effects!
+			1. This means treatment was not designed fairly, and the identity of the groups implicitly introduced confounding. 
+			2. To remedy, MAKE IT EXPLICIT by including the identity dummies. This is exactly what happened in Panel data and Fixed Effects!
 2. Under randomization, $Y$ is dependent on $T$. *This is the arrow between treatment and outcome in causal graph.*
 	1. This is also called association. Here NO counterfactual data! $$\mathbf{E}[Y|T=1] - \mathbf{E}[Y|T=0] = \mathbf{E}[Y_1|T=1] - \mathbf{E}[Y_0|T=0] \ne 0$$
 3. When Randomized, $ATE$ equals the difference of sample means.
@@ -77,7 +77,7 @@
 ### Non-random data
 > Why does regression work?
 1. multivariate to bivariate
-	1. "if we include IQ in our model, then  becomes the return of an additional year of education while keeping IQ fixed." how ???
+	1. "if we include IQ in our model, then becomes the return of an additional year of education while keeping IQ fixed." 
 		1. $X_1$: regress it on $X_2$, take the residual. Now both $\tilde{Y}$ and $\tilde{X}_1$ are "clean" of $X_2$'s influence. When you regress $\tilde{Y}$ on $\tilde{X}_1$, you get the effect of $X_1$ **holding $X_2$ constant** — which is exactly what multiple regression does.
 ### Omitted variable bias (OVB) or confounding bias
 1. the additional term in estimate for $\kappa$ proves association with both treatment and outcome.
@@ -149,7 +149,8 @@
 	1. About effects that are changing with time but same for all entities. E.g., inflation.
 	2. Partialling out both means you're looking at variation that's neither explained by "which person" nor by "which year" — only the truly idiosyncratic within-person, within-year variation remains.
 	3. See [[temp-time-effects]]
-7. ==???== [[temp-panel-data]]
+7. ==??? Parallel trend and FE== [[temp-panel-data]]
+8. There's a single $\beta$ — no subscript $i$ on $X_{it}$. It doesn't vary by entity. This is the mathematical expression of "the causal effect is constant across all entities."$$y_{it} = \beta X_{it} + \gamma U_i + e_{it}$$
 ## Code
 1. multivariate OLS
 2. DiD
