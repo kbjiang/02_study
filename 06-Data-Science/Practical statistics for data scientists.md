@@ -596,3 +596,9 @@ df.object1 = df.object1.astype("category")  # change object col to 'category' dt
 	1. Illustrating examples from 3B1B [video](https://youtu.be/zeJD6dqJ5lo)
 		1. Galton Board: each collision with a peg is a Bernoulli, more levels of pegs, i.e., *larger sample size*, leads to Gaussian distribution of the final displacement.
 		2. Sum of dice: each dice is uniform, but the distribution (*sampling distribution*) of sum of large number of dice (*sample statistic*) follows Gaussian
+3. $$\begin{array}{c|cc|c}
+& \text{Success} & \text{Failure} & \text{Total} \\hline
+\text{Group 1} & x_1 & n_1-x_1 & n_1 \
+\text{Group 2} & x_2 & n_2-x_2 & n_2 \\hline
+\text{Total} & x_1+x_2 & (n_1-x_1)+(n_2-x_2) & n_1+n_2
+\end{array}$$
