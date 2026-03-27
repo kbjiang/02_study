@@ -387,8 +387,9 @@ tags: #memory #gpu
 	2. [Speculative Decoding: When Two LLMs are Faster than One](https://www.youtube.com/@EfficientNLP)
 		1. Good intuition on $(q_x - p_x)_{+}$ for sampling after rejection ![[Pasted image 20251105180710.png]]
 		2. Tricky part is that $\forall x \ s.t. \  p_x < q_x$, there is contribution from resampling after rejection from $\forall x \ s.t. \  q_x <= p_x$.
-	3. [Accept-Reject Sampling : Data Science Concepts](https://www.youtube.com/@ritvikmath)
+	3. [Accept-Reject Sampling : Data Science Concepts](https://www.youtube.com/watch?v=OXDqjdVVePY)
 		1. Provides derivation and intuition on accepting with prob. $q_x/p_x$.
+			1. when $p_x$ is small but $q_x$ is large, means $x$ is rare in $p$ and should take it whenever it shows up, vice versa
 		2. This applies to the part where $p_x > q_x$ in speculative decoding.
 6. vLLM
 	1. small degradation on latency, but huge improve on throughput

@@ -26,6 +26,8 @@
 	3. Cross check https://neetcode.io/roadmap
 3. A better version is [Grind75](https://www.techinterviewhandbook.org/grind75/) where the list is updated for different time lines.
 4. Exercise notebook: [coding-interview.ipynb](C:\Users\kejia\Documents\GitHub\02_study\90-other-topics\interviews\)
+
+---
 ## Array
 1. Arrays hold values of the *same type* at *contiguous memory locations*.
 2. Use start and end indices to demarcate a subarray/range wherever possible.
@@ -79,6 +81,37 @@
 		 1. Therefore collisions
  4. References
 	 1. [Hash tables: Samuel's tutorial](https://youtu.be/r1XZGP5ppqQ?list=PL9t0xVFP90GBPScODccB2_PpouUUZ4j8C)
+
+---
+## Recursion
+### Learning
+1. Parts of every recursion
+	1. Base case, i.e., when to stop
+		1. *This also includes when condition is met*, e.g., search target found and stop.
+	2. Work towards base case
+		1. Dealing with intermediate results is important. See discussion ([[#^1361ef]] ) below.
+	3. Recursive call, i.e., call itself
+2. Two types of application of recursion
+	1. Divide-and-conquer
+		1. applied when needs results from all sub-problems
+	2. Backtracking
+		1. applied when needs to return all qualified answers
+		2. *trickier because there is a retraction component*.
+			1. Try every possible next step, *retract* as soon as it becomes invalid or reaches base case.
+			2. E.g., LeetCode 22, valid expression with $n$ parentheses. Recursion prevents going further down invalid paths.
+3. Intermediate results ^1361ef
+	1. Memorization: when there's a lot repetitions. E.g., Fibonacci numbers
+	2. Divide-and-conquer: combine the results of each subproblem
+	3. *Backtracking*: look for *all* valid results
+		1. Since we need to come back to the original state, needs to make sure the *progress* is well preserved
+		2. Sometimes uses `list` with `.pop()` to store progress
+	4. ==DFS: backtracking + mark visited?==
+		1. relation with backtracking? E.g, maze problem
+	5. How `return` works?
+4. Why Recursion Works
+	1. In a recursive algorithm, the computer "remembers" every previous state of the problem. This information is "held" by the computer on the **"activation stack"** (i.e., inside of each functions workspace). Every function has its own workspace *PER CALL* of the function.
+5. Ref
+	1. [硅谷工程师十五分钟带你深入理解](https://youtu.be/AqGagBmFXgw)
 ### Coding
 
 ## - String
@@ -144,7 +177,9 @@
 
 ## - Binary Search Trees
 ### data structures
-1. Traversal. See how the append is done.
+1. [Binary Search Trees: Samuel's tutorial](https://youtu.be/0woI8l0ZWmA)
+	1. Nice animation on *tree traversals*
+2. Traversal. See how the append is done.
 	```python
 	class TreeNode:
 	    def __init__(self, key):
@@ -163,9 +198,9 @@
 		traverse(root)
 		return result
 	```
-2. For level wise question, use `queue`.
-3. Binary Tree vs Binary Search Tree
-4. A lot of recursive calls
+3. For level wise question, use `queue`.
+4. Binary Tree vs Binary Search Tree
+5. A lot of recursive calls
 	1. Return values
 		1. Top Down: base case return `None`. E.g., `inorder traversal` of trees; E.g., backtracking
 		2. Bottom up: need value from subproblem, so return cannot be null.
@@ -210,21 +245,24 @@
 
 ## - Graph
 ### Data structure
-1. [Three representations](https://medium.com/basecs/from-theory-to-practice-representing-graphs-cfd782c5be38)
+> Main ref: [[Algorithms Illuminated (Part 2).pdf]] Chapter 7, 8
+1. Representations
 	1. edge list, adjacency matrix, adjacency list
 	2. directed vs undirected
-	3. Hash table of hash table?
-2. Traversal ([BFS](https://medium.com/basecs/going-broad-in-a-graph-bfs-traversal-959bd1a09255) and [DFS](https://medium.com/basecs/deep-dive-through-a-graph-dfs-traversal-8177df5d0f13))
-	1. Data structure
-		1. BFS with queue, needs `popleft` and `append`
-		2. DFS with stack, no popping?
-		3. Implementation [here](https://www.techinterviewhandbook.org/algorithms/graph/)
-			1. Graphs are usually matrix?
-	2. For a give node, 
-		2. BFS iterates over all of its adjacency linked list, i.e., neighbors at same level, thus breadth
-		3. DFS will recurse on the 1st element and put rest of the linked list "on hold" until backtracking, therefore prioritize depth
-	3. BFS tells us the *shortest* path from node $a$ to node $b$; DFS tells us if a path from $a$ to $b$ even exists
-	4. BFS iterative, DFS recursive
+2. BFS
+	1. iterates over all of its adjacency linked list, i.e., neighbors at same level, thus breadth
+	2. implementation
+		1. Queue for tracking exploration
+		2. Marking of *explored*
+3. DFS
+	1. DFS will recurse on the 1st element and put rest of the linked list "on hold" until backtracking, therefore prioritize depth
+	2. implementation
+		1. Stack (*iterative*) or recursion. Recursion also leverages stack, just inexplicitly.
+		2. Marking of *explored*
+4. Application
+	1. BFS tells us the *shortest* path from node $a$ to node $b$; DFS tells us if a path from $a$ to $b$ even exists
+	2. Topological Sort (Sect 8.5)
+		1. DAG may have many topological orderings, and DFS finds *one* of such orderings in $O(m+n)$ time 
 
 ### [542. 01 Matrix](https://leetcode.com/problems/01-matrix/)
 1. first find *all possible starting points*, then run BFS. See [solution](https://youtu.be/YTnYte6U61w)

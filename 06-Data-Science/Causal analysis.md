@@ -157,13 +157,16 @@
 2. ML vs Causal ML![[Pasted image 20260214065248.png]]
 
 ## Other references (TBD)
-## [Causal Inference - EXPLAINED!](https://youtu.be/Od6oAz1Op2k) by CodeEmporium
-	1. Logic
-		1. Randomized Controlled Test (RCT) is good but not always feasible
-			1. Why controlled? Because of *confounders*! 
-			2. When designing RCT, we can deliberately minimize confounders, i.e., other factors are equivalent between two treatment and control groups
-		2. Therefore we need to rely on existing observed data, where we have no control over confounders
-			1. Causal inference *simulates* RCT with observed data by dealing with *confounder* and *selection bias*.
-	2. Assumptions
+### [Causal Inference Is Eating Machine Learning]https://towardsdatascience.com/causal-inference-is-eating-machine-learning/
+### [Causal Inference - EXPLAINED!](https://youtu.be/Od6oAz1Op2k) by CodeEmporium
+1. Logic
+	1. Randomized Controlled Test (RCT) is good but not always feasible
+		1. Why controlled? Because of *confounders*! 
+		2. When designing RCT, we can deliberately minimize confounders, i.e., other factors are equivalent between two treatment and control groups
+	2. Therefore we need to rely on existing observed data, where we have no control over confounders
+		1. Causal inference *simulates* RCT with observed data by dealing with *confounder* and *selection bias*.
+2. Assumptions
 ## MIT 6.S897, lecture [14](https://youtu.be/gRkUhg9Wb-I) and 15
 1.  https://youtu.be/gRkUhg9Wb-I
+
+
