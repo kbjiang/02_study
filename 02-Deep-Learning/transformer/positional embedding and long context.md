@@ -13,7 +13,8 @@ tags: #UnderstandTransformers #PositionalEmbedding
 			 \end{align*} $$
 		 2. Pair of $\omega_k$ is in embedding dimension, while $t$ and $\phi$ are in position dimension. 
 3. [王木头](https://youtu.be/GGLr-TtKguA?t=4096)
-	1. The whole $P$ matrix is a Fourier expansion. 
+	1. The essence of embedding: 升维
+	2. The whole $P$ matrix is a Fourier expansion. 
 		1. think of the values at one position, it's just the list of Fourier coefficients, one at each dimension.
 	2. If we collapse all columns we get $f(t)$ with $t$ as token positions. If expanded, in the $t$ direction, we have simple sinusoids with different frequencies in each column
 	3. The large base (10,000) in denominator allows long wavelength at high dimensional (equivalently, lower frequency), which allows larger $t$ without repeating the encoding.
