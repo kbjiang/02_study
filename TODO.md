@@ -12,6 +12,7 @@
 ### Videos
 1. [Stanford CS230: Deep Learning I Autumn 2025](https://youtube.com/playlist?list=PLoROMvodv4rNRRGdS0rBbXOUGA0wjdh1X&si=3fdOsE71YITQgMGm)
 2. [Stanford CME296 Diffusion & Large Vision Models | Spring 2026 | Lecture 1 - Diffusion](https://www.youtube.com/@stanfordonline)
+3. https://x.com/ZitongYang0/status/2029034067992437139 "Today I defended my Ph.D. thesis at Stanford: Continually self-improving AI."
 ## Book
 1. LM interview handbook https://www.linkedin.com/feed/update/urn:li:activity:7446817744513028097/
 2. Foundations of Large Language Models https://arxiv.org/abs/2501.09223
