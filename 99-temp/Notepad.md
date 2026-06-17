@@ -22,4 +22,18 @@
 1. MCP servers
 	1. stdio: The host client launches the MCP server as a local background subprocess, passing JSON-RPC 2.0 messages over stdin and stdout.
 	2. sse: 
-2. "Dynamically load tools from a registry only when needed, and ==drop them from context== when the task is complete to prevent attention dilution." How?
+	3. "Dynamically load tools from a registry only when needed, and ==drop them from context== when the task is complete to prevent attention dilution." How?
+2. Agent-to-agent (A2A)
+	1. Fragmentation: Every one of these specialist agents can be built by a different team, using different technologies.
+	2. "This chaos of fragmentation is exactly what the Agent-to-Agent (A2A) protocol [A2A] is designed to standardize. A2A, originally developed by Google and now donated to the Linux Foundation, introduces a universal layer of communication for agentic systems. It acts as the lingua franca for the AI ecosystem, abstracting away networking transport nuances, the underlying frameworks, programming languages, and payload disparities."
+	3. "It ensures that the central Orchestrator can discover, onboard, and collaborate with any specialist agent in the ecosystem, completely agnostic to how that specialist was built under the hood. Just as HTTP standardized the web, A2A standardizes the virtual workforce."
+	4. "Without A2A, a developer might build an application and struggle to maintain its growing complexity. In the A2A era, that same developer can focus on perfecting a high-value niche— such as an agent that specializes in "Real-time Regulatory Compliance". Whether built as a sophisticated multi-agent monolith or a distributed app, these systems can now be exposed to the world as A2A-compliant agents. This means that a specialist vibe coded in one part of the world can be discovered and "hired" by another Orchestrator across the globe."
+	5. "Ultimately, the A2A protocol transforms the act of building isolated agentic applications into building the foundational members of a global, interoperable digital workforce."
+	6. "In a mature ecosystem, an application does not natively possess deep knowledge of every domain it touches. Instead, it acts as an Orchestrator—a central hub whose primary cognitive load is dedicated to understanding user intent, managing the overarching workflow, and delegating specific tasks to specialized, remote A2A agents."
+### Day 3, Agent Skills
+1. Skills enables one general-purpose agent to become a specialist across different things.
+2. Skill vs multi-agent
+	1. `single-agent-with-skills` much easier than `multiple-agent`
+	2. Multi-agent remains the ==absolute right answer== when you have genuine parallelism, real capability boundaries (different access, different security postures, different external systems), hierarchical decomposition where the abstraction layers actually differ, adversarial or check-and-balance setups, sub-agent intercommunication, or heterogeneous models.
+3. Evaluation
+	1. ![[Pasted image 20260617114638.png]]
