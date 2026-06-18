@@ -35,5 +35,17 @@
 2. Skill vs multi-agent
 	1. `single-agent-with-skills` much easier than `multiple-agent`
 	2. Multi-agent remains the ==absolute right answer== when you have genuine parallelism, real capability boundaries (different access, different security postures, different external systems), hierarchical decomposition where the abstraction layers actually differ, adversarial or check-and-balance setups, sub-agent intercommunication, or heterogeneous models.
-3. Evaluation
+3. Agent only sees skill's *description* during routing
+4. Evaluation
 	1. ![[Pasted image 20260617114638.png]]
+	2. ![[Pasted image 20260617114939.png]]
+	3. Primary failure modes
+		1. Trigger Failure
+		2. Execution Failure
+		3. Regression: adding the skill causes performance drops in existing library
+		4. Token Budget Failure
+	4. "When using LLM-as- Judge to score outputs at scale, remember two non-negotiables: swap the positions of the reference and actual outputs to eliminate ordering bias, and calibrate against human ratings until you hit 90% agreement."
+	5. skills must graduate through strict tiers of authority: 
+		1. Read-Only: LLM-as-Judge eval; 90% trigger accuracy. 
+		2. Draft-Only (Human Review): Golden dataset of 20+ cases; human approval. 
+		3. Action-Allowed: Full adversarial red-teaming; sustained success across multiple runs (not just a single lucky pass); no rollback events; sustained pass^k.
