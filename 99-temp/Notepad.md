@@ -93,3 +93,6 @@
 2. Evaluate as early as possible. E.g., evaluate the plan!
 3. ![[Pasted image 20260621155542.png]]
 4. ![[Pasted image 20260621160808.png]]
+### Codelab
+1. https://codelabs.developers.google.com/vibecode-ambient-expense-agent#0
+	1. understand `agent.py`, especially HITL (human in the loop) part.
