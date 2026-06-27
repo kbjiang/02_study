@@ -96,3 +96,9 @@
 ### Codelab
 1. https://codelabs.developers.google.com/vibecode-ambient-expense-agent#0
 	1. understand `agent.py`, especially HITL (human in the loop) part.
+### Day 5 Spec-Driven Production Grade Development in the Age of Vibe Coding
+### Spec-Driven Development (SDD)
+1. High-quality specification is like a *blueprint*--*code is now disposable*!
+	1. Format: "The data shows that for deeply nested configurations, YAML achieves a 51.9% parsing accuracy, compared to only 43.1% for JSON and 33.8% for XML."
+2. d
+	

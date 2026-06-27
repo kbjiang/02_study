@@ -16,6 +16,7 @@
 ## Book
 1. LM interview handbook https://www.linkedin.com/feed/update/urn:li:activity:7446817744513028097/
 2. Foundations of Large Language Models https://arxiv.org/abs/2501.09223
+3. syntax: a cognitive approach
 ## Blogs
 1. Frontier model training methodologies Alex Wa https://djdumpling.github.io/2026/01/31/frontier_training.html
 2. Eugene Yan https://eugeneyan.com/
