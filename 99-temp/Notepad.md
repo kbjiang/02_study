@@ -101,4 +101,6 @@
 1. High-quality specification is like a *blueprint*--*code is now disposable*!
 	1. Format: "The data shows that for deeply nested configurations, YAML achieves a 51.9% parsing accuracy, compared to only 43.1% for JSON and 33.8% for XML."
 2. d
-	
+
+### Livestream
+1. Spanner graph?
