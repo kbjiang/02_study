@@ -1,13 +1,17 @@
 ## Courses
-1. Cornell, cs6783 Machine Learning Theory
-2. Stanford CS229M Machine Learning Theory
+1. ==Start with this==. His list is solid.
+	1. https://csdiy.wiki/en/%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/#simplify-the-complex
+2. Missing semester
+	1. https://youtu.be/MSgoeuMqUmU?si=S0sWbiiCKRWEPNlq
+3. Cornell, cs6783 Machine Learning Theory
+4. Stanford CS229M Machine Learning Theory
 	1. [Stanford CS229M: Machine Learning Theory - Fall 2021 - YouTube](https://www.youtube.com/playlist?list=PLoROMvodv4rP8nAmISxFINlGKSK4rbLKh)
-3. Mathematics of Neural networks
+5. Mathematics of Neural networks
 	1. https://arxiv.org/pdf/2403.04807
-4. MIT matrix calculus
+6. MIT matrix calculus
 	1. https://ocw.mit.edu/courses/18-s096-matrix-calculus-for-machine-learning-and-beyond-january-iap-2023/
-5. Convex optimization Stephen Boyd ([https://web.stanford.edu/class/ee364a/lectures.html](https://web.stanford.edu/class/ee364a/lectures.html))
-6.  Physics informed ML
+7. Convex optimization Stephen Boyd ([https://web.stanford.edu/class/ee364a/lectures.html](https://web.stanford.edu/class/ee364a/lectures.html))
+8.  Physics informed ML
 
 ### Videos
 1. [Stanford CS230: Deep Learning I Autumn 2025](https://youtube.com/playlist?list=PLoROMvodv4rNRRGdS0rBbXOUGA0wjdh1X&si=3fdOsE71YITQgMGm)
