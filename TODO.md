@@ -8,6 +8,8 @@
 	1. https://ocw.mit.edu/courses/18-s096-matrix-calculus-for-machine-learning-and-beyond-january-iap-2023/
 5. Convex optimization Stephen Boyd ([https://web.stanford.edu/class/ee364a/lectures.html](https://web.stanford.edu/class/ee364a/lectures.html))
 6.  Physics informed ML
+7. Deep learning https://ocw.mit.edu/courses/6-7960-deep-learning-fall-2024/
+
 
 ### Videos
 1. [Stanford CS230: Deep Learning I Autumn 2025](https://youtube.com/playlist?list=PLoROMvodv4rNRRGdS0rBbXOUGA0wjdh1X&si=3fdOsE71YITQgMGm)
