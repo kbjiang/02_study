@@ -4,19 +4,32 @@
 2. Missing semester
 	1. https://youtu.be/MSgoeuMqUmU?si=S0sWbiiCKRWEPNlq
 3. Cornell, cs6783 Machine Learning Theory
-4. Stanford CS229M Machine Learning Theory
+4. CS4780. ML for intelligent systems. https://www.cs.cornell.edu/courses/cs4780/2018fa/
+5. Stanford CS229M Machine Learning Theory
 	1. [Stanford CS229M: Machine Learning Theory - Fall 2021 - YouTube](https://www.youtube.com/playlist?list=PLoROMvodv4rP8nAmISxFINlGKSK4rbLKh)
-5. Mathematics of Neural networks
+6. Mathematics of Neural networks
 	1. https://arxiv.org/pdf/2403.04807
-6. MIT matrix calculus
+7. MIT matrix calculus
 	1. https://ocw.mit.edu/courses/18-s096-matrix-calculus-for-machine-learning-and-beyond-january-iap-2023/
-7. Convex optimization Stephen Boyd ([https://web.stanford.edu/class/ee364a/lectures.html](https://web.stanford.edu/class/ee364a/lectures.html))
-8.  Physics informed ML
+8. Convex optimization Stephen Boyd ([https://web.stanford.edu/class/ee364a/lectures.html](https://web.stanford.edu/class/ee364a/lectures.html))
+9.  Physics informed ML
+10. learn from data, caltech
+11. stanford stats200, intro to statistical inference, zhou fan
+	1. Bradley-Terry model
+12. NYU DL research https://atcold.github.io/NYU-DLFL25U/
 
+### Papers
+1. Deep Learning Review (Nature) - Yann LeCun, Yoshua Bengio, Geoffrey Hinton 
+	1. https://github.com/voice32/activations_optimizers/blob/master/papers/Deep%20Learning%20Review%20(Nature)%20-%20Yann%20LeCun%2C%20Yoshua%20Bengio%2C%20Geoffrey%20Hinton.pdf
+2. Representation Learning: A Review and New Perspectives
+	1. https://arxiv.org/pdf/1206.5538
 ### Videos
 1. [Stanford CS230: Deep Learning I Autumn 2025](https://youtube.com/playlist?list=PLoROMvodv4rNRRGdS0rBbXOUGA0wjdh1X&si=3fdOsE71YITQgMGm)
 2. [Stanford CME296 Diffusion & Large Vision Models | Spring 2026 | Lecture 1 - Diffusion](https://www.youtube.com/@stanfordonline)
 3. https://x.com/ZitongYang0/status/2029034067992437139 "Today I defended my Ph.D. thesis at Stanford: Continually self-improving AI."
+4. 3B1B
+	1. information theory
+	2. lin alg
 ## Book
 1. LM interview handbook https://www.linkedin.com/feed/update/urn:li:activity:7446817744513028097/
 2. Foundations of Large Language Models https://arxiv.org/abs/2501.09223
