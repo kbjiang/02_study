@@ -34,3 +34,5 @@ https://www.cs.cornell.edu/courses/cs4780/2018fa/
 
 ### Perceptron
 1. In high-dimensional space, data points are almost always far away from each other therefore separable by a hyperplane.
+2. the geometry of adding an additional dimension for bias...
+3. overfitting has not become a thing yet
