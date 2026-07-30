@@ -19,18 +19,25 @@ https://www.cs.cornell.edu/courses/cs4780/2018fa/
 
 3. What does this connect to?
 
-# Lecture 4 "Curse of Dimensionality / Perceptron"
+# Lecture 4 "Curse of Dimensionality"
 ## Notes
-### Curse of Dimensionality
-1. random points live close to edges; in other words, no points are close to each other, closeness does not apply
-2. why KNN still works
+### KNN
+1. Assumption
+	1.  Distances reliably reflect a semantically meaningful notion of the dissimilarity.
+2. why KNN still works (despite of Curse of Dimensionality)
 	1. real data intrinsic low dim: subspace/manifold
-		1. e.g., an image of a face is 10k pixel, but a face may only need ~20 features to describe
+		1. e.g., an image of a face is 10k pixel, but a face may only need ~20 features (nose, eyes...) to describe
 	2. manifold def: locally Euclidean distance is valid
 	3. this is also why PCA and dimension reduction is important
 		1. KNN is very slow in high dimensional $O(n \times d)$
-3. Question
-	1. in his Curse of dim demo, why the peak in the middle?
-
+### Curse of Dimensionality
+1. As $d \gg 0$, points drawn from a *probability distribution* stop being similar to each other, and the $k$NN assumption breaks down.
+2. Pairwise distances grow with dimensionality 
+	1. pairwise $L^2$ distance when each dimension follows $U[0, 1]$ ![[Pasted image 20260729210325.png]]
+3. Distance to hyperplane stay small? (WIP, Lect #2 Syllabus)
+	1. distance between a point and a $d-1$ hyperplane does not change with $d$. This is why #SVM / #perceptron works.
+### No Free Lunch (NFL) Theorem 
+# Lecture 5 "Perceptron"
 ### Perceptron
 1. In high-dimensional space, data points are almost always far away from each other therefore separable by a hyperplane.
+2. the geometric view of adding a dimension for intercept.
