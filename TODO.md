@@ -17,6 +17,7 @@
 11. stanford stats200, intro to statistical inference, zhou fan
 	1. Bradley-Terry model
 12. NYU DL research https://atcold.github.io/NYU-DLFL25U/
+13. minitorch https://minitorch.github.io/
 
 ### Papers
 1. Deep Learning Review (Nature) - Yann LeCun, Yoshua Bengio, Geoffrey Hinton 

@@ -1,4 +1,4 @@
-### How CNN works
+### How CNN works #CNN
 1. Best [lecture](https://youtu.be/OP5HcXJg2Aw) on this topic.
 	1. Why CNN? 
 		1. Coz Fully connected network is too expensive.
