@@ -8,16 +8,11 @@ https://www.cs.cornell.edu/courses/cs4780/2018fa/
 2. ML vs AI
 	1. AI: top down, try to mimic human, focus on *Logic*
 	2. ML: bottom up, smaller goals, statistic + optimization
-## My takeaway
-1. What was the main idea?  
-
-  
-
-2. What surprised me?  
-
-  
-
-3. What does this connect to?
+3. *Inductive* [[#^inductive]]
+	1. Inductive is the process of moving from specific facts or observations to a broader, general conclusion, i.e., *generalization*. Deductive is the opposite direction.
+	2. No free lunch (NFL) theorem: no inductive bias is universally good. 
+## Reference
+1. 西瓜书 Section 1.3 ^inductive
 
 # Lecture 4 "Curse of Dimensionality / Perceptron"
 ## Notes
