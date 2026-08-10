@@ -50,3 +50,12 @@ https://www.cs.cornell.edu/courses/cs4780/2018fa/
 4. Perceptron convergence
 	1. If a dataset is linearly separable, perceptron algo is guaranteed to find a separating hyperplane in a finite number of updates.
 	2. the number of steps relates to margin $\gamma$.
+
+---
+# Lecture 7 "MLE"
+## Notes
+1. $P(D;\theta)$ vs $P(D|\theta)$ 
+2. parameter $\theta$ vs data $D$
+3. Hallucinated toss for coins--prior belief to avoid 0 probability; mental picture: Assuming already 10 head and 10 tails, start tossing; related to Beta distribution initial condition
+4. Naive Bayes
+	1. the monkey + two typewriters (spam/no-spam) metaphor
