@@ -57,3 +57,10 @@ https://www.cs.cornell.edu/courses/cs4780/2018fa/
 ## Probability review
 1. Student distribution is robust against outliers when DOF is small, due to its heavy tail
 	1. when DOF $\gg 5$ the Student dist. approaches Gaussian and lost the robustness
+# Lecture 7 "MLE"
+## Notes
+1. $P(D;\theta)$ vs $P(D|\theta)$ 
+2. parameter $\theta$ vs data $D$
+3. Hallucinated toss for coins--prior belief to avoid 0 probability; mental picture: Assuming already 10 head and 10 tails, start tossing; related to Beta distribution initial condition
+4. Naive Bayes
+	1. the monkey + two typewriters (spam/no-spam) metaphor
