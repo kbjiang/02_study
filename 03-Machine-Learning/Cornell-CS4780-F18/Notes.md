@@ -50,3 +50,10 @@ https://www.cs.cornell.edu/courses/cs4780/2018fa/
 4. Perceptron convergence
 	1. If a dataset is linearly separable, perceptron algo is guaranteed to find a separating hyperplane in a finite number of updates.
 	2. the number of steps relates to margin $\gamma$.
+
+---
+
+---
+## Probability review
+1. Student distribution is robust against outliers when DOF is small, due to its heavy tail
+	1. when DOF $\gg 5$ the Student dist. approaches Gaussian and lost the robustness
