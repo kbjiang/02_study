@@ -53,6 +53,12 @@ https://www.cs.cornell.edu/courses/cs4780/2018fa/
 
 ---
 # Lecture 7-10 "MLE" and "Naive Bayes"
+
+---
+## Probability review
+1. Student distribution is robust against outliers when DOF is small, due to its heavy tail
+	1. when DOF $\gg 5$ the Student dist. approaches Gaussian and lost the robustness
+# Lecture 7 "MLE"
 ## Notes
 1. $P(D;\theta)$ vs $P(D|\theta)$ 
 2. parameter $\theta$ vs data $D$
