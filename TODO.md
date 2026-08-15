@@ -36,6 +36,9 @@
 2. Foundations of Large Language Models https://arxiv.org/abs/2501.09223
 3. syntax: a cognitive approach
 4. GPT图解大模型是怎样构建的 https://drive.google.com/file/d/1IlWY2z8USBm3TKBUfLNDcTykltdiJriA/view?usp=drive_link
+5. Optimization (Steven L. Brunton) 
+	1. book https://faculty.washington.edu/sbrunton/OptimizationBootcamp.pdf
+	2. video https://youtube.com/playlist?list=PLMrJAkhIeNNS3UT10txhV70ZwIeIjkMQp&si=nFoFBICbV8S9UDJ1
 ## Blogs
 1. Frontier model training methodologies Alex Wa https://djdumpling.github.io/2026/01/31/frontier_training.html
 2. Eugene Yan https://eugeneyan.com/
