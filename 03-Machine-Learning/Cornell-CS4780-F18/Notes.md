@@ -52,7 +52,7 @@ https://www.cs.cornell.edu/courses/cs4780/2018fa/
 	2. the number of steps relates to margin $\gamma$.
 
 ---
-# Lecture 7-10 "Probability review" and "Naive Bayes"
+# Lecture 7-10 "Estimating Probabilities " and "Naive Bayes"
 
 ## Notes
 ### Student's $t$-distribution
@@ -61,14 +61,37 @@ https://www.cs.cornell.edu/courses/cs4780/2018fa/
 	2. small sample size--when DOF $\approx 30$ it becomes Gaussian.
 2. The fatter tail makes it harder to reject the null hypothesis-- it is good to be cautious when sample size is small. 
 	1. Equivalently, this means Student's $t$-dist is more robust to outliers, as shown below. ![[Pasted image 20260812065630.png]]
-### other
-1. $P(D;\theta)$ vs $P(D|\theta)$ 
-2. parameter $\theta$ vs data $D$
-3. Hallucinated toss for coins--prior belief to avoid 0 probability; mental picture: Assuming already 10 head and 10 tails, start tossing; related to Beta distribution initial condition
+### Estimating Probabilities from data
+1. Assume data $D={(x_1, y_1),...,(x_n, y_n)}$ is drawn from $P(X, Y)$, i.e., $P(D)=\prod_{\alpha=1}^{n}P(x_\alpha, y_\alpha)$. *This is the core of probabilistic ML approches.*
+2. If we have enough data, then we can estimate the true distribution by *counting*:
+	$$
+	 \begin{aligned}
+	 \hat{P}(x, y)&=\frac{\sum{I}(x=x_i\wedge y=y_i)}{n} \text{, with $I$ being the indicator function;}\\
+	\hat{P}(y|x)&=\frac{\sum{I}(x=x_i\wedge y=y_i)}{\sum\mathbb{I}(x=x_i)}.
+	\end{aligned}
+	$$
+	However, it's rarely the case, especially when $x$ is high dimensional. 
+3. *Therefore we need tricks*
+	1. modeling: assume certain probabilistic models, e.g., Gaussian, Binomial...; and estimate their parameters, the number of which is usually small comparing to sample size, with algorithms such as MLE/MAP.
+	2. additional assumptions: Naive Bayes for example
+### MLE and MAP (explained as coin toss)
+1. From MLE to MAP intuition
+	1. With pure MLE, one may ran into 0 heads in first $n$ toss, but we know a coin *should not* have 0 chance for heads
+	2. Then we assume imaginary toss--prior belief (MAP) to avoid 0 probability. For e.g.: if we believe it's a fair coin, assume 5 head and 5 tails before tossing
+2. Beta distribution as the prior distribution intuition
+	1. it is of the same distributional family as the binomial distribution (**conjugate prior**) $\rightarrow$ the math will turn out nicely
+	2. $P(\theta)=\frac{\theta^{\alpha-1} (1-\theta)^{\beta-1}}{B(\alpha, \beta)}$, means we start with $\alpha-1$ imaginary heads and $\beta-1$ imaginary tails.
+3. "True" Bayesian approach
+	1. $P(Y|D) = \int_{\theta} P(Y, \theta | D) d\theta =  \int_{\theta} P(Y| \theta, D) P(\theta | D) d\theta$. The 2nd equal sign is because $P(Y, \theta)=P(Y, \theta)P(Y|\theta)$.  
+	2. $\theta$ is integrated out - our prediction takes all possible models into account.
+4. ==TODO==
+	1. As always the differences are subtle. In MLE we maximize log[P(D;θ)] in MAP we maximize log[P(D|θ)]+log[P(θ)]. So essentially in MAP we only add the term log[P(θ)] to our optimization. This term is independent of the data and penalizes if the parameters, θ deviate too much from what we believe is reasonable. We will later revisit this as a form of [regularization](https://www.cs.cornell.edu/courses/cs4780/2018fa/lectures/lecturenote10.html), where log[P(θ)] will be interpreted as a measure of classifier complexity.
 ### Naive Bayes
-1. the monkey + two typewriters (spam/no-spam) metaphor
-2. interesting example around Lec 8 39:50--relates to confounder in causal analysis
-3. The multi-dimension mapping to counts of words in an email; each word in the vocab $\leftrightarrow$ each dimension, counts is the value in that dimension ; bag of words
+1. Instead of estimating $P(y|x)$ directly, estimate $P(y)$ (easy) and $P(x|y)$ (hard, therefore simplify with assumptions) instead.
+2. Num. of dimension = num. of features.  ![[Pasted image 20260817214448.png|1000]]
+	1. For example, spam filter. Each word in the vocab $\leftrightarrow$ each dimension; counts is the value in that dimension (bag of words)
+	2. $P(x_\alpha|y=c)$ is the class $c$ (e.g., spam) conditional distribution of feature $x_\alpha$ (e.g., # of word 'the')
+3. When is NB valid? When $y$ is the confounder of the features. Around Lec 8 39:50; relates to confounder in causal analysis
 
 ## References
 1. MLAPP
@@ -76,3 +99,4 @@ https://www.cs.cornell.edu/courses/cs4780/2018fa/
 2. MLAPP visualization #MLAPP #vis #stats
 	1. [pyprobml/notebooks at master · probml/pyprobml · GitHub](https://github.com/probml/pyprobml/tree/master/notebooks)
 	2. 2012 version, matlab https://github.com/probml/pmtk3/tree/master/demos
+3. [Joint_MLE_MAP.pdf](https://www.cs.cmu.edu/~tom/mlbook/Joint_MLE_MAP.pdf) by Tom Mitchell
