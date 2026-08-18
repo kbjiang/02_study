@@ -52,23 +52,27 @@ https://www.cs.cornell.edu/courses/cs4780/2018fa/
 	2. the number of steps relates to margin $\gamma$.
 
 ---
-# Lecture 7-10 "MLE" and "Naive Bayes"
+# Lecture 7-10 "Probability review" and "Naive Bayes"
 
----
-## Probability review
-1. Student distribution is robust against outliers when DOF is small, due to its heavy tail
-	1. when DOF $\gg 5$ the Student dist. approaches Gaussian and lost the robustness
-# Lecture 7 "MLE"
 ## Notes
+### Student's $t$-distribution
+1. It is used when *both*
+	1. population std $\sigma$ is unknow--otherwise just use Gaussian to calculate exact sample std
+	2. small sample size--when DOF $\approx 30$ it becomes Gaussian.
+2. The fatter tail makes it harder to reject the null hypothesis-- it is good to be cautious when sample size is small. 
+	1. Equivalently, this means Student's $t$-dist is more robust to outliers, as shown below. ![[Pasted image 20260812065630.png]]
+### other
 1. $P(D;\theta)$ vs $P(D|\theta)$ 
 2. parameter $\theta$ vs data $D$
 3. Hallucinated toss for coins--prior belief to avoid 0 probability; mental picture: Assuming already 10 head and 10 tails, start tossing; related to Beta distribution initial condition
-4. Naive Bayes
-	1. the monkey + two typewriters (spam/no-spam) metaphor
-	2. interesting example around Lec 8 39:50--relates to confounder in causal analysis
-	3. The multi-dimension mapping to counts of words in an email; each word in the vocab $\leftrightarrow$ each dimension, counts is the value in that dimension ; bag of words
+### Naive Bayes
+1. the monkey + two typewriters (spam/no-spam) metaphor
+2. interesting example around Lec 8 39:50--relates to confounder in causal analysis
+3. The multi-dimension mapping to counts of words in an email; each word in the vocab $\leftrightarrow$ each dimension, counts is the value in that dimension ; bag of words
 
 ## References
 1. MLAPP
 	1. The other interpretation is called the Bayesian interpretation of probability. In this view, probability is used to quantify our uncertainty about something; hence it is fundamentally related to information rather than repeated trials (Jaynes 2003). In the Bayesian view, the above statement means we believe the coin is equally likely to land heads or tails on the next toss. One big advantage of the Bayesian interpretation is that it can be used to model our uncer tainty about events that do not have long term frequencies. For example, we might want to compute the probability that the polar ice cap will melt by 2020 CE. This event will happen zero or one times, but cannot happen repeatedly. P27
-	2. Student $t$ distribution is more robust to outliers than Gaussian, due to its heavier tails ![[Pasted image 20260812065630.png]]
+2. MLAPP visualization #MLAPP #vis #stats
+	1. [pyprobml/notebooks at master · probml/pyprobml · GitHub](https://github.com/probml/pyprobml/tree/master/notebooks)
+	2. 2012 version, matlab https://github.com/probml/pmtk3/tree/master/demos
