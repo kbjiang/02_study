@@ -7,8 +7,7 @@
 4. CS4780. ML for intelligent systems. https://www.cs.cornell.edu/courses/cs4780/2018fa/
 5. Stanford CS229M Machine Learning Theory
 	1. [Stanford CS229M: Machine Learning Theory - Fall 2021 - YouTube](https://www.youtube.com/playlist?list=PLoROMvodv4rP8nAmISxFINlGKSK4rbLKh)
-6. Mathematics of Neural networks
-	1. https://arxiv.org/pdf/2403.04807
+6. Parallel computing (CUDA) [gfxcourses.stanford.edu/cs149/fall23](https://gfxcourses.stanford.edu/cs149/fall23)
 7. MIT matrix calculus
 	1. https://ocw.mit.edu/courses/18-s096-matrix-calculus-for-machine-learning-and-beyond-january-iap-2023/
 8. Convex optimization Stephen Boyd ([https://web.stanford.edu/class/ee364a/lectures.html](https://web.stanford.edu/class/ee364a/lectures.html))
@@ -39,6 +38,8 @@
 5. Optimization (Steven L. Brunton) 
 	1. book https://faculty.washington.edu/sbrunton/OptimizationBootcamp.pdf
 	2. video https://youtube.com/playlist?list=PLMrJAkhIeNNS3UT10txhV70ZwIeIjkMQp&si=nFoFBICbV8S9UDJ1
+6.  [Mathematics of Data Science](https://arxiv.org/abs/2607.11938)
+7. Mathematics of Neural networks https://arxiv.org/pdf/2403.04807
 ## Blogs
 1. Frontier model training methodologies Alex Wa https://djdumpling.github.io/2026/01/31/frontier_training.html
 2. Eugene Yan https://eugeneyan.com/
