@@ -101,3 +101,22 @@ https://www.cs.cornell.edu/courses/cs4780/2018fa/
 	1. [pyprobml/notebooks at master · probml/pyprobml · GitHub](https://github.com/probml/pyprobml/tree/master/notebooks)
 	2. 2012 version, matlab https://github.com/probml/pmtk3/tree/master/demos
 3. [Joint_MLE_MAP.pdf](https://www.cs.cmu.edu/~tom/mlbook/Joint_MLE_MAP.pdf) by Tom Mitchell
+---
+# Lecture 11-13 Logistic/linear regression
+## Notes
+### Logistic Regression
+1. Parametric form $P(Y=y|X=x)=1/(1+\exp (-w^T x y))$, where $y=\pm 1$.
+### Logistic Regression vs Naive Bayes
+1. both are ways to learn $P(Y|X)$
+	1. Gaussian NB implies LR form. Intro of Chap 3 in [[#^tom]]
+2. fit distribution vs directly learn from data 
+3. different assumptions?
+4. different learning algorithm
+### Logistic Regression vs Linear Regression
+1. LogReg cares if the data point is on the right side of the hyper-plane
+2. LinReg cares about the distance from the hyper-plane, doesn't matter which side.
+
+
+## References
+1. [NBayesLogReg.pdf](https://www.cs.cmu.edu/~tom/mlbook/NBayesLogReg.pdf) by Tom Mitchell ^tom
+2. d
