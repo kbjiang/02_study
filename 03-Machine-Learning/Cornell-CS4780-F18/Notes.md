@@ -104,18 +104,31 @@ https://www.cs.cornell.edu/courses/cs4780/2018fa/
 # Lecture 11-13 Logistic/linear regression
 ## Notes
 ### Logistic Regression
-1. Parametric form $P(Y=y|X=x)=1/(1+\exp (-w^T x y))$, where $y=\pm 1$.
+1. Parametric form $P(Y=y|X=x)=\frac{1}{1+\exp (-(w^T x + b) y)}$, where $y=\pm 1$. 
 ### Logistic Regression vs Naive Bayes
-1. both are ways to learn $P(Y|X)$
+1. MLE vs MAP
+	1. discrete input and smoothing
+	2. with $\ell_1$ (Laplace dist prior) and $\ell_2$ (Gaussian)
+2. Generative vs discriminative
+	1. GNB and Logistic Regression
+3. both are ways to learn $P(Y|X)$
 	1. Gaussian NB implies LR form. Intro of Chap 3 in [[#^tom]]
-2. fit distribution vs directly learn from data 
-3. different assumptions?
-4. different learning algorithm
+4. fit distribution vs directly learn from data 
+	1. generative vs discriminative
+5. different assumptions?
+6. different learning algorithm
+7. "Logistic Regression is the discriminative counterpart to Naive Bayes. In Naive Bayes, we first model P(x|y) for each label y, and then obtain the decision boundary that best discriminates between these two distributions. In Logistic Regression we do not attempt to model the data distribution P(x|y), instead, we model P(y|x) directly. We assume the same probabilistic form P(y|xi)=11+e−y(wTxi+b) , but we do not restrict ourselves in any way by making assumptions about P(x|y) (in fact it can be any member of the [Exponential Family](https://en.wikipedia.org/wiki/Exponential_family)). This allows logistic regression to be more flexible, but such flexibility also requires more data to avoid overfitting. Typically, in scenarios with little data and if the modeling assumption is appropriate, Naive Bayes tends to outperform Logistic Regression. However, as data sets become large logistic regression often outperforms Naive Bayes, which suffers from the fact that the assumptions made on P(x|y) are probably not exactly correct. If the assumptions hold exactly, i.e. the data is truly drawn from the distribution that we assumed in Naive Bayes, then Logistic Regression and Naive Bayes converge to the exact same result in the limit (but NB will be faster)."
 ### Logistic Regression vs Linear Regression
 1. LogReg cares if the data point is on the right side of the hyper-plane
 2. LinReg cares about the distance from the hyper-plane, doesn't matter which side.
 
-
+### Gradient Descent
+1.  the challenge is to find the right step size
+	1. all the methods with momentum for example
+2. Ways to optimize: Newton's method, line search, MLAPP Fig 8.2
+	1. Newton.  "if the function is flat or almost flat with respect to some dimension. In that case the second derivatives are close to zero, and their inverse becomes very large - resulting in gigantic steps."
+### MISC
+1. OLS and its geometry. Ambient space and its axes
 ## References
 1. [NBayesLogReg.pdf](https://www.cs.cmu.edu/~tom/mlbook/NBayesLogReg.pdf) by Tom Mitchell ^tom
 2. d

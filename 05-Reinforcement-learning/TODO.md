@@ -14,3 +14,8 @@
 	1. https://arxiv.org/pdf/2412.05265v2
 2. This lecture series. 深度强化学习 by Shusen Wang
 	1. https://youtu.be/jflq6vNcZyA?si=puViyPNlWnWYTWvD
+
+## RHLF by Nathan Lambert
+1. papers in case he did not include?
+	1. https://arxiv.org/pdf/2501.17161
+	2. https://arxiv.org/pdf/2608.03573
