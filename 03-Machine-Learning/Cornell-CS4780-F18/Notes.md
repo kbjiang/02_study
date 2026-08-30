@@ -77,10 +77,11 @@ https://www.cs.cornell.edu/courses/cs4780/2018fa/
 ### MLE and MAP (explained as coin toss)
 1. From MLE to MAP intuition
 	1. With pure MLE, one may ran into 0 heads in first $n$ toss, but we know a coin *should not* have 0 chance for heads
-	2. Then we assume imaginary toss--prior belief (MAP) to avoid 0 probability. For e.g.: if we believe it's a fair coin, assume 5 head and 5 tails before tossing
+	2. Then we assume imaginary toss--prior belief (MAP) to avoid 0 probability. For e.g.: if we believe a fair coin, then assume 10 head and 10 tails before tossing
 2. Beta distribution as the prior distribution intuition
 	1. it is of the same distributional family as the binomial distribution (**conjugate prior**) $\rightarrow$ the math will turn out nicely
 	2. $P(\theta)=\frac{\theta^{\alpha-1} (1-\theta)^{\beta-1}}{B(\alpha, \beta)}$, means we start with $\alpha-1$ imaginary heads and $\beta-1$ imaginary tails.
+		1. Greater values of $\alpha$ and $\beta$ means stronger belief. E.g., if we are quite sure $\theta=0.5$ then we can have 100 imaginary heads/tails--the prior Beta distribution is narrow around 0.5.
 3. "True" Bayesian approach
 	1. $P(Y|D) = \int_{\theta} P(Y, \theta | D) d\theta =  \int_{\theta} P(Y| \theta, D) P(\theta | D) d\theta$. The 2nd equal sign is because $P(Y, \theta)=P(Y, \theta)P(Y|\theta)$.  
 	2. $\theta$ is integrated out - our prediction takes all possible models into account.
