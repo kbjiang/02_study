@@ -28,6 +28,9 @@ Related:
 	4. Starting with $\pmb{\varepsilon}=\overrightarrow{BA}=\overrightarrow{BD}+\overrightarrow{DC} + \overrightarrow{CA} \sim \mathcal{N(0, \sigma^2\mathbf{I}_3)}$, and once proved mutually perpendicular, we have $\overrightarrow{BD},\overrightarrow{DC},\overrightarrow{CA} \sim \mathcal{N(0, \sigma^2})$. (WHY?) 
 ### Misc
 1. [Degrees of Freedom, Actually Explained - The Geometry of Statistics](https://youtu.be/VDlnuO96p58?list=TLPQMDMwMjIwMjbJ-Nrl2sTgmg) Similar
+	1. sample size $n$ is the dimensionality of the ambient space
+	2. sample mean has DOF 1 because it's direction is fixed, i.e. $[1,1]$, while population mean is DOF 0 because both magnitude and direction are fixed.
+	3. ![[Pasted image 20260908090627.png|350]] ![[Pasted image 20260908091008.png|250]]
 
 
 ## References
