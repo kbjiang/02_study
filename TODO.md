@@ -40,6 +40,7 @@
 	2. video https://youtube.com/playlist?list=PLMrJAkhIeNNS3UT10txhV70ZwIeIjkMQp&si=nFoFBICbV8S9UDJ1
 6.  [Mathematics of Data Science](https://arxiv.org/abs/2607.11938)
 7. Mathematics of Neural networks https://arxiv.org/pdf/2403.04807
+8. [The Ultra-Scale Playbook](https://huggingface.co/spaces/nanotron/ultrascale-playbook) from Huggingface
 ## Blogs
 1. Frontier model training methodologies Alex Wa https://djdumpling.github.io/2026/01/31/frontier_training.html
 2. Eugene Yan https://eugeneyan.com/

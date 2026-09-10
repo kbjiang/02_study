@@ -122,7 +122,11 @@ https://www.cs.cornell.edu/courses/cs4780/2018fa/
 ### Logistic Regression vs Linear Regression
 1. LogReg cares if the data point is on the right side of the hyper-plane
 2. LinReg cares about the distance from the hyper-plane, doesn't matter which side.
-
+### Linear regression in Stats vs ML
+1. Angles
+	1. In stats Linear Regression (LR) is approached as a parameter estimation, where uncertainty matters quite a bit (confidence interval for e.g.); in ML it's a way to introduce neural nets and gradient descent, people settle with parameters perform best on test set.
+2. Methodology
+	1. In stats, we use models for $P()$ with well-known prob. dist.
 ### Gradient Descent
 1.  the challenge is to find the right step size
 	1. all the methods with momentum for example
@@ -132,4 +136,4 @@ https://www.cs.cornell.edu/courses/cs4780/2018fa/
 1. OLS and its geometry. Ambient space and its axes
 ## References
 1. [NBayesLogReg.pdf](https://www.cs.cmu.edu/~tom/mlbook/NBayesLogReg.pdf) by Tom Mitchell ^tom
-2. d
+2. [Linear Regression: When it feels complicated, you’re probably reading a stats book](https://medium.com/towards-artificial-intelligence/linear-regression-statistical-vs-machine-learning-view-b157a1efeb3e)
