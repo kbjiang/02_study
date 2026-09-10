@@ -125,8 +125,10 @@ https://www.cs.cornell.edu/courses/cs4780/2018fa/
 ### Linear regression in Stats vs ML
 1. Angles
 	1. In stats Linear Regression (LR) is approached as a parameter estimation, where uncertainty matters quite a bit (confidence interval for e.g.); in ML it's a way to introduce neural nets and gradient descent, people settle with parameters perform best on test set.
-2. Methodology
+2. Methodology: MLE vs Optimization
 	1. In stats, we use models for $P()$ with well-known prob. dist.
+3. Generative vs Discriminative
+4. ![[Pasted image 20260910121805.png]]
 ### Gradient Descent
 1.  the challenge is to find the right step size
 	1. all the methods with momentum for example
