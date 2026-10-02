@@ -70,7 +70,7 @@ https://www.cs.cornell.edu/courses/cs4780/2018fa/
 	\hat{P}(y|x)&=\frac{\sum{I}(x=x_i\wedge y=y_i)}{\sum\mathbb{I}(x=x_i)}.
 	\end{aligned}
 	$$
-	However, it's rarely the case, especially when $x$ is high dimensional. 
+	==However, it's rarely the case, especially when $x$ is high dimensional.== 
 3. *Therefore we need tricks*
 	1. modeling: assume certain probabilistic models, e.g., Gaussian, Binomial...; and estimate their parameters, the number of which is usually small comparing to sample size, with algorithms such as MLE/MAP.
 	2. additional assumptions: Naive Bayes for example
@@ -106,6 +106,7 @@ https://www.cs.cornell.edu/courses/cs4780/2018fa/
 ## Notes
 ### Logistic Regression
 1. Parametric form $P(Y=y|X=x)=\frac{1}{1+\exp (-(w^T x + b) y)}$, where $y=\pm 1$. 
+2. From MLAPP, $P(y|x,w)=\text{Ber}(\text{sigm}(w^Tx))$. The mental picture is that for each $x$, the $y$ follows a Bernoulli distribution whose $p$ is the $\text{sigm}(w^Tx)$. The error bar for Bernoulli is not well defined, it's just for pedogogical purpose.![[Pasted image 20260915115346.png]]
 ### Logistic Regression vs Naive Bayes
 1. MLE vs MAP
 	1. discrete input and smoothing
@@ -122,6 +123,9 @@ https://www.cs.cornell.edu/courses/cs4780/2018fa/
 ### Logistic Regression vs Linear Regression
 1. LogReg cares if the data point is on the right side of the hyper-plane
 2. LinReg cares about the distance from the hyper-plane, doesn't matter which side.
+### Linear regression in Stats vs ML
+1. Why zero-centered Gaussian prior leads to L2 regularization?
+	1. Comparing to uniform prior, this prior has higher probability for smaller values of parameters.
 ### Linear regression in Stats vs ML
 1. Angles
 	1. In stats Linear Regression (LR) is approached as a parameter estimation, where uncertainty matters quite a bit (confidence interval for e.g.); in ML it's a way to introduce neural nets and gradient descent, people settle with parameters perform best on test set.

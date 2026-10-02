@@ -1,0 +1,2 @@
+#RNN
+1. From [post](https://magazine.sebastianraschka.com/p/classifier-history-and-jev?utm_source=email&redirect=app-store-no-desktop&inbox=true&utm_campaign=email-read-in-app&triedRedirect=true) by Sebastian Raschka.![[Pasted image 20261002082611.png]]
