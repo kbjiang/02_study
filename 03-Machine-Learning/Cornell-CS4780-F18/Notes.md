@@ -35,6 +35,9 @@ https://www.cs.cornell.edu/courses/cs4780/2018fa/
 1. [Mathematics of Data Science](https://arxiv.org/abs/2607.11938) Chapter 2, *Curses, Blessings, and Surprises in High Dimensions*
 	1. Strange geometry in high dimension -- curse
 	2. Concentration of measure (large sample size $\leftrightarrow$ high dimension) -- blessing
+		1. "the fact that certain random fluctuations can be well controlled in high dimensions, while it would be very complicated to make such predictive statements in moderate dimensions."
+	3. The corners of hypercubes in high dimension 'sticks out', which leads to feature sparsity in L1 regularizations. ^l1
+		1. For 2D, the distance from the center to a vertex (radius of the circumscribed sphere) is $\sqrt{(1/2)^2+(1/2)^2}=\sqrt{2}/2$ and the apothem (radius of the inscribed sphere) is $1/2$; for 4D, the former is $\sqrt{(1/2)^2+(1/2)^2+(1/2)^2+(1/2)^2}=1$ and the latter stays $1/2$--the 2D projection no longer appear convex. ![[Pasted image 20261004175343.png|200]]![[Pasted image 20261004175621.png|200]]![[Pasted image 20261004175657.png|200]]
 ---
 # Lecture 5 "Perceptron"
 ## Notes
