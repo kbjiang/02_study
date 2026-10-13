@@ -146,3 +146,13 @@ https://www.cs.cornell.edu/courses/cs4780/2018fa/
 ## References
 1. [NBayesLogReg.pdf](https://www.cs.cmu.edu/~tom/mlbook/NBayesLogReg.pdf) by Tom Mitchell ^tom
 2. [Linear Regression: When it feels complicated, you’re probably reading a stats book](https://medium.com/towards-artificial-intelligence/linear-regression-statistical-vs-machine-learning-view-b157a1efeb3e)
+# Lecture 14-15 SVM 
+# Lecture 16 Generic ML framework
+## ML framework
+1. Take SVM loss as e.g., $\min_{w, b} C\sum_i \max[1-y_i(w^Tx_i+b), 0] +||w||_2^2$. 
+	1. The former is the loss, or the mistakes made, and involves the data
+	2. The later is the regularizer, which does NOT involve on the data
+	3. The trade-off: get every training point correct, vs, a simpler solution that generalizes better (Occam's razor principle). Or, *simplest model that explains the data well enough.*
+## Losses
+1. Exponential loss freaks out about most misclassified points, while hinge cares about points all the same. See the plot below.
+# Lecture 14-15 SVM 
