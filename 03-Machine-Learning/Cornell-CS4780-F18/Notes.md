@@ -147,6 +147,10 @@ https://www.cs.cornell.edu/courses/cs4780/2018fa/
 1. [NBayesLogReg.pdf](https://www.cs.cmu.edu/~tom/mlbook/NBayesLogReg.pdf) by Tom Mitchell ^tom
 2. [Linear Regression: When it feels complicated, you’re probably reading a stats book](https://medium.com/towards-artificial-intelligence/linear-regression-statistical-vs-machine-learning-view-b157a1efeb3e)
 # Lecture 14-15 SVM 
+1. dd
+## References
+1. MIT 6.034 [Lecture 16](https://youtu.be/_PwhiWxHK8o)
+	1. For positive ($y_+=1$) and negative ($y_-=-1$) supporting samples, we have  $y_+(w^T x_+ +b)$ = $y_-(w^Tx_- +b)=1$.  Therefore, the distance between these two samples in $w$ direction, i.e., the width of the gutter, is just $w^T(x_+ - x_-)/||w||_2 = ((1-b)-(-1-b))/||w||_2=\frac{2}{||w||_2}$. Namely, *smaller weight, greater separation*. 
 # Lecture 16 Generic ML framework
 ## ML framework
 1. Take SVM loss as e.g., $\min_{w, b} C\sum_i \max[1-y_i(w^Tx_i+b), 0] +||w||_2^2$. 
