@@ -5,6 +5,7 @@
 	1. E.g., Binary trees and its traversal
 	2. The trick or *brain teasing* part should not be the focus.
 		1. E.g., the sum of linked list. They actually hinted the trick part
+		
 2. Be familiar with basic coding, such as recursion
 3. The complexity requirements: always look for less repeated computation
 	1. E.g., the `two sum` problem
@@ -45,15 +46,12 @@
 | Remove (at the end)   | O(1)      | Special case of removal where no other element needs to be shifted                                   |
 ### [TwoSums](https://leetcode.com/problems/two-sum/) 
 1. Good use case for `hashmap` i.e., `dictionary`. Gives `O(n)` complexity
+2. Why is `hashmap` lookup only `O(1)`?
 ### [3Sum](https://leetcode.com/problems/3sum/description/)
-1. *Sort it!*
-2. Then fix 1st number than two pointer. See [solution](https://youtu.be/IIxoo93bmPQ)
+1. Sort first. Then fix 1st number and run two pointers. See [solution](https://youtu.be/jzZsG8n2R9A)
 ### [Product of Array Except Self](https://leetcode.com/problems/product-of-array-except-self/)
-1. Good example: identify *repeated* computation. Do NOT have to calculate those partial products every time!
-	<details>
-	 <summary>Click to see hint</summary>
-	 * Calculate running prefix/suffix products for each element, then take the product of those two products.
-	</details>
+1. Calculate running prefix/suffix products for each element, then take the product of those two products.
+2. Can be done with space `O(1)` without calculating prefix/suffix separately.
 ### [Best Time to Buy and Sell Stock](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/description/)
 1. Very good [visualization](https://youtu.be/ioFPBdChabY): identify *repeated* computation. 
 
@@ -88,19 +86,21 @@
 1. Parts of every recursion
 	1. Base case, i.e., when to stop
 		1. *This also includes when condition is met*, e.g., search target found and stop.
-	2. Work towards base case
+		2. E.g., LeetCode 22 base case is `len(s)==2*n`. *Maximum* size as base case.
+	2. Recursively work towards base case
 		1. Dealing with intermediate results is important. See discussion ([[#^1361ef]] ) below.
-	3. Recursive call, i.e., call itself
-2. Two types of application of recursion
-	1. Divide-and-conquer
+2. Three types of application of recursion
+	1. Memorization
+		1. Use universial cache to record intermediate results
+	2. Divide-and-conquer
 		1. applied when needs results from all sub-problems
-	2. Backtracking
+	3. Backtracking
 		1. applied when needs to return all qualified answers
 		2. *trickier because there is a retraction component*.
-			1. Try every possible next step, *retract* as soon as it becomes invalid or reaches base case.
+			1. *Attempt* every possible next step, *retract* as soon as it becomes invalid or reaches base case.
 			2. E.g., LeetCode 22, valid expression with $n$ parentheses. Recursion prevents going further down invalid paths.
 3. Intermediate results ^1361ef
-	1. Memorization: when there's a lot repetitions. E.g., Fibonacci numbers
+	1. Memorization: when there's a lot repetitions. E.g., Fibonacci numbers. # 509
 	2. Divide-and-conquer: combine the results of each subproblem
 	3. *Backtracking*: look for *all* valid results
 		1. Since we need to come back to the original state, needs to make sure the *progress* is well preserved
@@ -113,7 +113,60 @@
 5. Ref
 	1. [硅谷工程师十五分钟带你深入理解](https://youtu.be/AqGagBmFXgw)
 ### Coding
+### [509. Fibonacci]()
+1. w/ and w/o memorization ![[Pasted image 20261016171100.png|500]]
 
+### [22. Generate parenthesis](https://leetcode.com/problems/generate-parentheses/)
+1. base case happens at max length, i.e., only valid full length strings make it to the result list.
+2. recursion conditions, `n_left < n` select valid paths
+```python
+def generateParenthesis(self, n: int) -> list[str]:
+	res = []
+	def backtrack(n_left, n_right, s) -> None:
+		# n_left: num of left parenthesis
+		# n_right: num of right parenthesis
+		
+		# base case
+		if len(s) == n*2:
+			res.append(s)
+			# return 
+		
+		# either `if+return` or `if+else``
+		else:
+			# attempt to add left parenthesis
+			if n_left < n:
+				backtrack(n_left + 1, n_right, s+"(")
+			# attempt to add right parenthesis
+			if n_right < n_left: # num of rights never exceeds num of lefts
+				backtrack(n_left, n_right+1, s+")")
+
+	backtrack(0, 0, "")
+	return res
+```
+
+### [77. Combinations](https://leetcode.com/problems/combinations/)
+1. the explicit backtrack of `lst`
+2. use of `lst.copy()` when appending
+```python
+def combine(self, n: int, k: int) -> list[list[int]]:
+	res = []
+	def backtrack(lst, cans):
+		# base case
+		if len(lst) == k:		
+		# .copy to not affect items in `res`
+		res.append(lst.copy())
+		return
+		
+		# attempt possible actions
+		for i, can in enumerate(cans):
+			lst = lst + [can]
+			backtrack(lst, cans[i+1:])
+			# to backtrack
+			lst.pop()
+
+	backtrack([], list(range(1, n+1)))
+	return res
+```
 ## - String
 ### data structures
 1. Tries: 
@@ -147,7 +200,7 @@
 	1. the mid points and the end condition `l < r` or `l <= r` or `l < r-1`
 	2. return `l` or `r`?
 3. needs `if arr[mid] == target` as the base case
-	1. this is not needed if we are changing the value itself, instead of indices. See [[coding interview#[Kth smallest element in a sorted matrix](https //leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/description/)]]
+	1. this is not needed if we are changing the value itself, instead of indices. See [[coding-interview#[Kth smallest element in a sorted matrix](https //leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/description/)]]
 
 ### [Kth smallest element in a sorted matrix](https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/description/) using Binary search
 1. Needs to calculate the number of elements smaller than `mid`. 
@@ -346,6 +399,14 @@ Tow-D Maze
 
 ## - Linked list
 ### Data structure
+1. basic form: each node contains `data` and `reference` to next node
+2. time complexity:
+	1. `O(n)` for access and search
+	2. `O(1)` for insertion and deletion
+3. Do NOT require contiguous memory allocation, as opposed to arrays
+	1. arrays are static data structures, linked lists are dynamic
+4. Singly and Doubly linked
+### Tricks
 1. Think of `node` as pointing to the *entire linked list starts at `node`*, not just a single node.
 	1. E.g., [[#[206. Reverse Linked List](https //leetcode.com/problems/reverse-linked-list/)]] for a linked list `1->2->3->4`, the recursion is `reverse(1) = connect(1, reverse(2)) = connect(1, connect(2, reverse(3)))`, not `reverse(1) = connect(1, reverse(2, 3, 4))`
 	2. E.g., [21. Merge Two Sorted Lists](https://leetcode.com/problems/merge-two-sorted-lists/). When only `list1` is left non-empty, one  can just do `cur.next = list1` to connect the whole list
@@ -353,17 +414,11 @@ Tow-D Maze
 	1. [[#[21. Merge Two Sorted Lists](https //leetcode.com/problems/merge-two-sorted-lists/)]]
 
 ### Techniques
-1. Dummy nodes before/after head/tail
+1. Adding a sentinel/dummy node at the head and/or tail might help to handle many edge cases where operations have to be performed at the head or the tail.
 	1. E.g., [[#[21. Merge Two Sorted Lists](https //leetcode.com/problems/merge-two-sorted-lists/)]]
 2. two pointers
 	1. one is $k$ ahead the other
 	2. one is faster than the other
-### [21. Merge Two Sorted Lists](https://leetcode.com/problems/merge-two-sorted-lists/)
-1. all `ListNode()` are just *pointers*!
-	1. `cur` is used to iterate through the list; 
-		1. compare `cur = cur.next` and `cur.next = cur.next.next`. The former is just updating the pointer, *the latter changes the actual data* in memory.
-	2. `dummy` is useful when we want to return the whole list at the end.
-
 ### [206. Reverse Linked List](https://leetcode.com/problems/reverse-linked-list/)
 1. use of two pointers `prev, curr`.
 	```python
@@ -377,12 +432,80 @@ Tow-D Maze
 	        return prev
 	```
 	1. This actually changes the physical data and `head` will be affected! 
-2. for recursive, see my solution online
-
+2. For recursive, see this [solution](https://youtu.be/W-EfGB0E_ao). 
+	1. It's not necessary at all. The recursive basically does the same thing as the iterative solution.
+### [21. Merge Two Sorted Lists](https://leetcode.com/problems/merge-two-sorted-lists/)
+1. Use of *pointers*!
+	1. `tail` pointer to construct merged list
+	2. extra `head` pointer to stay at the head of the whole list--so that we can return the whole list.
+	3. Do `list1 = list1.next` ==prior to== `tail.next = list2`, otherwise `list1.next` will be overwritten by `list2`
+2. compare `tail = tail.next` and `tail.next = tail.next.next`. The former is just moving the pointer, *the latter changes the actual data* in memory.
+```python
+def mergeTwoLists(self, list1: ListNode | None, list2: ListNode | None) -> ListNode | None:
+	# initialize two pointers
+	# tail to update list, head for return list
+	head = ListNode()
+	tail = head  
+	
+	# update list is trivial
+	while list1 and list2:
+		if list1.val <= list2.val:
+			tail.next = list1
+			list1 = list1.next
+		else:
+			tail.next = list2
+			list2 = list2.next
+		tail = tail.next
+		
+	# remainders
+	if list1:
+		tail.next = list1
+	if list2:
+		tail.next = list2
+	return head.next
+```
 ### [143. Reorder List](https://leetcode.com/problems/reorder-list/)
-1. [Solution](https://youtu.be/S5bfdUTrKLM)
-	1. Reverse the 2nd half of the list *in place*. 
-
+1. ==Redo! This problem subsumes previous problems.==
+2. [Solution](https://youtu.be/S5bfdUTrKLM)
+	1. Find the middle point
+	2. Reverse the 2nd half of the list *in place*. 
+	3. merge
+3. when merging, be sure to move `first` pointer before doing `first.next=second`. 
+```python
+def reorderList(self, head: ListNode | None) -> None:
+	"""
+	Do not return anything, modify head in-place instead.
+	"""
+	
+	# find middle, i.e., slow
+	slow, fast = head, head.next
+	while fast and fast.next:
+		slow = slow.next
+		fast = fast.next.next
+	
+	# reverse second half
+	second = slow.next
+	# to indicate the end of 1st half
+	slow.next = None
+	# the usual helper `prev` for reversing 2nd half
+	prev = None
+	
+	while second:
+		tmp = second.next
+		second.next = prev
+		prev = second
+		second = tmp
+	
+	# merge two halves
+	first, second = head, prev
+	while second:
+		tmp1, tmp2 = first.next, second.next
+		first.next = second
+		second.next = tmp1
+		first, second = tmp1, tmp2
+	
+	return head
+```
 
 ## - Stack
 ### Data Structure
