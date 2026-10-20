@@ -159,4 +159,6 @@ https://www.cs.cornell.edu/courses/cs4780/2018fa/
 	3. The trade-off: get every training point correct, vs, a simpler solution that generalizes better (Occam's razor principle). Or, *simplest model that explains the data well enough.*
 ## Losses
 1. Exponential loss freaks out about most misclassified points, while hinge cares about points all the same. See the plot below.
-# Lecture 14-15 SVM 
+# Lecture Bias-Variance tradeoff
+1. Variance, bias vs overfitting/underfitting
+2. same test (x, y), different training D leading to different $h_D(x)$, this is variance.

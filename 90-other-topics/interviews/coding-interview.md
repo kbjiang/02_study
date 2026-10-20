@@ -44,30 +44,29 @@
 | Insert (at the end)   | O(1)      | Special case of insertion where no other element needs to be shifted                                 |
 | Remove                | O(n)      | Removal would require shifting all the subsequent elements to the left by one and that takes O(n)    |
 | Remove (at the end)   | O(1)      | Special case of removal where no other element needs to be shifted                                   |
-### [TwoSums](https://leetcode.com/problems/two-sum/) 
+#### [TwoSums](https://leetcode.com/problems/two-sum/) 
 1. Good use case for `hashmap` i.e., `dictionary`. Gives `O(n)` complexity
 2. Why is `hashmap` lookup only `O(1)`?
-### [3Sum](https://leetcode.com/problems/3sum/description/)
+#### [3Sum](https://leetcode.com/problems/3sum/description/)
 1. Sort first. Then fix 1st number and run two pointers. See [solution](https://youtu.be/jzZsG8n2R9A)
-### [Product of Array Except Self](https://leetcode.com/problems/product-of-array-except-self/)
+#### [Product of Array Except Self](https://leetcode.com/problems/product-of-array-except-self/)
 1. Calculate running prefix/suffix products for each element, then take the product of those two products.
 2. Can be done with space `O(1)` without calculating prefix/suffix separately.
-### [Best Time to Buy and Sell Stock](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/description/)
+#### [Best Time to Buy and Sell Stock](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/description/)
 1. Very good [visualization](https://youtu.be/ioFPBdChabY): identify *repeated* computation. 
 
-### [Maximum Product Subarray](https://leetcode.com/problems/maximum-product-subarray/description/)
+#### [Maximum Product Subarray](https://leetcode.com/problems/maximum-product-subarray/description/)
 1. Example of *Kadane's* algorithm. Here is an [explanation](https://youtu.be/86CQq3pKSUw) on maximum sum
 2. Idea is 
 	1. to see the impact of existing sum/product on current element, i.e., compare `current_sum` with `nums[i]` and reset if negative impact from `current_sum`
-
-### Sliding window (important technique)
+#### Sliding window (important technique)
 1. Interview: you are given an array of 1's and 0's. You are also given a number k. What is the length of the longest continuous subsequence of 1's you can pick from the given array? You can substitute at most k 0's with 1's. Write a script in python.
 	1. Example: input [1, 0, 1, 0, 0, 1, 0, 0, 1, 1, 1, 1, 1], k=2;	output: 8
 	2. The mental picture is looking for a sliding window with no more than k zeros.
 
 ---
-##  Hash table
-### Learning
+## Hash table
+#### Learning
  1. Idea
 	 1. replace search $O(n)$ with array indexing $O(1)$.
 		 1. Get the key of the target object, and go directly to the corresponding *bucket*, without scanning.
@@ -113,10 +112,10 @@
 5. Ref
 	1. [硅谷工程师十五分钟带你深入理解](https://youtu.be/AqGagBmFXgw)
 ### Coding
-### [509. Fibonacci]()
+#### [509. Fibonacci]()
 1. w/ and w/o memorization ![[Pasted image 20261016171100.png|500]]
 
-### [22. Generate parenthesis](https://leetcode.com/problems/generate-parentheses/)
+#### [22. Generate parenthesis](https://leetcode.com/problems/generate-parentheses/)
 1. base case happens at max length, i.e., only valid full length strings make it to the result list.
 2. recursion conditions, `n_left < n` select valid paths
 ```python
@@ -143,8 +142,7 @@ def generateParenthesis(self, n: int) -> list[str]:
 	backtrack(0, 0, "")
 	return res
 ```
-
-### [77. Combinations](https://leetcode.com/problems/combinations/)
+#### [77. Combinations](https://leetcode.com/problems/combinations/)
 1. the explicit backtrack of `lst`
 2. use of `lst.copy()` when appending
 ```python
@@ -167,8 +165,8 @@ def combine(self, n: int, k: int) -> list[list[int]]:
 	backtrack([], list(range(1, n+1)))
 	return res
 ```
-## - String
-### data structures
+## String
+### Learning
 1. Tries: 
 	1. stores a *set* of strings $S$. Prefix/suffix trie and compressed trie
 		1. For standard trie, NO word in $S$ should be the prefix of another. Can be easily fixed by adding a boolean field $isWord$.
@@ -185,15 +183,16 @@ def combine(self, n: int, k: int) -> list[list[int]]:
 		3. implementation?
 	3. When criteria (such as 'max/min') and grouped (such as 'subarray') are involved, try `sliding window`, i.e. `two pointers`.
 		1. see this [section](https://youtu.be/MK-NZ4hN7rs?t=1030)
-### [Longest Substring without repeating characters](https://leetcode.com/problems/longest-substring-without-repeating-characters/)
+### Coding
+#### [Longest Substring without repeating characters](https://leetcode.com/problems/longest-substring-without-repeating-characters/)
 1. The big idea is to iterate and ignore anything goes before the last time current character repeated 
 2. Good [vid](https://youtu.be/pY2dYa1m2VM) with very nice use of hash. Use *two pointers*!
 
-### [Encode and Decode Strings](https://neetcode.io/problems/string-encode-and-decode)
+#### [Encode and Decode Strings](https://neetcode.io/problems/string-encode-and-decode)
 1. Key is to include string lengths in the encoded string.
 
-## - Sorting and Search
-### [Binary search](https://leetcode.com/problems/binary-search/description/)
+## Sorting and Search
+#### [Binary search](https://leetcode.com/problems/binary-search/description/)
 1. Use indices/pointers for searching problem!
 	1. If the target is close to one end of array, the `mid` will first approach the target from one side then the other.
 2. pay attention to edge cases when close to solution
@@ -201,8 +200,7 @@ def combine(self, n: int, k: int) -> list[list[int]]:
 	2. return `l` or `r`?
 3. needs `if arr[mid] == target` as the base case
 	1. this is not needed if we are changing the value itself, instead of indices. See [[coding-interview#[Kth smallest element in a sorted matrix](https //leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/description/)]]
-
-### [Kth smallest element in a sorted matrix](https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/description/) using Binary search
+#### [Kth smallest element in a sorted matrix](https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/description/) using Binary search
 1. Needs to calculate the number of elements smaller than `mid`. 
 	1. See [Ref2](https://www.cnblogs.com/firecode7/p/16120445.html) for a good explanation; [Ref1](https://leetcode-solution-leetcode-pp.gitbook.io/leetcode-solution/medium/378.kth-smallest-element-in-a-sorted-matrix) for Python implementation
 2. Here we are changing the value itself `1` every step, e.g., `right = mid - 1`
@@ -212,24 +210,24 @@ def combine(self, n: int, k: int) -> list[list[int]]:
 		1. As opposed to [Sqrt(x)](https://leetcode.com/problems/sqrtx/) where `right` is returned because we are looking for round down
 	4. See [Ref1](https://leetcode-solution-leetcode-pp.gitbook.io/leetcode-solution/medium/378.kth-smallest-element-in-a-sorted-matrix) for Python solution
 
-### [26. Remove Duplicates from Sorted Array](https://leetcode.com/problems/remove-duplicates-from-sorted-array/)
+#### [26. Remove Duplicates from Sorted Array](https://leetcode.com/problems/remove-duplicates-from-sorted-array/)
 1. Use left pointer $l$ to make sure `a[:l]` are the unique elements ran into so far. This is crucial for in-place.
-## - Matrix
-### [Set Matrix Zeroes](https://youtu.be/T41rL0L3Pnw)
+## Matrix
+### Coding
+#### [Set Matrix Zeroes](https://youtu.be/T41rL0L3Pnw)
 1. idea is to use 1st row and 1st column as indicator
 2. for $O(1)$ solution, the entry at $(0, 0)$ needs an extra memory because it cannot be the indicator for both 1st row and 1st column
 
-### [Spiral Matrix](https://leetcode.com/problems/spiral-matrix/description/)
+#### [Spiral Matrix](https://leetcode.com/problems/spiral-matrix/description/)
 1. Very nice [solution](https://leetcode.com/problems/spiral-matrix/solutions/3502927/c-java-python-image-explanation-recursion-and-single-for-loop/) 
 	1. recursion on each edge, i.e., from $m \times n$ to $n \times (m-1)$
 	2. use `dr, dc` to control change of direction
 	3. starting point is $(0, -1)$
-
-### [Valid Sudoku](https://leetcode.com/problems/valid-sudoku/description/) (coding trick)
+#### [Valid Sudoku](https://leetcode.com/problems/valid-sudoku/description/) (coding trick)
 1. Nice [solution](https://youtu.be/TjFXEUCMqI8) with use of `defaultdict(set)`, it's easier than regular `dict` coz it provides a default value for keys don't exist yet.
 
-## - Binary Search Trees
-### data structures
+## Tree
+### Learning
 1. [Binary Search Trees: Samuel's tutorial](https://youtu.be/0woI8l0ZWmA)
 	1. Nice animation on *tree traversals*
 2. Traversal. See how the append is done.
@@ -259,24 +257,23 @@ def combine(self, n: int, k: int) -> list[list[int]]:
 		2. Bottom up: need value from subproblem, so return cannot be null.
 	2. usually use `if not root`, i.e., None node, as base case
 	3. usually something like `f(root.val) & g(root.left) & g(root.right)` where `f` is the regular operation and $g$ is the recursive call
-
-### [124. Binary Tree Maximum Path Sum](https://leetcode.com/problems/binary-tree-maximum-path-sum/)
+### Coding
+#### [124. Binary Tree Maximum Path Sum](https://leetcode.com/problems/binary-tree-maximum-path-sum/)
 1. Nice explanation in [tutorial](https://youtu.be/5jz66VkGMCY?list=PLV5qT67glKSErHD66rKTfqerMYz9OaTOs&t=1003)
 	1. The recursion can ONLY have either left or right to avoid double visit of root. E.g., 3->15->5->15->20 in figure below
 	2. To include contribution from both ends, at each step do `cur_sum = recurse(root.left) + recurse(root.right) + root.val`
 	3. ![[Pasted image 20250519110557.png|800]]
-### [Diameter of Binary Tree](https://leetcode.com/problems/diameter-of-binary-tree/)
+#### [Diameter of Binary Tree](https://leetcode.com/problems/diameter-of-binary-tree/)
 1. This [time stamp](https://youtu.be/K81C31ytOZE?t=281) shows how to deal with global/nonlocal variable, i.e., use `self.res`
 2. This [video](https://youtu.be/81lu4qO9snY) has very good visualization of recursion
-
-### [Binary Tree Level Order Traversal](https://leetcode.com/problems/binary-tree-level-order-traversal/description/)
+#### [Binary Tree Level Order Traversal](https://leetcode.com/problems/binary-tree-level-order-traversal/description/)
 1. Breadth First Search (BFS) and *queue*
 	1. `while queue` is the condition to terminate loop when queue becomes empty
 	2. `qLen = len(q)` is important coz the length of `q` will change during loop
 		1. `queue` is 1st in 1st out; add node's children before removing it
 		2. The space complexity is `O(n)` coz last level could be `n/2`
 2. Good [explanation](https://youtu.be/KFkjJ7pjWVw) and Python [implementation](https://youtu.be/6ZnyEApgFYg?t=393)
-### [236. Lowest Common Ancestor of a Binary Tree](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/)
+#### [236. Lowest Common Ancestor of a Binary Tree](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/)
 1. [Solution](https://www.jiakaobo.com/leetcode/236.%20Lowest%20Common%20Ancestor%20of%20a%20Binary%20Tree.html)
 2. The challenge for me is to know *what to return* at each recursion
 	1. Idea is to return upwards till we find a root with both `left` and `right` not null.
@@ -289,15 +286,12 @@ def combine(self, n: int, k: int) -> list[list[int]]:
 
 ### [572. Subtree of Another Tree](https://leetcode.com/problems/subtree-of-another-tree/description/)
 1. [Solution](https://youtu.be/E36O5SWp-LE)
-
 ### [98. Validate Binary Search Tree](https://leetcode.com/problems/validate-binary-search-tree/)
 1. Brutal force will take $O(n^2)$
 2. [Solution](https://youtu.be/s6ATEkipzow) uses boundaries from root and is $O(n)$.
 	1. to see how the boundaries work, just think the limits of `root.right` and `root.right.left`, the `root.val` naturally becomes the lower limit of `root.right.left` 
-
-
-## - Graph
-### Data structure
+## Graph
+#### Learning
 > Main ref: [[Algorithms Illuminated (Part 2).pdf]] Chapter 7, 8
 1. Representations
 	1. edge list, adjacency matrix, adjacency list
@@ -338,7 +332,7 @@ def combine(self, n: int, k: int) -> list[list[int]]:
 		2. invalid cells may get added at later levels. 
 			1. E.g., `9` in `[[1,2,3,4],[12,13,14,5],[11,16,15,6],[10,9,8,7]]` will be ignored at step 1 but added at last step. This means `9` is not directly connected to `10` but can be reached via `5->6->7->8->9`.
 
-### [Valid tree](https://neetcode.io/problems/valid-tree)
+#### [Graph Valid Tree](https://neetcode.io/problems/valid-tree)
 1. For a graph to be a tree (undirected)
 	1. every node is connected, i.e., a tree has only one component and one can traverse the whole tree starting any node
 	2. no cycle: any two nodes have exactly one path
@@ -384,8 +378,6 @@ def combine(self, n: int, k: int) -> list[list[int]]:
 Tow-D Maze
 
 ### Data structure
-
-
 ### [138. Copy List with Random Pointer](https://leetcode.com/problems/copy-list-with-random-pointer/)
 1. Cute problem
 ### [380. Insert Delete GetRandom O(1)](https://leetcode.com/problems/insert-delete-getrandom-o1/)
@@ -397,7 +389,7 @@ Tow-D Maze
 	1. it's helpful to have `self.head` and `self.tail` as dummy nodes
 	2. they tend to initialize an empty list with `self.head.next, self.tail.prev = self.tail, self.head`
 
-## - Linked list
+## Linked list
 ### Data structure
 1. basic form: each node contains `data` and `reference` to next node
 2. time complexity:
@@ -464,8 +456,8 @@ def mergeTwoLists(self, list1: ListNode | None, list2: ListNode | None) -> ListN
 		tail.next = list2
 	return head.next
 ```
-### [143. Reorder List](https://leetcode.com/problems/reorder-list/)
-1. ==Redo! This problem subsumes previous problems.==
+### [143. Reorder List](https://leetcode.com/problems/reorder-list/) $\star$
+1. ==This problem subsumes previous problems.==
 2. [Solution](https://youtu.be/S5bfdUTrKLM)
 	1. Find the middle point
 	2. Reverse the 2nd half of the list *in place*. 
@@ -507,24 +499,38 @@ def reorderList(self, head: ListNode | None) -> None:
 	return head
 ```
 
-## - Stack
-### Data Structure
+## Queue
+### Learning
+1. dequen from front, enqueue from back, FIFO
+	1. dequeue only removes 1st element, which is different from removal
+2. when not knowing the queue size, implement with linked list
+### Coding
+#### [232. Implement Queue using Stacks](https://leetcode.com/problems/implement-queue-using-stacks/) $\star$
+1. The amortization is moving elements from stack 1 to stack 2 only when latter is empty. Moving is the expensive `O(n)` operation.
+```python
+def pop(self) -> int:
+	if not self.s2:
+		while self.s1:
+			self.s2.append(self.s1.pop())
+	return self.s2.pop()
+```
+#### [225. Implement Stack using Queues](https://leetcode.com/problems/implement-stack-using-queues/description/)
+1. Try to do with just one queue.
 
-### [20. Valid Parentheses](https://leetcode.com/problems/valid-parentheses/)
-### [739. Daily Temperatures](https://leetcode.com/problems/daily-temperatures/)
+## Stack
+### Learning
+1. Use cases: recursion calls, undo operations, etc.
+2. FILO
+### Coding
+#### [155. Min Stack](https://leetcode.com/problems/min-stack/)
+1. I did it with a `min` flag; but I should have prioritized using a/intern extra stack!
+#### [739. Daily Temperatures](https://leetcode.com/problems/daily-temperatures/)
 1. See my solution online
-### [227 Basic Calculator II](https://leetcode.com/problems/basic-calculator-ii/)
+#### [227 Basic Calculator II](https://leetcode.com/problems/basic-calculator-ii/)
 1. Nice [solution](https://www.youtube.com/watch?v=iua49ZFeptY&t=521s)
 	1. with details on how to *extract full numbers from string*. My online solution used `split()`.
 	2. Take high priority calculation on the fly. At the end, just need to take the sum of the stack.
 		1. E.g.,  `-num` is `-1*num` and do `stack.push(-num)` on the fly.
-
-## - Recursion
-### Data Structure
-1. backtracking
-	1. base case return `None`. E.g., `inorder traversal` of trees.
-2. See [小小福讲算法](https://youtu.be/AqGagBmFXgw) for three types of recursion
-	1. pay attention to the *return of base cases*
 
 ### All solutions of a maze (try both BFS and DFS)
 1. This is DFS, the backtracking is explicit

@@ -1,4 +1,5 @@
 1. URL: https://www.mihaileric.com/The-Emperor-Has-No-Clothes/
+	1. The raw python [file](/home/kebei/Documents/Github/02_study/07-agentic/coding_agent_from_scratch_lecture.py)
 2. How tools are introduced
 	1. They listed in `SYSTEM_PROMPT`
 	2. No `pydantic` schema anymore
