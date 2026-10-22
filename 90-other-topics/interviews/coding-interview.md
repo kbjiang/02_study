@@ -226,168 +226,6 @@ def combine(self, n: int, k: int) -> list[list[int]]:
 #### [Valid Sudoku](https://leetcode.com/problems/valid-sudoku/description/) (coding trick)
 1. Nice [solution](https://youtu.be/TjFXEUCMqI8) with use of `defaultdict(set)`, it's easier than regular `dict` coz it provides a default value for keys don't exist yet.
 
-## Tree
-### Learning
-1. [Binary Search Trees: Samuel's tutorial](https://youtu.be/0woI8l0ZWmA)
-	1. Nice animation on *tree traversals*
-2. Traversal. See how the append is done.
-	```python
-	class TreeNode:
-	    def __init__(self, key):
-	        self.key = key
-	        self.left = None
-	        self.right = None
-
-	def in_order_traversal(root):
-		result = []		
-		def traverse(node):		
-			if node is not None:		
-				traverse(node.left)  # Visit left subtree		
-				result.append(node.key)  # Visit current node		
-				traverse(node.right)  # Visit right subtree		
-		
-		traverse(root)
-		return result
-	```
-3. For level wise question, use `queue`.
-4. Binary Tree vs Binary Search Tree
-5. A lot of recursive calls
-	1. Return values
-		1. Top Down: base case return `None`. E.g., `inorder traversal` of trees; E.g., backtracking
-		2. Bottom up: need value from subproblem, so return cannot be null.
-	2. usually use `if not root`, i.e., None node, as base case
-	3. usually something like `f(root.val) & g(root.left) & g(root.right)` where `f` is the regular operation and $g$ is the recursive call
-### Coding
-#### [124. Binary Tree Maximum Path Sum](https://leetcode.com/problems/binary-tree-maximum-path-sum/)
-1. Nice explanation in [tutorial](https://youtu.be/5jz66VkGMCY?list=PLV5qT67glKSErHD66rKTfqerMYz9OaTOs&t=1003)
-	1. The recursion can ONLY have either left or right to avoid double visit of root. E.g., 3->15->5->15->20 in figure below
-	2. To include contribution from both ends, at each step do `cur_sum = recurse(root.left) + recurse(root.right) + root.val`
-	3. ![[Pasted image 20250519110557.png|800]]
-#### [Diameter of Binary Tree](https://leetcode.com/problems/diameter-of-binary-tree/)
-1. This [time stamp](https://youtu.be/K81C31ytOZE?t=281) shows how to deal with global/nonlocal variable, i.e., use `self.res`
-2. This [video](https://youtu.be/81lu4qO9snY) has very good visualization of recursion
-#### [Binary Tree Level Order Traversal](https://leetcode.com/problems/binary-tree-level-order-traversal/description/)
-1. Breadth First Search (BFS) and *queue*
-	1. `while queue` is the condition to terminate loop when queue becomes empty
-	2. `qLen = len(q)` is important coz the length of `q` will change during loop
-		1. `queue` is 1st in 1st out; add node's children before removing it
-		2. The space complexity is `O(n)` coz last level could be `n/2`
-2. Good [explanation](https://youtu.be/KFkjJ7pjWVw) and Python [implementation](https://youtu.be/6ZnyEApgFYg?t=393)
-#### [236. Lowest Common Ancestor of a Binary Tree](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/)
-1. [Solution](https://www.jiakaobo.com/leetcode/236.%20Lowest%20Common%20Ancestor%20of%20a%20Binary%20Tree.html)
-2. The challenge for me is to know *what to return* at each recursion
-	1. Idea is to return upwards till we find a root with both `left` and `right` not null.
-		1. Therefore `if left and right: return root` and `return left if left else right`
-		2. Tricky when one target node is the ancestor `q` of the other `p`. 
-			1. No need to explore more, because if `p` is not a child of `q`, the peer of `q` will return non-null value, so the ancestor will be a parent of `q`
-			2. see example 2 with `p=5, q=4`.
-	2. `if not root or root == p or root == q: return root`
-		2. This is base case.
-
-### [572. Subtree of Another Tree](https://leetcode.com/problems/subtree-of-another-tree/description/)
-1. [Solution](https://youtu.be/E36O5SWp-LE)
-### [98. Validate Binary Search Tree](https://leetcode.com/problems/validate-binary-search-tree/)
-1. Brutal force will take $O(n^2)$
-2. [Solution](https://youtu.be/s6ATEkipzow) uses boundaries from root and is $O(n)$.
-	1. to see how the boundaries work, just think the limits of `root.right` and `root.right.left`, the `root.val` naturally becomes the lower limit of `root.right.left` 
-## Graph
-#### Learning
-> Main ref: [[Algorithms Illuminated (Part 2).pdf]] Chapter 7, 8
-1. Representations
-	1. edge list, adjacency matrix, adjacency list
-	2. directed vs undirected
-2. BFS
-	1. iterates over all of its adjacency linked list, i.e., neighbors at same level, thus breadth
-	2. implementation
-		1. Queue for tracking exploration
-		2. Marking of *explored*
-3. DFS
-	1. DFS will recurse on the 1st element and put rest of the linked list "on hold" until backtracking, therefore prioritize depth
-	2. implementation
-		1. Stack (*iterative*) or recursion. Recursion also leverages stack, just inexplicitly.
-		2. Marking of *explored*
-4. Application
-	1. BFS tells us the *shortest* path from node $a$ to node $b$; DFS tells us if a path from $a$ to $b$ even exists
-	2. Topological Sort (Sect 8.5)
-		1. DAG may have many topological orderings, and DFS finds *one* of such orderings in $O(m+n)$ time 
-
-### [542. 01 Matrix](https://leetcode.com/problems/01-matrix/)
-1. first find *all possible starting points*, then run BFS. See [solution](https://youtu.be/YTnYte6U61w)
-	1. This can be thought of as all starting points are 1 step from a single super starting point.
-
-### [133. Clone Graph](https://leetcode.com/problems/clone-graph/) (understanding)
-1. DFS and update values dynamically. [solution](https://youtu.be/mQeF6bN8hMk)
-
-### [417. Pacific Atlantic Water Flow](https://leetcode.com/problems/pacific-atlantic-water-flow/description/) (understanding)
-1. [Solution](https://youtu.be/_ufr9Yz25lw) provided both DFS and BFS, but I prefer BFS which makes more sense to me. 
-	1. the DFS needs to start at specific rows/cols, the generic DFS does not work
-	2. *The vanilla DFS* in this situation won't work
-		1. Coz you may end up visiting a location over and over, infinite loop, before it's registered. See example in BFS below.
-2. *The BFS*
-	1. starts with points on the boundaries, think of the ocean as super starting points
-	2. always have `visted` so that we do not duplicate efforts 
-		1. and only when `pop` the element do we add it to `visited`!
-	3. at each level, only add legit `(next_r, next_c)` to `q`
-		1. Every node in `visited` will be valid. *This is like you can only explore connected next nodes.*
-		2. invalid cells may get added at later levels. 
-			1. E.g., `9` in `[[1,2,3,4],[12,13,14,5],[11,16,15,6],[10,9,8,7]]` will be ignored at step 1 but added at last step. This means `9` is not directly connected to `10` but can be reached via `5->6->7->8->9`.
-
-#### [Graph Valid Tree](https://neetcode.io/problems/valid-tree)
-1. For a graph to be a tree (undirected)
-	1. every node is connected, i.e., a tree has only one component and one can traverse the whole tree starting any node
-	2. no cycle: any two nodes have exactly one path
-2. For undirected tree, it's a good idea to keep both directions in the adjacency list
-3. Since we need to use `visited` to determine base case, the use of `prev` in `dfs(node, prev)` keeps track of where we came from
-	1. this enables us to start from any node
-	2. to start, use `dfs(node, -1)` since no node would have `-1`.
-4. `n == len(visited)` makes sure every node is connected
-5. Full code
-	```python
-	def is_valid_tree(n, edges):	
-		# get adjacency list	
-		adj = {i:[] for i in range(n)}
-		for i, j in edges:
-			adj[i].append(j)
-			adj[j].append(i)
-	
-		visited = set()
-		def dfs(node, prev):
-			if node in visited:  # cycle exists
-				return False
-	
-			visited.add(node)
-			for nei in adj[node]:
-				if nei == prev:  # since we cannot use `visited`
-					continue
-				if not dfs(nei, node):
-					return False
-			return True
-	
-		import random
-		root = random.choice(range(n))  # can start at any node
-		no_cycle = dfs(root, -1)  # -1 is outside of possible node value
-		all_connected = n == len(visited)  # if tree, should be able to traverse all nodes
-		return no_cycle and all_connected
-
-	# example: not valid tree, cycle of 1->2->3->1
-	n = 5
-	edges = [[0, 1], [1, 2], [2, 3], [1, 3], [1, 4]]	  
-	
-	```
-
-Tow-D Maze
-
-### Data structure
-### [138. Copy List with Random Pointer](https://leetcode.com/problems/copy-list-with-random-pointer/)
-1. Cute problem
-### [380. Insert Delete GetRandom O(1)](https://leetcode.com/problems/insert-delete-getrandom-o1/)
-1. I did not understand the problem, see [solution](https://youtu.be/j4KwhBziOpg) for explanation
-	1. basically need to avoid any $O(n)$ ops such as `list(self.val_map)` which is required for `random.choice` for the `getRandom()`
-
-### [146 LRU Cache](https://leetcode.com/problems/lru-cache/description/)
-1. The pattern is `hash map` and `double linked list`. 
-	1. it's helpful to have `self.head` and `self.tail` as dummy nodes
-	2. they tend to initialize an empty list with `self.head.next, self.tail.prev = self.tail, self.head`
 
 ## Linked list
 ### Data structure
@@ -532,6 +370,168 @@ def pop(self) -> int:
 	2. Take high priority calculation on the fly. At the end, just need to take the sum of the stack.
 		1. E.g.,  `-num` is `-1*num` and do `stack.push(-num)` on the fly.
 
+## Tree
+### Learning
+1. [Binary Search Trees: Samuel's tutorial](https://youtu.be/0woI8l0ZWmA)
+	1. Nice animation on *tree traversals*
+2. Time complexity is usually the height of the tree, i.e., `O(log(n))`
+3. The main difference between a **binary tree** and a **binary search tree (BST)** is that a binary tree has **no specific ordering rules** for its nodes, whereas a binary search tree enforces a **strict sorted order constraint**
+4. Traversal. See how the append is done.
+	```python
+	class TreeNode:
+	    def __init__(self, key):
+	        self.key = key
+	        self.left = None
+	        self.right = None
+
+	def in_order_traversal(root):
+		result = []		
+		def traverse(node):		
+			if node is not None:		
+				traverse(node.left)  # Visit left subtree		
+				result.append(node.key)  # Visit current node		
+				traverse(node.right)  # Visit right subtree		
+		
+		traverse(root)
+		return result
+	```
+5. For level wise question, use `queue`.
+6. A lot of recursive calls
+	1. Return values
+		1. Top Down: base case return `None`. E.g., `inorder traversal` of trees; E.g., backtracking
+		2. Bottom up: need value from subproblem, so return cannot be null.
+	2. usually use `if not root`, i.e., None node, as base case
+### Coding
+#### [124. Binary Tree Maximum Path Sum](https://leetcode.com/problems/binary-tree-maximum-path-sum/)
+1. Nice explanation in [tutorial](https://youtu.be/5jz66VkGMCY?list=PLV5qT67glKSErHD66rKTfqerMYz9OaTOs&t=1003)
+	1. The recursion can ONLY have either left or right to avoid double visit of root. E.g., 3->15->5->15->20 in figure below
+	2. To include contribution from both ends, at each step do `cur_sum = recurse(root.left) + recurse(root.right) + root.val`
+	3. ![[Pasted image 20250519110557.png|800]]
+#### [Diameter of Binary Tree](https://leetcode.com/problems/diameter-of-binary-tree/)
+1. This [time stamp](https://youtu.be/K81C31ytOZE?t=281) shows how to deal with global/nonlocal variable, i.e., use `self.res`
+2. This [video](https://youtu.be/81lu4qO9snY) has very good visualization of recursion
+#### [Binary Tree Level Order Traversal](https://leetcode.com/problems/binary-tree-level-order-traversal/description/)
+1. Breadth First Search (BFS) and *queue*
+	1. `while queue` is the condition to terminate loop when queue becomes empty
+	2. `qLen = len(q)` is important coz the length of `q` will change during loop
+		1. `queue` is 1st in 1st out; add node's children before removing it
+		2. The space complexity is `O(n)` coz last level could be `n/2`
+2. Good [explanation](https://youtu.be/KFkjJ7pjWVw) and Python [implementation](https://youtu.be/6ZnyEApgFYg?t=393)
+#### [236. Lowest Common Ancestor of a Binary Tree](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/)
+1. The challenge for me is to know *what to return* at each recursion
+	1. Idea is to return upwards till we find a root with both `left` and `right` not null.
+		1. Therefore `if left and right: return root` and `return left if left else right`
+		2. Tricky when one target node is the ancestor `q` of the other `p`. 
+			1. No need to explore more, because if `p` is not a child of `q`, the peer of `q` will return non-null value, so the ancestor will be a parent of `q`
+			2. see example 2 with `p=5, q=4`.
+	2. `if not root or root == p or root == q: return root`
+		2. This is base case.
+
+### [572. Subtree of Another Tree](https://leetcode.com/problems/subtree-of-another-tree/description/)
+1. [Solution](https://youtu.be/E36O5SWp-LE)
+### [98. Validate Binary Search Tree](https://leetcode.com/problems/validate-binary-search-tree/)
+1. Brutal force will take $O(n^2)$
+2. [Solution](https://youtu.be/s6ATEkipzow) uses boundaries from root and is $O(n)$.
+	1. to see how the boundaries work, just think the limits of `root.right` and `root.right.left`, the `root.val` naturally becomes the lower limit of `root.right.left` 
+
+## Graph
+### Learning
+> Main ref: [[Algorithms Illuminated (Part 2).pdf]] Chapter 7, 8
+1. Representations
+	1. edge list, adjacency matrix, adjacency list
+	2. directed vs undirected
+2. BFS
+	1. iterates over all of its adjacency linked list, i.e., neighbors at same level, thus breadth
+	2. implementation
+		1. Queue for tracking exploration
+		2. Marking of *explored*
+3. DFS
+	1. DFS will recurse on the 1st element and put rest of the linked list "on hold" until backtracking, therefore prioritize depth
+	2. implementation
+		1. Stack (*iterative*) or recursion. Recursion also leverages stack, just inexplicitly.
+		2. Marking of *explored*
+4. Application
+	1. BFS tells us the *shortest* path from node $a$ to node $b$; DFS tells us if a path from $a$ to $b$ even exists
+	2. Topological Sort (Sect 8.5)
+		1. DAG may have many topological orderings, and DFS finds *one* of such orderings in $O(m+n)$ time 
+
+### [542. 01 Matrix](https://leetcode.com/problems/01-matrix/)
+1. first find *all possible starting points*, then run BFS. See [solution](https://youtu.be/YTnYte6U61w)
+	1. This can be thought of as all starting points are 1 step from a single super starting point.
+
+### [133. Clone Graph](https://leetcode.com/problems/clone-graph/) (understanding)
+1. DFS and update values dynamically. [solution](https://youtu.be/mQeF6bN8hMk)
+
+### [417. Pacific Atlantic Water Flow](https://leetcode.com/problems/pacific-atlantic-water-flow/description/) (understanding)
+1. [Solution](https://youtu.be/_ufr9Yz25lw) provided both DFS and BFS, but I prefer BFS which makes more sense to me. 
+	1. the DFS needs to start at specific rows/cols, the generic DFS does not work
+	2. *The vanilla DFS* in this situation won't work
+		1. Coz you may end up visiting a location over and over, infinite loop, before it's registered. See example in BFS below.
+2. *The BFS*
+	1. starts with points on the boundaries, think of the ocean as super starting points
+	2. always have `visted` so that we do not duplicate efforts 
+		1. and only when `pop` the element do we add it to `visited`!
+	3. at each level, only add legit `(next_r, next_c)` to `q`
+		1. Every node in `visited` will be valid. *This is like you can only explore connected next nodes.*
+		2. invalid cells may get added at later levels. 
+			1. E.g., `9` in `[[1,2,3,4],[12,13,14,5],[11,16,15,6],[10,9,8,7]]` will be ignored at step 1 but added at last step. This means `9` is not directly connected to `10` but can be reached via `5->6->7->8->9`.
+
+#### [Graph Valid Tree](https://neetcode.io/problems/valid-tree)
+1. For a graph to be a tree (undirected)
+	1. every node is connected, i.e., a tree has only one component and one can traverse the whole tree starting any node
+	2. no cycle: any two nodes have exactly one path
+2. For undirected tree, it's a good idea to keep both directions in the adjacency list
+3. Since we need to use `visited` to determine base case, the use of `prev` in `dfs(node, prev)` keeps track of where we came from
+	1. this enables us to start from any node
+	2. to start, use `dfs(node, -1)` since no node would have `-1`.
+4. `n == len(visited)` makes sure every node is connected
+5. Full code
+	```python
+	def is_valid_tree(n, edges):	
+		# get adjacency list	
+		adj = {i:[] for i in range(n)}
+		for i, j in edges:
+			adj[i].append(j)
+			adj[j].append(i)
+	
+		visited = set()
+		def dfs(node, prev):
+			if node in visited:  # cycle exists
+				return False
+	
+			visited.add(node)
+			for nei in adj[node]:
+				if nei == prev:  # since we cannot use `visited`
+					continue
+				if not dfs(nei, node):
+					return False
+			return True
+	
+		import random
+		root = random.choice(range(n))  # can start at any node
+		no_cycle = dfs(root, -1)  # -1 is outside of possible node value
+		all_connected = n == len(visited)  # if tree, should be able to traverse all nodes
+		return no_cycle and all_connected
+
+	# example: not valid tree, cycle of 1->2->3->1
+	n = 5
+	edges = [[0, 1], [1, 2], [2, 3], [1, 3], [1, 4]]	  
+	
+	```
+
+Tow-D Maze
+
+### Data structure
+### [138. Copy List with Random Pointer](https://leetcode.com/problems/copy-list-with-random-pointer/)
+1. Cute problem
+### [380. Insert Delete GetRandom O(1)](https://leetcode.com/problems/insert-delete-getrandom-o1/)
+1. I did not understand the problem, see [solution](https://youtu.be/j4KwhBziOpg) for explanation
+	1. basically need to avoid any $O(n)$ ops such as `list(self.val_map)` which is required for `random.choice` for the `getRandom()`
+
+### [146 LRU Cache](https://leetcode.com/problems/lru-cache/description/)
+1. The pattern is `hash map` and `double linked list`. 
+	1. it's helpful to have `self.head` and `self.tail` as dummy nodes
+	2. they tend to initialize an empty list with `self.head.next, self.tail.prev = self.tail, self.head`
 ### All solutions of a maze (try both BFS and DFS)
 1. This is DFS, the backtracking is explicit
 	1. BFS is good to find shortest solution, but not all of them

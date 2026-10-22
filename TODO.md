@@ -30,6 +30,7 @@
 4. 3B1B
 	1. information theory
 	2. lin alg
+5. Physics of LLMs. Allen Zhu
 ## Book
 1. LM interview handbook https://www.linkedin.com/feed/update/urn:li:activity:7446817744513028097/
 2. Foundations of Large Language Models https://arxiv.org/abs/2501.09223

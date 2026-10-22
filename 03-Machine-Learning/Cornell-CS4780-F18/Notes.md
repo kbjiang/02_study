@@ -160,5 +160,33 @@ https://www.cs.cornell.edu/courses/cs4780/2018fa/
 ## Losses
 1. Exponential loss freaks out about most misclassified points, while hinge cares about points all the same. See the plot below.
 # Lecture Bias-Variance tradeoff
-1. Variance, bias vs overfitting/underfitting
-2. same test (x, y), different training D leading to different $h_D(x)$, this is variance.
+## Bias-variance tradeoff
+1. same test (x, y), different training D leading to different $h_D(x)$, this is variance.
+	1. $h_D$ is  also a R.V.
+2. The mathematical definition.![[Pasted image 20261021170818.png|800]]
+3. High variance: given a test data $x$, each dot corresponds to the test error associated with a model trained with some training set $D$ . When you take the average over all $D$s, the test error might be small (low bias)
+	1. ![[Pasted image 20261021170713.png|400]]
+4. How to map this graph to the math
+	1. As # training instances go up, test error drops and training error increases.
+		1. test loss is lower bounded by train loss
+	2. Regimen #1: small train set, low train loss, high variance, overfitting. 
+		1. Test loss can be misleading: with a new training set, the test error might be quite low--on average, the test error would be low. This is because *when the model is powerful enough to learn noise from every small train set, overall the noises will cancel out*. In other words, $h_D(x)$ varies a lot, but $\bar h(x)$ can be close to $\bar y(x)$, i.e. low bias.
+		2. This graph cannot tell if the trained model is good, even if both losses are low, due to small size of train set. Instead of loss curves, report confidence interval. See how [[#^CI]]
+	3. Regimen #2: large train set, high test and train loss, high bias, underfitting. I.e., $\bar h(x)$ far from $\bar y(x)$.
+	4. Note that adding training data to move from region #1 to #2, we are trading variance for bias. That's the *tradeoff*.
+	5. ![[Pasted image 20261021171520.png|600]]
+5. How to get CI of the error. ^CI
+	1. Analytical: normal approximation of the binomial proportion
+		1. $\text{CI} = \text{error} \pm 1.96 \times \sqrt{\frac{\text{error} \times (1-\text{error})}{n}}$ 
+	2. Bootstrapping
+6. Let's say I did evaluation five times, each with accuracy $x_i$, how do I report the overal accuracy with error bar?
+	1. $s = \sqrt{\frac{\sum(x_i-\bar x)^2}{n-1}}$
+## How to debug?
+1. Identify which regime we are in.
+2. Regime #1, high bias
+	1. Kernel (linear classifiers)
+3. Regime #2
+
+# Kernel (for linear classifiers)
+1. Combinatorics of existing features to capture all possible nonlinearity
+2. bad news: can easily have too many features $2^d$, where $d$ is number of original features
