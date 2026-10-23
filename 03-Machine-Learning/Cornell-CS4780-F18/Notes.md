@@ -190,3 +190,26 @@ https://www.cs.cornell.edu/courses/cs4780/2018fa/
 # Kernel (for linear classifiers)
 1. Combinatorics of existing features to capture all possible nonlinearity
 2. bad news: can easily have too many features $2^d$, where $d$ is number of original features
+3. KNN does not require kernel because it's already nonlinear and not in high-bias regime.
+### The Logic for the Kernel Trick
+1. Dual Optimization Framing
+	1. Frame the loss function purely in terms of the pairwise dot products of the data vectors ($\mathbf{x}_j^T \mathbf{x}_i$). 
+	2. As a result, the parameters to update during training (learning) are the dual coefficients ($\alpha$).  
+	3. Inference is also performed entirely using these coefficients and pairwise data interactions.
+ 2. Kernel Definition & Mapping Properties
+	 1. Define a kernel function $K(\mathbf{x},\mathbf{z}) = \phi(\mathbf{x})^T \phi(\mathbf{z})$ to compute similarities directly in the original feature space.
+	 2. **Space Dimensionality:** Different kernels map data to different feature spaces. 
+		 1. The **RBF kernel** maps data to an infinite-dimensional space.
+		  2. The **Polynomial kernel** $K(\mathbf{x},\mathbf{z}) = (\mathbf{x}^T \mathbf{z} + c)^p$ maps data into a finite higher-dimensional space of exactly $\binom{d + p}{p}$ dimensions (where $d$ is the original feature dimension).
+	3. **Hyperparameter Leverage:** Choose kernel functions with meaningful levers in the input space:
+		1. The **Polynomial kernel** controls complexity via its degree $p$ and the trading constant $c$.
+		2. The **RBF kernel** controls complexity via its radius of influence $\gamma$. 
+3. How Input Space Kernels Affect Higher-Dimensional Training (RBF Example)
+	1. Extreme Case 1: Large $\gamma$ (Very Small Radius of Influence)
+		1. **In the Input Space:** The kernel acts like a sharp spike. $K(\mathbf{x},\mathbf{z})$ drops to $0$ rapidly if $\mathbf{x}$ and $\mathbf{z}$ are even slightly separated.
+		2. **In the Infinite-Dimensional Space:** Because $K(\mathbf{x},\mathbf{z}) = \phi(\mathbf{x})^T \phi(\mathbf{z}) \to 0$, every single training point becomes **perfectly orthogonal** to every other training point ($\phi(\mathbf{x}_i) \perp \phi(\mathbf{x}_j)$).
+		3. **The Training Impact:** If every data point sits on its own completely mutually perpendicular, independent dimension, the model can lineally separate *any* arbitrary assignment of labels perfectly. This grants the model infinite capacity to memorize training data, leading to a jagged decision boundary and **severe overfitting (High Variance)**.
+	 2. Extreme Case 2: Small $\gamma$ (Very Large Radius of Influence)
+		1. **In the Input Space:** The kernel is broad and flat. Even for points far apart, $K(\mathbf{x},\mathbf{z}) \approx 1$.
+		2. **In the Infinite-Dimensional Space:** Because the vectors are normalized to length 1, an inner product close to 1 means $\cos(\theta) \approx 1$. Thus, the mapped vectors all point in **virtually the exact same direction** (highly collinear).
+		3. **The Training Impact:** Because the vectors are squeezed together into a tight, almost one-dimensional cluster on the hypersphere, the model's effective capacity drops. It becomes impossible to find a separating hyperplane, forcing a highly smoothed, flat decision boundary which leads to **underfitting (High Bias)**.
