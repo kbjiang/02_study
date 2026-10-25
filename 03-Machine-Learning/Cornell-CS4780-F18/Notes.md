@@ -192,9 +192,9 @@ https://www.cs.cornell.edu/courses/cs4780/2018fa/
 2. bad news: can easily have too many features $2^d$, where $d$ is number of original features
 3. KNN does not require kernel because it's already nonlinear and not in high-bias regime.
 ### The Logic for the Kernel Trick
-1. Dual Optimization Framing
+1. *Dual* Optimization Framing
 	1. Frame the loss function purely in terms of the pairwise dot products of the data vectors ($\mathbf{x}_j^T \mathbf{x}_i$). 
-	2. As a result, the parameters to update during training (learning) are the dual coefficients ($\alpha$).  
+	2. As a result, the parameters to update during training (learning) are the *dual* coefficients ($\alpha$).  
 	3. Inference is also performed entirely using these coefficients and pairwise data interactions.
  2. Kernel Definition & Mapping Properties
 	 1. Define a kernel function $K(\mathbf{x},\mathbf{z}) = \phi(\mathbf{x})^T \phi(\mathbf{z})$ to compute similarities directly in the original feature space.
@@ -213,3 +213,5 @@ https://www.cs.cornell.edu/courses/cs4780/2018fa/
 		1. **In the Input Space:** The kernel is broad and flat. Even for points far apart, $K(\mathbf{x},\mathbf{z}) \approx 1$.
 		2. **In the Infinite-Dimensional Space:** Because the vectors are normalized to length 1, an inner product close to 1 means $\cos(\theta) \approx 1$. Thus, the mapped vectors all point in **virtually the exact same direction** (highly collinear).
 		3. **The Training Impact:** Because the vectors are squeezed together into a tight, almost one-dimensional cluster on the hypersphere, the model's effective capacity drops. It becomes impossible to find a separating hyperplane, forcing a highly smoothed, flat decision boundary which leads to **underfitting (High Bias)**.
+### References
+1. A good [video](https://youtu.be/OKFMZQyDROI) for mapping intuition.

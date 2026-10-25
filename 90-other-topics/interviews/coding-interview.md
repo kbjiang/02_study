@@ -427,42 +427,73 @@ def pop(self) -> int:
 	2. `if not root or root == p or root == q: return root`
 		2. This is base case.
 
-### [572. Subtree of Another Tree](https://leetcode.com/problems/subtree-of-another-tree/description/)
+#### [572. Subtree of Another Tree](https://leetcode.com/problems/subtree-of-another-tree/description/)
 1. [Solution](https://youtu.be/E36O5SWp-LE)
-### [98. Validate Binary Search Tree](https://leetcode.com/problems/validate-binary-search-tree/)
+#### [98. Validate Binary Search Tree](https://leetcode.com/problems/validate-binary-search-tree/)
 1. Brutal force will take $O(n^2)$
 2. [Solution](https://youtu.be/s6ATEkipzow) uses boundaries from root and is $O(n)$.
 	1. to see how the boundaries work, just think the limits of `root.right` and `root.right.left`, the `root.val` naturally becomes the lower limit of `root.right.left` 
-
 ## Graph
 ### Learning
-> Main ref: [[Algorithms Illuminated (Part 2).pdf]] Chapter 7, 8
 1. Representations
 	1. edge list, adjacency matrix, adjacency list
 	2. directed vs undirected
+	3. ![[Pasted image 20261023164533.png|600]]
+	4. ![[Pasted image 20261023164559.png|600]]
 2. BFS
-	1. iterates over all of its adjacency linked list, i.e., neighbors at same level, thus breadth
-	2. implementation
+	1. ==BFS tells us the *shortest* path from node $a$ to node $b$.== Not good for wide graph.
+	2. iterates over all of its adjacency linked list, i.e., neighbors at same level, thus breadth
+	3. implementation
 		1. Queue for tracking exploration
 		2. Marking of *explored*
+	4. Complexity for undirected
+		1.  $V + 2E$: once every vertex, twice every edge
+		2. it's twice because once from each end node. The 2nd time the other node won't be visited because it's status is already 'visited'.
 3. DFS
-	1. DFS will recurse on the 1st element and put rest of the linked list "on hold" until backtracking, therefore prioritize depth
-	2. implementation
+	1. ==DFS tells us if a path from $a$ to $b$ even exists,== Not good for finding shortest path.
+		1. E.g., Topological Sort (Sect 8.5): DAG may have many topological orderings, and DFS finds *one* of such orderings in $O(m+n)$ time 
+	2. DFS will recurse on the 1st element and put rest of the linked list "on hold" until backtracking, therefore prioritize depth
+	3. implementation
 		1. Stack (*iterative*) or recursion. Recursion also leverages stack, just inexplicitly.
 		2. Marking of *explored*
-4. Application
-	1. BFS tells us the *shortest* path from node $a$ to node $b$; DFS tells us if a path from $a$ to $b$ even exists
-	2. Topological Sort (Sect 8.5)
-		1. DAG may have many topological orderings, and DFS finds *one* of such orderings in $O(m+n)$ time 
-
-### [542. 01 Matrix](https://leetcode.com/problems/01-matrix/)
-1. first find *all possible starting points*, then run BFS. See [solution](https://youtu.be/YTnYte6U61w)
+	4. Complexity for undirected
+### References
+1. [[Algorithms Illuminated (Part 2).pdf]] Chapter 7, 8
+2. [Post](https://medium.com/basecs/from-theory-to-practice-representing-graphs-cfd782c5be38) by Vaidehi Joshi
+### Coding
+#### [542. 01 Matrix](https://leetcode.com/problems/01-matrix/) $\star$
+1. I spent a lot of time try to solve it with DFS and failed--when use `visited` to avoid repeated visiting, it also block out potentially shorter paths. 
+	1. E.g., `[[1, 1, 1], [0, 1, 1]]`. If I first went `(1, 2) - (0, 2) - (0, 1) - (1, 1) - (1, 0)` and have `(1, 1)` added to `visited`, then I'd never have the best path `(1, 2) - (1, 1) - (1, 0)`./
+	2. ==🟡For shortest paths, use BFS!==
+2. find *all possible starting points*, then run BFS. See [solution](https://youtu.be/YTnYte6U61w)
 	1. This can be thought of as all starting points are 1 step from a single super starting point.
-
-### [133. Clone Graph](https://leetcode.com/problems/clone-graph/) (understanding)
+	2. No `visited` needed; coz `-1` means "not discovered yet" already
+		```python
+		from collections import deque
+		def updateMatrix(mat: list[list[int]]) -> list[list[int]]:
+		    rows, cols = len(mat), len(mat[0])
+		    distances = [[-1] * cols for _ in range(rows)]
+		    queue = deque()
+		
+		    for r in range(rows):
+		        for c in range(cols):
+		            if mat[r][c] == 0:
+		                distances[r][c] = 0
+		                queue.append((r, c))
+		
+		    while queue:
+		        r, c = queue.popleft()
+		        for dr, dc in ((-1, 0), (0, 1), (1, 0), (0, -1)):
+		            nr, nc = r + dr, c + dc
+		            if (0 <= nr < rows and 0 <= nc < cols
+		                    and distances[nr][nc] == -1):
+		                distances[nr][nc] = distances[r][c] + 1
+		                queue.append((nr, nc))
+		    return distances
+		```
+#### [133. Clone Graph](https://leetcode.com/problems/clone-graph/) (understanding)
 1. DFS and update values dynamically. [solution](https://youtu.be/mQeF6bN8hMk)
-
-### [417. Pacific Atlantic Water Flow](https://leetcode.com/problems/pacific-atlantic-water-flow/description/) (understanding)
+#### [417. Pacific Atlantic Water Flow](https://leetcode.com/problems/pacific-atlantic-water-flow/description/) (understanding)
 1. [Solution](https://youtu.be/_ufr9Yz25lw) provided both DFS and BFS, but I prefer BFS which makes more sense to me. 
 	1. the DFS needs to start at specific rows/cols, the generic DFS does not work
 	2. *The vanilla DFS* in this situation won't work
@@ -475,8 +506,7 @@ def pop(self) -> int:
 		1. Every node in `visited` will be valid. *This is like you can only explore connected next nodes.*
 		2. invalid cells may get added at later levels. 
 			1. E.g., `9` in `[[1,2,3,4],[12,13,14,5],[11,16,15,6],[10,9,8,7]]` will be ignored at step 1 but added at last step. This means `9` is not directly connected to `10` but can be reached via `5->6->7->8->9`.
-
-#### [Graph Valid Tree](https://neetcode.io/problems/valid-tree)
+#### [261. Graph Valid Tree](https://neetcode.io/problems/valid-tree) (premium)
 1. For a graph to be a tree (undirected)
 	1. every node is connected, i.e., a tree has only one component and one can traverse the whole tree starting any node
 	2. no cycle: any two nodes have exactly one path
@@ -521,6 +551,43 @@ def pop(self) -> int:
 
 Tow-D Maze
 
+## - Heap
+### Learning
+1. Useful for fast, repeated access to minimum or maximum elements in a dynamically changing dataset. E.g., top-K problems.
+2. Heaps are just binary trees with certain types of invariants
+	1. order invariant: Min-heap, Max-heap
+	2. shape invariant: nearly complete. I.e., every level is complete except possibly the last one, which is filled strictly from lef to right with no gaps.
+		1. this enables quick operations with child and parent indexing.
+3. Time complexity
+	1. Find max/min: `O(1)`
+	2. Insert/remove: `O(k)`, k is the size of the heap
+	3. heapify: `O(k)`, k is the size of the heap
+#### [973. K Closest Points to Origin](https://leetcode.com/problems/k-closest-points-to-origin/description/) $\star$
+1. Append `-dist` to leverage `minHeap`. See [solution](https://youtu.be/IGRUukbD6p8)
+2. Time complexity: `n*log(k)` where `k` is the size of the heap.
+3. Redo this to familiarize with syntax.
+```python
+def kClosest(self, points: list[list[int]], k: int) -> list[list[int]]:
+	def dist(x, y):
+		return x**2 + y**2
+	
+	import heapq
+	heap = []
+	for x, y in points:
+		d = dist(x, y)
+		if len(heap) < k:
+			# negate `d` because it's min_heap by default
+			# pop() removes the root, i.e., minimum of heap
+			heapq.heappush(heap, (-d, x, y))
+		else:
+			heapq.heappushpop(heap, (-d, x, y))
+	return [[x, y] for _, x, y in heap]
+```
+#### [23. Merge k Sorted Lists](https://leetcode.com/problems/merge-k-sorted-lists/)
+1. Each step use a heap to find the min pointer and insert one new pointer, both `log(k)` time.
+2. [solution](https://youtu.be/RyrVWP76lVo)
+	1. the tuple of `(node.val, i, node)` where `i` is the ith list; in case of same `node.val` of nodes
+	2. use `res` and `cur` where `cur` is to append node to `res`; I keep forgetting to do so
 ### Data structure
 ### [138. Copy List with Random Pointer](https://leetcode.com/problems/copy-list-with-random-pointer/)
 1. Cute problem
@@ -582,12 +649,6 @@ for path in solutions:
 	1. the base case is at a maximum instead of a minimum
 	2. no `return` until base case
 
-## - Heap
-### [23. Merge k Sorted Lists](https://leetcode.com/problems/merge-k-sorted-lists/)
-1. Each step use a heap to find the min pointer and insert one new pointer, both `log(k)` time.
-2. [solution](https://youtu.be/RyrVWP76lVo)
-	1. the tuple of `(node.val, i, node)` where `i` is the ith list; in case of same `node.val` of nodes
-	2. use `res` and `cur` where `cur` is to append node to `res`; I keep forgetting to do so
 
 ## References
 1. https://www.techinterviewhandbook.org/
