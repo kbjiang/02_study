@@ -187,17 +187,20 @@ https://www.cs.cornell.edu/courses/cs4780/2018fa/
 	1. Kernel (linear classifiers)
 3. Regime #2
 
-# Kernel (for linear classifiers)
-1. Combinatorics of existing features to capture all possible nonlinearity
+# Kernel 
+1. Motivation:
+	1. Need non-linear features to deal with problems non-linear separable in original space
 2. bad news: can easily have too many features $2^d$, where $d$ is number of original features
 3. KNN does not require kernel because it's already nonlinear and not in high-bias regime.
+4. Gram matrix vs Kernel function
+	1. $K_{ij}=k(\mathbf{x}_i, \mathbf{x}_j)$
 ### The Logic for the Kernel Trick
 1. *Dual* Optimization Framing
 	1. Frame the loss function purely in terms of the pairwise dot products of the data vectors ($\mathbf{x}_j^T \mathbf{x}_i$). 
 	2. As a result, the parameters to update during training (learning) are the *dual* coefficients ($\alpha$).  
 	3. Inference is also performed entirely using these coefficients and pairwise data interactions.
  2. Kernel Definition & Mapping Properties
-	 1. Define a kernel function $K(\mathbf{x},\mathbf{z}) = \phi(\mathbf{x})^T \phi(\mathbf{z})$ to compute similarities directly in the original feature space.
+	 1. Define a kernel function $K(\mathbf{x},\mathbf{z}) = \phi(\mathbf{x})^T \phi(\mathbf{z})$ to compute similarities directly in the *original feature space*.
 	 2. **Space Dimensionality:** Different kernels map data to different feature spaces. 
 		 1. The **RBF kernel** maps data to an infinite-dimensional space.
 		  2. The **Polynomial kernel** $K(\mathbf{x},\mathbf{z}) = (\mathbf{x}^T \mathbf{z} + c)^p$ maps data into a finite higher-dimensional space of exactly $\binom{d + p}{p}$ dimensions (where $d$ is the original feature dimension).
@@ -213,5 +216,28 @@ https://www.cs.cornell.edu/courses/cs4780/2018fa/
 		1. **In the Input Space:** The kernel is broad and flat. Even for points far apart, $K(\mathbf{x},\mathbf{z}) \approx 1$.
 		2. **In the Infinite-Dimensional Space:** Because the vectors are normalized to length 1, an inner product close to 1 means $\cos(\theta) \approx 1$. Thus, the mapped vectors all point in **virtually the exact same direction** (highly collinear).
 		3. **The Training Impact:** Because the vectors are squeezed together into a tight, almost one-dimensional cluster on the hypersphere, the model's effective capacity drops. It becomes impossible to find a separating hyperplane, forcing a highly smoothed, flat decision boundary which leads to **underfitting (High Bias)**.
+### Notes
+1. We then run gradient descent on $\mathbf{\alpha}$ in dual space like we did with $\mathbf{w}$ in primal space. See the other md file #TODO
+2. Prediction
+	1. $h(\mathbf{z})=\mathbf{z}^T\mathbf{w}=\mathbf{z}^T\mathbf{X}\mathbf{\alpha}=\mathbf{k_*}\mathbf{\alpha}$, meaning the prediction is a linear combination of data points 
+3. Beautiful [discussion](https://youtu.be/7LlpTABc27s?list=PLl8OlHZGYOQ7bkVbuRthEsaLr7bONzbXS&t=459) about the essence of SVM.
+	1. Linear SVM resembles KNN in high dimensional space.
+4. The regularization parameter $C$ in dual representation. [西瓜书 6.4]
+
 ### References
 1. A good [video](https://youtu.be/OKFMZQyDROI) for mapping intuition.
+
+# Lecture 15 Gaussian Process #TODO 
+# Lecture 16 KD Trees #TODO 
+
+# Lecture 17 Decision Trees #TODO 
+1. The CART cost function for classification
+	$$G(S)=\frac{|S_L|}{|S|}G(S_L)+\frac{|S_R|}{|S|}G(S_R),$$where $G$ is the Gini Impurity, and $\frac{|S_{L/R}|}{|S|}$ is the fraction of inputs in the left/right sub-tree. 
+	1. Not $S_{R/L}$ may contain all $C$ classes.
+	2. It's a  greedy algorithm--it looks for optimal split at *current* level only, without checking whether this leads to overall optimal result.
+	3. It does so by looking at every possible split at the level... 
+2. Parametric or not? $\star$
+	1. Primal algo is parametric, coz number of $w_i$ is fixed regardless of number of data points; dual algo is non-parametric, coz number of $\alpha_i$ increases as training data increases.
+
+# Lecture 18 Bagging ==> Reduce variance
+1. Trees have high variance problem--bagging is the fix

@@ -30,6 +30,7 @@
 
 ---
 ## Array
+### Learning
 1. Arrays hold values of the *same type* at *contiguous memory locations*.
 2. Use start and end indices to demarcate a subarray/range wherever possible.
 3. `subsequence` vs `subarray`
@@ -44,26 +45,49 @@
 | Insert (at the end)   | O(1)      | Special case of insertion where no other element needs to be shifted                                 |
 | Remove                | O(n)      | Removal would require shifting all the subsequent elements to the left by one and that takes O(n)    |
 | Remove (at the end)   | O(1)      | Special case of removal where no other element needs to be shifted                                   |
-#### [TwoSums](https://leetcode.com/problems/two-sum/) 
-1. Good use case for `hashmap` i.e., `dictionary`. Gives `O(n)` complexity
-2. Why is `hashmap` lookup only `O(1)`?
-#### [3Sum](https://leetcode.com/problems/3sum/description/)
+### Coding
+#### [15. 3Sum](https://leetcode.com/problems/3sum/description/)
 1. Sort first. Then fix 1st number and run two pointers. See [solution](https://youtu.be/jzZsG8n2R9A)
-#### [Product of Array Except Self](https://leetcode.com/problems/product-of-array-except-self/)
+#### [238. Product of Array Except Self](https://leetcode.com/problems/product-of-array-except-self/)
 1. Calculate running prefix/suffix products for each element, then take the product of those two products.
 2. Can be done with space `O(1)` without calculating prefix/suffix separately.
-#### [Best Time to Buy and Sell Stock](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/description/)
+#### [121. Best Time to Buy and Sell Stock](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/description/)
 1. Very good [visualization](https://youtu.be/ioFPBdChabY): identify *repeated* computation. 
-
-#### [Maximum Product Subarray](https://leetcode.com/problems/maximum-product-subarray/description/)
-1. Example of *Kadane's* algorithm. Here is an [explanation](https://youtu.be/86CQq3pKSUw) on maximum sum
-2. Idea is 
-	1. to see the impact of existing sum/product on current element, i.e., compare `current_sum` with `nums[i]` and reset if negative impact from `current_sum`
-#### Sliding window (important technique)
+#### Sliding window (important technique; MSFT interview)
 1. Interview: you are given an array of 1's and 0's. You are also given a number k. What is the length of the longest continuous subsequence of 1's you can pick from the given array? You can substitute at most k 0's with 1's. Write a script in python.
 	1. Example: input [1, 0, 1, 0, 0, 1, 0, 0, 1, 1, 1, 1, 1], k=2;	output: 8
 	2. The mental picture is looking for a sliding window with no more than k zeros.
-
+#### [33. Search in Rotated Sorted Array](https://leetcode.com/problems/search-in-rotated-sorted-array/) $\star$
+1. For binary search, the *standards*:
+	1. boundary conditions: `s<=e` 
+	2. `m=(s+e)//2` at the top of each iteration
+	3. `s = m+1` or `e = m-1`. The shift by `1` makes sure we are stuck when `s=0, e=1`.
+2. `s, m = m, (s + e) // 2` ==🟡WON'T work!== Coz we first calcuate the RHS so `m` was not updated with new `s`.
+```python
+def search(self, nums: list[int], target: int) -> int:
+	s = 0
+	e = len(nums) - 1
+	while s <= e:
+		m = (s+e)//2
+		if nums[m] == target:
+			return m
+			
+		# mid and target on same portion
+		if (nums[m] - nums[s]) * (target - nums[s]) >= 0:
+			if nums[m] < target:
+				s = m + 1
+			else:
+				e = m - 1
+			continue
+		# mid and target on different portions
+		if (nums[m] - nums[s]) * (target - nums[s]) <= 0:
+			if nums[m] < target:
+				e = m - 1
+			else:
+				s = m + 1
+			continue
+	return -1
+```
 ---
 ## Hash table
 #### Learning

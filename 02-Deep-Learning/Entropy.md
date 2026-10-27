@@ -4,7 +4,7 @@
 	1. $h(s) = f(p_s)$ where $h$ is the *entropy or the measure of surprise* of the given state $s$, which should be a function of the probability $p_s$.
 		1. More rare more surprise, therefore one possibility is $h$ relates to  $1/p_s$ 
 		2. Probabilities multiply while surprises add, therefore the $log$
-		3. Put together: $H = \sum{p_s}log(1/p_s)$
+		3. The expected surprise: $H = \sum{p_s}log(1/p_s)$
 3. In reality we don't know $p_s$ but only our belief/model $q_s$. 
 	1. ![[Pasted image 20250505070603.png|600]]
 4. KL divergence

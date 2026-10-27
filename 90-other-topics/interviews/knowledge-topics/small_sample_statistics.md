@@ -12,12 +12,25 @@ When evaluating $n = 5$ distinct accuracy scores ($x_1, x_2, \dots, x_5$), calcu
 To measure the natural variability between individual runs, we calculate the sample standard deviation. We use **Bessel's Correction** ($n-1 = 4$) in the denominator to ensure an unbiased estimator of the true population variance:
 $$s = \sqrt{\frac{\sum_{i=1}^n (x_i - \bar{x})^2}{4}}$$
 
-### Step 2: Scaling for the Mean (SEM)
-The Standard Error of the Mean (SEM) measures the stability of the *average accuracy* rather than individual runs. By basic algebraic properties of variance, the variance of an average drops by a factor of $n$:
-$$\text{Var}(\bar{x}) = \frac{s^2}{n} = \frac{s^2}{5}$$
+### Step 2: Calculating the SEM
+*The Standard Error of the Mean (SEM) measures the stability of the average accuracy rather than individual runs.* This provides the standard error of the mean:
+$$\text{SEM} = \frac{s}{\sqrt{5}}$$
 
-Taking the square root yields the standard error formula:
-$$\text{SEM} = \frac{s}{\sqrt{5}} = \frac{\sqrt{\frac{\sum (x_i - \bar{x})^2}{4}}}{\sqrt{5}} = \sqrt{\frac{\sum (x_i - \bar{x})^2}{20}}$$
+
+### Step 3: Find the Critical Value ($t^*$)
+To find the interval where the true population mean likely lies, we apply a Student's t-distribution with $n - 1 = 4$ degrees of freedom. For a two-tailed 95% confidence level and 4 degrees of freedom, the critical value is:
+$$t^* = 2.776.$$
+
+> Had we known the true population variance ($\sigma^2$), then we should use $Z$-distribution for CI.
+
+By basic algebraic properties of variance, the variance of an average drops by a factor of $n$:
+The margin of error scales the standard error by our critical value:
+$$\text{MoE} = t^* \times \text{SEM} = 2.776 \times \text{SEM}$$
+
+### Step 4: Define the Interval Bounds
+The final confidence interval is centered around the sample mean ($\bar{x}$):
+$$\text{CI} = \bar{x} \pm \text{MoE}$$
+$$\text{CI} = [\,\bar{x} - 2.776 \times \text{SEM},\;\; \bar{x} + 2.776 \times \text{SEM}\,]$$
 
 ---
 
