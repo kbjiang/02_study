@@ -89,6 +89,61 @@ def search(self, nums: list[int], target: int) -> int:
 	return -1
 ```
 ---
+
+## String
+### Learning
+1. Tries: 
+	1. stores a *set* of strings $S$. Prefix/suffix trie and compressed trie
+		1. For standard trie, NO word in $S$ should be the prefix of another. Can be easily fixed by adding a boolean field $isWord$.
+		2. Worst case space complexity $O(n)$ where $n$ is number of letters. This happens when words in $S$ has no common prefixes.
+	2. See this [video](https://youtu.be/tUBFINxzlLg) and two following it for high-level; this [video](https://youtu.be/-urNrIAQnNo) for in-depth; this [video](https://youtu.be/oobqoCJlHA0) for implementation
+2. Algo
+	1. [Rabin-Karp](https://youtu.be/qQ8vS2btsxI)for pattern searching with a rolling hash
+		1. compare pattern and substring char by char ONLY when their hash values match
+		2. strong *hash function* leads to less value collision
+	2. KMP for efficient searching of pattern
+		1. Best [video](https://youtu.be/af1oqpnH1vA) to understand why it works
+			1. Big idea is to AVOID back track on the main string (therefore $O(n)$), only move in the LPS ($O(m)$).
+		2. [Video](https://youtu.be/GTJr8OvyEVQ) for KMP in action
+		3. implementation?
+	3. When criteria (such as 'max/min') and grouped (such as 'subarray') are involved, try `sliding window`, i.e. `two pointers`.
+		1. see this [section](https://youtu.be/MK-NZ4hN7rs?t=1030)
+### Coding
+#### [3. Longest Substring without repeating characters](https://leetcode.com/problems/longest-substring-without-repeating-characters/)
+1. Good [solution](https://youtu.be/wiGpQwVHdE0). The `while` is neat.
+#### [49. Group Anagrams](https://leetcode.com/problems/group-anagrams/description/) $\star$
+1. Mutable/Unhashable variables, e.g. dict/list, CANNOT be the key of a dictionary!
+	1. List cannot be key, needs to do `tuple(list)` as key.
+2. Use a list of size 26 to hold counts--*use index to represent* which character, i.e., `count[ord(c) - ord('a')]`.
+#### [347. Top K Frequent Elements](https://leetcode.com/problems/top-k-frequent-elements/description/) $\star$
+1. Method 1: heap
+2. Method 2: Bucket sort--u*se index to represent* frequency. Similar to 49. Group Anagrams
+3. [Solution](https://youtu.be/phNDYf1xzco)
+#### [Encode and Decode Strings](https://neetcode.io/problems/string-encode-and-decode)
+1. Key is to include string lengths in the encoded string.
+
+## Sorting and Search
+#### [Binary search](https://leetcode.com/problems/binary-search/description/)
+1. Use indices/pointers for searching problem!
+	1. If the target is close to one end of array, the `mid` will first approach the target from one side then the other.
+2. pay attention to edge cases when close to solution
+	1. the mid points and the end condition `l < r` or `l <= r` or `l < r-1`
+	2. return `l` or `r`?
+3. needs `if arr[mid] == target` as the base case
+	1. this is not needed if we are changing the value itself, instead of indices. See [[coding-interview#[Kth smallest element in a sorted matrix](https //leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/description/)]]
+#### [Kth smallest element in a sorted matrix](https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/description/) using Binary search
+1. Needs to calculate the number of elements smaller than `mid`. 
+	1. See [Ref2](https://www.cnblogs.com/firecode7/p/16120445.html) for a good explanation; [Ref1](https://leetcode-solution-leetcode-pp.gitbook.io/leetcode-solution/medium/378.kth-smallest-element-in-a-sorted-matrix) for Python implementation
+2. Here we are changing the value itself `1` every step, e.g., `right = mid - 1`
+	1. `-1` is important otherwise infinite loop when `left==right`
+	2.  Do NOT need `if counts == k` as there could be multiple `mid` fit the bill
+	3. `right` will eventually ends up too small by 1, that's why we need `left` to pass `right` before return `left`.
+		1. As opposed to [Sqrt(x)](https://leetcode.com/problems/sqrtx/) where `right` is returned because we are looking for round down
+	4. See [Ref1](https://leetcode-solution-leetcode-pp.gitbook.io/leetcode-solution/medium/378.kth-smallest-element-in-a-sorted-matrix) for Python solution
+
+#### [26. Remove Duplicates from Sorted Array](https://leetcode.com/problems/remove-duplicates-from-sorted-array/)
+1. Use left pointer $l$ to make sure `a[:l]` are the unique elements ran into so far. This is crucial for in-place.
+
 ## Hash table
 #### Learning
  1. Idea
@@ -189,53 +244,6 @@ def combine(self, n: int, k: int) -> list[list[int]]:
 	backtrack([], list(range(1, n+1)))
 	return res
 ```
-## String
-### Learning
-1. Tries: 
-	1. stores a *set* of strings $S$. Prefix/suffix trie and compressed trie
-		1. For standard trie, NO word in $S$ should be the prefix of another. Can be easily fixed by adding a boolean field $isWord$.
-		2. Worst case space complexity $O(n)$ where $n$ is number of letters. This happens when words in $S$ has no common prefixes.
-	2. See this [video](https://youtu.be/tUBFINxzlLg) and two following it for high-level; this [video](https://youtu.be/-urNrIAQnNo) for in-depth; this [video](https://youtu.be/oobqoCJlHA0) for implementation
-2. Algo
-	1. [Rabin-Karp](https://youtu.be/qQ8vS2btsxI)for pattern searching with a rolling hash
-		1. compare pattern and substring char by char ONLY when their hash values match
-		2. strong *hash function* leads to less value collision
-	2. KMP for efficient searching of pattern
-		1. Best [video](https://youtu.be/af1oqpnH1vA) to understand why it works
-			1. Big idea is to AVOID back track on the main string (therefore $O(n)$), only move in the LPS ($O(m)$).
-		2. [Video](https://youtu.be/GTJr8OvyEVQ) for KMP in action
-		3. implementation?
-	3. When criteria (such as 'max/min') and grouped (such as 'subarray') are involved, try `sliding window`, i.e. `two pointers`.
-		1. see this [section](https://youtu.be/MK-NZ4hN7rs?t=1030)
-### Coding
-#### [Longest Substring without repeating characters](https://leetcode.com/problems/longest-substring-without-repeating-characters/)
-1. The big idea is to iterate and ignore anything goes before the last time current character repeated 
-2. Good [vid](https://youtu.be/pY2dYa1m2VM) with very nice use of hash. Use *two pointers*!
-
-#### [Encode and Decode Strings](https://neetcode.io/problems/string-encode-and-decode)
-1. Key is to include string lengths in the encoded string.
-
-## Sorting and Search
-#### [Binary search](https://leetcode.com/problems/binary-search/description/)
-1. Use indices/pointers for searching problem!
-	1. If the target is close to one end of array, the `mid` will first approach the target from one side then the other.
-2. pay attention to edge cases when close to solution
-	1. the mid points and the end condition `l < r` or `l <= r` or `l < r-1`
-	2. return `l` or `r`?
-3. needs `if arr[mid] == target` as the base case
-	1. this is not needed if we are changing the value itself, instead of indices. See [[coding-interview#[Kth smallest element in a sorted matrix](https //leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/description/)]]
-#### [Kth smallest element in a sorted matrix](https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/description/) using Binary search
-1. Needs to calculate the number of elements smaller than `mid`. 
-	1. See [Ref2](https://www.cnblogs.com/firecode7/p/16120445.html) for a good explanation; [Ref1](https://leetcode-solution-leetcode-pp.gitbook.io/leetcode-solution/medium/378.kth-smallest-element-in-a-sorted-matrix) for Python implementation
-2. Here we are changing the value itself `1` every step, e.g., `right = mid - 1`
-	1. `-1` is important otherwise infinite loop when `left==right`
-	2.  Do NOT need `if counts == k` as there could be multiple `mid` fit the bill
-	3. `right` will eventually ends up too small by 1, that's why we need `left` to pass `right` before return `left`.
-		1. As opposed to [Sqrt(x)](https://leetcode.com/problems/sqrtx/) where `right` is returned because we are looking for round down
-	4. See [Ref1](https://leetcode-solution-leetcode-pp.gitbook.io/leetcode-solution/medium/378.kth-smallest-element-in-a-sorted-matrix) for Python solution
-
-#### [26. Remove Duplicates from Sorted Array](https://leetcode.com/problems/remove-duplicates-from-sorted-array/)
-1. Use left pointer $l$ to make sure `a[:l]` are the unique elements ran into so far. This is crucial for in-place.
 ## Matrix
 ### Coding
 #### [Set Matrix Zeroes](https://youtu.be/T41rL0L3Pnw)
@@ -586,10 +594,12 @@ Tow-D Maze
 	1. Find max/min: `O(1)`
 	2. Insert/remove: `O(k)`, k is the size of the heap
 	3. heapify: `O(k)`, k is the size of the heap
+4. MinHeap always put the smallest (including incoming data) at root then push it out--i==🟠t stores the *largest* $k$ values.==
 #### [973. K Closest Points to Origin](https://leetcode.com/problems/k-closest-points-to-origin/description/) $\star$
 1. Append `-dist` to leverage `minHeap`. See [solution](https://youtu.be/IGRUukbD6p8)
 2. Time complexity: `n*log(k)` where `k` is the size of the heap.
 3. Redo this to familiarize with syntax.
+4. Similar ones: 347.
 ```python
 def kClosest(self, points: list[list[int]], k: int) -> list[list[int]]:
 	def dist(x, y):

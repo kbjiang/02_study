@@ -241,3 +241,16 @@ https://www.cs.cornell.edu/courses/cs4780/2018fa/
 
 # Lecture 18 Bagging ==> Reduce variance
 1. Trees have high variance problem--bagging is the fix
+### Random Forest
+1. Trees
+	1. each get a random subset of $k$ features out of $d$, good rule-of-thumb is $k=\sqrt{d}$.
+	2. can be as many as one can afford. Usually in the hundreds.
+	3. trained all the way, i.e., *low bias but high variance*--the ensemble will take care of the variance/overfitting.
+2. Out-of-bag error: error trees made on data they did not see during training. This is a *free estimate of test error*.
+# Lecture 19 Boosting ==> Reduce bias
+1. weak learners <=> high bias
+2. weak learners are like drunk walker
+3. Dose boosting increase variance?
+### AdaBoost
+1. The weight of data points changes each iteration. See [timestamp](https://youtu.be/Vd6hzcwEa2k?list=PLl8OlHZGYOQ7bkVbuRthEsaLr7bONzbXS)
+	1. Actually exponentially change, because of the exponential loss?
