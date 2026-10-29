@@ -231,9 +231,8 @@ https://www.cs.cornell.edu/courses/cs4780/2018fa/
 # Lecture 16 KD Trees #TODO 
 
 # Lecture 17 Decision Trees #TODO 
-1. The CART cost function for classification
-	$$G(S)=\frac{|S_L|}{|S|}G(S_L)+\frac{|S_R|}{|S|}G(S_R),$$where $G$ is the Gini Impurity, and $\frac{|S_{L/R}|}{|S|}$ is the fraction of inputs in the left/right sub-tree. 
-	1. Not $S_{R/L}$ may contain all $C$ classes.
+1. The CART cost function for classification. $$G(S)=\frac{|S_L|}{|S|}G(S_L)+\frac{|S_R|}{|S|}G(S_R),$$where $G$ is the Gini Impurity, and $\frac{|S_{L/R}|}{|S|}$ is the fraction of inputs in the left/right sub-tree. 
+	1. Note $S_{R/L}$ may contain all $C$ classes.
 	2. It's a  greedy algorithm--it looks for optimal split at *current* level only, without checking whether this leads to overall optimal result.
 	3. It does so by looking at every possible split at the level... 
 2. Parametric or not? $\star$
@@ -254,3 +253,14 @@ https://www.cs.cornell.edu/courses/cs4780/2018fa/
 ### AdaBoost
 1. The weight of data points changes each iteration. See [timestamp](https://youtu.be/Vd6hzcwEa2k?list=PLl8OlHZGYOQ7bkVbuRthEsaLr7bONzbXS)
 	1. Actually exponentially change, because of the exponential loss?
+2. Line search for $\alpha_t$.
+	1. Greater $\epsilon$ leads to larger $\alpha$? $$\alpha = \frac{1}{2}\ln (\frac{1-\epsilon}{\epsilon})$$ 
+## Lecture 20 Deep Learning
+1. kernel method scales as $n^2$, DL linear in $n$, where $n$ is number of training data points.
+2. universal approximator. Great intuition at [timestamp](https://www.youtube.com/watch?v=kPXxbmBsFxs&t=1383s).
+	1. each row of matrix $U$ is a linear estimator. $w^T \sigma(U x+c)$.
+3. multi-layer intuition at [timestamp](https://youtu.be/kPXxbmBsFxs?t=2105)
+4. Why NN does not overfit? *SGD*!
+5. The loss landscape is not convex anymore--because of all the non-linear activation functions.
+	1. therefore multiple minia; therefore initialization matters.
+	2. GD is great at find deep minima, which is bad for generalization; SGD is great at finding deep and wide valley.

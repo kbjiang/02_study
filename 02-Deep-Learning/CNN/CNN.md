@@ -28,7 +28,8 @@
 5. Detailed visualization videos. [CNN e2e](https://youtu.be/JboZfxUjLSk) and [backpropagation](https://youtu.be/z9hJzduHToc). 
 6. Nice [visualization](https://youtu.be/eASwKmKYWeo) on feature maps
 
-
+### Why 1x1 Convolutions in Deep Network #CNN
+1. [video](https://youtu.be/wf2HblQbP-U)
 
 ## Resources
 ### How to 
