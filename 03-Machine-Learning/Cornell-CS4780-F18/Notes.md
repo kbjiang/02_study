@@ -223,6 +223,7 @@ https://www.cs.cornell.edu/courses/cs4780/2018fa/
 3. Beautiful [discussion](https://youtu.be/7LlpTABc27s?list=PLl8OlHZGYOQ7bkVbuRthEsaLr7bONzbXS&t=459) about the essence of SVM.
 	1. Linear SVM resembles KNN in high dimensional space.
 4. The regularization parameter $C$ in dual representation. [西瓜书 6.4]
+5. Sklearn [Documentation](https://scikit-learn.org/stable/auto_examples/svm/plot_svm_kernels.html)
 
 ### References
 1. A good [video](https://youtu.be/OKFMZQyDROI) for mapping intuition.
@@ -264,3 +265,4 @@ https://www.cs.cornell.edu/courses/cs4780/2018fa/
 5. The loss landscape is not convex anymore--because of all the non-linear activation functions.
 	1. therefore multiple minia; therefore initialization matters.
 	2. GD is great at find deep minima, which is bad for generalization; SGD is great at finding deep and wide valley.
+6. The use of word 'neuron' really is not necessary.

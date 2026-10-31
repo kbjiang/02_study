@@ -57,37 +57,6 @@
 1. Interview: you are given an array of 1's and 0's. You are also given a number k. What is the length of the longest continuous subsequence of 1's you can pick from the given array? You can substitute at most k 0's with 1's. Write a script in python.
 	1. Example: input [1, 0, 1, 0, 0, 1, 0, 0, 1, 1, 1, 1, 1], k=2;	output: 8
 	2. The mental picture is looking for a sliding window with no more than k zeros.
-#### [33. Search in Rotated Sorted Array](https://leetcode.com/problems/search-in-rotated-sorted-array/) $\star$
-1. For binary search, the *standards*:
-	1. boundary conditions: `s<=e` 
-	2. `m=(s+e)//2` at the top of each iteration
-	3. `s = m+1` or `e = m-1`. The shift by `1` makes sure we are stuck when `s=0, e=1`.
-2. `s, m = m, (s + e) // 2` ==🟡WON'T work!== Coz we first calcuate the RHS so `m` was not updated with new `s`.
-```python
-def search(self, nums: list[int], target: int) -> int:
-	s = 0
-	e = len(nums) - 1
-	while s <= e:
-		m = (s+e)//2
-		if nums[m] == target:
-			return m
-			
-		# mid and target on same portion
-		if (nums[m] - nums[s]) * (target - nums[s]) >= 0:
-			if nums[m] < target:
-				s = m + 1
-			else:
-				e = m - 1
-			continue
-		# mid and target on different portions
-		if (nums[m] - nums[s]) * (target - nums[s]) <= 0:
-			if nums[m] < target:
-				e = m - 1
-			else:
-				s = m + 1
-			continue
-	return -1
-```
 ---
 
 ## String
@@ -119,31 +88,8 @@ def search(self, nums: list[int], target: int) -> int:
 1. Method 1: heap
 2. Method 2: Bucket sort--u*se index to represent* frequency. Similar to 49. Group Anagrams
 3. [Solution](https://youtu.be/phNDYf1xzco)
-#### [Encode and Decode Strings](https://neetcode.io/problems/string-encode-and-decode)
-1. Key is to include string lengths in the encoded string.
 
-## Sorting and Search
-#### [Binary search](https://leetcode.com/problems/binary-search/description/)
-1. Use indices/pointers for searching problem!
-	1. If the target is close to one end of array, the `mid` will first approach the target from one side then the other.
-2. pay attention to edge cases when close to solution
-	1. the mid points and the end condition `l < r` or `l <= r` or `l < r-1`
-	2. return `l` or `r`?
-3. needs `if arr[mid] == target` as the base case
-	1. this is not needed if we are changing the value itself, instead of indices. See [[coding-interview#[Kth smallest element in a sorted matrix](https //leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/description/)]]
-#### [Kth smallest element in a sorted matrix](https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/description/) using Binary search
-1. Needs to calculate the number of elements smaller than `mid`. 
-	1. See [Ref2](https://www.cnblogs.com/firecode7/p/16120445.html) for a good explanation; [Ref1](https://leetcode-solution-leetcode-pp.gitbook.io/leetcode-solution/medium/378.kth-smallest-element-in-a-sorted-matrix) for Python implementation
-2. Here we are changing the value itself `1` every step, e.g., `right = mid - 1`
-	1. `-1` is important otherwise infinite loop when `left==right`
-	2.  Do NOT need `if counts == k` as there could be multiple `mid` fit the bill
-	3. `right` will eventually ends up too small by 1, that's why we need `left` to pass `right` before return `left`.
-		1. As opposed to [Sqrt(x)](https://leetcode.com/problems/sqrtx/) where `right` is returned because we are looking for round down
-	4. See [Ref1](https://leetcode-solution-leetcode-pp.gitbook.io/leetcode-solution/medium/378.kth-smallest-element-in-a-sorted-matrix) for Python solution
-
-#### [26. Remove Duplicates from Sorted Array](https://leetcode.com/problems/remove-duplicates-from-sorted-array/)
-1. Use left pointer $l$ to make sure `a[:l]` are the unique elements ran into so far. This is crucial for in-place.
-
+---
 ## Hash table
 #### Learning
  1. Idea
@@ -158,6 +104,7 @@ def search(self, nums: list[int], target: int) -> int:
  4. References
 	 1. [Hash tables: Samuel's tutorial](https://youtu.be/r1XZGP5ppqQ?list=PL9t0xVFP90GBPScODccB2_PpouUUZ4j8C)
 
+### Coding
 ---
 ## Recursion
 ### Learning
@@ -171,11 +118,11 @@ def search(self, nums: list[int], target: int) -> int:
 	1. Memorization
 		1. Use universial cache to record intermediate results
 	2. Divide-and-conquer
-		1. applied when needs results from all sub-problems
+		1. applied when needs results from all sub-problems. E.g., 46 Permutation.
 	3. Backtracking
 		1. applied when needs to return all qualified answers
 		2. *trickier because there is a retraction component*.
-			1. *Attempt* every possible next step, *retract* as soon as it becomes invalid or reaches base case.
+			1. ==🟡*Attempt*== every possible next step, *retract* as soon as it becomes invalid or reaches base case.
 			2. E.g., LeetCode 22, valid expression with $n$ parentheses. Recursion prevents going further down invalid paths.
 3. Intermediate results ^1361ef
 	1. Memorization: when there's a lot repetitions. E.g., Fibonacci numbers. # 509
@@ -194,9 +141,10 @@ def search(self, nums: list[int], target: int) -> int:
 #### [509. Fibonacci]()
 1. w/ and w/o memorization ![[Pasted image 20261016171100.png|500]]
 
-#### [22. Generate parenthesis](https://leetcode.com/problems/generate-parentheses/)
-1. base case happens at max length, i.e., only valid full length strings make it to the result list.
-2. recursion conditions, `n_left < n` select valid paths
+#### [22. Generate parenthesis](https://leetcode.com/problems/generate-parentheses/) $\star$
+1. The ==attempt== idea!
+2. base case happens at max length, i.e., only valid full length strings make it to the result list.
+3. recursion conditions, `n_left < n` select valid paths
 ```python
 def generateParenthesis(self, n: int) -> list[str]:
 	res = []
@@ -221,9 +169,10 @@ def generateParenthesis(self, n: int) -> list[str]:
 	backtrack(0, 0, "")
 	return res
 ```
-#### [77. Combinations](https://leetcode.com/problems/combinations/)
+#### [77. Combinations](https://leetcode.com/problems/combinations/) $\star$
 1. the explicit backtrack of `lst`
 2. use of `lst.copy()` when appending
+3. Compare with [78. Subsets](https://leetcode.com/problems/subsets/description/) and [46. Permutation](https://leetcode.com/problems/permutations/) (divide and conquer)
 ```python
 def combine(self, n: int, k: int) -> list[list[int]]:
 	res = []
@@ -244,6 +193,49 @@ def combine(self, n: int, k: int) -> list[list[int]]:
 	backtrack([], list(range(1, n+1)))
 	return res
 ```
+#### [46. Permutation](https://leetcode.com/problems/permutations/) $\star$
+1. Divide and conquer!
+2. Can be done iteratively as well
+3. Similar 17. Letter Combinations of a Phone Number.
+---
+## Sorting and Search
+#### [704. Binary search](https://leetcode.com/problems/binary-search/description/) $\star$
+1. Recipe:
+	1. Get the boundaries correct: `l <= r` and `m = (l+r)//2`
+	2. base case: `if nums[m] == target: return m`
+	3. Move the pointers by one (reduce problem size) after comparison: `if nums[m] < target: l = m + 1`... The shift by `1` makes sure we are not stuck when `l=0, r=1`.
+#### [33. Search in Rotated Sorted Array](https://leetcode.com/problems/search-in-rotated-sorted-array/) 
+1. `s, m = m, (s + e) // 2` ==🟡WON'T work!== Coz we first calcuate the RHS so `m` was not updated with new `s`.
+```python
+def search(self, nums: list[int], target: int) -> int:
+	s = 0
+	e = len(nums) - 1
+	while s <= e:
+		m = (s+e)//2
+		if nums[m] == target:
+			return m
+			
+		# mid and target on same portion
+		if (nums[m] - nums[s]) * (target - nums[s]) >= 0:
+			if nums[m] < target:
+				s = m + 1
+			else:
+				e = m - 1
+			continue
+		# mid and target on different portions
+		if (nums[m] - nums[s]) * (target - nums[s]) <= 0:
+			if nums[m] < target:
+				e = m - 1
+			else:
+				s = m + 1
+			continue
+	return -1
+```
+#### [74. Search a 2D Matrix](https://leetcode.com/problems/search-a-2d-matrix/) $\star$
+
+#### [26. Remove Duplicates from Sorted Array](https://leetcode.com/problems/remove-duplicates-from-sorted-array/)
+1. Use left pointer $l$ to make sure `a[:l]` are the unique elements ran into so far. This is crucial for in-place.
+---
 ## Matrix
 ### Coding
 #### [Set Matrix Zeroes](https://youtu.be/T41rL0L3Pnw)
@@ -625,14 +617,6 @@ def kClosest(self, points: list[list[int]], k: int) -> list[list[int]]:
 ### Data structure
 ### [138. Copy List with Random Pointer](https://leetcode.com/problems/copy-list-with-random-pointer/)
 1. Cute problem
-### [380. Insert Delete GetRandom O(1)](https://leetcode.com/problems/insert-delete-getrandom-o1/)
-1. I did not understand the problem, see [solution](https://youtu.be/j4KwhBziOpg) for explanation
-	1. basically need to avoid any $O(n)$ ops such as `list(self.val_map)` which is required for `random.choice` for the `getRandom()`
-
-### [146 LRU Cache](https://leetcode.com/problems/lru-cache/description/)
-1. The pattern is `hash map` and `double linked list`. 
-	1. it's helpful to have `self.head` and `self.tail` as dummy nodes
-	2. they tend to initialize an empty list with `self.head.next, self.tail.prev = self.tail, self.head`
 ### All solutions of a maze (try both BFS and DFS)
 1. This is DFS, the backtracking is explicit
 	1. BFS is good to find shortest solution, but not all of them
