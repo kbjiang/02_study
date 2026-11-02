@@ -1,0 +1,9 @@
+I'm an Applied Scientist with over 10 years of experience in AI and machine learning, and most recently I spent about six and a half years at Microsoft as a Senior Applied Scientist.
+
+At Microsoft, my work evolved toward generative AI, including multimodal RAG systems, vision-language models, and LLM-based agents. One thing I particularly enjoy is that I got to do thinking-out-of-the-box from time to time to solve a real problem. For example, I redesigned a multimodal document-processing pipeline by removing an unnecessary image-storage step, which reduced parsing time by about 80%.
+
+More recently, I've focused on developing and evaluating AI agents in Dyanmics 365 finance. I've built synthetic benchmarks and realistic test environments to understand not just whether an agent completes a task, but also how it uses tools and how consistently it performs.
+
+Another important part of who I am is that I've never stopped learning and sharing. Since I do not have a formal education in ML or AI, I taught myself everything and landed a job at MSFT. After joining, I've continued taking online courses and doing side projects. For example, I worked through Stanford's Language Modeling from Scratch course and implemented key components of language-model development myself. I have started a couple of reading and studying group within my team, just to share our learnings. I enjoy understanding how things work under the hood.
+
+Now, I'm looking for a role where I can continue tackling challenging AI problems, particularly in LLMs and agentic systems, while taking meaningful technical ownership from experimentation through to real-world impact.
