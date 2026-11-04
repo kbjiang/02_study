@@ -485,6 +485,9 @@ def pop(self) -> int:
 1. [[Algorithms Illuminated (Part 2).pdf]] Chapter 7, 8
 2. [Post](https://medium.com/basecs/from-theory-to-practice-representing-graphs-cfd782c5be38) by Vaidehi Joshi
 ### Coding
+#### [200. Number of Islands](https://leetcode.com/problems/number-of-island) $\star$
+1. Do it in both BFS and DFS--requires minimal change, but shows the essence of both algorithms
+2. Where to do `visited.append(next_r, next_c)`. It's supposed to mean **“this land cell has been discovered and queued,”** not just “we’ve looked at these coordinates.”
 #### [542. 01 Matrix](https://leetcode.com/problems/01-matrix/) $\star$
 1. I spent a lot of time try to solve it with DFS and failed--when use `visited` to avoid repeated visiting, it also block out potentially shorter paths. 
 	1. E.g., `[[1, 1, 1], [0, 1, 1]]`. If I first went `(1, 2) - (0, 2) - (0, 1) - (1, 1) - (1, 0)` and have `(1, 1)` added to `visited`, then I'd never have the best path `(1, 2) - (1, 1) - (1, 0)`./
