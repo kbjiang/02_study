@@ -1,0 +1,2 @@
+1. Without the scaling of attention, i.e. $\frac{1}{\sqrt{d_k}}$, "the dot products can grow very large in magnitude. This can push the subsequent softmax function into regions ==where its gradients are extremely small==, making learning difficult."
+2. $\text{Attention}(Q, K, V) = \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V$ 

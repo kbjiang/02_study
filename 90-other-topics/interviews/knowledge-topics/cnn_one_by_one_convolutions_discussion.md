@@ -42,9 +42,19 @@ This architecture introduces a bottleneck by squeezing the channel depth down to
 
 ## 4. Summary Verdict
 
-| Block Strategy | Number of Weights | Computational Footprint |
-| :--- | :--- | :--- |
-| **Without 1x1 Conv** (Basic Block) | 1,179,648 | Baseline (100%) |
-| **With 1x1 Conv** (Bottleneck) | 69,632 | **~17x Fewer Parameters (5.9%)** |
+| Block Strategy                     | Number of Weights | Computational Footprint          |
+| :--------------------------------- | :---------------- | :------------------------------- |
+| **Without 1x1 Conv** (Basic Block) | 1,179,648         | Baseline (100%)                  |
+| **With 1x1 Conv** (Bottleneck)     | 69,632            | **~17x Fewer Parameters (5.9%)** |
 
 By restricting the heavy spatial 3x3 filter to work only on a slimmed-down channel depth (64 channels instead of 256), the bottleneck block operates with **nearly 17 times fewer parameters**. This extreme mathematical efficiency is exactly what allows deep networks to stack over 50, 101, or 152 layers without hitting memory walls.
+
+## 5. Connecting last CNN layer and first Fully connected layer
+
+| Feature                   | Flattening                               | Global Average Pooling (GAP)                           |
+| :------------------------ | :--------------------------------------- | :----------------------------------------------------- |
+| **Output Vector Size**    | `Height × Width × Channels` (Very large) | `1 × 1 × Channels` (Compact)                           |
+| **Spatial Information**   | Preserves exact spatial grid positions   | Summarizes presence across the whole map               |
+| **Parameter Count**       | High (prone to overfitting)              | Very low (acts as regularization)                      |
+| **Input Image Size**      | Must be strictly fixed                   | Flexible across different resolutions                  |
+| **Representative Models** | LeNet-5, AlexNet, VGG-16, VGG-19         | ResNet, GoogLeNet (Inception), MobileNet, EfficientNet |

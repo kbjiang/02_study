@@ -72,3 +72,13 @@ The point is sharper decision boundaries, not simply longer rubrics.
 ## Interview takeaway
 
 > In SPEC2CAL, GEPA iteratively optimizes the judge's rubric while keeping the judge model fixed. Positive/negative pairs provide contrastive supervision. The current judge is evaluated against their intended labels; its errors and execution feedback give GEPA's reflection model signals about where the rubric is underspecified. GEPA proposes revised rubrics, which are evaluated and selected using a task-specific grading objective. This is prompt/rubric optimization—not model fine-tuning.
+
+### So, when GEPA revises a rubric, what happens?
+
+For example:
+1. GEPA evaluates the current rubric on a training minibatch.
+2. It finds incorrect preference predictions.
+3. The reflection model analyzes the errors and proposes a revised rubric.
+4. The revised rubric is evaluated on training examples to obtain feedback.
+5. Its performance on the dev split helps determine whether it should be retained.
+==So, the training examples can be reused across optimization iterations, but GEPA also uses a separate dev split to avoid selecting candidates solely based on the examples used for reflection.==
