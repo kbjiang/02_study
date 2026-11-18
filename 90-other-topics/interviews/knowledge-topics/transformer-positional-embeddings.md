@@ -90,7 +90,9 @@ Both architectures allow Transformers to disentangle position from token semanti
 #### B. RoPE: Frequency-Band Specialization & Constant-Vector Projections
 1. **Low-frequency semantic channels:** For large pair indices $m$, $\omega_m$ is tiny. Even over hundreds of tokens, $(j - i)\omega_m \approx 0$, so $R_{(j-i)\omega_m} \approx I$. Semantic heads concentrate weight norms in these slow channels to achieve distance-invariant content matching.
 2. **High-frequency positional circuits:** In specialized positional heads (e.g., targeting offset $k = -1$), $W_Q^{(m)}$ and $W_K^{(m)}$ place token-specific semantic directions in their null space and map **every token** onto the same fixed 2D reference vector $\mathbf{v}_{\text{ref}}$ within the fast-rotating bands ($m = 0, 1, 2, \dots$), baking in a relative phase offset $-k\omega_m$.
-   * When $j - i = k$, the rotation cancels the phase offset ($(j - i - k)\omega_m = 0$), causing all high-frequency cosines to peak simultaneously (**constructive interference**).
+	1. **$W_{Q}^{(m)}$ refers to the $2 \times d_k$ slice (or block of rows) of $W_{Q}$ that acts specifically on the m-th 2D frequency subspace** (dimensions 2m and 2m+1 of the input).
+	2. See [[#^2bfe07]]
+	3. When $j - i = k$, the rotation cancels the phase offset ($(j - i - k)\omega_m = 0$), causing all high-frequency cosines to peak simultaneously (**constructive interference**).
    * At any other offset $j - i \neq k$, the fast waves oscillate out of phase and cancel out (**destructive interference**).
 3. **Clean value propagation:** Because RoPE never rotates $W_V \mathbf{h}_j$ or adds vectors to the residual stream, positional geometry controls attention routing without ever consuming embedding dimensions or polluting semantic features.
 
@@ -98,9 +100,10 @@ Both architectures allow Transformers to disentangle position from token semanti
 
 ## References & Further Reading
 
-* **Foundational Architecture:** Vaswani et al. (2017), [*Attention Is All You Need*](https://arxiv.org/abs/1706.03762) — Introduces sinusoidal positional encodings and notes their linear relative-position property.
+* **Additive Sinusoidal PE:** ExplainingAI, [*Positional Encoding in Transformer | Sinusoidal Positional Encoding Explained*](https://www.youtube.com/watch?v=dWkm4nFikgM) — Explains why such a design from 1st principle.
 * **Rotary Position Embeddings:** Su et al. (2021), [*RoFormer: Enhanced Transformer with Rotary Position Embedding*](https://arxiv.org/abs/2104.09864) — Derives RoPE from relative inner-product invariance and analyzes long-term decay.
 * **RoPE Frequency Specialization:** Barbero et al. (2024), [*Round and Round We Go! What Makes Rotary Position Embeddings Useful?*](https://arxiv.org/abs/2410.06205) — Demonstrates how trained Transformers use high-frequency bands for positional heads and low-frequency bands for semantic attention.
+* **Derive RoPE via Group theory:** — Alok Puranik [*Using group theory to explore the space of positional encodings for attention*](https://blog.janestreet.com/using-group-theory-to-explore-positional-encodings-attention/). There is an associated video as well.
 * **Subspace Disentanglement & Interpretability:**
   * Lequeu et al. (2026), [*Give it Space! Explicit Disentangling of Positional and Semantic Representations in Encoders*](https://arxiv.org/abs/2605.30022) — Examines the low-dimensional positional manifold, subspace orthogonality, and semantic vs. structural head specialization.
   * Harvard Data Science Review (2026), [*Uncovering Hidden Geometry in Transformers*](https://hdsr.mitpress.mit.edu/pub/l9iaw8m3/download/pdf) — Analyzes $QK$ circuit decompositions across content and positional cross-terms.
@@ -108,3 +111,84 @@ Both architectures allow Transformers to disentangle position from token semanti
   * [LearnOpenCV: Sinusoidal Position Embeddings](https://learnopencv.com/sinusoidal-position-embeddings/)
   * [GeeksforGeeks: Positional Encoding in Transformers](https://www.geeksforgeeks.org/nlp/positional-encoding-in-transformers/)
   * [Cross Validated: Intuitive Explanation for Summing Embedding and Positional Encoding](https://stats.stackexchange.com/questions/586813/intuitive-explanation-for-summing-the-embedding-and-positional-encoding-in-the-t)
+
+---
+# High-Frequency Positional Circuits in Transformers
+
+^2bfe07
+
+This document summarizes how Transformer attention heads isolate relative positional offsets (such as $k = -1$) while ignoring token semantics, using subspace orthogonalization, low-rank projections, and sinusoidal frequency bands.
+
+---
+
+## 1. Core Mechanism: What $W_Q^{(m)}$ Means
+
+In sinusoidal positional encoding, a model embedding of dimension $d_{\text{model}}$ is partitioned into $d_{\text{model}}/2$ pairs of dimensions. Each pair $m \in \{0, 1, \dots, d_{\text{model}}/2 - 1\}$ corresponds to a specific sinusoidal angular frequency $\omega_m$:
+
+$$\text{PE}_{(\text{pos}, 2m)} = \sin(\text{pos} \cdot \omega_m), \qquad \text{PE}_{(\text{pos}, 2m+1)} = \cos(\text{pos} \cdot \omega_m)$$
+
+For a given attention head, the query weight matrix $W_Q \in \mathbb{R}^{d_{\text{model}} \times d_k}$ maps the full input vector $\mathbf{x}_i = \mathbf{e}_{w_i} + \mathbf{p}_i$ into the head's query space. 
+
+* **$W_Q^{(m)}$** denotes the $2 \times d_k$ slice (block of rows) of $W_Q$ that acts exclusively on the $m$-th 2D frequency subspace (dimensions $2m$ and $2m+1$).
+* The full query vector can be expressed as a sum over all frequency bands:
+
+$$\mathbf{q}_i = \mathbf{x}_i W_Q = \sum_{m=0}^{d_{\text{model}}/2 - 1} \mathbf{x}_i^{(m)} W_Q^{(m)}$$
+
+where $\mathbf{x}_i^{(m)} \in \mathbb{R}^2$ is the 2D slice of the input embedding at frequency band $m$.
+
+---
+
+## 2. Terminology: Frequency Bands and Small Rank
+
+### Frequency Band
+* **Definition:** A single sine-cosine pair oscillating at a fixed rate $\omega_m$. Because $\sin(\text{pos}\cdot\omega_m)$ and $\cos(\text{pos}\cdot\omega_m)$ trace a unit circle, each band represents a 2D rotating vector $\mathbf{p}_i^{(m)}$.
+* **High vs. Low Bands:** Low indices ($m = 0, 1, 2, \dots$) rotate rapidly and change noticeably from one token to the next (useful for short-range relative offsets). Higher indices rotate slowly over long distances.
+
+### Small Rank
+* **Definition:** The **rank** of a weight matrix $W_Q$ is the number of independent input dimensions it actively reads. All remaining dimensions fall into its **null space** and are mapped to $\mathbf{0}$.
+* **Application to Positional Heads:** Reading a single 2D frequency band requires a rank of $2$. If a positional head only reads $5$ fast-rotating bands ($m = 0, 1, 2, 3, 4$) to detect an adjacent token, $W_Q$ only requires a rank of $5 \times 2 = 10$.
+* **Result:** In a model with $d_{\text{model}} = 512$, a rank-$10$ matrix leaves $512 - 10 = 502$ dimensions in its null space.
+
+---
+
+## 3. How All Token Semantics Fit in the Null Space
+
+A single linear projection can zero out thousands of distinct token meanings simultaneously because **the null space only needs to cover the subspace where semantics live, not the entire vocabulary size.**
+
+1. **Subspace Orthogonalization:** Because token embeddings $\mathbf{e}_w$ are learned while sinusoidal encodings $\mathbf{p}_i$ are fixed, gradient descent separates them into orthogonal subspaces to prevent interference. Learned token embeddings place their semantic variance into dimensions outside the high-frequency positional channels ($\mathbf{e}_w^{(m)} \approx \mathbf{0}$).
+2. **Rank-Nullity Filtering:** Because $\mathbf{e}_w$ resides inside the $\sim 500$-dimensional null space of $W_Q$ and $W_K$, multiplying $\mathbf{e}_w W_Q$ produces $\mathbf{0}$ for every token in the vocabulary:
+
+$$\mathbf{q}_i = (\mathbf{e}_{w_i} + \mathbf{p}_i) W_Q = \underbrace{\mathbf{e}_{w_i} W_Q}_{\mathbf{0}} + \mathbf{p}_i W_Q = \mathbf{p}_i W_Q$$
+
+---
+
+## 4. Concrete Matrix Example ($k = -1$)
+
+Consider a minimal $4\text{D}$ model space ($d_{\text{model}} = 4$) and a single attention head ($d_k = 2$):
+* **Dimensions $0, 1$ (Band $m=0$, Positional):** Holds frequency $\omega_0$.
+* **Dimensions $2, 3$ (Semantic Subspace):** Holds token-specific semantic features $(s_{w,1}, s_{w,2})$.
+
+For token $w$ at position $i$:
+
+$$\mathbf{x}_i = \mathbf{e}_w + \mathbf{p}_i = \begin{bmatrix} \sin(i \omega_0) & \cos(i \omega_0) & s_{w,1} & s_{w,2} \end{bmatrix}$$
+
+### Weight Matrix Construction
+To attend strictly to the preceding token ($k = -1$), we zero out the semantic rows and apply a $-k\omega_0 = +\omega_0$ rotation in $W_Q^{(0)}$ relative to $W_K^{(0)}$ (scaled by $c$ to sharpen softmax):
+
+$$W_Q = c \begin{bmatrix} \cos(\omega_0) & -\sin(\omega_0) \\ \sin(\omega_0) & \cos(\omega_0) \\ 0 & 0 \\ 0 & 0 \end{bmatrix}, \qquad W_K = c \begin{bmatrix} 1 & 0 \\ 0 & 1 \\ 0 & 0 \\ 0 & 0 \end{bmatrix}$$
+
+### Projections and Dot Product
+1. **Key at position $j$:**
+   $$\mathbf{k}_j = \mathbf{x}_j W_K = c \begin{bmatrix} \sin(j\omega_0) & \cos(j\omega_0) \end{bmatrix}$$
+
+2. **Query at position $i$:** Using angle addition identities, the rotation shifts the phase backward by one step:
+   $$\mathbf{q}_i = \mathbf{x}_i W_Q = c \begin{bmatrix} \sin((i - 1)\omega_0) & \cos((i - 1)\omega_0) \end{bmatrix}$$
+
+3. **Attention Score ($\mathbf{q}_i \cdot \mathbf{k}_j$):**
+   $$\begin{aligned}
+   \mathbf{q}_i \cdot \mathbf{k}_j &= c^2 \Big[ \sin((i - 1)\omega_0)\sin(j\omega_0) + \cos((i - 1)\omega_0)\cos(j\omega_0) \Big] \\
+   &= c^2 \cos\big( (j - i + 1)\omega_0 \big)
+   \end{aligned}$$
+
+* **Constructive Interference ($j - i = -1$):** The phase difference becomes $(-1 + 1)\omega_0 = 0$. Across all active high-frequency bands $m$, $\cos(0) = 1$, causing the dot product to peak simultaneously at its maximum value.
+* **Destructive Interference ($j - i \neq -1$):** Across multiple high-frequency bands, the cosines oscillate out of phase and cancel out, suppressing attention to all other positions.

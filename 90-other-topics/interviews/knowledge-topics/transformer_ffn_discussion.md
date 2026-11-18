@@ -18,8 +18,8 @@ $$\text{FFN}(x) = \max(0, xW_1 + b_1)W_2 + b_2$$
 * **The Second Linear Layer ($W_2$):** Acts as a value retriever. It synthesizes those activations back into the standard $d_{\text{model}}$ space, updating the token vector with new semantic meaning.
 
 ### 3. Separation of Concerns: Space vs. Time
-* **Attention Layer (Inter-token):** Handles the sequence axis. It determines *where* to look by routing information between different positions in the sentence.
-* **Feed-Forward Layer (Intra-token):** Handles the feature axis. It processes each token position completely independently and identically, translating context into abstract features.
+* **Attention Layer (Inter-token):** Handles the sequence axis. It determines *where* to look by routing information between different positions in the sentence. *Global information aggregation*.
+* **Feed-Forward Layer (Intra-token):** Handles the feature axis. It processes each token position completely independently and ==identically, translating context into abstract features==. *each token's representation*
 
 ---
 

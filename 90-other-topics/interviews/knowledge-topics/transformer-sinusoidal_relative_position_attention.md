@@ -1,4 +1,5 @@
 # Sinusoidal Positional Encodings & Relative Position Attention
+> This doc aims to understand the statement that "It allows the model to easily learn to attend by relative positions, because for any fixed offset k, PE_{pos+k} can be represented as a linear function of PE_{pos}."
 
 ## 1. Linear Shift Property of Sinusoidal Encodings
 In *Attention Is All You Need*, each frequency $\omega_i = 10000^{-2i/d_{\text{model}}}$ defines a sine-cosine pair at dimensions $2i$ and $2i+1$:
