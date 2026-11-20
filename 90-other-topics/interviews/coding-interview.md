@@ -47,7 +47,7 @@
 | Remove (at the end)   | O(1)      | Special case of removal where no other element needs to be shifted                                   |
 ### Coding
 #### [15. 3Sum](https://leetcode.com/problems/3sum/description/)
-1. Sort first. Then fix 1st number and run two pointers. See [solution](https://youtu.be/jzZsG8n2R9A)
+1. Sort first. Then fix 1st number and run two sum. See [solution](https://youtu.be/jzZsG8n2R9A)
 #### [238. Product of Array Except Self](https://leetcode.com/problems/product-of-array-except-self/)
 1. Calculate running prefix/suffix products for each element, then take the product of those two products.
 2. Can be done with space `O(1)` without calculating prefix/suffix separately.
@@ -670,6 +670,35 @@ for path in solutions:
 	1. the base case is at a maximum instead of a minimum
 	2. no `return` until base case
 
+#### Capital One prep. Gravity(simulation) $\star$
+1. A field is a list of strings, each of equal length. `'#'` is a block, `'*'` is a fixed obstacle, `'.'` is empty. When gravity is switched on, every block falls straight down until it rests on the bottom row, on an obstacle, or on another block that has already settled. Obstacles never move. Return the field after everything settles.
+```python
+Input:  ["#.*",
+         "#..",
+         ".#.",
+         "..."]
+
+Output: ["..*",
+         "...",
+         "#..",
+         "##."]
+```
+2. I keep forgetting to use two pointers!
+```python
+def gravity(field):
+    R, C = len(field), len(field[0])
+    res = [['.'] * C for _ in range(R)]
+    for c in range(C):
+        write = R - 1
+        for r in range(R - 1, -1, -1):  # lower bound -1
+            if field[r][c] == '*':
+                res[r][c] = '*'
+                write = r - 1
+            elif field[r][c] == '#':
+                res[write][c] = '#'
+                write -= 1
+    return [''.join(row) for row in res]
+```
 
 ## References
 1. https://www.techinterviewhandbook.org/

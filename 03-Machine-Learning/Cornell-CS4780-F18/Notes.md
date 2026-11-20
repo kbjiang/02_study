@@ -146,8 +146,57 @@ https://www.cs.cornell.edu/courses/cs4780/2018fa/
 ## References
 1. [NBayesLogReg.pdf](https://www.cs.cmu.edu/~tom/mlbook/NBayesLogReg.pdf) by Tom Mitchell ^tom
 2. [Linear Regression: When it feels complicated, you’re probably reading a stats book](https://medium.com/towards-artificial-intelligence/linear-regression-statistical-vs-machine-learning-view-b157a1efeb3e)
-# Lecture 14-15 SVM 
-1. dd
+
+---
+# Lecture 8 Linear Regerssion
+1. MLAPP
+	1. 7.4. Robust linear regression
+		1. Heavy tailed distribution (e.g., Laplace distribution) to assign higher likelihood to outliers, without perturbing the straight line $\mathbf{w}\mathbf{x}$. ![[Pasted image 20261118181206.png|500]]
+	2. 7.5. Ridge regression
+		1. Without proper prior (e.g., Gaussian), we may have large values for parameters. With $\mathcal{N}(w|0, \tau^2)$, the $w$'s are encouraged to be close to zero.
+		2. $w_0$ is not regularized as it does not affect the complexity of the function.
+	
+| Likelihood | Prior    | Name              | Section        |
+| ---------- | -------- | ----------------- | -------------- |
+| Gaussian   | Uniform  | Least squares     | 7.3            |
+| Gaussian   | Gaussian | Ridge             | 7.5            |
+| Gaussian   | Laplace  | Lasso             | 13.3           |
+| Laplace    | Uniform  | Robust regression | 7.4            |
+| Student    | Uniform  | Robust regression | Exercise 11.12 |
+**Table 7.1** Summary of various likelihoods and priors used for linear regression. The likelihood refers to the distributional form of $p(y|\mathbf{x}, \mathbf{w}, \sigma^2)$, and the prior refers to the distributional form of $p(\mathbf{w})$. MAP estimation with a uniform distribution corresponds to MLE.
+
+---
+# Lecture 10 Empirical Risk Minimization
+## Surrogate Losses: Convex Upper Bounds on the 0/1 Loss
+> "Logistic Regression and Boosting minimize a convex upper-bound on the > 0/1 loss for binary classification: logistic in one case and exponential in the other." — CIS 520 (UPenn), SVMs lecture
+
+==Unpack it with the margin.== For a binary classifier producing a real-valued score $f(x)$, define the margin of an example as
+$$m = y\, f(x), \qquad y \in \{-1, +1\}$$
+$m > 0$ means correct classification, and the bigger $m$ is, the more confident. Everything in that sentence is a loss written as a function of $m$.
+### The 0/1 loss
+The 0/1 loss is what you actually care about — the error rate:
+$$\ell_{0/1}(m) = \begin{cases} 1 & m \le 0 \text{ (wrong)} \\ 0 & m > 0 \text{ (right)} \end{cases}$$
+The problem: as a function of the parameters it's flat almost everywhere and jumps at $m = 0$ — non-convex, no usable gradient, and minimizing it directly over a hypothesis class is combinatorially hard. So nobody optimizes it directly.
+### The surrogate idea
+Replace it with a function $\varphi(m)$ that is
+1. **Convex** in $m$ (and hence in the parameters, for a linear $f$) — so minimization is tractable, with a global optimum gradient methods can actually reach, and
+2. **An upper bound:** $\varphi(m) \ge \ell_{0/1}(m)$ for every $m$ — so the average of $\varphi$ over your training set is $\ge$ your training error rate, and pushing $\varphi$ down squeezes the true error down with it.
+3. Non-increasing in $m$: correct-and-confident is cheap, wrong is expensive
+	![[Pasted image 20261119184312.png|500]]
+### The two cases
+- **Logistic regression** uses $\varphi(m) = \log(1 + e^{-m})$. Check the bound at the critical points: at $m = 0$ it equals 1 (with log base 2), for $m < 0$ it's $> 1$, for $m > 0$ it's $> 0$ — always above the 0/1 step. 
+- **Boosting (AdaBoost)** uses $\varphi(m) = e^{-m}$. At $m = 0$ it's exactly 1, above 1 for wrong answers, positive for right ones. This isn't a coincidence about AdaBoost: AdaBoost *is* forward stagewise minimization of the exponential loss — the loss came first, the algorithm is derived from it.
+	- exponential loss explodes like $e^{-m}$, which is why AdaBoost is notoriously sensitive to mislabeled outliers;
+
+---
+
+# Lecture 9 SVM 
+### From primal to dual (via Lagrangian form)
+1. The primal problem: $$\min_{w, b} \frac{1}{2}\mathbf{w}^T\mathbf{w} \quad \text{s.t.} \quad  y_i(\mathbf{w}^T\mathbf{x}_i + b) \ge 1, \quad \forall \ i=1,\ldots, n $$ and the Lagrangian form:  $$L(w, b, \alpha) = \frac{1}{2}\mathbf{w}^T\mathbf{w} + \sum_i^n \alpha_i c_i, \quad \text{where }c_i = 1-y_i(\mathbf{w}^T\mathbf{x}_i + b) $$ here $\alpha_i$ should be understood as the penalty for potential violation of sample $i$. 
+2. ==The equivalency between primal problem and $\min_{\mathbf{w}, b}(\max_{\alpha}L)$==
+	1. for feasible $\mathbf{w}, b$ (i.e. satisfy all the constraints) $c_i \le 0$, therefore $\max_{\alpha \ge 0}L(\mathbf{w}, b, \alpha))=\frac{1}{2}\mathbf{w}^T\mathbf{w}$, i.e. recovers the primal problem, with $\alpha_i=0$ for all $c_i <0$. 
+		1. The samples with $c_i = 0$ can have non-zero $\alpha_i$, i.e., *support vectors*.
+	2. for non-feasible $\mathbf{w}, b$,  *some* $c_i \ge 0$ and leads to $\max_{\alpha \ge 0}L(\mathbf{w}, b, \alpha))=\infty$. Such $\mathbf{w}, b$ won't survive the $\min(\max L)$--again recovers the primal problem. 
 ## References
 1. MIT 6.034 [Lecture 16](https://youtu.be/_PwhiWxHK8o)
 	1. For positive ($y_+=1$) and negative ($y_-=-1$) supporting samples, we have  $y_+(w^T x_+ +b)$ = $y_-(w^Tx_- +b)=1$.  Therefore, the distance between these two samples in $w$ direction, i.e., the width of the gutter, is just $w^T(x_+ - x_-)/||w||_2 = ((1-b)-(-1-b))/||w||_2=\frac{2}{||w||_2}$. Namely, *smaller weight, greater separation*. 
