@@ -66,17 +66,20 @@
 		1. For standard trie, NO word in $S$ should be the prefix of another. Can be easily fixed by adding a boolean field $isWord$.
 		2. Worst case space complexity $O(n)$ where $n$ is number of letters. This happens when words in $S$ has no common prefixes.
 	2. See this [video](https://youtu.be/tUBFINxzlLg) and two following it for high-level; this [video](https://youtu.be/-urNrIAQnNo) for in-depth; this [video](https://youtu.be/oobqoCJlHA0) for implementation
-2. Algo
-	1. [Rabin-Karp](https://youtu.be/qQ8vS2btsxI)for pattern searching with a rolling hash
-		1. compare pattern and substring char by char ONLY when their hash values match
-		2. strong *hash function* leads to less value collision
-	2. KMP for efficient searching of pattern
-		1. Best [video](https://youtu.be/af1oqpnH1vA) to understand why it works
-			1. Big idea is to AVOID back track on the main string (therefore $O(n)$), only move in the LPS ($O(m)$).
-		2. [Video](https://youtu.be/GTJr8OvyEVQ) for KMP in action
-		3. implementation?
-	3. When criteria (such as 'max/min') and grouped (such as 'subarray') are involved, try `sliding window`, i.e. `two pointers`.
-		1. see this [section](https://youtu.be/MK-NZ4hN7rs?t=1030)
+2. sliding window
+	1. *When it applies*
+		1. the segment must be _contiguous_,
+		2. the condition must be monotonic: if a window is invalid, shrinking it is the only direction that can fix it.
+	2. Pseudo code
+	```python
+	left = 0
+	for right in range(len(a)):
+	    add a[right] to window state
+	    while window invalid:
+	        remove a[left] from window state
+	        left += 1
+	    update answer using window a[left..right]   # length = right - left + 1
+	```
 ### Coding
 #### [3. Longest Substring without repeating characters](https://leetcode.com/problems/longest-substring-without-repeating-characters/)
 1. Good [solution](https://youtu.be/wiGpQwVHdE0). The `while` is neat.
@@ -88,10 +91,34 @@
 1. Method 1: heap
 2. Method 2: Bucket sort--u*se index to represent* frequency. Similar to 49. Group Anagrams
 3. [Solution](https://youtu.be/phNDYf1xzco)
+#### Longest substring with at most k distinct characters $\star$
+1. Question: Given a string `s` and an integer `k`, return the length of the longest substring containing at most `k` distinct characters.
+```
+Input:  s = "eceba", k = 2
+Output: 3        # "ece"
 
+Input:  s = "ccaabbb", k = 2
+Output: 5        # "aabbb"
+```
+2. Use sliding  window
+```python
+def longest_subarray(s, k):
+	l = 0
+	counts = {}
+	longest = 0
+	for r in range(len(s)):
+		counts[s[r]] = counts.get(s[r], 0) + 1
+		while len(counts) > k:
+			counts[s[l]] -= 1
+			if counts[s[l]] == 0:
+				del counts[s[l]]
+			l += 1
+		longest = max(longest, r-l+1)
+	return longest
+```
 ---
 ## Hash table
-#### Learning
+### Learning
  1. Idea
 	 1. replace search $O(n)$ with array indexing $O(1)$.
 		 1. Get the key of the target object, and go directly to the corresponding *bucket*, without scanning.
@@ -105,6 +132,22 @@
 	 1. [Hash tables: Samuel's tutorial](https://youtu.be/r1XZGP5ppqQ?list=PL9t0xVFP90GBPScODccB2_PpouUUZ4j8C)
 
 ### Coding
+#### Subarray_sum $\star$
+1. Q: Count the subarrays that sum to k. E.g., `nums = [1, 2, 1, 2, 1]`, `k = 3`, returns 4.
+2. Details
+	1. starts with `{0:1}` to deal with when `k` equals to a subarray sum starting from index 0.
+	2. look up BEFORE inserting--otherwise `k=0` will always count `counts[prefix]`.
+```python
+def subarray_sum(nums, k):
+    counts = {0: 1}          # empty prefix
+    prefix = 0
+    total = 0
+    for x in nums:
+        prefix += x
+        total += counts.get(prefix - k, 0)   # look up BEFORE inserting
+        counts[prefix] = counts.get(prefix, 0) + 1
+    return total
+```
 ---
 ## Recursion
 ### Learning
