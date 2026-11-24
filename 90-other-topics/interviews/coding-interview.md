@@ -318,18 +318,19 @@ def search(self, nums: list[int], target: int) -> int:
 	2. one is faster than the other
 ### [206. Reverse Linked List](https://leetcode.com/problems/reverse-linked-list/)
 1. use of two pointers `prev, curr`.
-	```python
-	    def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
-	        prev, curr = None, head
-	        while curr:
-	            nxt = curr.next
-	            curr.next = prev
-	            prev = curr
-	            curr = nxt
-	        return prev
-	```
-	1. This actually changes the physical data and `head` will be affected! 
-2. For recursive, see this [solution](https://youtu.be/W-EfGB0E_ao). 
+> [!Example]- Code
+> ```python
+    def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        prev, curr = None, head
+        while curr:
+            nxt = curr.next
+            curr.next = prev
+            prev = curr
+            curr = nxt
+        return prev
+> ```
+2. This actually changes the physical data and `head` will be affected! 
+3. For recursive, see this [solution](https://youtu.be/W-EfGB0E_ao). 
 	1. It's not necessary at all. The recursive basically does the same thing as the iterative solution.
 ### [21. Merge Two Sorted Lists](https://leetcode.com/problems/merge-two-sorted-lists/)
 1. Use of *pointers*!
@@ -561,6 +562,19 @@ def pop(self) -> int:
 		                queue.append((nr, nc))
 		    return distances
 		```
+#### [994. Rotting Oranges](https://leetcode.com/problems/rotting-oranges/) $\star$
+1. Multi-source BFS
+2. How to track the `minute` by layer, or *count BFS steps in general*.
+> [!Example]- Hint
+> ```python
+> while queue:
+>     minutes += 1
+>     for _ in range(len(queue)):     # everything currently queued rots this minute
+>         r, c = queue.popleft()
+>         ... enqueue fresh neighbours ...
+> ```
+3. Count number of fresh orange up-front, and if it's `>0` when queue is empty, return `-1`
+
 #### [133. Clone Graph](https://leetcode.com/problems/clone-graph/) (understanding)
 1. DFS and update values dynamically. [solution](https://youtu.be/mQeF6bN8hMk)
 #### [417. Pacific Atlantic Water Flow](https://leetcode.com/problems/pacific-atlantic-water-flow/description/) (understanding)
