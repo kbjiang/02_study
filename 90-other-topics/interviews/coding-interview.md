@@ -58,7 +58,6 @@
 	1. Example: input [1, 0, 1, 0, 0, 1, 0, 0, 1, 1, 1, 1, 1], k=2;	output: 8
 	2. The mental picture is looking for a sliding window with no more than k zeros.
 ---
-
 ## String
 ### Learning
 1. Tries: 
@@ -86,7 +85,21 @@
 #### [49. Group Anagrams](https://leetcode.com/problems/group-anagrams/description/) $\star$
 1. Mutable/Unhashable variables, e.g. dict/list, CANNOT be the key of a dictionary!
 	1. List cannot be key, needs to do `tuple(list)` as key.
-2. Use a list of size 26 to hold counts--*use index to represent* which character, i.e., `count[ord(c) - ord('a')]`.
+2. Use a list of size 26 to hold counts--*use index to represent* which character, i.e., `count[ord(char) - ord('a')]`.
+> [! ]- answer
+> ```python
+> def groupAnagrams(self, strs: list[str]) -> list[list[str]]:
+>    res = {}
+>    for s in strs:
+>        key = [0] * 26
+>        for char in s:
+>            id = ord(char) - ord('a')
+>            key[id] += 1
+>        key = tuple(key)
+>        res[key] = res.get(key, [])
+>        res[key].append(s)
+>    return list(res.values())
+> ```
 #### [347. Top K Frequent Elements](https://leetcode.com/problems/top-k-frequent-elements/description/) $\star$
 1. Method 1: heap
 2. Method 2: Bucket sort--u*se index to represent* frequency. Similar to 49. Group Anagrams
@@ -438,6 +451,13 @@ def pop(self) -> int:
 	2. Take high priority calculation on the fly. At the end, just need to take the sum of the stack.
 		1. E.g.,  `-num` is `-1*num` and do `stack.push(-num)` on the fly.
 
+
+---
+## Interval
+### Coding
+#### [56. Merge intervals](https://leetcode.com/problems/merge-intervals/) $\star$
+
+---
 ## Tree
 ### Learning
 1. [Binary Search Trees: Samuel's tutorial](https://youtu.be/0woI8l0ZWmA)
