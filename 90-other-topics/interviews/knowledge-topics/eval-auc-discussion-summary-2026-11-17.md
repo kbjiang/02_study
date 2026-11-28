@@ -30,7 +30,12 @@ $$\text{TPR}(t) = P(A > t), \qquad \text{FPR}(t) = P(B > t)$$
 AUC is the area under TPR plotted against FPR. Substitute $u = \text{FPR}(t)$:
 $$\text{AUC} = \int_0^1 \text{TPR}\, du$$
 Since $u = P(B>t)$, we have $du = -f_B(t)\,dt$. As $t$ goes from $+\infty$ to $-\infty$, $u$ goes from $0$ to $1$, and the minus sign flips the limits back:
-$$\text{AUC} = \int_{-\infty}^{\infty} P(A > t)\, f_B(t)\, dt$$
+$$\begin{align*}
+\text{AUC} &= \int_{-\infty}^{\infty} P(A > t)\, f_B(t)\, dt \\
+&= \int_{-\infty}^{\infty} P(A > t|B=t)\, f_B(t)\, dt \qquad \text{ \# because }P(A|B)=P(A) \\
+&= \int_{-\infty}^{\infty} P(A > B|B=t)\, f_B(t)\, dt \\
+&= \mathbb{E}_B\big[\,P(A > B \mid B)\,\big]
+\end{align*} $$
 **Step 3 — Read the integral as an expectation over $B$.**
 In that integral, $t$ is not a random variable — it is a fixed value that $B$ might take, weighted by $f_B(t)$. Averaging $P(A>t)$ over all values of $B$ is conditioning on $B$ (law of total probability):
 $$\text{AUC} = \mathbb{E}_B\big[\,P(A > B \mid B)\,\big] = P(A > B) \qquad \blacksquare$$
